@@ -703,17 +703,20 @@ public class NFNotaInfoItemProdutoVeiculo extends ModelCosmeDamiao {
 
 	@Override
 	public String toString() {
-		return "NFNotaInfoItemProdutoVeiculo [getId()=" + getId() + ", getChassi()=" + getChassi() + ", getCodigoCor()="
-				+ getCodigoCor() + ", getDescricaoCor()=" + getDescricaoCor() + ", getPotencia()=" + getPotencia()
-				+ ", getCilindrada()=" + getCilindrada() + ", getPesoLiquido()=" + getPesoLiquido()
-				+ ", getPesoBruto()=" + getPesoBruto() + ", getNumeroSerie()=" + getNumeroSerie()
-				+ ", getTipoCombustivel()=" + getTipoCombustivel() + ", getNumeroMotor()=" + getNumeroMotor()
-				+ ", getCapacidadeMaximaTracao()=" + getCapacidadeMaximaTracao() + ", getDistanciaEntreEixos()="
-				+ getDistanciaEntreEixos() + ", getAnoModeloFabricacao()=" + getAnoModeloFabricacao()
-				+ ", getAnoFabricacao()=" + getAnoFabricacao() + ", getTipoPintura()=" + getTipoPintura()
-				+ ", getTipoVeiculo()=" + getTipoVeiculo() + ", getEspecieVeiculo()=" + getEspecieVeiculo()
-				+ ", getCodigoMarcaModelo()=" + getCodigoMarcaModelo() + ", getLotacao()=" + getLotacao()
-				+ ", toString()=" + super.toString() + "]";
+		return "NFNotaInfoItemProdutoVeiculo [getId()=" + getId() + ", getTipoOperacao()=" + getTipoOperacao()
+				+ ", getChassi()=" + getChassi() + ", getCodigoCor()=" + getCodigoCor() + ", getDescricaoCor()="
+				+ getDescricaoCor() + ", getPotencia()=" + getPotencia() + ", getCilindrada()=" + getCilindrada()
+				+ ", getPesoLiquido()=" + getPesoLiquido() + ", getPesoBruto()=" + getPesoBruto()
+				+ ", getNumeroSerie()=" + getNumeroSerie() + ", getTipoCombustivel()=" + getTipoCombustivel()
+				+ ", getNumeroMotor()=" + getNumeroMotor() + ", getCapacidadeMaximaTracao()="
+				+ getCapacidadeMaximaTracao() + ", getDistanciaEntreEixos()=" + getDistanciaEntreEixos()
+				+ ", getAnoModeloFabricacao()=" + getAnoModeloFabricacao() + ", getAnoFabricacao()="
+				+ getAnoFabricacao() + ", getTipoPintura()=" + getTipoPintura() + ", getTipoVeiculo()="
+				+ getTipoVeiculo() + ", getEspecieVeiculo()=" + getEspecieVeiculo() + ", getCondicaoChassi()="
+				+ getCondicaoChassi() + ", getCondicao()=" + getCondicao() + ", getCodigoMarcaModelo()="
+				+ getCodigoMarcaModelo() + ", getCorDENATRAN()=" + getCorDENATRAN() + ", getLotacao()=" + getLotacao()
+				+ ", getRestricao()=" + getRestricao() + ", toString()=" + super.toString() + "]";
 	}
+
 
 }

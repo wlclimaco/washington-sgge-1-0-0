@@ -29,8 +29,6 @@ public class Usuario extends Pessoa
 
 	private String language;
 
-
-
 	private Long ultAcesso;
 
 	private List<Email> emails;

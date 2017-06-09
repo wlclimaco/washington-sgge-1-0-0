@@ -27,6 +27,8 @@
     <result property="statusEmpresa" column="statusEmpresa"/>
     <result property="dtAbertura" column="dtAbertura"/>
     <result property="responsavel" column="responsavel"/>
+    <result property="tipo" column="tipo"/>
+    <result property="primeiroAcesso" column="primeiroAcesso"/>
 	<result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
@@ -56,6 +58,8 @@ nome
 ,statusEmpresa
 ,dtAbertura
 ,responsavel
+,tipo
+,primeiroAcesso
 ,planosServicos
 ,regime
 ,create_date
@@ -77,6 +81,8 @@ nome
 #{statusEmpresa},
 #{dtAbertura},
 #{responsavel},
+#{primeiroAcesso},
+#{tipo},
 #{regime.id},
 #{planosServicos.id},
 #{createDateUTC},
@@ -114,6 +120,8 @@ c.regime,
 <if test="nome!= null">nome = #{nome},</if>
 <if test="razao!= null">razao = #{razao},</if>
 <if test="processId!= null">processId = #{processId},</if>
+<if test="primeiroAcesso!= null">processId = #{processId},</if>
+<if test="tipo!= null">tipo = #{tipo},</if>
 <if test="entidadeId!= null">entidadeId = #{entidadeId},</if>
 <if test="configuracao!= null">configuracao = #{configuracao.id},</if>
 <if test="emprId!= null">emprId = #{emprId},</if>

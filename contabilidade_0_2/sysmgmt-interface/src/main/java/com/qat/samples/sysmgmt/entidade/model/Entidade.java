@@ -39,6 +39,10 @@ public class Entidade extends ModelCosmeDamiao
 
 	private Integer entidadeId;
 
+	private Integer tipo;
+
+	private Integer primeiroAcesso;
+
 	private EntidadeTypeEnum entidadeEnum;
 
 	private Configuracao configuracao;
@@ -358,6 +362,24 @@ public class Entidade extends ModelCosmeDamiao
 		this.siteList = siteList;
 	}
 
+
+
+	public Integer getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(Integer tipo) {
+		this.tipo = tipo;
+	}
+
+	public Integer getPrimeiroAcesso() {
+		return primeiroAcesso;
+	}
+
+	public void setPrimeiroAcesso(Integer primeiroAcesso) {
+		this.primeiroAcesso = primeiroAcesso;
+	}
+
 	@Override
 	public String toString() {
 		return "Entidade [getUsuarios()=" + getUsuarios() + ", getBancos()=" + getBancos() + ", getEntidadeEnumValue()="
@@ -367,10 +389,10 @@ public class Entidade extends ModelCosmeDamiao
 				+ ", getEntidadeEnum()=" + getEntidadeEnum() + ", getConfiguracao()=" + getConfiguracao()
 				+ ", getEntidadeId()=" + getEntidadeId() + ", getNotificacoes()=" + getNotificacoes()
 				+ ", getNumFunc()=" + getNumFunc() + ", getPlanosServicos()=" + getPlanosServicos() + ", getSocios()="
-				+ getSocios() + ", getRazao()=" + getRazao()
-				+ ", getStatusEmpresa()=" + getStatusEmpresa() + ", getDtAbertura()=" + getDtAbertura()
-				+ ", getResponsavel()=" + getResponsavel() + ", getSiteList()=" + getSiteList() + ", toString()="
-				+ super.toString() + "]";
+				+ getSocios() + ", getRazao()=" + getRazao() + ", getStatusEmpresa()=" + getStatusEmpresa()
+				+ ", getDtAbertura()=" + getDtAbertura() + ", getResponsavel()=" + getResponsavel() + ", getSiteList()="
+				+ getSiteList() + ", getTipo()=" + getTipo() + ", getPrimeiroAcesso()=" + getPrimeiroAcesso()
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 

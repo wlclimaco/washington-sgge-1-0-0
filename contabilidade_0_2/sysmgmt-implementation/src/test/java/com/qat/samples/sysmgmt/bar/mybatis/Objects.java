@@ -4381,7 +4381,7 @@ public class Objects {
 		nfnotainfoitemprodutoveiculo.setAnoFabricacao(100);
 		nfnotainfoitemprodutoveiculo.setTipoPintura("NATIVE INSERT UPDATE");
 		nfnotainfoitemprodutoveiculo.setTipoVeiculo(insertDoisValor(id, tabela, action));
-		nfnotainfoitemprodutoveiculo.setEspecieVeiculo(100);
+		nfnotainfoitemprodutoveiculo.setEspecieVeiculo(insertDoisValor(id, tabela, action));
 		nfnotainfoitemprodutoveiculo.setCondicaoChassi(insertDoisValor(id, tabela, action));
 		nfnotainfoitemprodutoveiculo.setCondicao(insertDoisValor(id, tabela, action));
 		nfnotainfoitemprodutoveiculo.setCodigoMarcaModelo("NATIVE INSERT UPDATE");
