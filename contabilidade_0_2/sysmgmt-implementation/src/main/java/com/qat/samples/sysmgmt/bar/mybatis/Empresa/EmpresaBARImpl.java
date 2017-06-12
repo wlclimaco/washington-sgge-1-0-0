@@ -683,28 +683,30 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 			ArrayList<UserRoles> userRoleList = new ArrayList<UserRoles>();
 			for (Usuario usuario : empresa.getUsuarios()) {
 				userRoles = new UserRoles();
-				switch (empresa.getEntidadeEnumValue()) {
-				case 1: // comercio
+				if (!ValidationUtil.isNull(empresa.getTipo())){
+				switch (empresa.getTipo()) {
+				case 5: // comercio
 					userRoles.setRole(new Role(12));
 					break;
 				case 4:// clinica
 					userRoles.setRole(new Role(6));
 					break;
-				case 5:// condominio
+				case 2:// condominio
 					userRoles.setRole(new Role(5));
 					break;
-				case 6: // adbocacia
+				case 1: // adbocacia
 					userRoles.setRole(new Role(8));
 					break;
-				case 7:// prest Servico
+				case 6:// prest Servico
 					userRoles.setRole(new Role(13));
 					break;
-				case 8: // Parceiro
+				case 3: // Parceiro
 					userRoles.setRole(new Role(7));
 					break;
 				default:
 					System.out.println("Este não é um dia válido!");
 
+				}
 				}
 				userRoles.setUsername(usuario.getEmail());
 				userRoles.setModelAction(PersistenceActionEnum.INSERT);

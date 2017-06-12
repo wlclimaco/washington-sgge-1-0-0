@@ -1108,6 +1108,31 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 		produto.setProcessId(produto.getTransactionId());
 
+		if (!ValidationUtil.isNull(produto.getVeiculo()))
+		{
+			NFNotaInfoItemProdutoVeiculoBARD.maintainNFNotaInfoItemProdutoVeiculoAssociations(produto.getVeiculo(), response,null,  TypeEnum.LOW, AcaoTypeEnum.UPDATE, TabelaEnum.PRODUTO,
+					getNfnotaInfoItemBAR(), getStatusBAR(), getHistoricoBAR(), produto.getEmprId(), produto.getUserId(), produto.getTransactionId(), produto.getTransactionId());
+		}
+
+		if (ValidationUtil.isNull(produto.getMedicamento()))
+		{
+			NFNotaInfoItemProdutoMedicamentoBARD.maintainNFNotaInfoItemProdutoMedicamentoAssociations(produto.getMedicamento(), response,null,  TypeEnum.LOW, AcaoTypeEnum.UPDATE, TabelaEnum.PRODUTO,
+					getNfnotaInfoItemBAR(), getStatusBAR(), getHistoricoBAR(), produto.getEmprId(), produto.getUserId(), produto.getTransactionId(), produto.getTransactionId());
+		}
+
+		if (ValidationUtil.isNull(produto.getArmamento()))
+		{
+			NFNotaInfoItemProdutoArmamentoBARD.maintainNFNotaInfoItemProdutoArmamentoAssociations(produto.getArmamento(), response,null,  TypeEnum.LOW, AcaoTypeEnum.UPDATE, TabelaEnum.PRODUTO,
+					getNfnotaInfoItemBAR(), getStatusBAR(), getHistoricoBAR(), produto.getEmprId(), produto.getUserId(), produto.getTransactionId(), produto.getTransactionId());
+		}
+
+		if (ValidationUtil.isNull(produto.getCombustivel()))
+		{
+			NFNotaInfoItemProdutoCombustivelBARD.maintainNFNotaInfoItemProdutoCombustivelAssociations(produto.getCombustivel(), response,null,  TypeEnum.LOW, AcaoTypeEnum.UPDATE, TabelaEnum.PRODUTO,
+					getNfnotaInfoItemBAR(), getStatusBAR(), getHistoricoBAR(), produto.getEmprId(), produto.getUserId(), produto.getTransactionId(), produto.getTransactionId());
+		}
+
+
 		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_PRODUTO, produto, response);
 
 		if (ValidationUtil.isNull(produto.getUniMed()))

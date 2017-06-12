@@ -303,7 +303,7 @@ public final class BaseBARD extends SqlSessionDaoSupport
 
 		ConfigFiscal configfiscal = new ConfigFiscal();
 
-		configfiscal.setPrincAtividade(empresa.getCnaes().get(0).getIdCnae());
+		configfiscal.setPrincAtividade(empresa.getCnaes() != null ? empresa.getCnaes().get(0).getIdCnae() : null);
 		configfiscal.setRegime(empresa.getRegime());
 		configfiscal.setAliqSimples(new Double(10.00));
 		configfiscal.setParentId(empresa.getId());
