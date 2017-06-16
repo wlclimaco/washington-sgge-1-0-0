@@ -26,6 +26,7 @@
     <result property="language" column="language"/>
     <result property="ultAcesso" column="ultAcesso"/>
     <result property="tabelaEnumValue" column="tabelaEnumValue"/>
+    <result property="nome" column="nome"/>
 <result property="createUser" column="create_user"/>
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
@@ -44,6 +45,7 @@ username
 ,language
 ,ultAcesso
 ,tabelaEnumValue
+,nome
 ,create_date
 ,create_user
 ,modify_date
@@ -60,6 +62,7 @@ username
 #{language},
 #{ultAcesso},
 #{tabelaEnumValue},
+#{nome},
 #{createDateUTC},
 #{createUser},
 #{modifyDateUTC},
@@ -95,6 +98,12 @@ c.tabelaEnumValue,
    FROM users WHERE id = #{fetchid}
  </select>
 
+  <select id="fetchUsuarioByEmnprId" parameterType="Integer" resultMap="UsuarioResult">
+    SELECT
+	id,<include refid="allUsuarioColumns" />
+   FROM users WHERE emprid = #{fetchid} order by username  ASC
+ </select>
+
  <select id="fetchAllUsuariosRequest" parameterType="UsuarioInquiryRequest" resultMap="UsuarioResult">
 
 		SELECT id,<include refid="allUsuarioColumns" />
@@ -123,6 +132,7 @@ c.tabelaEnumValue,
 <if test="id!= null">id = #{id},</if>
 <if test="emprId!= null">emprId = #{emprId},</if>
 <if test="email!= null">username = #{email},</if>
+<if test="nome!= null">nome = #{nome},</if>
 <if test="telefone!= null">telefone = #{telefone},</if>
 <if test="processId!= null">processId = #{processId},</if>
 <if test="senha!= null">password = #{senha},</if>

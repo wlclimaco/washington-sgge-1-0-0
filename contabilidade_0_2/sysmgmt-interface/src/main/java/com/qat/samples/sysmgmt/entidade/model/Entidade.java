@@ -41,6 +41,8 @@ public class Entidade extends ModelCosmeDamiao
 
 	private Integer tipo;
 
+	private Integer tipoPessoa;
+
 	private Integer primeiroAcesso;
 
 	private EntidadeTypeEnum entidadeEnum;
@@ -380,6 +382,14 @@ public class Entidade extends ModelCosmeDamiao
 		this.primeiroAcesso = primeiroAcesso;
 	}
 
+	public Integer getTipoPessoa() {
+		return tipoPessoa;
+	}
+
+	public void setTipoPessoa(Integer tipoPessoa) {
+		this.tipoPessoa = tipoPessoa;
+	}
+
 	@Override
 	public String toString() {
 		return "Entidade [getUsuarios()=" + getUsuarios() + ", getBancos()=" + getBancos() + ", getEntidadeEnumValue()="
@@ -392,7 +402,7 @@ public class Entidade extends ModelCosmeDamiao
 				+ getSocios() + ", getRazao()=" + getRazao() + ", getStatusEmpresa()=" + getStatusEmpresa()
 				+ ", getDtAbertura()=" + getDtAbertura() + ", getResponsavel()=" + getResponsavel() + ", getSiteList()="
 				+ getSiteList() + ", getTipo()=" + getTipo() + ", getPrimeiroAcesso()=" + getPrimeiroAcesso()
-				+ ", toString()=" + super.toString() + "]";
+				+ ", getTipoPessoa()=" + getTipoPessoa() + ", toString()=" + super.toString() + "]";
 	}
 
 

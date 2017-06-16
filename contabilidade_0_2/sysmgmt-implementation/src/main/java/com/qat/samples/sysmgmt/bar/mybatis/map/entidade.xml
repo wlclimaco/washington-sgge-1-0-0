@@ -28,6 +28,7 @@
     <result property="dtAbertura" column="dtAbertura"/>
     <result property="responsavel" column="responsavel"/>
     <result property="tipo" column="tipo"/>
+    <result property="tipoPessoa" column="tipoPessoa"/>
     <result property="primeiroAcesso" column="primeiroAcesso"/>
 	<result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>
@@ -44,6 +45,7 @@
 	<collection property="notes" column="id" select="NoteMap.fetchNoteByNotes"/>
     <collection property="siteList" column="id" select="SiteMap.fetchSiteByEmpresa"/>
     <collection property="configuracao" column="configuracao" select="ConfiguracaoMap.fetchConfiguracaoById"/>
+    <collection property="usuarios" column="id" select="UsuarioMap.fetchUsuarioByEmnprId"/>
 
   </resultMap>
 
