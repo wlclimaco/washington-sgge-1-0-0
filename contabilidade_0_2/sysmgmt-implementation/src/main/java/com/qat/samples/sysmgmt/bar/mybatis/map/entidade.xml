@@ -29,6 +29,7 @@
     <result property="responsavel" column="responsavel"/>
     <result property="tipo" column="tipo"/>
     <result property="tipoPessoa" column="tipoPessoa"/>
+    <result property="cpfResponsavel" column="cpfResponsavel"/>
     <result property="primeiroAcesso" column="primeiroAcesso"/>
 	<result property="createUser" column="create_user"/>
 	<result property="createDateUTC" column="create_date"/>

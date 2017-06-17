@@ -43,6 +43,8 @@ public class Entidade extends ModelCosmeDamiao
 
 	private Integer tipoPessoa;
 
+	private String cpfResponsavel;
+
 	private Integer primeiroAcesso;
 
 	private EntidadeTypeEnum entidadeEnum;
@@ -390,6 +392,16 @@ public class Entidade extends ModelCosmeDamiao
 		this.tipoPessoa = tipoPessoa;
 	}
 
+
+
+	public String getCpfResponsavel() {
+		return cpfResponsavel;
+	}
+
+	public void setCpfResponsavel(String cpfResponsavel) {
+		this.cpfResponsavel = cpfResponsavel;
+	}
+
 	@Override
 	public String toString() {
 		return "Entidade [getUsuarios()=" + getUsuarios() + ", getBancos()=" + getBancos() + ", getEntidadeEnumValue()="
@@ -402,7 +414,8 @@ public class Entidade extends ModelCosmeDamiao
 				+ getSocios() + ", getRazao()=" + getRazao() + ", getStatusEmpresa()=" + getStatusEmpresa()
 				+ ", getDtAbertura()=" + getDtAbertura() + ", getResponsavel()=" + getResponsavel() + ", getSiteList()="
 				+ getSiteList() + ", getTipo()=" + getTipo() + ", getPrimeiroAcesso()=" + getPrimeiroAcesso()
-				+ ", getTipoPessoa()=" + getTipoPessoa() + ", toString()=" + super.toString() + "]";
+				+ ", getTipoPessoa()=" + getTipoPessoa() + ", getCpfResponsavel()=" + getCpfResponsavel()
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 

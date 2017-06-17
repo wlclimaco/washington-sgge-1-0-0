@@ -44,8 +44,9 @@ public enum DocumentoTypeEnum implements IIntegerEnum, II18nEnum
 	CERTIDADONASCIMENTO(13, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown"),
 
 	INDICADORIE(14, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown"),
-	
-	IDESTRANGEIRO(15, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown");
+
+	IDESTRANGEIRO(15, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown"),
+	NUNINSJUNTCOMERCIAL(16, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown");
 
 	/** The code. */
 	private Integer code;
