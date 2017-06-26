@@ -683,6 +683,7 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 			ArrayList<UserRoles> userRoleList = new ArrayList<UserRoles>();
 			for (Usuario usuario : empresa.getUsuarios()) {
 				userRoles = new UserRoles();
+
 				if (!ValidationUtil.isNull(empresa.getTipo())){
 				switch (empresa.getTipo()) {
 				case 5: // comercio
@@ -710,8 +711,9 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 				}
 				userRoles.setUsername(usuario.getEmail());
 				userRoles.setModelAction(PersistenceActionEnum.INSERT);
+				userRoleList.add(new UserRoles(usuario.getEmail(),new Role(12),PersistenceActionEnum.INSERT));
 				userRoleList.add(userRoles);
-
+//ROLE_EMPRESA
 			}
 
 			UserRoleBARD.maintainUserRolesAssociations(userRoleList, response, empresa.getId(), null, null,

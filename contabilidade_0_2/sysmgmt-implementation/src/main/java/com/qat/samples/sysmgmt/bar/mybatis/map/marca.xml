@@ -67,12 +67,12 @@ marca
  <select id="fetchAllMarcasRequest" parameterType="MarcaInquiryRequest" resultMap="MarcaResult">
 
 		SELECT id,<include refid="allMarcaColumns" />
-  		  FROM marca where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY id ASC
+  		  FROM marca where 0 = 0 <if test="emprId != null"> and emprId = #{emprId}</if> ORDER BY id ASC
 
 </select>
 
 <select id="fetchMarcaRowCount" resultType="Integer">
-		SELECT COUNT(*) AS RECORD_COUNT FROM marca WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
+		SELECT COUNT(*) AS RECORD_COUNT FROM marca WHERE id IS NOT NULL <if test="emprId != null"> and emprId = #{emprId}</if>
 
  </select>
 

@@ -39,6 +39,13 @@ public class UserRoles extends ModelCosmeDamiao
 		this.role = role;
 	}
 
+	public UserRoles(String username, Role role,PersistenceActionEnum action) {
+		super();
+		this.username = username;
+		this.role = role;
+		this.setModelAction(action);
+	}
+
 	public String getUsername() {
 		return username;
 	}

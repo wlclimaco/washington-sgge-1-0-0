@@ -1,114 +1,126 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 
-<!-- create by system gera-java version 1.0.0 15/05/2016 18:59 : 2-->
+<!-- create by system gera-java version 1.0.0 15/05/2016 18:59 : 2 -->
 
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="CondPagMap">
-	<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
-	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+	<cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache" />
 
-  <!-- Result maps describe the mapping between the columns returned
-      from a query, and the class properties.  A result map isnt
-      necessary if the columns (or aliases) match to the properties
-       exactly. -->
-  <resultMap id="CondPagResult" type="CondPag">
-    <result property="id" column="id"/>
-    <result property="nome" column="nome"/>
-    <result property="valorIni" column="valorIni"/>
-    <result property="valorFin" column="valorFin"/>
-    <result property="parcelas" column="parcelas"/>
+	<!-- Result maps describe the mapping between the columns returned from
+		a query, and the class properties. A result map isnt necessary if the columns
+		(or aliases) match to the properties exactly. -->
+	<resultMap id="CondPagResult" type="CondPag">
+		<result property="id" column="id" />
+		<result property="nome" column="nome" />
+		<result property="valorIni" column="valorIni" />
+		<result property="valorFin" column="valorFin" />
+		<result property="parcelas" column="parcelas" />
 
-<result property="emprId" column="emprId"/>
-<result property="processId" column="processId"/>
-<result property="createUser" column="create_user"/>
-<result property="createDateUTC" column="create_date"/>
-<result property="modifyUser" column="modify_user"/>
-<result property="modifyDateUTC" column="modify_date"/>
-<!-- <collection property="listTipoPag" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/> -->
-  </resultMap>
+		<result property="emprId" column="emprId" />
+		<result property="processId" column="processId" />
+		<result property="createUser" column="create_user" />
+		<result property="createDateUTC" column="create_date" />
+		<result property="modifyUser" column="modify_user" />
+		<result property="modifyDateUTC" column="modify_date" />
+		<!-- <collection property="listTipoPag" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/> -->
+	</resultMap>
 
-  <sql id="allCondPagColumns">
-nome
-,valorIni
-,valorFin
-,parcelas
-,emprId
-,processId
-,create_date
-,create_user
-,modify_date
-,modify_user
+	<sql id="allCondPagColumns">
+		nome
+		,valorIni
+		,valorFin
+		,parcelas
+		,emprId
+		,processId
+		,create_date
+		,create_user
+		,modify_date
+		,modify_user
 
-</sql>
-<sql id="allCondPagValues">
-#{nome},
-#{valorIni},
-#{valorFin},
-#{parcelas},
+	</sql>
+	<sql id="allCondPagValues">
+		#{nome},
+		#{valorIni},
+		#{valorFin},
+		#{parcelas},
 		#{emprId},
 		#{processId},
 		#{createDateUTC},
 		#{createUser},
 		#{modifyDateUTC},
 		#{modifyUser}
-  </sql>
+	</sql>
 
 
- <select id="fetchAllCondPags" resultMap="CondPagResult">
-    SELECT id,
-	<include refid="allCondPagColumns" />
-   FROM condpag ORDER BY id ASC
- </select>
+	<select id="fetchAllCondPags" resultMap="CondPagResult">
+		SELECT id,
+		<include refid="allCondPagColumns" />
+		FROM condpag ORDER BY id ASC
+	</select>
 
- <select id="fetchCondPagById" parameterType="Integer" resultMap="CondPagResult">
-    SELECT id,
-	<include refid="allCondPagColumns" />
-   FROM condpag WHERE id = #{fetchid}
- </select>
+	<select id="fetchCondPagById" parameterType="Integer" resultMap="CondPagResult">
+		SELECT id,
+		<include refid="allCondPagColumns" />
+		FROM condpag WHERE id = #{fetchid}
+	</select>
 
- <select id="fetchAllCondPagsRequest" parameterType="CondPagInquiryRequest" resultMap="CondPagResult">
+	<select id="fetchAllCondPagsRequest" parameterType="CondPagInquiryRequest"
+		resultMap="CondPagResult">
 
-		SELECT id,<include refid="allCondPagColumns" />
-  		  FROM condpag where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
-		  OFFSET ( #{startPage} * #{pageSize} )
-		  LIMIT #{pageSize}
-</select>
+		SELECT id,
+		<include refid="allCondPagColumns" />
+		FROM condpag where 0 = 0
+		<if test="emprId != null"> and emprId = #{emprId}</if>
+		ORDER BY id ASC
 
-<select id="fetchCondPagRowCount" resultType="Integer">
-		SELECT COUNT(*) AS RECORD_COUNT FROM condpag WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+	</select>
 
- </select>
+	<select id="fetchCondPagRowCount" resultType="Integer">
+		SELECT COUNT(*) AS RECORD_COUNT FROM condpag WHERE id IS NOT NULL
+		<if test="emprId != null"> and emprId = #{emprId}</if>
 
- <insert id="insertCondPag" parameterType="CondPag" useGeneratedKeys="true" keyProperty="id">
- 	INSERT INTO condpag (
-	<if test="id != null"><if test="id > 0">id,</if></if><include refid="allCondPagColumns" />
-     )
-   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allCondPagValues" /> )
- </insert>
+	</select>
 
- <update id="updateCondPag" parameterType="CondPag">
-   UPDATE condpag SET
-<if test="nome!= null">nome = #{nome},</if>
-<if test="valorIni!= null">valorIni = #{valorIni},</if>
-<if test="valorFin!= null">valorFin = #{valorFin},</if>
-<if test="parcelas!= null">parcelas = #{parcelas},</if>
-<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
-<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
-   WHERE
-    id = #{id}
- </update>
+	<insert id="insertCondPag" parameterType="CondPag"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO condpag (
+		<if test="id != null">
+			<if test="id > 0">id,</if>
+		</if>
+		<include refid="allCondPagColumns" />
+		)
+		VALUES (
+		<if test="id != null">
+			<if test="id > 0">#{id},</if>
+		</if>
+		<include refid="allCondPagValues" />
+		)
+	</insert>
 
-<delete id="deleteCondPagById" parameterType="CondPag">
-  DELETE FROM condpag WHERE id = #{id}
- </delete>
+	<update id="updateCondPag" parameterType="CondPag">
+		UPDATE condpag SET
+		<if test="nome!= null">nome = #{nome},</if>
+		<if test="valorIni!= null">valorIni = #{valorIni},</if>
+		<if test="valorFin!= null">valorFin = #{valorFin},</if>
+		<if test="parcelas!= null">parcelas = #{parcelas},</if>
+		<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+		<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		WHERE
+		id = #{id}
+	</update>
 
- <delete id="deleteAllCondPags">
-	DELETE FROM condpag
-  </delete>
+	<delete id="deleteCondPagById" parameterType="CondPag">
+		DELETE FROM condpag WHERE id = #{id}
+	</delete>
+
+	<delete id="deleteAllCondPags">
+		DELETE FROM condpag
+	</delete>
 </mapper>
 
 

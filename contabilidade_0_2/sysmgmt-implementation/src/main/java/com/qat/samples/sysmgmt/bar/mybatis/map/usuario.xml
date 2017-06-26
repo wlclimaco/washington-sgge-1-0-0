@@ -1,158 +1,174 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 
-<!-- create by system gera-java version 1.0.0 01/05/2016 18:1 : 13-->
+<!-- create by system gera-java version 1.0.0 01/05/2016 18:1 : 13 -->
 
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="UsuarioMap">
-	<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
-	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+	<cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache" />
 
-  <!-- Result maps describe the mapping between the columns returned
-      from a query, and the class properties.  A result map isnt
-      necessary if the columns (or aliases) match to the properties
-       exactly. -->
-  <resultMap id="UsuarioResult" type="Usuario">
-    <result property="id" column="id"/>
-    <result property="email" column="username"/>
-    <result property="telefone" column="telefone"/>
-    <result property="emprId" column="emprId"/>
-    <result property="processId" column="processId"/>
-    <result property="senha" column="password"/>
-    <result property="pergunta" column="pergunta"/>
-    <result property="language" column="language"/>
-    <result property="ultAcesso" column="ultAcesso"/>
-    <result property="tabelaEnumValue" column="tabelaEnumValue"/>
-    <result property="nome" column="nome"/>
-<result property="createUser" column="create_user"/>
-<result property="createDateUTC" column="create_date"/>
-<result property="modifyUser" column="modify_user"/>
-<result property="modifyDateUTC" column="modify_date"/>
-<collection property="cpf" column="id" select="DocumentoMap.fetchDocumentoByUsuario"/>
-<collection property="roles" column="email" select="RoleMap.fetchRoleByUsuario"/>
-  </resultMap>
+	<!-- Result maps describe the mapping between the columns returned from
+		a query, and the class properties. A result map isnt necessary if the columns
+		(or aliases) match to the properties exactly. -->
+	<resultMap id="UsuarioResult" type="Usuario">
+		<result property="id" column="id" />
+		<result property="email" column="username" />
+		<result property="telefone" column="telefone" />
+		<result property="emprId" column="emprId" />
+		<result property="processId" column="processId" />
+		<result property="senha" column="password" />
+		<result property="pergunta" column="pergunta" />
+		<result property="language" column="language" />
+		<result property="ultAcesso" column="ultAcesso" />
+		<result property="tabelaEnumValue" column="tabelaEnumValue" />
+		<result property="nome" column="nome" />
+		<result property="createUser" column="create_user" />
+		<result property="createDateUTC" column="create_date" />
+		<result property="modifyUser" column="modify_user" />
+		<result property="modifyDateUTC" column="modify_date" />
+		<collection property="cpf" column="id"
+			select="DocumentoMap.fetchDocumentoByUsuario" />
+		<collection property="roles" column="email"
+			select="RoleMap.fetchRoleByUsuario" />
+	</resultMap>
 
-  <sql id="allUsuarioColumns">
-username
-,telefone
-,emprId
-,processId
-,password
-,pergunta
-,language
-,ultAcesso
-,tabelaEnumValue
-,nome
-,create_date
-,create_user
-,modify_date
-,modify_user
+	<sql id="allUsuarioColumns">
+		username
+		,telefone
+		,emprId
+		,processId
+		,password
+		,pergunta
+		,language
+		,ultAcesso
+		,tabelaEnumValue
+		,nome
+		,create_date
+		,create_user
+		,modify_date
+		,modify_user
 
-</sql>
-<sql id="allUsuarioValues">
-#{email},
-#{telefone},
-#{emprId},
-#{processId},
-#{senha},
-#{pergunta},
-#{language},
-#{ultAcesso},
-#{tabelaEnumValue},
-#{nome},
-#{createDateUTC},
-#{createUser},
-#{modifyDateUTC},
-#{modifyUser}
-  </sql>
+	</sql>
+	<sql id="allUsuarioValues">
+		#{email},
+		#{telefone},
+		#{emprId},
+		#{processId},
+		#{senha},
+		#{pergunta},
+		#{language},
+		#{ultAcesso},
+		#{tabelaEnumValue},
+		#{nome},
+		#{createDateUTC},
+		#{createUser},
+		#{modifyDateUTC},
+		#{modifyUser}
+	</sql>
 
- <sql id="allUsuarioColumnsWithQualifier">
+	<sql id="allUsuarioColumnsWithQualifier">
 		c.id, c.usuario_desc
-c.id,
-c.emprId,
-c.processId,
-c.email,
-c.senha,
-c.pergunta,
-c.language,
-c.ultAcesso,
-c.tabelaEnumValue,
+		c.id,
+		c.emprId,
+		c.processId,
+		c.email,
+		c.senha,
+		c.pergunta,
+		c.language,
+		c.ultAcesso,
+		c.tabelaEnumValue,
 		c.createDateUTC,
 		c.createUser,
 		c.modifyDateUTC,
 		c.modifyUser
- </sql>
+	</sql>
 
- <select id="fetchAllUsuarios" resultMap="UsuarioResult">
-    SELECT
-	id,<include refid="allUsuarioColumns" />
-   FROM users ORDER BY id ASC
- </select>
+	<select id="fetchAllUsuarios" resultMap="UsuarioResult">
+		SELECT
+		id,
+		<include refid="allUsuarioColumns" />
+		FROM users ORDER BY id ASC
+	</select>
 
- <select id="fetchUsuarioById" parameterType="Integer" resultMap="UsuarioResult">
-    SELECT
-	id,<include refid="allUsuarioColumns" />
-   FROM users WHERE id = #{fetchid}
- </select>
+	<select id="fetchUsuarioById" parameterType="Integer" resultMap="UsuarioResult">
+		SELECT
+		id,
+		<include refid="allUsuarioColumns" />
+		FROM users WHERE id = #{fetchid}
+	</select>
 
-  <select id="fetchUsuarioByEmnprId" parameterType="Integer" resultMap="UsuarioResult">
-    SELECT
-	id,<include refid="allUsuarioColumns" />
-   FROM users WHERE emprid = #{fetchid} order by username  ASC
- </select>
+	<select id="fetchUsuarioByEmnprId" parameterType="Integer"
+		resultMap="UsuarioResult">
+		SELECT
+		id,
+		<include refid="allUsuarioColumns" />
+		FROM users WHERE emprid = #{fetchid} order by username ASC
+	</select>
 
- <select id="fetchAllUsuariosRequest" parameterType="UsuarioInquiryRequest" resultMap="UsuarioResult">
+	<select id="fetchAllUsuariosRequest" parameterType="UsuarioInquiryRequest"
+		resultMap="UsuarioResult">
 
-		SELECT id,<include refid="allUsuarioColumns" />
-  		  FROM users WHERE id IS NOT NULL <if test="criteria.emprId != null">
-						AND emprId = #{criteria.emprId}
-					</if> <if test="criteria.id != null">
-						AND id = #{criteria.id}
-					</if> ORDER BY id ASC
+		SELECT id,
+		<include refid="allUsuarioColumns" />
+		FROM users WHERE id IS NOT NULL
+		<if test="emprId != null"> and emprId = #{emprId}</if>
+		<if test="id != null ">AND id = #{id}</if>
+		ORDER BY id ASC
 
-</select>
+	</select>
 
-<select id="fetchUsuarioRowCount" resultType="Integer">
-		SELECT COUNT(*) AS RECORD_COUNT FROM users WHERE id IS NOT NULL
+	<select id="fetchUsuarioRowCount" resultType="Integer">
+		SELECT COUNT(*) AS
+		RECORD_COUNT FROM users WHERE id IS NOT NULL
 
- </select>
+	</select>
 
- <insert id="insertUsuario" parameterType="Usuario" useGeneratedKeys="true" keyProperty="id">
- 	INSERT INTO users (
-	<if test="id != null"><if test="id > 0">id,</if></if><include refid="allUsuarioColumns" />
-     )
-   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allUsuarioValues" /> )
- </insert>
+	<insert id="insertUsuario" parameterType="Usuario"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO users (
+		<if test="id != null">
+			<if test="id > 0">id,</if>
+		</if>
+		<include refid="allUsuarioColumns" />
+		)
+		VALUES (
+		<if test="id != null">
+			<if test="id > 0">#{id},</if>
+		</if>
+		<include refid="allUsuarioValues" />
+		)
+	</insert>
 
- <update id="updateUsuario" parameterType="Usuario">
-   UPDATE users SET
-<if test="id!= null">id = #{id},</if>
-<if test="emprId!= null">emprId = #{emprId},</if>
-<if test="email!= null">username = #{email},</if>
-<if test="nome!= null">nome = #{nome},</if>
-<if test="telefone!= null">telefone = #{telefone},</if>
-<if test="processId!= null">processId = #{processId},</if>
-<if test="senha!= null">password = #{senha},</if>
-<if test="pergunta!= null">pergunta = #{pergunta},</if>
-<if test="language!= null">language = #{language},</if>
-<if test="ultAcesso!= null">ultAcesso = #{ultAcesso},</if>
-<if test="tabelaEnumValue!= null">tabelaEnumValue = #{tabelaEnumValue},</if>
-<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
-<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
-   WHERE
-    id = #{id}
- </update>
+	<update id="updateUsuario" parameterType="Usuario">
+		UPDATE users SET
+		<if test="id!= null">id = #{id},</if>
+		<if test="emprId!= null">emprId = #{emprId},</if>
+		<if test="email!= null">username = #{email},</if>
+		<if test="nome!= null">nome = #{nome},</if>
+		<if test="telefone!= null">telefone = #{telefone},</if>
+		<if test="processId!= null">processId = #{processId},</if>
+		<if test="senha!= null">password = #{senha},</if>
+		<if test="pergunta!= null">pergunta = #{pergunta},</if>
+		<if test="language!= null">language = #{language},</if>
+		<if test="ultAcesso!= null">ultAcesso = #{ultAcesso},</if>
+		<if test="tabelaEnumValue!= null">tabelaEnumValue = #{tabelaEnumValue},</if>
+		<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+		<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		WHERE
+		id = #{id}
+	</update>
 
-<delete id="deleteUsuarioById" parameterType="Usuario">
-  DELETE FROM users WHERE id = #{id}
- </delete>
+	<delete id="deleteUsuarioById" parameterType="Usuario">
+		DELETE FROM users WHERE id = #{id}
+	</delete>
 
- <delete id="deleteAllUsuarios">
-	DELETE FROM users
-  </delete>
+	<delete id="deleteAllUsuarios">
+		DELETE FROM users
+	</delete>
 </mapper>
 
 

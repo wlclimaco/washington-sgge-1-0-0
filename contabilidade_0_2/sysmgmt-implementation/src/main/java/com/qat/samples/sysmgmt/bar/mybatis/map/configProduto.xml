@@ -1,242 +1,268 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 
-<!-- create by system gera-java version 1.0.0 27/07/2016 17:55 : 21-->
+<!-- create by system gera-java version 1.0.0 27/07/2016 17:55 : 21 -->
 
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ConfigProdutoMap">
- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
- <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+	<cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache" />
 
-  <!-- Result maps describe the mapping between the columns returned
-      from a query, and the class properties.  A result map isnt
-      necessary if the columns (or aliases) match to the properties
-       exactly. -->
-  <resultMap id="ConfigProdutoResult" type="ConfigProduto">
-    <result property="id" column="id"/>
+	<!-- Result maps describe the mapping between the columns returned from
+		a query, and the class properties. A result map isnt necessary if the columns
+		(or aliases) match to the properties exactly. -->
+	<resultMap id="ConfigProdutoResult" type="ConfigProduto">
+		<result property="id" column="id" />
 
-    <result property="icmsRedBaseCalc" column="icmsRedBaseCalc"/>
-    <result property="icmsAliq" column="icmsAliq"/>
+		<result property="icmsRedBaseCalc" column="icmsRedBaseCalc" />
+		<result property="icmsAliq" column="icmsAliq" />
 
-    <result property="icmsMargValAdic" column="icmsMargValAdic"/>
-    <result property="icmsRedBaseCalcST" column="icmsRedBaseCalcST"/>
-    <result property="icmsPrecoUnitPautaST" column="icmsPrecoUnitPautaST"/>
-    <result property="icmsAliqST" column="icmsAliqST"/>
+		<result property="icmsMargValAdic" column="icmsMargValAdic" />
+		<result property="icmsRedBaseCalcST" column="icmsRedBaseCalcST" />
+		<result property="icmsPrecoUnitPautaST" column="icmsPrecoUnitPautaST" />
+		<result property="icmsAliqST" column="icmsAliqST" />
 
-    <result property="ipiClasCigarroBebida" column="ipiClasCigarroBebida"/>
-    <result property="ipiCNPJProd" column="ipiCNPJProd"/>
-    <result property="ipiCodSeloCont" column="ipiCodSeloCont"/>
-    <result property="ipiQtdSelo" column="ipiQtdSelo"/>
-    <result property="ipiCodEnquad" column="ipiCodEnquad"/>
+		<result property="ipiClasCigarroBebida" column="ipiClasCigarroBebida" />
+		<result property="ipiCNPJProd" column="ipiCNPJProd" />
+		<result property="ipiCodSeloCont" column="ipiCodSeloCont" />
+		<result property="ipiQtdSelo" column="ipiQtdSelo" />
+		<result property="ipiCodEnquad" column="ipiCodEnquad" />
 
-    <result property="ipiAliq" column="ipiAliq"/>
+		<result property="ipiAliq" column="ipiAliq" />
 
-    <result property="pisAliq" column="pisAliq"/>
-    <result property="pisValUnidtrib" column="pisValUnidtrib"/>
+		<result property="pisAliq" column="pisAliq" />
+		<result property="pisValUnidtrib" column="pisValUnidtrib" />
 
-    <result property="pisAliqST" column="pisAliqST"/>
-    <result property="pisValorAliqST" column="pisValorAliqST"/>
+		<result property="pisAliqST" column="pisAliqST" />
+		<result property="pisValorAliqST" column="pisValorAliqST" />
 
-    <result property="cofinsAliq" column="cofinsAliq"/>
-    <result property="cofinsValorAliq" column="cofinsValorAliq"/>
+		<result property="cofinsAliq" column="cofinsAliq" />
+		<result property="cofinsValorAliq" column="cofinsValorAliq" />
 
-    <result property="cofinsAliqST" column="cofinsAliqST"/>
-    <result property="cofinsValorAliqST" column="cofinsValorAliqST"/>
-<result property="parentId" column="parentId"/>
-<result property="tabelaEnumValue" column="tabelaEnumValue"/>
-<result property="emprId" column="emprId"/>
-<result property="processId" column="processId"/>
-<result property="createUser" column="create_user"/>
-<result property="createDateUTC" column="create_date"/>
-<result property="modifyUser" column="modify_user"/>
-<result property="modifyDateUTC" column="modify_date"/>
- <collection property="cfop" column="cfop" select="CfopMap.fetchCfopById"/>
-    <collection property="icmsSitTrib" column="icmsSitTrib" select="DoisValorMap.fetchDoisValorById"/>
-    <collection property="icmsOrigem" column="icmsOrigem" select="DoisValorMap.fetchDoisValorById"/>
-    <collection property="icmsModalidadeBC" column="icmsModalidadeBC" select="DoisValorMap.fetchDoisValorById"/>
-    <collection property="icmsMotDesoneracao" column="icmsMotDesoneracao" select="DoisValorMap.fetchDoisValorById"/>
-    <collection property="icmsModBCST" column="icmsModBCST" select="DoisValorMap.fetchDoisValorById"/>
-     <collection property="ipiSitTrib" column="ipiSitTrib" select="DoisValorMap.fetchDoisValorById"/>
-     <collection property="ipiTipCalc" column="ipiTipCalc" select="DoisValorMap.fetchDoisValorById"/>
-     <collection property="pisSitTrib" column="pisSitTrib" select="DoisValorMap.fetchDoisValorById"/>
-     <collection property="pistipoCalcSubstTrib" column="pistipoCalcSubstTrib" select="DoisValorMap.fetchDoisValorById"/>
-     <collection property="cofinsSubstTrib" column="cofinsSubstTrib" select="DoisValorMap.fetchDoisValorById"/>
-     <collection property="cofinsTipoCalcSubstTrib" column="cofinsTipoCalcSubstTrib" select="DoisValorMap.fetchDoisValorById"/>
-  </resultMap>
+		<result property="cofinsAliqST" column="cofinsAliqST" />
+		<result property="cofinsValorAliqST" column="cofinsValorAliqST" />
+		<result property="parentId" column="parentId" />
+		<result property="tabelaEnumValue" column="tabelaEnumValue" />
+		<result property="emprId" column="emprId" />
+		<result property="processId" column="processId" />
+		<result property="createUser" column="create_user" />
+		<result property="createDateUTC" column="create_date" />
+		<result property="modifyUser" column="modify_user" />
+		<result property="modifyDateUTC" column="modify_date" />
+		<collection property="cfop" column="cfop" select="CfopMap.fetchCfopById" />
+		<collection property="icmsSitTrib" column="icmsSitTrib"
+			select="DoisValorMap.fetchDoisValorById" />
+		<collection property="icmsOrigem" column="icmsOrigem"
+			select="DoisValorMap.fetchDoisValorById" />
+		<collection property="icmsModalidadeBC" column="icmsModalidadeBC"
+			select="DoisValorMap.fetchDoisValorById" />
+		<collection property="icmsMotDesoneracao" column="icmsMotDesoneracao"
+			select="DoisValorMap.fetchDoisValorById" />
+		<collection property="icmsModBCST" column="icmsModBCST"
+			select="DoisValorMap.fetchDoisValorById" />
+		<collection property="ipiSitTrib" column="ipiSitTrib"
+			select="DoisValorMap.fetchDoisValorById" />
+		<collection property="ipiTipCalc" column="ipiTipCalc"
+			select="DoisValorMap.fetchDoisValorById" />
+		<collection property="pisSitTrib" column="pisSitTrib"
+			select="DoisValorMap.fetchDoisValorById" />
+		<collection property="pistipoCalcSubstTrib" column="pistipoCalcSubstTrib"
+			select="DoisValorMap.fetchDoisValorById" />
+		<collection property="cofinsSubstTrib" column="cofinsSubstTrib"
+			select="DoisValorMap.fetchDoisValorById" />
+		<collection property="cofinsTipoCalcSubstTrib" column="cofinsTipoCalcSubstTrib"
+			select="DoisValorMap.fetchDoisValorById" />
+	</resultMap>
 
-  <sql id="allConfigProdutoColumns">
-cfop
-,icmsSitTrib
-,icmsOrigem
-,icmsModalidadeBC
-,icmsRedBaseCalc
-,icmsAliq
-,icmsMotDesoneracao
-,icmsModBCST
-,icmsMargValAdic
-,icmsRedBaseCalcST
-,icmsPrecoUnitPautaST
-,icmsAliqST
-,ipiSitTrib
-,ipiClasCigarroBebida
-,ipiCNPJProd
-,ipiCodSeloCont
-,ipiQtdSelo
-,ipiCodEnquad
-,ipiTipCalc
-,ipiAliq
-,pisSitTrib
-,pisAliq
-,pisValUnidtrib
-,pistipoCalcSubstTrib
-,pisAliqST
-,pisValorAliqST
-,cofinsSubstTrib
-,cofinsAliq
-,cofinsValorAliq
-,cofinsTipoCalcSubstTrib
-,cofinsAliqST
-,cofinsValorAliqST
-,parentId
-,tabelaEnumValue
-,emprId
-,processId
-,create_date
-,create_user
-,modify_date
-,modify_user
+	<sql id="allConfigProdutoColumns">
+		cfop
+		,icmsSitTrib
+		,icmsOrigem
+		,icmsModalidadeBC
+		,icmsRedBaseCalc
+		,icmsAliq
+		,icmsMotDesoneracao
+		,icmsModBCST
+		,icmsMargValAdic
+		,icmsRedBaseCalcST
+		,icmsPrecoUnitPautaST
+		,icmsAliqST
+		,ipiSitTrib
+		,ipiClasCigarroBebida
+		,ipiCNPJProd
+		,ipiCodSeloCont
+		,ipiQtdSelo
+		,ipiCodEnquad
+		,ipiTipCalc
+		,ipiAliq
+		,pisSitTrib
+		,pisAliq
+		,pisValUnidtrib
+		,pistipoCalcSubstTrib
+		,pisAliqST
+		,pisValorAliqST
+		,cofinsSubstTrib
+		,cofinsAliq
+		,cofinsValorAliq
+		,cofinsTipoCalcSubstTrib
+		,cofinsAliqST
+		,cofinsValorAliqST
+		,parentId
+		,tabelaEnumValue
+		,emprId
+		,processId
+		,create_date
+		,create_user
+		,modify_date
+		,modify_user
 
-</sql>
-<sql id="allConfigProdutoValues">
-#{cfop.id},
-#{icmsSitTrib.id},
-#{icmsOrigem.id},
-#{icmsModalidadeBC.id},
-#{icmsRedBaseCalc},
-#{icmsAliq},
-#{icmsMotDesoneracao.id},
-#{icmsModBCST.id},
-#{icmsMargValAdic},
-#{icmsRedBaseCalcST},
-#{icmsPrecoUnitPautaST},
-#{icmsAliqST},
-#{ipiSitTrib.id},
-#{ipiClasCigarroBebida},
-#{ipiCNPJProd},
-#{ipiCodSeloCont},
-#{ipiQtdSelo},
-#{ipiCodEnquad},
-#{ipiTipCalc.id},
-#{ipiAliq},
-#{pisSitTrib.id},
-#{pisAliq},
-#{pisValUnidtrib},
-#{pistipoCalcSubstTrib.id},
-#{pisAliqST},
-#{pisValorAliqST},
-#{cofinsSubstTrib.id},
-#{cofinsAliq},
-#{cofinsValorAliq},
-#{cofinsTipoCalcSubstTrib.id},
-#{cofinsAliqST},
-#{cofinsValorAliqST},
-     #{parentId},
-     #{tabelaEnumValue},
-     #{emprId},
-     #{processId},
-     #{createDateUTC},
-     #{createUser},
-     #{modifyDateUTC},
-     #{modifyUser}
-  </sql>
+	</sql>
+	<sql id="allConfigProdutoValues">
+		#{cfop.id},
+		#{icmsSitTrib.id},
+		#{icmsOrigem.id},
+		#{icmsModalidadeBC.id},
+		#{icmsRedBaseCalc},
+		#{icmsAliq},
+		#{icmsMotDesoneracao.id},
+		#{icmsModBCST.id},
+		#{icmsMargValAdic},
+		#{icmsRedBaseCalcST},
+		#{icmsPrecoUnitPautaST},
+		#{icmsAliqST},
+		#{ipiSitTrib.id},
+		#{ipiClasCigarroBebida},
+		#{ipiCNPJProd},
+		#{ipiCodSeloCont},
+		#{ipiQtdSelo},
+		#{ipiCodEnquad},
+		#{ipiTipCalc.id},
+		#{ipiAliq},
+		#{pisSitTrib.id},
+		#{pisAliq},
+		#{pisValUnidtrib},
+		#{pistipoCalcSubstTrib.id},
+		#{pisAliqST},
+		#{pisValorAliqST},
+		#{cofinsSubstTrib.id},
+		#{cofinsAliq},
+		#{cofinsValorAliq},
+		#{cofinsTipoCalcSubstTrib.id},
+		#{cofinsAliqST},
+		#{cofinsValorAliqST},
+		#{parentId},
+		#{tabelaEnumValue},
+		#{emprId},
+		#{processId},
+		#{createDateUTC},
+		#{createUser},
+		#{modifyDateUTC},
+		#{modifyUser}
+	</sql>
 
 
- <select id="fetchAllConfigProdutos" resultMap="ConfigProdutoResult">
-    SELECT id,
- <include refid="allConfigProdutoColumns" />
-   FROM configproduto ORDER BY id ASC
- </select>
+	<select id="fetchAllConfigProdutos" resultMap="ConfigProdutoResult">
+		SELECT id,
+		<include refid="allConfigProdutoColumns" />
+		FROM configproduto ORDER BY id ASC
+	</select>
 
- <select id="fetchConfigProdutoById" parameterType="Integer" resultMap="ConfigProdutoResult">
-    SELECT id,
- <include refid="allConfigProdutoColumns" />
-   FROM configproduto WHERE id = #{fetchid}
- </select>
+	<select id="fetchConfigProdutoById" parameterType="Integer"
+		resultMap="ConfigProdutoResult">
+		SELECT id,
+		<include refid="allConfigProdutoColumns" />
+		FROM configproduto WHERE id = #{fetchid}
+	</select>
 
- <select id="fetchAllConfigProdutosRequest" parameterType="PagedInquiryRequest" resultMap="ConfigProdutoResult">
+	<select id="fetchAllConfigProdutosRequest" parameterType="PagedInquiryRequest"
+		resultMap="ConfigProdutoResult">
 
-     SELECT id,<include refid="allConfigProdutoColumns" />
-           FROM configproduto where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY id ASC
-       OFFSET ( #{startPage} * #{pageSize} )
-       LIMIT #{pageSize}
-</select>
+		SELECT id,
+		<include refid="allConfigProdutoColumns" />
+		FROM configproduto where 0 = 0
+		<if test="emprId != null"> and emprId = emprId</if>
+		ORDER BY id ASC
 
-<select id="fetchConfigProdutoRowCount" resultType="Integer">
-     SELECT COUNT(*) AS RECORD_COUNT FROM configproduto WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
+	</select>
 
- </select>
+	<select id="fetchConfigProdutoRowCount" resultType="Integer">
+		SELECT COUNT(*) AS RECORD_COUNT FROM configproduto WHERE id IS NOT
+		NULL
+		<if test="emprId != null"> and emprId = emprId</if>
 
- <insert id="insertConfigProduto" parameterType="ConfigProduto" useGeneratedKeys="true" keyProperty="id">
-     INSERT INTO configproduto (
- <if test="id != null"><if test="id > 0">id,</if></if><include refid="allConfigProdutoColumns" />
-     )
-   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allConfigProdutoValues" /> )
- </insert>
+	</select>
 
- <update id="updateConfigProduto" parameterType="ConfigProduto">
-   UPDATE configproduto SET
-<if test="cfop!= null">cfop = #{cfop.id},</if>
-<if test="icmsSitTrib!= null">icmsSitTrib = #{icmsSitTrib.id},</if>
-<if test="icmsOrigem!= null">icmsOrigem = #{icmsOrigem.id},</if>
-<if test="icmsModalidadeBC!= null">icmsModalidadeBC = #{icmsModalidadeBC.id},</if>
-<if test="icmsRedBaseCalc!= null">icmsRedBaseCalc = #{icmsRedBaseCalc},</if>
-<if test="icmsAliq!= null">icmsAliq = #{icmsAliq},</if>
-<if test="icmsMotDesoneracao!= null">icmsMotDesoneracao = #{icmsMotDesoneracao.id},</if>
-<if test="icmsModBCST!= null">icmsModBCST = #{icmsModBCST.id},</if>
-<if test="icmsMargValAdic!= null">icmsMargValAdic = #{icmsMargValAdic},</if>
-<if test="icmsRedBaseCalcST!= null">icmsRedBaseCalcST = #{icmsRedBaseCalcST},</if>
-<if test="icmsPrecoUnitPautaST!= null">icmsPrecoUnitPautaST = #{icmsPrecoUnitPautaST},</if>
-<if test="icmsAliqST!= null">icmsAliqST = #{icmsAliqST},</if>
-<if test="ipiSitTrib!= null">ipiSitTrib = #{ipiSitTrib.id},</if>
-<if test="ipiClasCigarroBebida!= null">ipiClasCigarroBebida = #{ipiClasCigarroBebida},</if>
-<if test="ipiCNPJProd!= null">ipiCNPJProd = #{ipiCNPJProd},</if>
-<if test="ipiCodSeloCont!= null">ipiCodSeloCont = #{ipiCodSeloCont},</if>
-<if test="ipiQtdSelo!= null">ipiQtdSelo = #{ipiQtdSelo},</if>
-<if test="ipiCodEnquad!= null">ipiCodEnquad = #{ipiCodEnquad},</if>
-<if test="ipiTipCalc!= null">ipiTipCalc = #{ipiTipCalc.id},</if>
-<if test="ipiAliq!= null">ipiAliq = #{ipiAliq},</if>
-<if test="pisSitTrib!= null">pisSitTrib = #{pisSitTrib.id},</if>
-<if test="pisAliq!= null">pisAliq = #{pisAliq},</if>
-<if test="pisValUnidtrib!= null">pisValUnidtrib = #{pisValUnidtrib},</if>
-<if test="pistipoCalcSubstTrib!= null">pistipoCalcSubstTrib = #{pistipoCalcSubstTrib.id},</if>
-<if test="pisAliqST!= null">pisAliqST = #{pisAliqST},</if>
-<if test="pisValorAliqST!= null">pisValorAliqST = #{pisValorAliqST},</if>
-<if test="cofinsSubstTrib!= null">cofinsSubstTrib = #{cofinsSubstTrib.id},</if>
-<if test="cofinsAliq!= null">cofinsAliq = #{cofinsAliq},</if>
-<if test="cofinsValorAliq!= null">cofinsValorAliq = #{cofinsValorAliq},</if>
-<if test="cofinsTipoCalcSubstTrib!= null">cofinsTipoCalcSubstTrib = #{cofinsTipoCalcSubstTrib.id},</if>
-<if test="cofinsAliqST!= null">cofinsAliqST = #{cofinsAliqST},</if>
-<if test="cofinsValorAliqST!= null">cofinsValorAliqST = #{cofinsValorAliqST},</if>
-<if test="parentId!= null"> parentId=#{parentId},</if>
-<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
-<if test="emprId!= null"> emprId=#{emprId},</if>
-<if test="processId!= null"> processId=#{processId},</if>
-<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
-<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
-   WHERE
-    id = #{id}
- </update>
+	<insert id="insertConfigProduto" parameterType="ConfigProduto"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO configproduto (
+		<if test="id != null">
+			<if test="id > 0">id,</if>
+		</if>
+		<include refid="allConfigProdutoColumns" />
+		)
+		VALUES (
+		<if test="id != null">
+			<if test="id > 0">#{id},</if>
+		</if>
+		<include refid="allConfigProdutoValues" />
+		)
+	</insert>
 
-<delete id="deleteConfigProdutoById" parameterType="ConfigProduto">
-  DELETE FROM configproduto WHERE id = #{id}
- </delete>
+	<update id="updateConfigProduto" parameterType="ConfigProduto">
+		UPDATE configproduto SET
+		<if test="cfop!= null">cfop = #{cfop.id},</if>
+		<if test="icmsSitTrib!= null">icmsSitTrib = #{icmsSitTrib.id},</if>
+		<if test="icmsOrigem!= null">icmsOrigem = #{icmsOrigem.id},</if>
+		<if test="icmsModalidadeBC!= null">icmsModalidadeBC = #{icmsModalidadeBC.id},</if>
+		<if test="icmsRedBaseCalc!= null">icmsRedBaseCalc = #{icmsRedBaseCalc},</if>
+		<if test="icmsAliq!= null">icmsAliq = #{icmsAliq},</if>
+		<if test="icmsMotDesoneracao!= null">icmsMotDesoneracao = #{icmsMotDesoneracao.id},</if>
+		<if test="icmsModBCST!= null">icmsModBCST = #{icmsModBCST.id},</if>
+		<if test="icmsMargValAdic!= null">icmsMargValAdic = #{icmsMargValAdic},</if>
+		<if test="icmsRedBaseCalcST!= null">icmsRedBaseCalcST = #{icmsRedBaseCalcST},</if>
+		<if test="icmsPrecoUnitPautaST!= null">icmsPrecoUnitPautaST = #{icmsPrecoUnitPautaST},</if>
+		<if test="icmsAliqST!= null">icmsAliqST = #{icmsAliqST},</if>
+		<if test="ipiSitTrib!= null">ipiSitTrib = #{ipiSitTrib.id},</if>
+		<if test="ipiClasCigarroBebida!= null">ipiClasCigarroBebida = #{ipiClasCigarroBebida},</if>
+		<if test="ipiCNPJProd!= null">ipiCNPJProd = #{ipiCNPJProd},</if>
+		<if test="ipiCodSeloCont!= null">ipiCodSeloCont = #{ipiCodSeloCont},</if>
+		<if test="ipiQtdSelo!= null">ipiQtdSelo = #{ipiQtdSelo},</if>
+		<if test="ipiCodEnquad!= null">ipiCodEnquad = #{ipiCodEnquad},</if>
+		<if test="ipiTipCalc!= null">ipiTipCalc = #{ipiTipCalc.id},</if>
+		<if test="ipiAliq!= null">ipiAliq = #{ipiAliq},</if>
+		<if test="pisSitTrib!= null">pisSitTrib = #{pisSitTrib.id},</if>
+		<if test="pisAliq!= null">pisAliq = #{pisAliq},</if>
+		<if test="pisValUnidtrib!= null">pisValUnidtrib = #{pisValUnidtrib},</if>
+		<if test="pistipoCalcSubstTrib!= null">pistipoCalcSubstTrib = #{pistipoCalcSubstTrib.id},</if>
+		<if test="pisAliqST!= null">pisAliqST = #{pisAliqST},</if>
+		<if test="pisValorAliqST!= null">pisValorAliqST = #{pisValorAliqST},</if>
+		<if test="cofinsSubstTrib!= null">cofinsSubstTrib = #{cofinsSubstTrib.id},</if>
+		<if test="cofinsAliq!= null">cofinsAliq = #{cofinsAliq},</if>
+		<if test="cofinsValorAliq!= null">cofinsValorAliq = #{cofinsValorAliq},</if>
+		<if test="cofinsTipoCalcSubstTrib!= null">cofinsTipoCalcSubstTrib = #{cofinsTipoCalcSubstTrib.id},
+		</if>
+		<if test="cofinsAliqST!= null">cofinsAliqST = #{cofinsAliqST},</if>
+		<if test="cofinsValorAliqST!= null">cofinsValorAliqST = #{cofinsValorAliqST},</if>
+		<if test="parentId!= null"> parentId=#{parentId},</if>
+		<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
+		<if test="emprId!= null"> emprId=#{emprId},</if>
+		<if test="processId!= null"> processId=#{processId},</if>
+		<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+		<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		WHERE
+		id = #{id}
+	</update>
 
- <delete id="deleteAllConfigProdutos">
- DELETE FROM configproduto
-  </delete>
+	<delete id="deleteConfigProdutoById" parameterType="ConfigProduto">
+		DELETE FROM configproduto WHERE id = #{id}
+	</delete>
+
+	<delete id="deleteAllConfigProdutos">
+		DELETE FROM configproduto
+	</delete>
 </mapper>
 
 

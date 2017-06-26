@@ -1,102 +1,120 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 
-<!-- create by system gera-java version 1.0.0 12/05/2016 12:43 : 4-->
+<!-- create by system gera-java version 1.0.0 12/05/2016 12:43 : 4 -->
 
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ContasPagarMap">
-	<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
-	<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+	<cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache" />
 
-  <!-- Result maps describe the mapping between the columns returned
-      from a query, and the class properties.  A result map isnt
-      necessary if the columns (or aliases) match to the properties
-       exactly. -->
-  <resultMap id="ContasPagarResult" type="ContasPagar" extends="TituloMap.TituloResult">
-    <collection property="fornecedor" column="parentId" select="FornecedorMap.fetchFornecedorById"/>
-  </resultMap>
+	<!-- Result maps describe the mapping between the columns returned from
+		a query, and the class properties. A result map isnt necessary if the columns
+		(or aliases) match to the properties exactly. -->
+	<resultMap id="ContasPagarResult" type="ContasPagar"
+		extends="TituloMap.TituloResult">
+		<collection property="fornecedor" column="parentId"
+			select="FornecedorMap.fetchFornecedorById" />
+	</resultMap>
 
-  <sql id="allContasPagarColumns">
-<include refid="TituloMap.allTituloColumns"/>,parentId
+	<sql id="allContasPagarColumns">
+		<include refid="TituloMap.allTituloColumns" />
+		,parentId
 
-</sql>
-<sql id="allContasPagarValues">
-<include refid="TituloMap.allTituloValues"/>,#{fornecedor.id}
-  </sql>
-
-
- <select id="fetchAllContasPagars" resultMap="ContasPagarResult">
-    SELECT id,
-	<include refid="allContasPagarColumns" />
-   FROM contaspagar ORDER BY dataVencimento ASC
- </select>
-
- <select id="fetchContasPagarById" parameterType="Integer" resultMap="ContasPagarResult">
-    SELECT id,
-	<include refid="allContasPagarColumns" />
-   FROM contaspagar WHERE id = #{fetchid}
- </select>
-
- <select id="fetchAllContasPagarsRequest" parameterType="ContasPagarInquiryRequest" resultMap="ContasPagarResult">
-
-		SELECT id,<include refid="allContasPagarColumns" />
-  		  FROM contaspagar where 0 = 0
-  		  <if test="id != null"> and id = #{id}</if>
-  		  <if test="emprId != null"> and emprId = #{emprId}</if>
-  		  <if test="descricao != null"> and descricao = #{descricao}</if>
-  		  <if test="dataInicial != null"> and dataVencimento between  #{dataInicial} and #{dataFinal}</if>
-  		  <if test="status != null"> and status = #{status.id}</if>
-		 ORDER BY  dataVencimento DESC
+	</sql>
+	<sql id="allContasPagarValues">
+		<include refid="TituloMap.allTituloValues" />
+		,#{fornecedor.id}
+	</sql>
 
 
-</select>
+	<select id="fetchAllContasPagars" resultMap="ContasPagarResult">
+		SELECT id,
+		<include refid="allContasPagarColumns" />
+		FROM contaspagar ORDER BY dataVencimento ASC
+	</select>
 
-<select id="fetchContasPagarRowCount" resultType="Integer">
-		SELECT COUNT(*) AS RECORD_COUNT FROM contaspagar WHERE id IS NOT NULL  <if test="id != null"> and id = #{id}</if> <if test="emprId != null"> and emprId = #{emprId}</if>
+	<select id="fetchContasPagarById" parameterType="Integer"
+		resultMap="ContasPagarResult">
+		SELECT id,
+		<include refid="allContasPagarColumns" />
+		FROM contaspagar WHERE id = #{fetchid}
+	</select>
 
- </select>
+	<select id="fetchAllContasPagarsRequest" parameterType="ContasPagarInquiryRequest"
+		resultMap="ContasPagarResult">
 
- <insert id="insertContasPagar" parameterType="ContasPagar" useGeneratedKeys="true" keyProperty="id">
- 	INSERT INTO contaspagar (
-	<if test="id != null"><if test="id > 0">id,</if></if><include refid="allContasPagarColumns" />
-     )
-   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allContasPagarValues" /> )
- </insert>
+		SELECT id,
+		<include refid="allContasPagarColumns" />
+		FROM contaspagar where 0 = 0
+		<if test="id != null"> and id = #{id}</if>
+		<if test="emprId != null"> and emprId = #{emprId}</if>
+		<if test="descricao != null"> and descricao = #{descricao}</if>
+		<if test="dataInicial != null"> and dataVencimento between #{dataInicial} and
+			#{dataFinal}</if>
+		<if test="status != null"> and status = #{status.id}</if>
+		ORDER BY dataVencimento DESC
 
- <update id="updateContasPagar" parameterType="ContasPagar">
-   UPDATE contaspagar SET
-<if test="numero!= null">numero = #{numero},</if>
-<if test="descricao!= null">descricao = #{descricao},</if>
-<if test="parcela!= null">parcela = #{parcela},</if>
-<if test="dataEmissao!= null">dataEmissao = #{dataEmissao},</if>
-<if test="dataVencimento!= null">dataVencimento = #{dataVencimento},</if>
-<if test="dataPagamento!= null">dataPagamento = #{dataPagamento},</if>
-<if test="docId!= null">docId = #{docId},</if>
-<if test="tipoDoc!= null">tipoDoc = #{tipoDoc.id},</if>
-<if test="formaCadastro!= null">formaCadastro = #{formaCadastro.id},</if>
-<if test="intervalo!= null">intervalo = #{intervalo.id},</if>
-<if test="categoria!= null">categoria = #{categoria.id},</if>
-<if test="observacao!= null">observacao = #{observacao},</if>
-<if test="valor!= null">valor = #{valor},</if>
-<if test="situacao!= null">situacao = #{situacao.id},</if>
-<if test="financeiroEnumValue!= null">financeiroEnumValue = #{financeiroEnumValue},</if>
-<if test="fornecedor.id!= null">parentId = #{fornecedor.id},</if>
-<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
-<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
-   WHERE
-    id = #{id}
- </update>
 
-<delete id="deleteContasPagarById" parameterType="ContasPagar">
-  DELETE FROM contaspagar WHERE id = #{id}
- </delete>
+	</select>
 
- <delete id="deleteAllContasPagars">
-	DELETE FROM contaspagar
-  </delete>
+	<select id="fetchContasPagarRowCount" resultType="Integer">
+		SELECT COUNT(*) AS RECORD_COUNT FROM contaspagar WHERE id IS NOT NULL
+		<if test="id != null"> and id = #{id}</if>
+		<if test="emprId != null"> and emprId = #{emprId}</if>
+
+	</select>
+
+	<insert id="insertContasPagar" parameterType="ContasPagar"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO contaspagar (
+		<if test="id != null">
+			<if test="id > 0">id,</if>
+		</if>
+		<include refid="allContasPagarColumns" />
+		)
+		VALUES (
+		<if test="id != null">
+			<if test="id > 0">#{id},</if>
+		</if>
+		<include refid="allContasPagarValues" />
+		)
+	</insert>
+
+	<update id="updateContasPagar" parameterType="ContasPagar">
+		UPDATE contaspagar SET
+		<if test="numero!= null">numero = #{numero},</if>
+		<if test="descricao!= null">descricao = #{descricao},</if>
+		<if test="parcela!= null">parcela = #{parcela},</if>
+		<if test="dataEmissao!= null">dataEmissao = #{dataEmissao},</if>
+		<if test="dataVencimento!= null">dataVencimento = #{dataVencimento},</if>
+		<if test="dataPagamento!= null">dataPagamento = #{dataPagamento},</if>
+		<if test="docId!= null">docId = #{docId},</if>
+		<if test="tipoDoc!= null">tipoDoc = #{tipoDoc.id},</if>
+		<if test="formaCadastro!= null">formaCadastro = #{formaCadastro.id},</if>
+		<if test="intervalo!= null">intervalo = #{intervalo.id},</if>
+		<if test="categoria!= null">categoria = #{categoria.id},</if>
+		<if test="observacao!= null">observacao = #{observacao},</if>
+		<if test="valor!= null">valor = #{valor},</if>
+		<if test="situacao!= null">situacao = #{situacao.id},</if>
+		<if test="financeiroEnumValue!= null">financeiroEnumValue = #{financeiroEnumValue},</if>
+		<if test="fornecedor.id!= null">parentId = #{fornecedor.id},</if>
+		<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+		<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		WHERE
+		id = #{id}
+	</update>
+
+	<delete id="deleteContasPagarById" parameterType="ContasPagar">
+		DELETE FROM contaspagar WHERE id = #{id}
+	</delete>
+
+	<delete id="deleteAllContasPagars">
+		DELETE FROM contaspagar
+	</delete>
 </mapper>
 
 

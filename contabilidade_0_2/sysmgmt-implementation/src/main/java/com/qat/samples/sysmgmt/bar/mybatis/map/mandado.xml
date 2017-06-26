@@ -112,7 +112,7 @@
 					where id = #{id} order by dataAdmissao ASC
   </select>
 
-  <select id="fetchAllMandadosByRequest" parameterType="MandadoInquiryRequest" resultMap="mandadoResult">
+  <select id="fetchAllMandadosByRequest" parameterType="PagedInquiryRequest" resultMap="mandadoResult">
      SELECT * FROM ( SELECT id,
     						<include refid="allMandadoColumns" />,
     						ROW_NUMBER() OVER(ORDER BY id) AS RowNumber

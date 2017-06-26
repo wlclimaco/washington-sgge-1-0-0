@@ -1,193 +1,216 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 
-<!-- create by system gera-java version 1.0.0 27/07/2016 17:55 : 21-->
+<!-- create by system gera-java version 1.0.0 27/07/2016 17:55 : 21 -->
 
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ConfiguracaoNFeMap">
- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
- <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+	<cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache" />
 
-  <!-- Result maps describe the mapping between the columns returned
-      from a query, and the class properties.  A result map isnt
-      necessary if the columns (or aliases) match to the properties
-       exactly. -->
-  <resultMap id="ConfiguracaoNFeResult" type="ConfiguracaoNFe">
-    <result property="id" column="id"/>
-    <result property="preencherDataHora" column="preencherDataHora"/>
-    <result property="icmsPadrao" column="icmsPadrao"/>
-    <result property="ipiPadrao" column="ipiPadrao"/>
-    <result property="pisPadrao" column="pisPadrao"/>
-    <result property="cofinsPadrao" column="cofinsPadrao"/>
-    <result property="anexarXmlEmail" column="anexarXmlEmail"/>
-    <result property="idCSC" column="idCSC"/>
-    <result property="cSC" column="cSC"/>
-    <result property="informacaoAdd" column="informacaoAdd"/>
-    <result property="certificado" column="certificado"/>
-    <result property="senha" column="senha"/>
-    <result property="salvarSenha" column="salvarSenha"/>
-<result property="parentId" column="parentId"/>
-<result property="tabelaEnumValue" column="tabelaEnumValue"/>
-<result property="emprId" column="emprId"/>
-<result property="processId" column="processId"/>
-<result property="createUser" column="create_user"/>
-<result property="createDateUTC" column="create_date"/>
-<result property="modifyUser" column="modify_user"/>
-<result property="modifyDateUTC" column="modify_date"/>
-<collection property="destConsFinal" column="destConsFinal" select="DoisValorMap.fetchDoisValorById"/>
-<collection property="servMsmNota" column="servMsmNota" select="DoisValorMap.fetchDoisValorById"/>
-<collection property="ambienteEnvio" column="ambienteEnvio" select="DoisValorMap.fetchDoisValorById"/>
-<collection property="modelo" column="modelo" select="DoisValorMap.fetchDoisValorById"/>
-<collection property="cfopPadrao" column="cfopPadrao" select="CfopMap.fetchCfopById"/>
-<collection property="presCompr" column="presCompr" select="DoisValorMap.fetchDoisValorById"/>
-<collection property="serieEnvio" column="serieEnvio" select="DoisValorMap.fetchDoisValorById"/>
-<collection property="tipoImpressao" column="tipoImpressao" select="DoisValorMap.fetchDoisValorById"/>
-<collection property="tipoEmissao" column="tipoEmissao" select="DoisValorMap.fetchDoisValorById"/>
-  </resultMap>
+	<!-- Result maps describe the mapping between the columns returned from
+		a query, and the class properties. A result map isnt necessary if the columns
+		(or aliases) match to the properties exactly. -->
+	<resultMap id="ConfiguracaoNFeResult" type="ConfiguracaoNFe">
+		<result property="id" column="id" />
+		<result property="preencherDataHora" column="preencherDataHora" />
+		<result property="icmsPadrao" column="icmsPadrao" />
+		<result property="ipiPadrao" column="ipiPadrao" />
+		<result property="pisPadrao" column="pisPadrao" />
+		<result property="cofinsPadrao" column="cofinsPadrao" />
+		<result property="anexarXmlEmail" column="anexarXmlEmail" />
+		<result property="idCSC" column="idCSC" />
+		<result property="cSC" column="cSC" />
+		<result property="informacaoAdd" column="informacaoAdd" />
+		<result property="certificado" column="certificado" />
+		<result property="senha" column="senha" />
+		<result property="salvarSenha" column="salvarSenha" />
+		<result property="parentId" column="parentId" />
+		<result property="tabelaEnumValue" column="tabelaEnumValue" />
+		<result property="emprId" column="emprId" />
+		<result property="processId" column="processId" />
+		<result property="createUser" column="create_user" />
+		<result property="createDateUTC" column="create_date" />
+		<result property="modifyUser" column="modify_user" />
+		<result property="modifyDateUTC" column="modify_date" />
+		<collection property="destConsFinal" column="destConsFinal"
+			select="DoisValorMap.fetchDoisValorById" />
+		<collection property="servMsmNota" column="servMsmNota"
+			select="DoisValorMap.fetchDoisValorById" />
+		<collection property="ambienteEnvio" column="ambienteEnvio"
+			select="DoisValorMap.fetchDoisValorById" />
+		<collection property="modelo" column="modelo"
+			select="DoisValorMap.fetchDoisValorById" />
+		<collection property="cfopPadrao" column="cfopPadrao"
+			select="CfopMap.fetchCfopById" />
+		<collection property="presCompr" column="presCompr"
+			select="DoisValorMap.fetchDoisValorById" />
+		<collection property="serieEnvio" column="serieEnvio"
+			select="DoisValorMap.fetchDoisValorById" />
+		<collection property="tipoImpressao" column="tipoImpressao"
+			select="DoisValorMap.fetchDoisValorById" />
+		<collection property="tipoEmissao" column="tipoEmissao"
+			select="DoisValorMap.fetchDoisValorById" />
+	</resultMap>
 
-  <sql id="allConfiguracaoNFeColumns">
+	<sql id="allConfiguracaoNFeColumns">
 
-preencherDataHora
-,icmsPadrao
-,ipiPadrao
-,pisPadrao
-,cofinsPadrao
-,anexarXmlEmail
-,idCSC
-,cSC
-,informacaoAdd
-,certificado
-,senha
-,salvarSenha
-,presCompr
-,destConsFinal
-,ambienteEnvio
-,servMsmNota
-,serieEnvio
-,modelo
-,cfopPadrao
-,tipoImpressao
-,tipoEmissao
-,parentId
-,tabelaEnumValue
-,emprId
-,processId
-,create_date
-,create_user
-,modify_date
-,modify_user
-
-
-</sql>
-<sql id="allConfiguracaoNFeValues">
-
-#{preencherDataHora},
-#{icmsPadrao},
-#{ipiPadrao},
-#{pisPadrao},
-#{cofinsPadrao},
-#{anexarXmlEmail},
-#{idCSC},
-#{cSC},
-#{informacaoAdd},
-#{certificado},
-#{senha},
-#{salvarSenha},
-#{presCompr.id},
-#{destConsFinal.id},
-#{ambienteEnvio.id},
-#{servMsmNota.id},
-#{serieEnvio.id},
-#{modelo.id},
-#{cfopPadrao.id},
-#{tipoImpressao.id},
-#{tipoEmissao.id},
-     #{parentId},
-     #{tabelaEnumValue},
-     #{emprId},
-     #{processId},
-     #{createDateUTC},
-     #{createUser},
-     #{modifyDateUTC},
-     #{modifyUser}
-  </sql>
+		preencherDataHora
+		,icmsPadrao
+		,ipiPadrao
+		,pisPadrao
+		,cofinsPadrao
+		,anexarXmlEmail
+		,idCSC
+		,cSC
+		,informacaoAdd
+		,certificado
+		,senha
+		,salvarSenha
+		,presCompr
+		,destConsFinal
+		,ambienteEnvio
+		,servMsmNota
+		,serieEnvio
+		,modelo
+		,cfopPadrao
+		,tipoImpressao
+		,tipoEmissao
+		,parentId
+		,tabelaEnumValue
+		,emprId
+		,processId
+		,create_date
+		,create_user
+		,modify_date
+		,modify_user
 
 
- <select id="fetchAllConfiguracaoNFes" resultMap="ConfiguracaoNFeResult">
-    SELECT id,
- <include refid="allConfiguracaoNFeColumns" />
-   FROM configuracaonfe ORDER BY id ASC
- </select>
+	</sql>
+	<sql id="allConfiguracaoNFeValues">
 
- <select id="fetchConfiguracaoNFeById" parameterType="Integer" resultMap="ConfiguracaoNFeResult">
-    SELECT id,
- <include refid="allConfiguracaoNFeColumns" />
-   FROM configuracaonfe WHERE id = #{fetchid}
- </select>
+		#{preencherDataHora},
+		#{icmsPadrao},
+		#{ipiPadrao},
+		#{pisPadrao},
+		#{cofinsPadrao},
+		#{anexarXmlEmail},
+		#{idCSC},
+		#{cSC},
+		#{informacaoAdd},
+		#{certificado},
+		#{senha},
+		#{salvarSenha},
+		#{presCompr.id},
+		#{destConsFinal.id},
+		#{ambienteEnvio.id},
+		#{servMsmNota.id},
+		#{serieEnvio.id},
+		#{modelo.id},
+		#{cfopPadrao.id},
+		#{tipoImpressao.id},
+		#{tipoEmissao.id},
+		#{parentId},
+		#{tabelaEnumValue},
+		#{emprId},
+		#{processId},
+		#{createDateUTC},
+		#{createUser},
+		#{modifyDateUTC},
+		#{modifyUser}
+	</sql>
 
- <select id="fetchAllConfiguracaoNFesRequest" parameterType="PagedInquiryRequest" resultMap="ConfiguracaoNFeResult">
 
-     SELECT id,<include refid="allConfiguracaoNFeColumns" />
-           FROM configuracaonfe where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY id ASC
-       OFFSET ( #{startPage} * #{pageSize} )
-       LIMIT #{pageSize}
-</select>
+	<select id="fetchAllConfiguracaoNFes" resultMap="ConfiguracaoNFeResult">
+		SELECT id,
+		<include refid="allConfiguracaoNFeColumns" />
+		FROM configuracaonfe ORDER BY id ASC
+	</select>
 
-<select id="fetchConfiguracaoNFeRowCount" resultType="Integer">
-     SELECT COUNT(*) AS RECORD_COUNT FROM configuracaonfe WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
+	<select id="fetchConfiguracaoNFeById" parameterType="Integer"
+		resultMap="ConfiguracaoNFeResult">
+		SELECT id,
+		<include refid="allConfiguracaoNFeColumns" />
+		FROM configuracaonfe WHERE id = #{fetchid}
+	</select>
 
- </select>
+	<select id="fetchAllConfiguracaoNFesRequest" parameterType="PagedInquiryRequest"
+		resultMap="ConfiguracaoNFeResult">
 
- <insert id="insertConfiguracaoNFe" parameterType="ConfiguracaoNFe" useGeneratedKeys="true" keyProperty="id">
-     INSERT INTO configuracaonfe (
- <if test="id != null"><if test="id > 0">id,</if></if><include refid="allConfiguracaoNFeColumns" />
-     )
-   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allConfiguracaoNFeValues" /> )
- </insert>
+		SELECT id,
+		<include refid="allConfiguracaoNFeColumns" />
+		FROM configuracaonfe where 0 = 0
+		<if test="emprId != null"> and emprId = emprId</if>
+		ORDER BY id ASC
 
- <update id="updateConfiguracaoNFe" parameterType="ConfiguracaoNFe">
-   UPDATE configuracaonfe SET
-<if test="presCompr!= null">presCompr = #{presCompr.id},</if>
-<if test="destConsFinal!= null">destConsFinal = #{destConsFinal.id},</if>
-<if test="preencherDataHora!= null">preencherDataHora = #{preencherDataHora},</if>
-<if test="icmsPadrao!= null">icmsPadrao = #{icmsPadrao},</if>
-<if test="ipiPadrao!= null">ipiPadrao = #{ipiPadrao},</if>
-<if test="pisPadrao!= null">pisPadrao = #{pisPadrao},</if>
-<if test="cofinsPadrao!= null">cofinsPadrao = #{cofinsPadrao},</if>
-<if test="ambienteEnvio!= null">ambienteEnvio = #{ambienteEnvio.id},</if>
-<if test="modelo!= null">modelo = #{modelo.id},</if>
-<if test="servMsmNota!= null">servMsmNota = #{servMsmNota.id},</if>
-<if test="serieEnvio!= null">serieEnvio = #{serieEnvio.id},</if>
-<if test="tipoImpressao!= null">tipoImpressao = #{tipoImpressao.id},</if>
-<if test="tipoEmissao!= null">tipoEmissao = #{tipoEmissao.id},</if>
-<if test="anexarXmlEmail!= null">anexarXmlEmail = #{anexarXmlEmail},</if>
-<if test="idCSC!= null">idCSC = #{idCSC},</if>
-<if test="cSC!= null">cSC = #{cSC},</if>
-<if test="informacaoAdd!= null">informacaoAdd = #{informacaoAdd},</if>
-<if test="certificado!= null">certificado = #{certificado},</if>
-<if test="senha!= null">senha = #{senha},</if>
-<if test="salvarSenha!= null">salvarSenha = #{salvarSenha},</if>
-<if test="cfopPadrao!= null">cfopPadrao = #{cfopPadrao.id},</if>
-<if test="parentId!= null"> parentId=#{parentId},</if>
-<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
-<if test="emprId!= null"> emprId=#{emprId},</if>
-<if test="processId!= null"> processId=#{processId},</if>
-<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
-<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
-   WHERE
-    id = #{id}
- </update>
+	</select>
 
-<delete id="deleteConfiguracaoNFeById" parameterType="ConfiguracaoNFe">
-  DELETE FROM configuracaonfe WHERE id = #{id}
- </delete>
+	<select id="fetchConfiguracaoNFeRowCount" resultType="Integer">
+		SELECT COUNT(*) AS RECORD_COUNT FROM configuracaonfe WHERE id IS NOT
+		NULL
+		<if test="emprId != null"> and emprId = emprId</if>
 
- <delete id="deleteAllConfiguracaoNFes">
- DELETE FROM configuracaonfe
-  </delete>
+	</select>
+
+	<insert id="insertConfiguracaoNFe" parameterType="ConfiguracaoNFe"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO configuracaonfe (
+		<if test="id != null">
+			<if test="id > 0">id,</if>
+		</if>
+		<include refid="allConfiguracaoNFeColumns" />
+		)
+		VALUES (
+		<if test="id != null">
+			<if test="id > 0">#{id},</if>
+		</if>
+		<include refid="allConfiguracaoNFeValues" />
+		)
+	</insert>
+
+	<update id="updateConfiguracaoNFe" parameterType="ConfiguracaoNFe">
+		UPDATE configuracaonfe SET
+		<if test="presCompr!= null">presCompr = #{presCompr.id},</if>
+		<if test="destConsFinal!= null">destConsFinal = #{destConsFinal.id},</if>
+		<if test="preencherDataHora!= null">preencherDataHora = #{preencherDataHora},</if>
+		<if test="icmsPadrao!= null">icmsPadrao = #{icmsPadrao},</if>
+		<if test="ipiPadrao!= null">ipiPadrao = #{ipiPadrao},</if>
+		<if test="pisPadrao!= null">pisPadrao = #{pisPadrao},</if>
+		<if test="cofinsPadrao!= null">cofinsPadrao = #{cofinsPadrao},</if>
+		<if test="ambienteEnvio!= null">ambienteEnvio = #{ambienteEnvio.id},</if>
+		<if test="modelo!= null">modelo = #{modelo.id},</if>
+		<if test="servMsmNota!= null">servMsmNota = #{servMsmNota.id},</if>
+		<if test="serieEnvio!= null">serieEnvio = #{serieEnvio.id},</if>
+		<if test="tipoImpressao!= null">tipoImpressao = #{tipoImpressao.id},</if>
+		<if test="tipoEmissao!= null">tipoEmissao = #{tipoEmissao.id},</if>
+		<if test="anexarXmlEmail!= null">anexarXmlEmail = #{anexarXmlEmail},</if>
+		<if test="idCSC!= null">idCSC = #{idCSC},</if>
+		<if test="cSC!= null">cSC = #{cSC},</if>
+		<if test="informacaoAdd!= null">informacaoAdd = #{informacaoAdd},</if>
+		<if test="certificado!= null">certificado = #{certificado},</if>
+		<if test="senha!= null">senha = #{senha},</if>
+		<if test="salvarSenha!= null">salvarSenha = #{salvarSenha},</if>
+		<if test="cfopPadrao!= null">cfopPadrao = #{cfopPadrao.id},</if>
+		<if test="parentId!= null"> parentId=#{parentId},</if>
+		<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
+		<if test="emprId!= null"> emprId=#{emprId},</if>
+		<if test="processId!= null"> processId=#{processId},</if>
+		<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+		<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		WHERE
+		id = #{id}
+	</update>
+
+	<delete id="deleteConfiguracaoNFeById" parameterType="ConfiguracaoNFe">
+		DELETE FROM configuracaonfe WHERE id = #{id}
+	</delete>
+
+	<delete id="deleteAllConfiguracaoNFes">
+		DELETE FROM configuracaonfe
+	</delete>
 </mapper>
 
 
