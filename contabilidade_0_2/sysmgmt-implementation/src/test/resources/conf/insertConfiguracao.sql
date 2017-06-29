@@ -1,11 +1,11 @@
 
-INSERT INTO Configuracao(id,  confCabecalho, confGeral, confNFe, confFiscal, confProd, confVendas, confCMTP, confAlertas, confEntrada, confCarne, configOS, confBlueSoft,parentId,tabelaEnumValue,emprId,processId,create_user,create_date,modify_user,modify_date)values
+INSERT INTO Configuracao(id,  confCabecalho, confGeral, confNFe, confFiscal, confProd, confVendas, confSMTP, confAlertas, confEntrada, confCarne, configOS, confBlueSoft,parentId,tabelaEnumValue,emprId,processId,create_user,create_date,modify_user,modify_date)values
 (1001,'confCabecalho_0', 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000,100000,1,1,1,'system',1471371790961,'rod',1471371790961);
 
-INSERT INTO Configuracao(id,  confCabecalho, confGeral, confNFe, confFiscal, confProd, confVendas, confCMTP, confAlertas, confEntrada, confCarne, configOS, confBlueSoft,parentId,tabelaEnumValue,emprId,processId,create_user,create_date,modify_user,modify_date)values
+INSERT INTO Configuracao(id,  confCabecalho, confGeral, confNFe, confFiscal, confProd, confVendas, confSMTP, confAlertas, confEntrada, confCarne, configOS, confBlueSoft,parentId,tabelaEnumValue,emprId,processId,create_user,create_date,modify_user,modify_date)values
 ( 1000,'confCabecalho_1', 10001, 10001, 10001, 10001, 10001, 10001, 10001, 10001, 10001, 10001, 10001,100000,1,1,1,'system',1471371794016,'rod',1471371794016);
 
-INSERT INTO Configuracao(id,  confCabecalho, confGeral, confNFe, confFiscal, confProd, confVendas, confCMTP, confAlertas, confEntrada, confCarne, configOS, confBlueSoft,parentId,tabelaEnumValue,emprId,processId,create_user,create_date,modify_user,modify_date)values
+INSERT INTO Configuracao(id,  confCabecalho, confGeral, confNFe, confFiscal, confProd, confVendas, confSMTP, confAlertas, confEntrada, confCarne, configOS, confBlueSoft,parentId,tabelaEnumValue,emprId,processId,create_user,create_date,modify_user,modify_date)values
 ( 1002,'confCabecalho_2', 10002, 10002, 10002, 10002, 10002, 10002, 10002, 10002, 10002, 10002, 10002,100000,1,1,1,'system',1471371794981,'rod',1471371794981);
 
 INSERT INTO Boleto( ativarBolOnLine, tipoBoleto, agencia, cedente, juros, tipoCalcMora, mora, instrucoes, demonstrativo, impJuros,create_user,create_date,modify_user,modify_date)values
@@ -98,13 +98,13 @@ INSERT INTO configVendas( descontoMaxVenda, observacao, imprSegVia, imprAssinatu
 INSERT INTO configVendas( descontoMaxVenda, observacao, imprSegVia, imprAssinatura, imprResumoFinanc, atuaPrecoClonar, imprColUnidade, bloquearvendProdSemEstoq, addDespCalcImposto, retSubstTribICMS,create_user,create_date,modify_user,modify_date)values
 ( 10.00, 'observacao_2', 10002, 10002, 10002, 10002, 10002, 10002, 10002, 10002,'system',1471371796439,'rod',1471371796439);
 
-INSERT INTO Configuracao( confCabecalho, confGeral, confNFe, confFiscal, confProd, confVendas, confCMTP, confAlertas, confEntrada, confCarne, configOS, confBlueSoft,create_user,create_date,modify_user,modify_date)values
+INSERT INTO Configuracao( confCabecalho, confGeral, confNFe, confFiscal, confProd, confVendas, confSMTP, confAlertas, confEntrada, confCarne, configOS, confBlueSoft,create_user,create_date,modify_user,modify_date)values
 ('confCabecalho_0', 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000,'system',1471371796439,'rod',1471371796439);
 
-INSERT INTO Configuracao( confCabecalho, confGeral, confNFe, confFiscal, confProd, confVendas, confCMTP, confAlertas, confEntrada, confCarne, configOS, confBlueSoft,create_user,create_date,modify_user,modify_date)values
+INSERT INTO Configuracao( confCabecalho, confGeral, confNFe, confFiscal, confProd, confVendas, confSMTP, confAlertas, confEntrada, confCarne, configOS, confBlueSoft,create_user,create_date,modify_user,modify_date)values
 ( 'confCabecalho_1', 10001, 10001, 10001, 10001, 10001, 10001, 10001, 10001, 10001, 10001, 10001,'system',1471371796439,'rod',1471371796439);
 
-INSERT INTO Configuracao( confCabecalho, confGeral, confNFe, confFiscal, confProd, confVendas, confCMTP, confAlertas, confEntrada, confCarne, configOS, confBlueSoft,create_user,create_date,modify_user,modify_date)values
+INSERT INTO Configuracao( confCabecalho, confGeral, confNFe, confFiscal, confProd, confVendas, confSMTP, confAlertas, confEntrada, confCarne, configOS, confBlueSoft,create_user,create_date,modify_user,modify_date)values
 ( 'confCabecalho_2', 10002, 10002, 10002, 10002, 10002, 10002, 10002, 10002, 10002, 10002, 10002,'system',1471371796439,'rod',1471371796439);
 
 INSERT INTO configOS( impr2Via, imprAss, imprResumo, imprDetHorz, diasGarantia, observ,create_user,create_date,modify_user,modify_date)values

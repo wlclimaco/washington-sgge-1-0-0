@@ -2686,11 +2686,11 @@ public INFeBAR getNFeBAR()
 	@Test
 	public void testUpdateNFNotaInfoCompra()
 	{
-		NFNotaInfoCompra nfnotainfocompra = Objects.insertNFNotaInfoCompra(1001, TabelaEnum.NFNOTAINFOCOMPRA, PersistenceActionEnum.UPDATE);
+		NFNotaInfoCompra nfnotainfocompra = Objects.insertNFNotaInfoCompra(1000001, TabelaEnum.NFNOTAINFOCOMPRA, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1001);
+		request.setFetchId(1000001);
 		NFNotaInfoCompra nfnotainfocompraResponse = getNFeBAR().fetchNFNotaInfoCompraById(request);
-		Assert.assertEquals(nfnotainfocompraResponse.getContrato(), "contrato_1");
+		Assert.assertEquals(nfnotainfocompraResponse.getContrato(), "contrato_0");
 		getNFeBAR().updateNFNotaInfoCompra(nfnotainfocompra);
 		nfnotainfocompraResponse = getNFeBAR().fetchNFNotaInfoCompraById(request);
 		Assert.assertEquals(nfnotainfocompraResponse.getContrato(), "NATIVE INSERT UPDATE");

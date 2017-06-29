@@ -2704,7 +2704,7 @@ public class Objects {
 		configuracao.setConfFiscal(insertConfigFiscal(id, TabelaEnum.CONFIGURACAO, action));
 		configuracao.setConfProd(insertConfigProduto(id, TabelaEnum.CONFIGURACAO, action));
 		configuracao.setConfVendas(insertConfigVendas(id, TabelaEnum.CONFIGURACAO, action));
-		configuracao.setConfCMTP(insertConfigSMTP(id, TabelaEnum.CONFIGURACAO, action));
+		configuracao.setConfSMTP(insertConfigSMTP(id, TabelaEnum.CONFIGURACAO, action));
 		configuracao.setConfEntrada(insertConfigEntrada(id, TabelaEnum.CONFIGURACAO, action));
 		configuracao.setConfCarne(insertConfigCarne(id, TabelaEnum.CONFIGURACAO, action));
 		configuracao.setBoletoList(new ArrayList<Boleto>());

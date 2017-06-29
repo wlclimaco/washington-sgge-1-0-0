@@ -129,6 +129,7 @@
     				FROM entidade e <if test="userId != null"> INNER JOIN  users on (users.emprId = e.id and users.username like #{userId})</if>
 					where e.entidadeEnumValue = 1
 					<if test="permissaoTypeEnumValue != null">
+						<if test="permissaoTypeEnumValue == 1"> and e.entidadeId = #{entidadeId}</if>
 						<if test="permissaoTypeEnumValue != 1 and permissaoTypeEnumValue != 2 and permissaoTypeEnumValue != 3 "> and e.emprId = #{emprId}</if>
 						<if test="permissaoTypeEnumValue != 1 and permissaoTypeEnumValue != 4 and permissaoTypeEnumValue != 3 "> and e.parceiroId = #{parceiroId}</if>
 						<if test="permissaoTypeEnumValue != 1 and permissaoTypeEnumValue != 4 and permissaoTypeEnumValue != 2 "> and e.contabilidadeId = #{contabilidadeId}</if>

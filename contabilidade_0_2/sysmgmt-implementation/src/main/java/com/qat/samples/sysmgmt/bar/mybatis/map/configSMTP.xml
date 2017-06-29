@@ -22,7 +22,7 @@
     <result property="endEmail" column="endEmail"/>
     <result property="usuario" column="usuario"/>
     <result property="senha" column="senha"/>
-
+	<result property="ativSMTP" column="ativSMTP"/>
 <result property="parentId" column="parentId"/>
 <result property="tabelaEnumValue" column="tabelaEnumValue"/>
 <result property="emprId" column="emprId"/>
@@ -40,6 +40,7 @@ servSMTP
 ,endEmail
 ,usuario
 ,senha
+,ativSMTP
 ,seguranca
 ,parentId
 ,tabelaEnumValue
@@ -57,6 +58,7 @@ servSMTP
 #{endEmail},
 #{usuario},
 #{senha},
+#{ativSMTP},
 #{seguranca.id},
      #{parentId},
      #{tabelaEnumValue},
@@ -103,6 +105,7 @@ servSMTP
 
  <update id="updateConfigSMTP" parameterType="ConfigSMTP">
    UPDATE configsmtp SET
+<if test="ativSMTP!= null">ativSMTP = #{ativSMTP},</if>
 <if test="servSMTP!= null">servSMTP = #{servSMTP},</if>
 <if test="porta!= null">porta = #{porta},</if>
 <if test="endEmail!= null">endEmail = #{endEmail},</if>

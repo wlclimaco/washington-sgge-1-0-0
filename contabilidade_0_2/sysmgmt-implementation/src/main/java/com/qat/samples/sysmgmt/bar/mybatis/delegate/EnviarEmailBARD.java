@@ -55,11 +55,11 @@ public final class EnviarEmailBARD extends SqlSessionDaoSupport {
 		Empresa empresa = empresaBAR.fetchEmpresaById(new FetchByIdRequest(empresaPai));
 		if (!ValidationUtil.isNull(empresa)) {
 			if (!ValidationUtil.isNull(empresa.getConfiguracao())) {
-				if ((!ValidationUtil.isNull(empresa.getConfiguracao().getConfCMTP()))&&(!ValidationUtil.isNull(empresa.getConfiguracao().getConfCMTP().getPorta()))) {
+				if ((!ValidationUtil.isNull(empresa.getConfiguracao().getConfSMTP()))&&(!ValidationUtil.isNull(empresa.getConfiguracao().getConfSMTP().getPorta()))) {
 					// Step1
 					System.out.println("\n 1st ===> setup Mail Server Properties..");
 					mailServerProperties = System.getProperties();
-					mailServerProperties.put("mail.smtp.port", empresa.getConfiguracao().getConfCMTP().getPorta());
+					mailServerProperties.put("mail.smtp.port", empresa.getConfiguracao().getConfSMTP().getPorta());
 					mailServerProperties.put("mail.smtp.auth", "true");
 					mailServerProperties.put("mail.smtp.starttls.enable", "true");
 					System.out.println("Mail Server Properties have been setup successfully..");
@@ -73,7 +73,7 @@ public final class EnviarEmailBARD extends SqlSessionDaoSupport {
 								new InternetAddress(emailDestino.getUsuarios().get(0).getEmail()));
 
 						 generateMailMessage.addRecipient(Message.RecipientType.CC,
-						 new InternetAddress(empresa.getConfiguracao().getConfCMTP().getEndEmail()));
+						 new InternetAddress(empresa.getConfiguracao().getConfSMTP().getEndEmail()));
 						generateMailMessage.setSubject("Greetings from Crunchify..");
 						String emailBody = "Test email by Crunchify.com JavaMail API example. "
 								+ "<br><br> Regards, <br>Crunchify Admin";
@@ -87,7 +87,7 @@ public final class EnviarEmailBARD extends SqlSessionDaoSupport {
 						// Enter your correct gmail UserID and Password
 						// if you have 2FA enabled then provide App Specific
 						// Password
-						transport.connect(empresa.getConfiguracao().getConfCMTP().getServSMTP(), empresa.getConfiguracao().getConfCMTP().getEndEmail(), empresa.getConfiguracao().getConfCMTP().getSenha());
+						transport.connect(empresa.getConfiguracao().getConfSMTP().getServSMTP(), empresa.getConfiguracao().getConfSMTP().getEndEmail(), empresa.getConfiguracao().getConfSMTP().getSenha());
 						transport.sendMessage(generateMailMessage, generateMailMessage.getAllRecipients());
 						transport.close();
 					} catch (AddressException e) {

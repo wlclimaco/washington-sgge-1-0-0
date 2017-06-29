@@ -33,7 +33,7 @@
 			select="ConfigProdutoMap.fetchConfigProdutoById" />
 		<collection property="confVendas" column="confVendas"
 			select="ConfigVendasMap.fetchConfigVendasById" />
-		<collection property="confCMTP" column="confCMTP"
+		<collection property="confSMTP" column="confSMTP"
 			select="ConfigSMTPMap.fetchConfigSMTPById" />
 		<collection property="confEntrada" column="confEntrada"
 			select="ConfigEntradaMap.fetchConfigEntradaById" />
@@ -56,7 +56,7 @@
 		,confFiscal
 		,confProd
 		,confVendas
-		,confCMTP
+		,confSMTP
 		,confEntrada
 		,confCarne
 		,confNFe
@@ -80,7 +80,7 @@
 		#{confFiscal.id},
 		#{confProd.id},
 		#{confVendas.id},
-		#{confCMTP.id},
+		#{confSMTP.id},
 		#{confEntrada.id},
 		#{confCarne.id},
 		#{confNFe.id},
@@ -151,7 +151,7 @@
 		<if test="confFiscal!= null">confFiscal = #{confFiscal.id},</if>
 		<if test="confProd!= null">confProd = #{confProd.id},</if>
 		<if test="confVendas!= null">confVendas = #{confVendas.id},</if>
-		<if test="confCMTP!= null">confCMTP = #{confCMTP.id},</if>
+		<if test="confSMTP!= null">confSMTP = #{confSMTP.id},</if>
 		<if test="confEntrada!= null">confEntrada = #{confEntrada.id},</if>
 		<if test="confCarne!= null">confCarne = #{confCarne.id},</if>
 		<if test="confNFe!= null">confNFe = #{confNFe.id},</if>

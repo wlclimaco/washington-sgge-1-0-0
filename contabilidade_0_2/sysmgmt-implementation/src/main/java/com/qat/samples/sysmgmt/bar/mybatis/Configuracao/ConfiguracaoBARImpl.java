@@ -378,8 +378,8 @@ public class ConfiguracaoBARImpl extends SqlSessionDaoSupport implements IConfig
 	/** The Constant STMT_FETCH_CONFIGVENDAS_ALL_REQUEST. */
 	private static final String STMT_FETCH_CONFIGVENDAS_ALL_REQUEST = NAMESPACE_CONFIGVENDAS
 			+ "fetchAllConfigVendassRequest";
-	
-	
+
+
 	/// ===================================### CONFIGOS
 		/// ####======================================
 		/** The Constant NAMESPACE. */
@@ -2187,8 +2187,8 @@ public class ConfiguracaoBARImpl extends SqlSessionDaoSupport implements IConfig
 					configuracao.getCreateUser(), historicoId, historicoId);
 
 		}
-		if (!ValidationUtil.isNull(configuracao.getConfCMTP())) {
-			a += ConfigSMTPBARD.maintainConfigSMTPAssociations(configuracao.getConfCMTP(), response, configuracao.getId(), null, null,
+		if (!ValidationUtil.isNull(configuracao.getConfSMTP())) {
+			a += ConfigSMTPBARD.maintainConfigSMTPAssociations(configuracao.getConfSMTP(), response, configuracao.getId(), null, null,
 					TabelaEnum.EMPRESA, configuracaoBAR, statusBAR, historicoBAR, configuracao.getId(),
 					configuracao.getCreateUser(), historicoId, historicoId);
 
