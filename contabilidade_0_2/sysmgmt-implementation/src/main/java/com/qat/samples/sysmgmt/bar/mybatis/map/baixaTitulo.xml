@@ -96,16 +96,16 @@ dataBaixa
 	<include refid="allBaixaTituloColumns" />
    FROM baixatitulo where parentId = #{parentId} ORDER BY dataBaixa ASC
  </select>
- 
- 
+
+
   <select id="fetchContaIdBaixaTitulos" parameterType="Integer" resultMap="BaixaTitulo2Result">
     SELECT id,
 	<include refid="allBaixaTituloColumns" />
    FROM baixatitulo where conta = #{conta} ORDER BY dataBaixa ASC
  </select>
- 
- 
- 
+
+
+
  <select id="fetchAllBaixaTitulos" resultMap="BaixaTituloResult">
     SELECT id,
 	<include refid="allBaixaTituloColumns" />
@@ -127,13 +127,43 @@ dataBaixa
  <select id="fetchAllBaixaTitulosRequest" parameterType="PagedInquiryRequest" resultMap="BaixaTituloResult">
 
 		SELECT id,<include refid="allBaixaTituloColumns" />
-  		  FROM baixatitulo where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY id ASC
+  		  FROM baixatitulo where 0 = 0 <if test="permissaoTypeEnumValue == 1">
+			and id IS NOT NULL
+		</if>
+		<if test="permissaoTypeEnumValue != 1">
+			<if test="emprId == null">
+				<if test="emprIds != null"> and emprId in
+
+				<foreach item="item" index="index" collection="emprIds"
+		             open="(" separator="," close=")">
+		        #{item}
+		    	</foreach>
+
+				</if>
+			</if>
+			<if test="emprId != null"> and emprId = #{emprId}</if>
+		</if> ORDER BY id ASC
 		  OFFSET ( #{startPage} * #{pageSize} )
 		  LIMIT #{pageSize}
 </select>
 
 <select id="fetchBaixaTituloRowCount" resultType="Integer">
-		SELECT COUNT(*) AS RECORD_COUNT FROM baixatitulo WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
+		SELECT COUNT(*) AS RECORD_COUNT FROM baixatitulo WHERE id IS NOT NULL <if test="permissaoTypeEnumValue == 1">
+			and id IS NOT NULL
+		</if>
+		<if test="permissaoTypeEnumValue != 1">
+			<if test="emprId == null">
+				<if test="emprIds != null"> and emprId in
+
+				<foreach item="item" index="index" collection="emprIds"
+		             open="(" separator="," close=")">
+		        #{item}
+		    	</foreach>
+
+				</if>
+			</if>
+			<if test="emprId != null"> and emprId = #{emprId}</if>
+		</if>
 
  </select>
 

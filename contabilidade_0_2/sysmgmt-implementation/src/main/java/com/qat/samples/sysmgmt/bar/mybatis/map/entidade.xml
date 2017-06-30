@@ -35,6 +35,7 @@
 	<result property="createDateUTC" column="create_date"/>
 	<result property="modifyUser" column="modify_user"/>
 	<result property="modifyDateUTC" column="modify_date"/>
+	<result property="permissaoTypeEnumValue" column="permissaoTypeEnumValue"/>
 	<collection property="planosServicos" column="planosServicos" select="PlanoByServicoMap.fetchPlanoByServicoById"/>
 	<collection property="regime" column="regime" select="RegimeMap.fetchRegimeById"/>
 	<collection property="enderecos" column="id" select="EnderecoMap.fetchEnderecoByTableById"/>
@@ -47,8 +48,13 @@
     <collection property="siteList" column="id" select="SiteMap.fetchSiteByEmpresa"/>
     <collection property="configuracao" column="configuracao" select="ConfiguracaoMap.fetchConfiguracaoById"/>
     <collection property="usuarios" column="id" select="UsuarioMap.fetchUsuarioByEmnprId"/>
+    <collection property="emprIds" column="emprId" select="EntidadeMap.fetchParentsByNota"/>
 
   </resultMap>
+
+   <select id="fetchParentsByNota" parameterType="Integer" resultType="Integer">
+    			  select id from entidade where emprId = #{id}
+  </select>
 
   <sql id="allEntidadeColumns">
 

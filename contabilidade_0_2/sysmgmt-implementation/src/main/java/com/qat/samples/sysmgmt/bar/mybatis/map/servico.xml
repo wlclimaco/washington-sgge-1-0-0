@@ -74,12 +74,42 @@ nome
  <select id="fetchAllServicosRequest" parameterType="ServicoInquiryRequest" resultMap="ServicoResult">
 
 		SELECT id,<include refid="allServicoColumns" />
-  		  FROM servico <if test="emprId != null">where  emprId = #{emprId}</if> ORDER BY id ASC
+  		  FROM servico <if test="permissaoTypeEnumValue == 1">
+			and id IS NOT NULL
+		</if>
+		<if test="permissaoTypeEnumValue != 1">
+			<if test="emprId == null">
+				<if test="emprIds != null"> and emprId in
+
+				<foreach item="item" index="index" collection="emprIds"
+		             open="(" separator="," close=")">
+		        #{item}
+		    	</foreach>
+
+				</if>
+			</if>
+			<if test="emprId != null"> and emprId = #{emprId}</if>
+		</if> ORDER BY id ASC
 
 </select>
 
 <select id="fetchServicoRowCount" resultType="Integer">
-		SELECT COUNT(*) AS RECORD_COUNT FROM servico WHERE id IS NOT NULL
+		SELECT COUNT(*) AS RECORD_COUNT FROM servico WHERE id IS NOT NULL <if test="permissaoTypeEnumValue == 1">
+			and id IS NOT NULL
+		</if>
+		<if test="permissaoTypeEnumValue != 1">
+			<if test="emprId == null">
+				<if test="emprIds != null"> and emprId in
+
+				<foreach item="item" index="index" collection="emprIds"
+		             open="(" separator="," close=")">
+		        #{item}
+		    	</foreach>
+
+				</if>
+			</if>
+			<if test="emprId != null"> and emprId = #{emprId}</if>
+		</if>
 
  </select>
 

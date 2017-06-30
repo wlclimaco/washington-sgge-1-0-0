@@ -40,13 +40,46 @@
  <select id="fetchAllFornecedorsRequest" parameterType="FornecedorInquiryRequest" resultMap="fornecedorResult">
 
 		SELECT <include refid="allFornecedorColumns" />
-  		  FROM pessoa where pessoaTypeEnum = 2 ORDER BY id ASC
+  		  FROM pessoa where pessoaTypeEnum = 2
+  		  <if test="permissaoTypeEnumValue == 1">
+			and id IS NOT NULL
+		</if>
+		<if test="permissaoTypeEnumValue != 1">
+			<if test="emprId == null">
+				<if test="emprIds != null"> and emprId in
+
+				<foreach item="item" index="index" collection="emprIds"
+		             open="(" separator="," close=")">
+		        #{item}
+		    	</foreach>
+
+				</if>
+			</if>
+			<if test="emprId != null"> and emprId = #{emprId}</if>
+		</if>
+  		   ORDER BY id ASC
 		  OFFSET ( #{startPage} * #{pageSize} )
 		  LIMIT #{pageSize}
 </select>
 
 <select id="fetchFornecedorRowCount" resultType="Integer">
 		SELECT COUNT(*) AS RECORD_COUNT FROM pessoa WHERE id IS NOT NULL and pessoaTypeEnum = 2
+		<if test="permissaoTypeEnumValue == 1">
+			and id IS NOT NULL
+		</if>
+		<if test="permissaoTypeEnumValue != 1">
+			<if test="emprId == null">
+				<if test="emprIds != null"> and emprId in
+
+				<foreach item="item" index="index" collection="emprIds"
+		             open="(" separator="," close=")">
+		        #{item}
+		    	</foreach>
+
+				</if>
+			</if>
+			<if test="emprId != null"> and emprId = #{emprId}</if>
+		</if>
 
  </select>
 </mapper>

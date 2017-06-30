@@ -80,12 +80,42 @@ identificadorLocal
  <select id="fetchAllNFNotasRequest" parameterType="PagedInquiryRequest" resultMap="NFNotaResult">
 
      SELECT id,<include refid="allNFNotaColumns" />
-           FROM nfnota where 0 = 0 <if test="emprId != null"> and emprId = emprId</if> ORDER BY create_date ASC
+           FROM nfnota where 0 = 0 <if test="permissaoTypeEnumValue == 1">
+			and id IS NOT NULL
+		</if>
+		<if test="permissaoTypeEnumValue != 1">
+			<if test="emprId == null">
+				<if test="emprIds != null"> and emprId in
+
+				<foreach item="item" index="index" collection="emprIds"
+		             open="(" separator="," close=")">
+		        #{item}
+		    	</foreach>
+
+				</if>
+			</if>
+			<if test="emprId != null"> and emprId = #{emprId}</if>
+		</if> ORDER BY create_date ASC
 
 </select>
 
 <select id="fetchNFNotaRowCount" resultType="Integer">
-     SELECT COUNT(*) AS RECORD_COUNT FROM nfnota WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
+     SELECT COUNT(*) AS RECORD_COUNT FROM nfnota WHERE id IS NOT NULL <if test="permissaoTypeEnumValue == 1">
+			and id IS NOT NULL
+		</if>
+		<if test="permissaoTypeEnumValue != 1">
+			<if test="emprId == null">
+				<if test="emprIds != null"> and emprId in
+
+				<foreach item="item" index="index" collection="emprIds"
+		             open="(" separator="," close=")">
+		        #{item}
+		    	</foreach>
+
+				</if>
+			</if>
+			<if test="emprId != null"> and emprId = #{emprId}</if>
+		</if>
 
  </select>
 

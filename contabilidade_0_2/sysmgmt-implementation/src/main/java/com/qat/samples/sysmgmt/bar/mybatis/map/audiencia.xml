@@ -1,115 +1,160 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 
-<!-- create by system gera-java version 1.0.0 03/08/2016 12:24 : 19-->
+<!-- create by system gera-java version 1.0.0 03/08/2016 12:24 : 19 -->
 
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="AudienciaMap">
- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
- <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+	<cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache" />
 
-  <!-- Result maps describe the mapping between the columns returned
-      from a query, and the class properties.  A result map isnt
-      necessary if the columns (or aliases) match to the properties
-       exactly. -->
-  <resultMap id="AudienciaResult" type="Audiencia">
-    <result property="id" column="id"/>
-    <result property="dataAudiencia" column="dataAudiencia"/>
-    <result property="descricao" column="descricao"/>
-<result property="parentId" column="parentId"/>
-<result property="tabelaEnumValue" column="tabelaEnumValue"/>
-<result property="emprId" column="emprId"/>
-<result property="processId" column="processId"/>
-<result property="createUser" column="create_user"/>
-<result property="createDateUTC" column="create_date"/>
-<result property="modifyUser" column="modify_user"/>
-<result property="modifyDateUTC" column="modify_date"/>
-<collection property="notes" column="id" select="NoteMap.fetchNoteById"/>
-  </resultMap>
+	<!-- Result maps describe the mapping between the columns returned from
+		a query, and the class properties. A result map isnt necessary if the columns
+		(or aliases) match to the properties exactly. -->
+	<resultMap id="AudienciaResult" type="Audiencia">
+		<result property="id" column="id" />
+		<result property="dataAudiencia" column="dataAudiencia" />
+		<result property="descricao" column="descricao" />
+		<result property="parentId" column="parentId" />
+		<result property="tabelaEnumValue" column="tabelaEnumValue" />
+		<result property="emprId" column="emprId" />
+		<result property="processId" column="processId" />
+		<result property="createUser" column="create_user" />
+		<result property="createDateUTC" column="create_date" />
+		<result property="modifyUser" column="modify_user" />
+		<result property="modifyDateUTC" column="modify_date" />
+		<collection property="notes" column="id" select="NoteMap.fetchNoteById" />
+	</resultMap>
 
-  <sql id="allAudienciaColumns">
-dataAudiencia
-,descricao
-,parentId
-,tabelaEnumValue
-,emprId
-,processId
-,create_date
-,create_user
-,modify_date
-,modify_user
+	<sql id="allAudienciaColumns">
+		dataAudiencia
+		,descricao
+		,parentId
+		,tabelaEnumValue
+		,emprId
+		,processId
+		,create_date
+		,create_user
+		,modify_date
+		,modify_user
 
-</sql>
-<sql id="allAudienciaValues">
-#{dataAudiencia},
-#{descricao},
-     #{parentId},
-     #{tabelaEnumValue},
-     #{emprId},
-     #{processId},
-     #{createDateUTC},
-     #{createUser},
-     #{modifyDateUTC},
-     #{modifyUser}
-  </sql>
+	</sql>
+	<sql id="allAudienciaValues">
+		#{dataAudiencia},
+		#{descricao},
+		#{parentId},
+		#{tabelaEnumValue},
+		#{emprId},
+		#{processId},
+		#{createDateUTC},
+		#{createUser},
+		#{modifyDateUTC},
+		#{modifyUser}
+	</sql>
 
 
- <select id="fetchAllAudiencias" resultMap="AudienciaResult">
-    SELECT id,
- <include refid="allAudienciaColumns" />
-   FROM Audiencia ORDER BY id ASC
- </select>
+	<select id="fetchAllAudiencias" resultMap="AudienciaResult">
+		SELECT id,
+		<include refid="allAudienciaColumns" />
+		FROM Audiencia ORDER BY id ASC
+	</select>
 
- <select id="fetchAudienciaById" parameterType="Integer" resultMap="AudienciaResult">
-    SELECT id,
- <include refid="allAudienciaColumns" />
-   FROM Audiencia WHERE id = #{fetchid}
- </select>
+	<select id="fetchAudienciaById" parameterType="Integer"
+		resultMap="AudienciaResult">
+		SELECT id,
+		<include refid="allAudienciaColumns" />
+		FROM Audiencia WHERE id = #{fetchid}
+	</select>
 
- <select id="fetchAllAudienciasRequest" parameterType="AudienciaInquiryRequest" resultMap="AudienciaResult">
+	<select id="fetchAllAudienciasRequest" parameterType="AudienciaInquiryRequest"
+		resultMap="AudienciaResult">
 
-     SELECT id,<include refid="allAudienciaColumns" />
-           FROM Audiencia where 0 = 0 <if test="criteria.emprId != null"> and emprId = criteria.emprId</if> ORDER BY id ASC
-       OFFSET ( #{startPage} * #{pageSize} )
-       LIMIT #{pageSize}
-</select>
+		SELECT id,
+		<include refid="allAudienciaColumns" />
+		FROM Audiencia where 0 = 0
+		<if test="permissaoTypeEnumValue == 1">
+			and id IS NOT NULL
+		</if>
+		<if test="permissaoTypeEnumValue != 1">
+			<if test="emprId == null">
+				<if test="emprIds != null">
+					and emprId in
 
-<select id="fetchAudienciaRowCount" resultType="Integer">
-     SELECT COUNT(*) AS RECORD_COUNT FROM Audiencia WHERE id IS NOT NULL <if test="criteria.emprId != null"> and emprId = criteria.emprId</if>
+					<foreach item="item" index="index" collection="emprIds"
+						open="(" separator="," close=")">
+						#{item}
+					</foreach>
 
- </select>
+				</if>
+			</if>
+			<if test="emprId != null"> and emprId = #{emprId}</if>
+		</if>
+		ORDER BY id ASC
+		OFFSET ( #{startPage} * #{pageSize} )
+		LIMIT #{pageSize}
+	</select>
 
- <insert id="insertAudiencia" parameterType="Audiencia" useGeneratedKeys="true" keyProperty="id">
-     INSERT INTO Audiencia (
- <if test="id != null"><if test="id > 0">id,</if></if><include refid="allAudienciaColumns" />
-     )
-   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allAudienciaValues" /> )
- </insert>
+	<select id="fetchAudienciaRowCount" resultType="Integer">
+		SELECT COUNT(*) AS RECORD_COUNT FROM Audiencia WHERE id IS NOT NULL
+		<if test="permissaoTypeEnumValue == 1">
+			and id IS NOT NULL
+		</if>
+		<if test="permissaoTypeEnumValue != 1">
+			<if test="emprId == null">
+				<if test="emprIds != null"> and emprId in
 
- <update id="updateAudiencia" parameterType="Audiencia">
-   UPDATE Audiencia SET
-<if test="dataAudiencia!= null">dataAudiencia = #{dataAudiencia},</if>
-<if test="descricao!= null">descricao = #{descricao},</if>
-<if test="parentId!= null"> parentId=#{parentId},</if>
-<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
-<if test="emprId!= null"> emprId=#{emprId},</if>
-<if test="processId!= null"> processId=#{processId},</if>
-<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
-<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
-   WHERE
-    id = #{id}
- </update>
+				<foreach item="item" index="index" collection="emprIds"
+		             open="(" separator="," close=")">
+		        #{item}
+		    	</foreach>
 
-<delete id="deleteAudienciaById" parameterType="Audiencia">
-  DELETE FROM Audiencia WHERE id = #{id}
- </delete>
+				</if>
+			</if>
+			<if test="emprId != null"> and emprId = #{emprId}</if>
+		</if>
 
- <delete id="deleteAllAudiencias">
- DELETE FROM Audiencia
-  </delete>
+	</select>
+
+	<insert id="insertAudiencia" parameterType="Audiencia"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO Audiencia (
+		<if test="id != null">
+			<if test="id > 0">id,</if>
+		</if>
+		<include refid="allAudienciaColumns" />
+		)
+		VALUES (
+		<if test="id != null">
+			<if test="id > 0">#{id},</if>
+		</if>
+		<include refid="allAudienciaValues" />
+		)
+	</insert>
+
+	<update id="updateAudiencia" parameterType="Audiencia">
+		UPDATE Audiencia SET
+		<if test="dataAudiencia!= null">dataAudiencia = #{dataAudiencia},</if>
+		<if test="descricao!= null">descricao = #{descricao},</if>
+		<if test="parentId!= null"> parentId=#{parentId},</if>
+		<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
+		<if test="emprId!= null"> emprId=#{emprId},</if>
+		<if test="processId!= null"> processId=#{processId},</if>
+		<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+		<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		WHERE
+		id = #{id}
+	</update>
+
+	<delete id="deleteAudienciaById" parameterType="Audiencia">
+		DELETE FROM Audiencia WHERE id = #{id}
+	</delete>
+
+	<delete id="deleteAllAudiencias">
+		DELETE FROM Audiencia
+	</delete>
 </mapper>
 
 

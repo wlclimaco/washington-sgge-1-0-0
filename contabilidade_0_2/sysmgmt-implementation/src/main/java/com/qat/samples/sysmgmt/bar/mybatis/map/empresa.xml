@@ -32,7 +32,6 @@
    <resultMap id="empresaTableResult" type="Empresa" extends="EntidadeMap.EntidadeResult">
     <result property="parceiroId" column="parceiroId"/>
     <result property="contabilidadeId" column="contabilidadeId"/>
-    <result property="permissaoTypeEnumValue" column="permissaoTypeEnumValue"/>
 	</resultMap>
 
 

@@ -40,7 +40,22 @@
 
 		select pessoa.* from pessoa , pessoaTipo where pessoaTipo.parentId =
 		pessoa.id and pessoaTipo.pessoaTypeEnum = 1
-		<if test="emprId != null"> and pessoa.emprId = #{emprId}</if>
+		<if test="permissaoTypeEnumValue == 1">
+			and pessoa.id IS NOT NULL
+		</if>
+		<if test="permissaoTypeEnumValue != 1">
+			<if test="emprId == null">
+				<if test="emprIds != null"> and pessoa.emprId in
+
+				<foreach item="item" index="index" collection="emprIds"
+		             open="(" separator="," close=")">
+		        #{item}
+		    	</foreach>
+
+				</if>
+			</if>
+			<if test="emprId != null"> and pessoa.emprId = #{emprId}</if>
+		</if>
 		<if test="id != null and id > 0"> and pessoa.id = #{id}</if>
 		ORDER BY pessoa.nome ASC
 
@@ -54,7 +69,22 @@
 
 		SELECT COUNT(pessoa.*) AS RECORD_COUNT from pessoa , pessoaTipo where
 		pessoaTipo.parentId = pessoa.id and pessoaTipo.pessoaTypeEnum = 1
-		<if test="emprId != null"> and pessoa.emprId = #{emprId}</if>
+		<if test="permissaoTypeEnumValue == 1">
+			and pessoa.id IS NOT NULL
+		</if>
+		<if test="permissaoTypeEnumValue != 1">
+			<if test="emprId == null">
+				<if test="emprIds != null"> and pessoa.emprId in
+
+				<foreach item="item" index="index" collection="emprIds"
+		             open="(" separator="," close=")">
+		        #{item}
+		    	</foreach>
+
+				</if>
+			</if>
+			<if test="emprId != null"> and pessoa.emprId = #{emprId}</if>
+		</if>
 		<if test="id != null and id > 0"> and pessoa.id = #{id}</if>
 
 

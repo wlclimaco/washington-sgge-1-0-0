@@ -19,7 +19,7 @@ import com.qat.samples.sysmgmt.util.model.Telefone;
  * This represents an account for a transfer setting.
  */
 @SuppressWarnings("serial")
-public class Entidade extends ModelCosmeDamiao {
+public class EntidadeFilial extends ModelCosmeDamiao {
 	/** The SendSolv id for the account. */
 	private Integer id;
 
@@ -143,7 +143,7 @@ public class Entidade extends ModelCosmeDamiao {
 	/**
 	 * Default constructor.
 	 */
-	public Entidade() {
+	public EntidadeFilial() {
 		super();
 	}
 

@@ -51,7 +51,22 @@
 		<include refid="allContasPagarColumns" />
 		FROM contaspagar where 0 = 0
 		<if test="id != null"> and id = #{id}</if>
-		<if test="emprId != null"> and emprId = #{emprId}</if>
+		<if test="permissaoTypeEnumValue == 1">
+			and id IS NOT NULL
+		</if>
+		<if test="permissaoTypeEnumValue != 1">
+			<if test="emprId == null">
+				<if test="emprIds != null"> and emprId in
+
+				<foreach item="item" index="index" collection="emprIds"
+		             open="(" separator="," close=")">
+		        #{item}
+		    	</foreach>
+
+				</if>
+			</if>
+			<if test="emprId != null"> and emprId = #{emprId}</if>
+		</if>
 		<if test="descricao != null"> and descricao = #{descricao}</if>
 		<if test="dataInicial != null"> and dataVencimento between #{dataInicial} and
 			#{dataFinal}</if>
@@ -64,7 +79,22 @@
 	<select id="fetchContasPagarRowCount" resultType="Integer">
 		SELECT COUNT(*) AS RECORD_COUNT FROM contaspagar WHERE id IS NOT NULL
 		<if test="id != null"> and id = #{id}</if>
-		<if test="emprId != null"> and emprId = #{emprId}</if>
+		<if test="permissaoTypeEnumValue == 1">
+			and id IS NOT NULL
+		</if>
+		<if test="permissaoTypeEnumValue != 1">
+			<if test="emprId == null">
+				<if test="emprIds != null"> and emprId in
+
+				<foreach item="item" index="index" collection="emprIds"
+		             open="(" separator="," close=")">
+		        #{item}
+		    	</foreach>
+
+				</if>
+			</if>
+			<if test="emprId != null"> and emprId = #{emprId}</if>
+		</if>
 
 	</select>
 

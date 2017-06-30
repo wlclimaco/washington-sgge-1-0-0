@@ -32,34 +32,11 @@ public class Empresa extends Entidade
 
 	private Integer contabilidadeId;
 
-	private EmpresaTypeEnum permissaoTypeEnum;
-
 	public Empresa()
 	{
 		super();
 	}
 
-	public Integer getPermissaoTypeEnumValue()
-	{
-		if (permissaoTypeEnum != null)
-		{
-			return permissaoTypeEnum.getValue();
-		}
-		return null;
-	}
-
-	public void setPermissaoTypeEnumValue(Integer acaoTypeValue)
-	{
-		permissaoTypeEnum = EmpresaTypeEnum.enumForValue(acaoTypeValue);
-	}
-
-	public EmpresaTypeEnum getPermissaoTypeEnum() {
-		return permissaoTypeEnum;
-	}
-
-	public void setPermissaoTypeEnum(EmpresaTypeEnum permissaoTypeEnum) {
-		this.permissaoTypeEnum = permissaoTypeEnum;
-	}
 
 	public Empresa(Integer id)
 	{

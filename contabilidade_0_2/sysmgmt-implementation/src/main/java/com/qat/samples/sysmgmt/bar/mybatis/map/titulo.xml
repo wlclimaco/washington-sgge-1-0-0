@@ -14,8 +14,8 @@
   <!-- Result maps describe the mapping between the columns returned
       from a query, and the class properties.  A result map isnt
       necessary if the columns (or aliases) match to the properties
-       exactly. 
-       
+       exactly.
+
        private Integer id;
 
 	private String numero;
@@ -32,7 +32,7 @@
 	private Double valor;
 	private FinanceiroStatusEnum financeiroEnum;
 	private List<BaixaTitulo> listBaixa;
-       
+
        -->
   <resultMap id="TituloResult" type="Titulo">
     <result property="id" column="id"/>
@@ -127,7 +127,24 @@
  <select id="fetchAllTitulosRequest" parameterType="PagedInquiryRequest" resultMap="TituloResult">
 
 		SELECT id,<include refid="allTituloColumns" />
-  		  FROM titulo where 0 = 0  ORDER BY id ASC
+  		  FROM titulo where 0 = 0
+  		  <if test="permissaoTypeEnumValue == 1">
+			and id IS NOT NULL
+		</if>
+		<if test="permissaoTypeEnumValue != 1">
+			<if test="emprId == null">
+				<if test="emprIds != null"> and emprId in
+
+				<foreach item="item" index="index" collection="emprIds"
+		             open="(" separator="," close=")">
+		        #{item}
+		    	</foreach>
+
+				</if>
+			</if>
+			<if test="emprId != null"> and emprId = #{emprId}</if>
+		</if>
+  		  ORDER BY id ASC
 		  OFFSET ( #{startPage} * #{pageSize} )
 		  LIMIT #{pageSize}
 </select>

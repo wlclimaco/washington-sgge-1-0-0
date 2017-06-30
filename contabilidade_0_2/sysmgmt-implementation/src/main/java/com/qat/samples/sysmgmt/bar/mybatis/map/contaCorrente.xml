@@ -85,7 +85,22 @@
 		SELECT id,
 		<include refid="allContaCorrenteColumns" />
 		FROM contacorrente where 0 = 0
-		<if test="emprId != null"> and emprId = #{emprId}</if>
+		<if test="permissaoTypeEnumValue == 1">
+			and id IS NOT NULL
+		</if>
+		<if test="permissaoTypeEnumValue != 1">
+			<if test="emprId == null">
+				<if test="emprIds != null"> and emprId in
+
+				<foreach item="item" index="index" collection="emprIds"
+		             open="(" separator="," close=")">
+		        #{item}
+		    	</foreach>
+
+				</if>
+			</if>
+			<if test="emprId != null"> and emprId = #{emprId}</if>
+		</if>
 		ORDER BY id ASC
 
 	</select>
@@ -93,7 +108,22 @@
 	<select id="fetchContaCorrenteRowCount" resultType="Integer">
 		SELECT COUNT(*) AS RECORD_COUNT FROM contacorrente WHERE id IS NOT
 		NULL
-		<if test="emprId != null"> and emprId = #{emprId}</if>
+		<if test="permissaoTypeEnumValue == 1">
+			and id IS NOT NULL
+		</if>
+		<if test="permissaoTypeEnumValue != 1">
+			<if test="emprId == null">
+				<if test="emprIds != null"> and emprId in
+
+				<foreach item="item" index="index" collection="emprIds"
+		             open="(" separator="," close=")">
+		        #{item}
+		    	</foreach>
+
+				</if>
+			</if>
+			<if test="emprId != null"> and emprId = #{emprId}</if>
+		</if>
 
 	</select>
 
