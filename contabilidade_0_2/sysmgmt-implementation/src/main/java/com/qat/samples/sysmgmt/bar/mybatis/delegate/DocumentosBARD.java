@@ -99,4 +99,47 @@ public final class DocumentosBARD extends SqlSessionDaoSupport
 
 		return 1;
 	}
+
+	@SuppressWarnings("unchecked")
+	public static Integer maintainDocumentoAssociationss(Documento documento,
+			InternalResponse response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
+			TabelaEnum tabelaEnum, IDocumentoBAR documentoDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC,
+			Integer empId, String UserId, Integer processId, Integer historicoId)
+	{
+		Boolean count = false;
+		// First Maintain Empresa
+		if (ValidationUtil.isNull(documento))
+		{
+			return 0;
+		}
+		// For Each Contact...
+
+			// Make sure we set the parent key
+			documento.setParentId(parentId);
+			documento.setTabelaEnum(tabelaEnum);
+			documento.setProcessId(processId);
+
+			if (ValidationUtil.isNull(documento.getModelAction()))
+			{
+				return 0;
+			}
+			switch (documento.getModelAction())
+			{
+				case INSERT:
+					count = documentoDAC.insertDocumento(documento).hasSystemError();
+
+					break;
+				case UPDATE:
+					count = documentoDAC.updateDocumento(documento).hasSystemError();
+
+					break;
+				case DELETE:
+					count = documentoDAC.deleteDocumentoById(documento).hasSystemError();
+
+					break;
+
+		}
+
+		return 1;
+	}
 }

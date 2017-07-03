@@ -135,40 +135,14 @@ public final class PlanoByEmpresaBARD extends SqlSessionDaoSupport
 			{
 				case INSERT:
 					count = iSiteBAR.insertPlanoByEmpresa(planobyempresa).hasSystemError();
-					if (count == true)
-					{
-						Status status = new Status();
-						status.setStatus(CdStatusTypeEnum.ATIVO);
-						List<Status> statusList = new ArrayList<Status>();
-						statusList.add(status);
-						count =
-								StatusBARD.maintainStatusAssociations(statusList, response, parentId, null,
-										AcaoEnum.INSERT, UserId, empId, TabelaEnum.PLANOBYEMPRESA, statusDAC, historicoDAC,
-										processId, historicoId);
-					}
+
 					break;
 				case UPDATE:
 					count = iSiteBAR.updatePlanoByEmpresa(planobyempresa).hasSystemError();
-					if (count == true)
-					{
-						count =
-								StatusBARD.maintainStatusAssociations(planobyempresa.getStatusList(), response, planobyempresa.getId(),
-										null,
-										AcaoEnum.UPDATE, UserId, empId, TabelaEnum.PLANOBYEMPRESA, statusDAC, historicoDAC,
-										processId, historicoId);
-					}
+
 					break;
 				case DELETE:
 					count = iSiteBAR.deletePlanoByEmpresaById(planobyempresa).hasSystemError();
-					Status status = new Status();
-					status.setStatus(CdStatusTypeEnum.DELETADO);
-					List<Status> statusList = new ArrayList<Status>();
-					statusList.add(status);
-					count =
-							StatusBARD.maintainStatusAssociations(statusList, response, planobyempresa.getId(), null,
-									AcaoEnum.DELETE, UserId, empId, TabelaEnum.PLANOBYEMPRESA, statusDAC, historicoDAC,
-									processId, historicoId);
-
 					break;
 			}
 

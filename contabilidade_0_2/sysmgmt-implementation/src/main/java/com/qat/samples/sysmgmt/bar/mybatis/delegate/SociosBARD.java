@@ -66,44 +66,19 @@ public final class SociosBARD extends SqlSessionDaoSupport
 			{
 				case INSERT:
 					count = socioDAC.insertSocio(socio).hasSystemError();
-					if (count == true)
-					{
-						Status status = new Status();
-						status.setStatus(CdStatusTypeEnum.ATIVO);
-						List<Status> statusList = new ArrayList<Status>();
-						statusList.add(status);
-						count =
-								StatusBARD.maintainStatusAssociations(statusList, (InternalResultsResponse<?>) response, parentId, null,
-										AcaoEnum.INSERT, UserId, empId, TabelaEnum.SOCIO, statusDAC, historicoDAC,
-										processId, historicoId);
-					}
+
 					break;
 				case UPDATE:
 					count = socioDAC.updateSocio(socio).hasSystemError();
-					if (count == true)
-					{
-						count =
-								StatusBARD
-										.maintainStatusAssociations(socio.getStatusList(), response, socio.getId(),
-												null, AcaoEnum.UPDATE, UserId, empId, TabelaEnum.SOCIO, statusDAC,
-												historicoDAC, processId, historicoId);
-					}
+
 					break;
 				case DELETE:
-
-					Status status = new Status();
-					status.setStatus(CdStatusTypeEnum.ATIVO);
-					List<Status> statusList = new ArrayList<Status>();
-					statusList.add(status);
-					count =
-							StatusBARD.maintainStatusAssociations(statusList, response, socio.getId(), null,
-									AcaoEnum.DELETE, UserId, empId, TabelaEnum.SOCIO, statusDAC, historicoDAC,
-									processId, historicoId);
+					count = socioDAC.deleteSocioById(socio).hasSystemError();
 
 					break;
 			}
 
-			
+
 		}
 		return 1;
 	}

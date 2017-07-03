@@ -32,6 +32,7 @@ import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
 import com.qat.samples.sysmgmt.bar.Telefone.ITelefoneBAR;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.BaseBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.ConfiguracaoBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.DocumentosBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.EnviarEmailBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.InsertHistBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.PlanoByEmpresaBARD;
@@ -622,7 +623,6 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 		empresa.setProcessId(historicoId);
 		Boolean count1;
 		Integer a = 0;
-
 
 
 		if (!ValidationUtil.isNull(empresa.getConfiguracao())) {
@@ -1292,7 +1292,26 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 	@Override
 	public InternalResponse insertUsuario(Usuario usuario) {
 		InternalResponse response = new InternalResponse();
+
+		Integer historicoId = usuario.getTransactionId();
+		usuario.setProcessId(historicoId);
+		Integer count1;
+
 		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_USUARIO, usuario, response);
+
+		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.EMPRESA, AcaoEnum.INSERT, historicoId,
+				getHistoricoBAR(), response, usuario.getId(), usuario.getUserId());
+
+		if (!ValidationUtil.isNullOrEmpty(usuario.getDocumentos()))
+		{
+			count1 =
+					DocumentosBARD.maintainDocumentoAssociationss(usuario.getCpf(), response, usuario.getId(),
+							null,
+							null,
+							TabelaEnum.USUARIO, documentoBAR, statusBAR, historicoBAR, usuario.getId(),
+							usuario.getCreateUser(), historicoId, historicoId);
+		}
+
 		return response;
 	}
 
@@ -1305,7 +1324,27 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 	@Override
 	public InternalResponse updateUsuario(Usuario usuario) {
 		InternalResponse response = new InternalResponse();
+
+		Integer historicoId = usuario.getTransactionId();
+		Integer processId = usuario.getTransactionId();
+		usuario.setProcessId(historicoId);
+		Integer count1;
+
 		MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_USUARIO, usuario, response);
+
+		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.EMPRESA, AcaoEnum.INSERT, historicoId,
+				getHistoricoBAR(), response, usuario.getId(), usuario.getUserId());
+
+		if (!ValidationUtil.isNullOrEmpty(usuario.getDocumentos()))
+		{
+			count1 =
+					DocumentosBARD.maintainDocumentoAssociationss(usuario.getCpf(), response, usuario.getId(),
+							null,
+							null,
+							TabelaEnum.USUARIO, documentoBAR, statusBAR, historicoBAR, usuario.getId(),
+							usuario.getCreateUser(), historicoId, historicoId);
+		}
+
 		return response;
 	}
 
@@ -1319,6 +1358,26 @@ public class EmpresaBARImpl extends SqlSessionDaoSupport implements IEmpresaBAR 
 	public InternalResponse deleteUsuarioById(Usuario usuario) {
 		InternalResponse response = new InternalResponse();
 		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_USUARIO, usuario, response);
+
+		Integer historicoId = usuario.getTransactionId();
+		Integer processId = usuario.getTransactionId();
+		usuario.setProcessId(historicoId);
+		Integer count1;
+
+
+		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.EMPRESA, AcaoEnum.INSERT, historicoId,
+				getHistoricoBAR(), response, usuario.getId(), usuario.getUserId());
+
+		if (!ValidationUtil.isNullOrEmpty(usuario.getDocumentos()))
+		{
+			count1 =
+					DocumentosBARD.maintainDocumentoAssociationss(usuario.getCpf(), response, usuario.getId(),
+							null,
+							null,
+							TabelaEnum.USUARIO, documentoBAR, statusBAR, historicoBAR, usuario.getId(),
+							usuario.getCreateUser(), historicoId, historicoId);
+		}
+
 		return response;
 	}
 

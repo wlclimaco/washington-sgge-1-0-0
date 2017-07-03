@@ -12,10 +12,13 @@ import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.MyBatisBARHelper;
 import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.bar.Cadastros.ICadastrosBAR;
+import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Socios.ISociosBAR;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.InsertHistBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.PessoaBARD;
 import com.qat.samples.sysmgmt.pessoa.model.Cliente;
 import com.qat.samples.sysmgmt.pessoa.model.Socio;
+import com.qat.samples.sysmgmt.util.model.AcaoEnum;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
@@ -60,12 +63,22 @@ public class SociosBARImpl extends SqlSessionDaoSupport implements ISociosBAR {
 
 	private ICadastrosBAR cadastrosBAR;
 
+	private IHistoricoBAR historicoBAR;
+
 	public ICadastrosBAR getCadastrosBAR() {
 		return cadastrosBAR;
 	}
 
 	public void setCadastrosBAR(ICadastrosBAR cadastrosBAR) {
 		this.cadastrosBAR = cadastrosBAR;
+	}
+
+	public IHistoricoBAR getHistoricoBAR() {
+		return historicoBAR;
+	}
+
+	public void setHistoricoBAR(IHistoricoBAR historicoBAR) {
+		this.historicoBAR = historicoBAR;
 	}
 
 	// ===================================### SOCIO
@@ -78,12 +91,19 @@ public class SociosBARImpl extends SqlSessionDaoSupport implements ISociosBAR {
 	@Override
 	public InternalResponse insertSocio(Socio socio) {
 		InternalResponse response = new InternalResponse();
+		Integer historicoId = socio.getTransactionId();
+		socio.setProcessId(historicoId);
+
 		if (!ValidationUtil.isNull(socio.getPessoa())) {
 			PessoaBARD.maintainClienteAssociation(socio.getPessoa(), response, null, null, null,
 					TabelaEnum.SOCIO, getCadastrosBAR(), null, null, socio.getEmprId(), socio.getUserId(),
 					socio.getTransactionId(), socio.getTransactionId());
 		}
 		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_SOCIO, socio, response);
+
+		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.SOCIO, AcaoEnum.INSERT, historicoId,
+				getHistoricoBAR(), response, socio.getId(), socio.getUserId());
+
 		return response;
 	}
 
@@ -97,12 +117,19 @@ public class SociosBARImpl extends SqlSessionDaoSupport implements ISociosBAR {
 	@Override
 	public InternalResponse updateSocio(Socio socio) {
 		InternalResponse response = new InternalResponse();
+		Integer historicoId = socio.getTransactionId();
+		socio.setProcessId(historicoId);
+
+
 		if (!ValidationUtil.isNull(socio.getPessoa())) {
 			PessoaBARD.maintainClienteAssociation(socio.getPessoa(), response, null, null, null,
 					TabelaEnum.SOCIO, getCadastrosBAR(), null, null, socio.getEmprId(), socio.getUserId(),
 					socio.getTransactionId(), socio.getTransactionId());
 		}
 		MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_SOCIO, socio, response);
+
+		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.SOCIO, AcaoEnum.INSERT, historicoId,
+				getHistoricoBAR(), response, socio.getId(), socio.getUserId());
 		return response;
 	}
 
@@ -116,6 +143,8 @@ public class SociosBARImpl extends SqlSessionDaoSupport implements ISociosBAR {
 	@Override
 	public InternalResponse deleteSocioById(Socio socio) {
 		InternalResponse response = new InternalResponse();
+		Integer historicoId = socio.getTransactionId();
+		socio.setProcessId(historicoId);
 
 		if (!ValidationUtil.isNull(socio.getPessoa())) {
 			PessoaBARD.maintainClienteAssociation(socio.getPessoa(), response, null, null, null,
@@ -124,6 +153,10 @@ public class SociosBARImpl extends SqlSessionDaoSupport implements ISociosBAR {
 		}
 
 		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_SOCIO, socio, response);
+
+		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.SOCIO, AcaoEnum.INSERT, historicoId,
+				getHistoricoBAR(), response, socio.getId(), socio.getUserId());
+
 		return response;
 	}
 

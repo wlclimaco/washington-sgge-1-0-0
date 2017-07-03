@@ -75,8 +75,43 @@ public final class EnviarEmailBARD extends SqlSessionDaoSupport {
 						 generateMailMessage.addRecipient(Message.RecipientType.CC,
 						 new InternetAddress(empresa.getConfiguracao().getConfSMTP().getEndEmail()));
 						generateMailMessage.setSubject("Greetings from Crunchify..");
-						String emailBody = "Test email by Crunchify.com JavaMail API example. "
-								+ "<br><br> Regards, <br>Crunchify Admin";
+						String emailBody = "<!-- #######  YAY, I AM THE SOURCE EDITOR! #########-->"+
+"<h1 style='color: #5e9ca0;'>Bem vindo ao melhor sistema de gest&atilde;o empresarial GR&Aacute;TIS</h1>"+
+"<h2 style='color: #2e6c80;'>O E-Cont&aacute;bil &eacute; um sistema totalmente online, n&atilde;o precisa instala&ccedil;&atilde;o, funciona diretamente no seu navegador e em qualquer sistema operacional. Tamb&eacute;m em celulares e tablets. Basta ter acesso a internet.</h2>"+
+"<p>Integra&ccedil;&atilde;o dos processos de gest&atilde;o em sua micro ou pequena empresa, das finan&ccedil;as &agrave;s vendas, com cadastro de clientes, estoque e relat&oacute;rios.</p>"+
+"<p>Contas a pagar e a receber com integra&ccedil;&atilde;o banc&aacute;ria em seu controle financeiro. Contas em dia &eacute; sa&uacute;de financeira para seus neg&oacute;cios.</p>"+
+"<p>Controle de propostas e vendas integrado a emiss&atilde;o de NF-e e boleto. Compras e estoque integrado ao cadastro de clientes e fornecedores.</p>"+
+"<p>Ganhe tempo na troca de documentos e informa&ccedil;&otilde;es com o contador e melhore a qualidade da rela&ccedil;&atilde;o de sua empresa com a contabilidade</p>"+
+"<h2 style='color: #2e6c80;'>Some useful features:</h2>"+
+"<ol style='list-style: none; font-size: 14px; line-height: 32px; font-weight: bold;'>"+
+"<li style='clear: both;'><img style='float: left;' src='https://html-online.com/img/01-interactive-connection.png' alt='interactive connection' width='45' />"+
+"<h2 class=''>E-CONT&Aacute;BIL-MED</h2>"+
+"<p style='text-align: left;'><span style='color: #000000;'>SISTEMA PARA CLINICAS MEDICAS&nbsp;</span>Integra&ccedil;&atilde;o dos processos de gest&atilde;o para clinicas de medicas, das finan&ccedil;as &agrave;s processos,agenda, com cadastro de clientes, medicos,prontuario eletronico e relat&oacute;rios.</p>"+
+"</li>"+
+"<li style='clear: both;'></li>"+
+"<li style='clear: both;'><img style='float: left;' src='https://html-online.com/img/02-html-clean.png' alt='html cleaner' width='45' />"+
+"<h2>E-CONT&Aacute;BIL-ADV:</h2>"+
+"E&nbsp;o mais completo Software Jur&iacute;dico on-line para advogados e escrit&oacute;rios de advocacia. Com ele voc&ecirc; controla seus processos, clientes e financeiro, al&eacute;m de permitir a consulta dos andamentos processuais e no di&aacute;rio oficial de forma &aacute;gil. Tudo isso com uma interface amig&aacute;vel e totalmente on-line.</li>"+
+"<li style='clear: both;'></li>"+
+"<li style='clear: both;'></li>"+
+"<li style='clear: both;'><img style='float: left;' src='https://html-online.com/img/03-docs-to-html.png' alt='Word to html' width='45' />"+
+"<h2 class=''>E-CONT&Aacute;BIL-COND:</h2>"+
+"<h2 id='offer-title' data-editable='true' data-field-name='landing_page[values[offer-title]]'>E&nbsp;o sistema para condom&iacute;nio para beneficiar s&iacute;ndicos, administradores e moradores de condom&iacute;nio.</h2>"+
+"</li>"+
+"<li style='clear: both;'><img style='float: left;' src='https://html-online.com/img/04-replace.png' alt='replace text' width='45' />"+
+"<h2 class=''>E-CONT&Aacute;BIL-CONTABIL:</h2>"+
+"</li>"+
+"<li style='clear: both;'>Ganhe tempo na troca de documentos e informa&ccedil;&otilde;es com o contador e melhore a qualidade da rela&ccedil;&atilde;o de sua empresa com a contabilidade</li>"+
+"<li style='clear: both;'><img style='float: left;' src='https://html-online.com/img/05-gibberish.png' alt='gibberish' width='45' />"+
+"<h2 class=''>E-CONT&Aacute;BIL-GEST&Atilde;O:</h2>"+
+"</li>"+
+"<li style='clear: both;'>Integra&ccedil;&atilde;o dos processos de gest&atilde;o em sua micro ou pequena empresa, das finan&ccedil;as &agrave;s vendas, com cadastro de clientes, estoque e relat&oacute;rios</li>"+
+"<li style='clear: both;'><img style='float: left;' src='https://html-online.com/img/6-table-div-html.png' alt='html table div' width='45' />"+
+"<h2 class=''>E-CONT&Aacute;BIL-SPAR:</h2>"+
+"</li>"+
+"<li style='clear: both;'>O E-cont&aacute;bil-Spar e ideal para seu sal&atilde;o,barbearia, clinica de stetica entre outros. Faz campanhas de marketing para trazer novos clientes para os seus parceiros, mas al&eacute;m disso, se preocupa em oferecer uma ferramenta de marketing e adminitra&ccedil;&atilde;o que fideliza os seus clientes e garante que eles voltem mais vezes, enviando mensagens de texto e emails.</li>"+
+"</ol>"+
+"<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>'";
 						generateMailMessage.setContent(emailBody, "text/html");
 						System.out.println("Mail Session has been created successfully..");
 
