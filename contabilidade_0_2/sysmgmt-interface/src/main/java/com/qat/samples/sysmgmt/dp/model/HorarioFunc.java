@@ -1,5 +1,8 @@
 package com.qat.samples.sysmgmt.dp.model;
 
+import java.util.List;
+
+import com.qat.samples.sysmgmt.util.model.DoisValores;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 
 /**
@@ -24,6 +27,8 @@ public class HorarioFunc extends ModelCosmeDamiao
 	/** The tipo. */
 	private String tipo;
 
+	private List<DoisValores> dias;
+
 	/**
 	 * Default constructor.
 	 */
@@ -41,7 +46,7 @@ public class HorarioFunc extends ModelCosmeDamiao
 	 * @param tipo the tipo
 	 */
 	public HorarioFunc(Integer id, Long data, Long horarioEntr, Long horarioSair, String tipo,
-			PersistenceActionEnum modelAction)
+			PersistenceActionEnum modelAction ,List<DoisValores> dias)
 	{
 		super();
 		this.id = id;
@@ -49,6 +54,7 @@ public class HorarioFunc extends ModelCosmeDamiao
 		this.horarioEntr = horarioEntr;
 		this.horarioSair = horarioSair;
 		this.tipo = tipo;
+		this.dias = dias;
 		setModelAction(modelAction);
 	}
 
@@ -136,6 +142,14 @@ public class HorarioFunc extends ModelCosmeDamiao
 	public String getTipo()
 	{
 		return tipo;
+	}
+
+	public List<DoisValores> getDias() {
+		return dias;
+	}
+
+	public void setDias(List<DoisValores> dias) {
+		this.dias = dias;
 	}
 
 	/**

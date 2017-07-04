@@ -18,6 +18,7 @@ import com.qat.samples.sysmgmt.cfop.model.Cfop;
 import com.qat.samples.sysmgmt.cfop.model.CfopParentId;
 import com.qat.samples.sysmgmt.clinica.model.Clinica;
 import com.qat.samples.sysmgmt.clinica.model.Consulta;
+import com.qat.samples.sysmgmt.clinica.model.EspecialidadePessoa;
 import com.qat.samples.sysmgmt.clinica.model.Exame;
 import com.qat.samples.sysmgmt.clinica.model.ExamePessoa;
 import com.qat.samples.sysmgmt.clinica.model.PlanoSaudePessoa;
@@ -411,7 +412,7 @@ public class Objects {
 		medico.setDatanasc(a.getTime());
 		medico.setFoto("foto_8 - " + action.toString());
 		medico.setPessoaTipo(new ArrayList<PessoaTipo>());
-		medico.getPessoaTipo().add(new PessoaTipo(PessoaTypeEnum.ADVOGADO, id, action));
+		medico.getPessoaTipo().add(new PessoaTipo(PessoaTypeEnum.MEDICO, id, action));
 		medico.setSexo(1010);
 		medico.setEnderecos(new ArrayList<Endereco>());
 		medico.getEnderecos().add(insertEndereco(id, TabelaEnum.MEDICO, action));
@@ -438,6 +439,24 @@ public class Objects {
 		medico.setModifyUser("system");
 		medico.setProcessId(1);
 		medico.setModelAction(action);
+		//=============
+		List<EspecialidadePessoa> especialidade = new ArrayList<EspecialidadePessoa>();
+		especialidade.add(new EspecialidadePessoa("Ortopedia", id, action));
+		especialidade.add(new EspecialidadePessoa("Traumatologia", id, action));
+		medico.setEspecialidadeList(especialidade);
+		//============
+		List<DoisValores> dois = new ArrayList<DoisValores>();
+		dois.add(new DoisValores(1));
+		dois.add(new DoisValores(2));
+		dois.add(new DoisValores(3));
+		List<HorarioFunc> horarioFunc = new ArrayList<HorarioFunc>();
+		horarioFunc.add(new HorarioFunc(id,a.getTime(),a.getTime(),a.getTime(),"",action,dois));
+		medico.setHorarioList(horarioFunc);
+		//==========
+		List<Consulta> consultas = new ArrayList<Consulta>();
+		consultas.add(new Consulta(id, "Teste"));
+		medico.setConsultaList(consultas);
+
 
 		return medico;
 	}

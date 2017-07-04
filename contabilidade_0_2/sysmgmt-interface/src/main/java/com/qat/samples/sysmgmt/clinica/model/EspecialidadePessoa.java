@@ -19,6 +19,17 @@ public class EspecialidadePessoa extends ModelCosmeDamiao
 
 	}
 
+
+
+	public EspecialidadePessoa(String specialidade,Integer id,PersistenceActionEnum action) {
+		super();
+		this.especialidade = new Especialidade(specialidade,action);
+		setParentId(id);
+		setModelAction(action);
+	}
+
+
+
 	/**
 	 * @return the id
 	 */

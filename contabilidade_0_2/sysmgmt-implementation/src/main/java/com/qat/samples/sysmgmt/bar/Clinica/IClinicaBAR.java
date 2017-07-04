@@ -2,6 +2,8 @@ package com.qat.samples.sysmgmt.bar.Clinica;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.clinica.model.Consulta;
+import com.qat.samples.sysmgmt.clinica.model.Especialidade;
+import com.qat.samples.sysmgmt.clinica.model.EspecialidadePessoa;
 import com.qat.samples.sysmgmt.clinica.model.Exame;
 import com.qat.samples.sysmgmt.clinica.model.request.ConsultaInquiryRequest;
 import com.qat.samples.sysmgmt.clinica.model.request.ExameInquiryRequest;
@@ -10,6 +12,7 @@ import com.qat.samples.sysmgmt.clinica.model.request.PacienteInquiryRequest;
 import com.qat.samples.sysmgmt.pessoa.model.Medico;
 import com.qat.samples.sysmgmt.pessoa.model.Paciente;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
+import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
 
 /**
  * The Interface ClinicaBAR.. (Data Access Component - DAC)
@@ -244,5 +247,131 @@ public interface IClinicaBAR
 * @return the internal results response
 */
 	public InternalResultsResponse<Exame> fetchExamesByRequest(ExameInquiryRequest request);
+
+
+
+
+
+
+
+	/**
+	 * Fetch medico by id.
+	 *
+	 * @param request the request
+* @return the internal results response
+*/
+	public InternalResultsResponse<Especialidade> fetchEspecialidadeById(FetchByIdRequest request);
+
+	/**
+* Insert medico.
+*
+* @param medico the medico
+*
+* @return the internal response
+*/
+	public InternalResponse insertEspecialidade(Especialidade especialidade);
+
+	/**
+* Update medico.
+*
+* @param medico the medico
+*
+* @return the internal response
+*/
+	public InternalResponse updateEspecialidade(Especialidade especialidade);
+
+	/**
+* Delete medico.
+*
+* @param medico the medico
+*
+* @return the internal response
+*/
+	public InternalResponse deleteEspecialidadeById(Especialidade especialidade);
+
+	/**
+* Delete all medicos.
+*
+* @return the internal response
+*/
+	public InternalResponse deleteAllEspecialidades();
+
+	/**
+* Fetch all medicos.
+*
+* @return the list< medico>
+*/
+	public InternalResultsResponse<Especialidade> fetchAllEspecialidades(Especialidade  especialidade);
+
+	/**
+* Fetch medicos by request.
+*
+* @param request the request
+* @return the internal results response
+*/
+	public InternalResultsResponse<Especialidade> fetchEspecialidadesByRequest(PagedInquiryRequest request);
+
+
+
+
+
+
+
+	/**
+	 * Fetch medico by id.
+	 *
+	 * @param request the request
+* @return the internal results response
+*/
+	public InternalResultsResponse<EspecialidadePessoa> fetchEspecialidadePessoaById(FetchByIdRequest request);
+
+	/**
+* Insert medico.
+*
+* @param medico the medico
+*
+* @return the internal response
+*/
+	public InternalResponse insertEspecialidadePessoa(EspecialidadePessoa especialidade);
+
+	/**
+* Update medico.
+*
+* @param medico the medico
+*
+* @return the internal response
+*/
+	public InternalResponse updateEspecialidadePessoa(EspecialidadePessoa especialidade);
+
+	/**
+* Delete medico.
+*
+* @param medico the medico
+*
+* @return the internal response
+*/
+	public InternalResponse deleteEspecialidadePessoaById(EspecialidadePessoa especialidade);
+
+	/**
+* Delete all medicos.
+*
+* @return the internal response
+*/
+	public InternalResponse deleteAllEspecialidadePessoas();
+
+	/**
+* Fetch all medicos.
+*
+* @return the list< medico>
+*/
+	public InternalResultsResponse<EspecialidadePessoa> fetchAllEspecialidadePessoas(EspecialidadePessoa  especialidade);
+
+	/**
+* Fetch medicos by request.
+*
+* @param request the request
+* @return the internal results response
+*/
+	public InternalResultsResponse<EspecialidadePessoa> fetchEspecialidadePessoasByRequest(PagedInquiryRequest request);
 
 }

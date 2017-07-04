@@ -16,7 +16,9 @@ import com.qat.framework.util.MyBatisBARHelper;
 import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.advocacia.Advogado;
 import com.qat.samples.sysmgmt.advocacia.request.AdvogadoInquiryRequest;
+import com.qat.samples.sysmgmt.bar.Clinica.IClinicaBAR;
 import com.qat.samples.sysmgmt.bar.Documentos.IDocumentoBAR;
+import com.qat.samples.sysmgmt.bar.Dp.IDpBAR;
 import com.qat.samples.sysmgmt.bar.Email.IEmailBAR;
 import com.qat.samples.sysmgmt.bar.Endereco.IEnderecoBAR;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
@@ -24,9 +26,12 @@ import com.qat.samples.sysmgmt.bar.Notes.INotesBAR;
 import com.qat.samples.sysmgmt.bar.Pessoa.IPessoaBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
 import com.qat.samples.sysmgmt.bar.Telefone.ITelefoneBAR;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.ConsultaBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.DocumentosBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.EmailBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.EnderecoBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.EspecialidadeBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.HorarioFuncBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.InsertHistBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.NotesBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.PessoaTipoBARD;
@@ -239,6 +244,8 @@ private static final String NAMESPACE_FUNCIONARIO = "FuncionarioMap.";
 	ITelefoneBAR telefoneBAR;
 	INotesBAR notesBAR;
 	IPessoaBAR pessoaBAR;
+	IClinicaBAR clinicaBAR;
+	IDpBAR dpBAR;
 
 
 
@@ -306,6 +313,24 @@ private static final String NAMESPACE_FUNCIONARIO = "FuncionarioMap.";
 
 	public void setPessoaBAR(IPessoaBAR pessoaBAR) {
 		this.pessoaBAR = pessoaBAR;
+	}
+
+
+
+	public IClinicaBAR getClinicaBAR() {
+		return clinicaBAR;
+	}
+
+	public void setClinicaBAR(IClinicaBAR clinicaBAR) {
+		this.clinicaBAR = clinicaBAR;
+	}
+
+	public IDpBAR getDpBAR() {
+		return dpBAR;
+	}
+
+	public void setDpBAR(IDpBAR dpBAR) {
+		this.dpBAR = dpBAR;
 	}
 
 	/**
@@ -472,9 +497,22 @@ public InternalResponse insertCliente(Cliente cliente)
 @Override
 public InternalResponse updateCliente(Cliente cliente)
 {
+
 	InternalResponse response = new InternalResponse();
+
+	Integer historicoId = InsertHistBARD.maintainInsertHistorico(TabelaEnum.CLIENTE, getHistoricoBAR(), response);
+
+	cliente.setProcessId(historicoId);
+
 	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_PESSOA, cliente, response);
+
+	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.CLIENTE, AcaoEnum.UPDATE, historicoId,
+			getHistoricoBAR(), response, cliente.getId(),cliente.getUserId());
+
+	insertPessoa(cliente, response, TabelaEnum.CLIENTE, historicoId);
+
 	return response;
+
 }
 
 /*
@@ -484,8 +522,20 @@ public InternalResponse updateCliente(Cliente cliente)
 @Override
 public InternalResponse deleteClienteById(Cliente cliente)
 {
+
 	InternalResponse response = new InternalResponse();
+
+	Integer historicoId = InsertHistBARD.maintainInsertHistorico(TabelaEnum.CLIENTE, getHistoricoBAR(), response);
+
+	cliente.setProcessId(historicoId);
+
 	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PESSOA, cliente, response);
+
+	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.CLIENTE, AcaoEnum.DELETE, historicoId,
+			getHistoricoBAR(), response, cliente.getId(),cliente.getUserId());
+
+	insertPessoa(cliente, response, TabelaEnum.CLIENTE, historicoId);
+
 	return response;
 }
 
@@ -867,8 +917,47 @@ public static void fetchTransportadorsByRequest(SqlSession sqlSession, Transport
 public InternalResponse insertMedico(Medico medico)
 {
 	InternalResponse response = new InternalResponse();
+
+	Integer historicoId = InsertHistBARD.maintainInsertHistorico(TabelaEnum.MEDICO, getHistoricoBAR(), response);
+
+	medico.setProcessId(historicoId);
+
 	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_PESSOA, medico, response);
+
+	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.MEDICO, AcaoEnum.INSERT, historicoId,
+			getHistoricoBAR(), response, medico.getId(),medico.getUserId());
+
+	insertPessoa(medico, response, TabelaEnum.MEDICO, historicoId);
+
+	if (!ValidationUtil.isNullOrEmpty(medico.getConsultaList()))
+	{
+		a +=
+				ConsultaBARD.maintainConsultaAssociations(medico.getConsultaList(), response, medico.getId(), null,
+						null,
+						TabelaEnum.MEDICO, clinicaBAR, statusBAR, historicoBAR, medico.getId(),
+						medico.getCreateUser(), historicoId, historicoId);
+	}
+
+	if (!ValidationUtil.isNullOrEmpty(medico.getEspecialidadeList()))
+	{
+		a +=
+				EspecialidadeBARD.maintainEspecialidadeAssociations(medico.getEspecialidadeList(), response, medico.getId(), null,
+						null,
+						TabelaEnum.MEDICO, clinicaBAR, statusBAR, historicoBAR, medico.getId(),
+						medico.getCreateUser(), historicoId, historicoId);
+	}
+
+	if (!ValidationUtil.isNullOrEmpty(medico.getHorarioList()))
+	{
+		a +=
+				HorarioFuncBARD.maintainHorarioFuncAssociations(medico.getHorarioList(), response, medico.getId(), null,
+						null,
+						TabelaEnum.MEDICO, dpBAR, statusBAR, historicoBAR, medico.getId(),
+						medico.getCreateUser(), historicoId, historicoId);
+	}
+
 	return response;
+
 }
 
 /*
@@ -878,9 +967,49 @@ public InternalResponse insertMedico(Medico medico)
 @Override
 public InternalResponse updateMedico(Medico medico)
 {
+
 	InternalResponse response = new InternalResponse();
+
+	Integer historicoId = InsertHistBARD.maintainInsertHistorico(TabelaEnum.MEDICO, getHistoricoBAR(), response);
+
+	medico.setProcessId(historicoId);
+
 	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_PESSOA, medico, response);
+
+	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.MEDICO, AcaoEnum.UPDATE, historicoId,
+			getHistoricoBAR(), response, medico.getId(),medico.getUserId());
+
+	insertPessoa(medico, response, TabelaEnum.MEDICO, historicoId);
+
+	if (!ValidationUtil.isNullOrEmpty(medico.getConsultaList()))
+	{
+		a +=
+				ConsultaBARD.maintainConsultaAssociations(medico.getConsultaList(), response, medico.getId(), null,
+						null,
+						TabelaEnum.MEDICO, clinicaBAR, statusBAR, historicoBAR, medico.getId(),
+						medico.getCreateUser(), historicoId, historicoId);
+	}
+
+	if (!ValidationUtil.isNullOrEmpty(medico.getEspecialidadeList()))
+	{
+		a +=
+				EspecialidadeBARD.maintainEspecialidadeAssociations(medico.getEspecialidadeList(), response, medico.getId(), null,
+						null,
+						TabelaEnum.MEDICO, clinicaBAR, statusBAR, historicoBAR, medico.getId(),
+						medico.getCreateUser(), historicoId, historicoId);
+	}
+
+	if (!ValidationUtil.isNullOrEmpty(medico.getHorarioList()))
+	{
+		a +=
+				HorarioFuncBARD.maintainHorarioFuncAssociations(medico.getHorarioList(), response, medico.getId(), null,
+						null,
+						TabelaEnum.MEDICO, dpBAR, statusBAR, historicoBAR, medico.getId(),
+						medico.getCreateUser(), historicoId, historicoId);
+	}
+
 	return response;
+
 }
 
 /*
@@ -890,9 +1019,49 @@ public InternalResponse updateMedico(Medico medico)
 @Override
 public InternalResponse deleteMedicoById(Medico medico)
 {
+
 	InternalResponse response = new InternalResponse();
+
+	Integer historicoId = InsertHistBARD.maintainInsertHistorico(TabelaEnum.MEDICO, getHistoricoBAR(), response);
+
+	medico.setProcessId(historicoId);
+
 	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PESSOA, medico, response);
+
+	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.MEDICO, AcaoEnum.DELETE, historicoId,
+			getHistoricoBAR(), response, medico.getId(),medico.getUserId());
+
+	insertPessoa(medico, response, TabelaEnum.MEDICO, historicoId);
+
+	if (!ValidationUtil.isNullOrEmpty(medico.getConsultaList()))
+	{
+		a +=
+				ConsultaBARD.maintainConsultaAssociations(medico.getConsultaList(), response, medico.getId(), null,
+						null,
+						TabelaEnum.MEDICO, clinicaBAR, statusBAR, historicoBAR, medico.getId(),
+						medico.getCreateUser(), historicoId, historicoId);
+	}
+
+	if (!ValidationUtil.isNullOrEmpty(medico.getEspecialidadeList()))
+	{
+		a +=
+				EspecialidadeBARD.maintainEspecialidadeAssociations(medico.getEspecialidadeList(), response, medico.getId(), null,
+						null,
+						TabelaEnum.MEDICO, clinicaBAR, statusBAR, historicoBAR, medico.getId(),
+						medico.getCreateUser(), historicoId, historicoId);
+	}
+
+	if (!ValidationUtil.isNullOrEmpty(medico.getHorarioList()))
+	{
+		a +=
+				HorarioFuncBARD.maintainHorarioFuncAssociations(medico.getHorarioList(), response, medico.getId(), null,
+						null,
+						TabelaEnum.MEDICO, dpBAR, statusBAR, historicoBAR, medico.getId(),
+						medico.getCreateUser(), historicoId, historicoId);
+	}
+
 	return response;
+
 }
 
 /*

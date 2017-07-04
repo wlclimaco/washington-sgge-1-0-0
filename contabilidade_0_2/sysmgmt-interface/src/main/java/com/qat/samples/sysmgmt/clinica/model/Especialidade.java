@@ -1,5 +1,6 @@
 package com.qat.samples.sysmgmt.clinica.model;
 
+import com.qat.framework.model.BaseModel.PersistenceActionEnum;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 
 /**
@@ -19,6 +20,16 @@ public class Especialidade extends ModelCosmeDamiao
 	{
 
 	}
+
+
+
+	public Especialidade(String nome,PersistenceActionEnum action) {
+		super();
+		this.nome = nome;
+		setModelAction(action);
+	}
+
+
 
 	/**
 	 * @return the id

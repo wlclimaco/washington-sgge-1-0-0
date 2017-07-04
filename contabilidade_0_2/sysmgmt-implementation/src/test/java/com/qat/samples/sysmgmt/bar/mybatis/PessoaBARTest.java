@@ -170,6 +170,7 @@ public IPessoaBAR getPessoaBAR()
 		clienteResponse = getPessoaBAR().fetchClienteById(request);
 		Assert.assertEquals(PessoaTypeEnum.CLIENTE.getLabelKey().toLowerCase(), clienteResponse.getPessoaTipo().get(0).getPessoaTypeEnum().name().toLowerCase());
 		Assert.assertEquals(cliente.getNome(), clienteResponse.getNome());
+		cliente = Objects.insertCliente(1090, TabelaEnum.CLIENTE,PersistenceActionEnum.DELETE);
 		getPessoaBAR().deleteClienteById(cliente);
 		clienteResponse = getPessoaBAR().fetchClienteById(request);
 		Assert.assertEquals(clienteResponse, null);
