@@ -59,7 +59,7 @@ public IClinicaBAR getClinicaBAR()
 @Test
 	public void testDeleteConsulta()
 	{
-		Consulta consulta = insertConsulta(1004, TabelaEnum.CONSULTA, PersistenceActionEnum.INSERT);
+		Consulta consulta = Objects.insertConsulta(1004, TabelaEnum.CONSULTA, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1004);
 		Consulta consultaResponse = getClinicaBAR().fetchConsultaById(request);
@@ -92,7 +92,7 @@ public IClinicaBAR getClinicaBAR()
 	@Test
 	public void testUpdateConsulta()
 	{
-		Consulta consulta = insertConsulta(1000, TabelaEnum.CONSULTA, PersistenceActionEnum.UPDATE);
+		Consulta consulta = Objects.insertConsulta(1000, TabelaEnum.CONSULTA, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1000);
 		Consulta consultaResponse = getClinicaBAR().fetchConsultaById(request);
@@ -147,7 +147,7 @@ public IClinicaBAR getClinicaBAR()
 @Test
 	public void testDeleteExame()
 	{
-		Exame exame = insertExame(1004, TabelaEnum.EXAME, PersistenceActionEnum.INSERT);
+		Exame exame = Objects.insertExame(1004, TabelaEnum.EXAME, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1004);
 		Exame exameResponse = getClinicaBAR().fetchExameById(request);
@@ -180,7 +180,7 @@ public IClinicaBAR getClinicaBAR()
 	@Test
 	public void testUpdateExame()
 	{
-		Exame exame = insertExame(1000, TabelaEnum.EXAME, PersistenceActionEnum.UPDATE);
+		Exame exame = Objects.insertExame(1000, TabelaEnum.EXAME, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1000);
 		Exame exameResponse = getClinicaBAR().fetchExameById(request);
@@ -235,18 +235,5 @@ public IClinicaBAR getClinicaBAR()
 		executeSqlScript("conf/insertConsulta.sql", false);
 		executeSqlScript("conf/insertExame.sql", false);
 	}
-
-
-	public Consulta insertConsulta(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-		return Objects.insertConsulta(id,tabela,action);
-		}
-
-
-	public Exame insertExame(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-		return Objects.insertExame(id,tabela,action);
-		}
-
 
 }

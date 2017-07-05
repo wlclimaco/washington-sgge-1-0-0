@@ -56,22 +56,22 @@ public final class HorarioFuncBARD extends SqlSessionDaoSupport
 			{
 				continue;
 			}
-			switch (horarioFunc.getModelAction())
-			{
-				case INSERT:
-					count = horarioFuncDAC.insertHorafunc(horarioFunc).hasSystemError();
-
-					break;
-				case UPDATE:
-					count = horarioFuncDAC.updateHorafunc(horarioFunc).hasSystemError();
-
-					break;
-				case DELETE:
-
-					count = horarioFuncDAC.deleteHorafuncById(horarioFunc).hasSystemError();
-
-					break;
-			}
+//			switch (horarioFunc.getModelAction())
+//			{
+//				case INSERT:
+//					count = horarioFuncDAC.insertHorafunc(horarioFunc).hasSystemError();
+//
+//					break;
+//				case UPDATE:
+//					count = horarioFuncDAC.updateHorafunc(horarioFunc).hasSystemError();
+//
+//					break;
+//				case DELETE:
+//
+//					count = horarioFuncDAC.deleteHorafuncById(horarioFunc).hasSystemError();
+//
+//					break;
+//			}
 		}
 
 		return 1;

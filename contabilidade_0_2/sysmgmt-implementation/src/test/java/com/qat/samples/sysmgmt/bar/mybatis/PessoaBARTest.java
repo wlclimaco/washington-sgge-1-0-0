@@ -437,6 +437,7 @@ public IPessoaBAR getPessoaBAR()
 		getPessoaBAR().insertMedico(medico);
 		medicoResponse = getPessoaBAR().fetchMedicoById(request);
 		Assert.assertEquals(medico.getId(), medicoResponse.getId());
+		medico = Objects.insertMedico(1045, TabelaEnum.MEDICO,PersistenceActionEnum.DELETE);
 		getPessoaBAR().deleteMedicoById(medico);
 		medicoResponse = getPessoaBAR().fetchMedicoById(request);
 		Assert.assertEquals(medicoResponse, null);

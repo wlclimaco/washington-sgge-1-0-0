@@ -1033,32 +1033,32 @@ public InternalResponse deleteMedicoById(Medico medico)
 
 	insertPessoa(medico, response, TabelaEnum.MEDICO, historicoId);
 
-	if (!ValidationUtil.isNullOrEmpty(medico.getConsultaList()))
-	{
-		a +=
-				ConsultaBARD.maintainConsultaAssociations(medico.getConsultaList(), response, medico.getId(), null,
-						null,
-						TabelaEnum.MEDICO, clinicaBAR, statusBAR, historicoBAR, medico.getId(),
-						medico.getCreateUser(), historicoId, historicoId);
-	}
-
-	if (!ValidationUtil.isNullOrEmpty(medico.getEspecialidadeList()))
-	{
-		a +=
-				EspecialidadeBARD.maintainEspecialidadeAssociations(medico.getEspecialidadeList(), response, medico.getId(), null,
-						null,
-						TabelaEnum.MEDICO, clinicaBAR, statusBAR, historicoBAR, medico.getId(),
-						medico.getCreateUser(), historicoId, historicoId);
-	}
-
-	if (!ValidationUtil.isNullOrEmpty(medico.getHorarioList()))
-	{
-		a +=
-				HorarioFuncBARD.maintainHorarioFuncAssociations(medico.getHorarioList(), response, medico.getId(), null,
-						null,
-						TabelaEnum.MEDICO, dpBAR, statusBAR, historicoBAR, medico.getId(),
-						medico.getCreateUser(), historicoId, historicoId);
-	}
+//	if (!ValidationUtil.isNullOrEmpty(medico.getConsultaList()))
+//	{
+//		a +=
+//				ConsultaBARD.maintainConsultaAssociations(medico.getConsultaList(), response, medico.getId(), null,
+//						null,
+//						TabelaEnum.MEDICO, clinicaBAR, statusBAR, historicoBAR, medico.getId(),
+//						medico.getCreateUser(), historicoId, historicoId);
+//	}
+//
+//	if (!ValidationUtil.isNullOrEmpty(medico.getEspecialidadeList()))
+//	{
+//		a +=
+//				EspecialidadeBARD.maintainEspecialidadeAssociations(medico.getEspecialidadeList(), response, medico.getId(), null,
+//						null,
+//						TabelaEnum.MEDICO, clinicaBAR, statusBAR, historicoBAR, medico.getId(),
+//						medico.getCreateUser(), historicoId, historicoId);
+//	}
+//
+//	if (!ValidationUtil.isNullOrEmpty(medico.getHorarioList()))
+//	{
+//		a +=
+//				HorarioFuncBARD.maintainHorarioFuncAssociations(medico.getHorarioList(), response, medico.getId(), null,
+//						null,
+//						TabelaEnum.MEDICO, dpBAR, statusBAR, historicoBAR, medico.getId(),
+//						medico.getCreateUser(), historicoId, historicoId);
+//	}
 
 	return response;
 

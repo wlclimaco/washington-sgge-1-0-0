@@ -56,22 +56,22 @@ public final class ConsultaBARD extends SqlSessionDaoSupport
 			{
 				continue;
 			}
-			switch (consulta.getModelAction())
-			{
-				case INSERT:
-					count = consultaDAC.insertConsulta(consulta).hasSystemError();
-
-					break;
-				case UPDATE:
-					count = consultaDAC.updateConsulta(consulta).hasSystemError();
-
-					break;
-				case DELETE:
-
-					count = consultaDAC.deleteConsultaById(consulta).hasSystemError();
-
-					break;
-			}
+//			switch (consulta.getModelAction())
+//			{
+//				case INSERT:
+//					count = consultaDAC.insertConsulta(consulta).hasSystemError();
+//
+//					break;
+//				case UPDATE:
+//					count = consultaDAC.updateConsulta(consulta).hasSystemError();
+//
+//					break;
+//				case DELETE:
+//
+//					count = consultaDAC.deleteConsultaById(consulta).hasSystemError();
+//
+//					break;
+//			}
 		}
 
 		return 1;

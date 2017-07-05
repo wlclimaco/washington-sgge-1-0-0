@@ -39,14 +39,29 @@
 
  <select id="fetchAllTransportadorsRequest" parameterType="TransportadorInquiryRequest" resultMap="transportadorResult">
 
-		SELECT <include refid="allTransportadorColumns" />
-  		  FROM pessoa where pessoaTypeEnum = 8 ORDER BY id ASC
-		  OFFSET ( #{startPage} * #{pageSize} )
-		  LIMIT #{pageSize}
+				select p.* from pessoa p left join pessoatipo t  on(p.id = t.parentid) where t.pessoatypeenum = 4
+		<if test="permissaoTypeEnumValue == 1">
+			and pessoa.id IS NOT NULL
+		</if>
+		<if test="permissaoTypeEnumValue != 1">
+			<if test="emprId == null">
+				<if test="emprIds != null"> and p.emprId in
+
+				<foreach item="item" index="index" collection="emprIds"
+		             open="(" separator="," close=")">
+		        #{item}
+		    	</foreach>
+
+				</if>
+			</if>
+			<if test="emprId != null"> and p.emprId = #{emprId}</if>
+		</if>
+		<if test="id != null and id > 0"> and p.id = #{id}</if>
+		ORDER BY p.nome ASC
 </select>
 
 <select id="fetchTransportadorRowCount" resultType="Integer">
-		SELECT COUNT(*) AS RECORD_COUNT FROM pessoa WHERE id IS NOT NULL and pessoaTypeEnum = 8
+		SELECT COUNT(*) AS RECORD_COUNT FROM pessoa WHERE id IS NOT NULL and pessoaTypeEnum = 4
 
  </select>
 </mapper>

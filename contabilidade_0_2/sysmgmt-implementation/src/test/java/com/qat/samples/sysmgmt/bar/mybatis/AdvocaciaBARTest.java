@@ -2,8 +2,6 @@
 package com.qat.samples.sysmgmt.bar.mybatis;
 
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -27,7 +25,6 @@ import com.qat.samples.sysmgmt.advocacia.Processo;
 import com.qat.samples.sysmgmt.advocacia.request.AudienciaInquiryRequest;
 import com.qat.samples.sysmgmt.advocacia.request.ProcessoInquiryRequest;
 import com.qat.samples.sysmgmt.bar.Advogado.IAdvocaciaBAR;
-import com.qat.samples.sysmgmt.util.model.Note;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 
@@ -60,7 +57,7 @@ public void setAdvocaciaBAR(IAdvocaciaBAR advocaciaBAR) {
 @Test
 	public void testDeleteAudiencia()
 	{
-		Audiencia audiencia = insertAudiencia(1004, TabelaEnum.AUDIENCIA, PersistenceActionEnum.INSERT);
+		Audiencia audiencia = Objects.insertAudiencia(1004, TabelaEnum.AUDIENCIA, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1004);
 		Audiencia audienciaResponse = getAdvocaciaBAR().fetchAudienciaById(request);
@@ -93,7 +90,7 @@ public void setAdvocaciaBAR(IAdvocaciaBAR advocaciaBAR) {
 	@Test
 	public void testUpdateAudiencia()
 	{
-		Audiencia audiencia = insertAudiencia(1000, TabelaEnum.AUDIENCIA, PersistenceActionEnum.UPDATE);
+		Audiencia audiencia = Objects.insertAudiencia(1000, TabelaEnum.AUDIENCIA, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1000);
 		Audiencia audienciaResponse = getAdvocaciaBAR().fetchAudienciaById(request);
@@ -148,7 +145,7 @@ public void setAdvocaciaBAR(IAdvocaciaBAR advocaciaBAR) {
 @Test
 	public void testDeleteProcesso()
 	{
-		Processo processo = insertProcesso(1004, TabelaEnum.PROCESSO, PersistenceActionEnum.INSERT);
+		Processo processo = Objects.insertProcesso(1004, TabelaEnum.PROCESSO, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1004);
 		Processo processoResponse = getAdvocaciaBAR().fetchProcessoById(request);
@@ -181,7 +178,7 @@ public void setAdvocaciaBAR(IAdvocaciaBAR advocaciaBAR) {
 	@Test
 	public void testUpdateProcesso()
 	{
-		Processo processo = insertProcesso(1000, TabelaEnum.PROCESSO, PersistenceActionEnum.UPDATE);
+		Processo processo = Objects.insertProcesso(1000, TabelaEnum.PROCESSO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1000);
 		Processo processoResponse = getAdvocaciaBAR().fetchProcessoById(request);
@@ -237,19 +234,6 @@ public void setAdvocaciaBAR(IAdvocaciaBAR advocaciaBAR) {
 		executeSqlScript("conf/insertProcesso.sql", false);
 	}
 
-
-	public Audiencia insertAudiencia(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-
-
-			return Objects.insertAudiencia(id,tabela,action);
-		}
-
-
-	public Processo insertProcesso(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
-		{
-		return Objects.insertProcesso(id,tabela,action);
-		}
 
 
 }

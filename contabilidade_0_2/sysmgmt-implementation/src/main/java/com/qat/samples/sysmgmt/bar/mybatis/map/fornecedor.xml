@@ -39,14 +39,13 @@
 
  <select id="fetchAllFornecedorsRequest" parameterType="FornecedorInquiryRequest" resultMap="fornecedorResult">
 
-		SELECT <include refid="allFornecedorColumns" />
-  		  FROM pessoa where pessoaTypeEnum = 2
-  		  <if test="permissaoTypeEnumValue == 1">
-			and id IS NOT NULL
+		select p.* from pessoa p left join pessoatipo t  on(p.id = t.parentid) where t.pessoatypeenum = 2
+		<if test="permissaoTypeEnumValue == 1">
+			and pessoa.id IS NOT NULL
 		</if>
 		<if test="permissaoTypeEnumValue != 1">
 			<if test="emprId == null">
-				<if test="emprIds != null"> and emprId in
+				<if test="emprIds != null"> and p.emprId in
 
 				<foreach item="item" index="index" collection="emprIds"
 		             open="(" separator="," close=")">
@@ -55,11 +54,10 @@
 
 				</if>
 			</if>
-			<if test="emprId != null"> and emprId = #{emprId}</if>
+			<if test="emprId != null"> and p.emprId = #{emprId}</if>
 		</if>
-  		   ORDER BY id ASC
-		  OFFSET ( #{startPage} * #{pageSize} )
-		  LIMIT #{pageSize}
+		<if test="id != null and id > 0"> and p.id = #{id}</if>
+		ORDER BY p.nome ASC
 </select>
 
 <select id="fetchFornecedorRowCount" resultType="Integer">

@@ -11,6 +11,8 @@ import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.MyBatisBARHelper;
 import com.qat.samples.sysmgmt.bar.Clinica.IClinicaBAR;
 import com.qat.samples.sysmgmt.clinica.model.Consulta;
+import com.qat.samples.sysmgmt.clinica.model.Especialidade;
+import com.qat.samples.sysmgmt.clinica.model.EspecialidadePessoa;
 import com.qat.samples.sysmgmt.clinica.model.Exame;
 import com.qat.samples.sysmgmt.clinica.model.request.ConsultaInquiryRequest;
 import com.qat.samples.sysmgmt.clinica.model.request.ExameInquiryRequest;
@@ -19,6 +21,7 @@ import com.qat.samples.sysmgmt.clinica.model.request.PacienteInquiryRequest;
 import com.qat.samples.sysmgmt.pessoa.model.Medico;
 import com.qat.samples.sysmgmt.pessoa.model.Paciente;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
+import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
 
 /**
  * The Class CountyBARImpl. (Business Access Repository - BAR)
@@ -676,5 +679,89 @@ public static void fetchExamesByRequest(SqlSession sqlSession, ExameInquiryReque
 		}
 
 	}
+
+@Override
+public InternalResultsResponse<Especialidade> fetchEspecialidadeById(FetchByIdRequest request) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public InternalResponse insertEspecialidade(Especialidade especialidade) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public InternalResponse updateEspecialidade(Especialidade especialidade) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public InternalResponse deleteEspecialidadeById(Especialidade especialidade) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public InternalResponse deleteAllEspecialidades() {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public InternalResultsResponse<Especialidade> fetchAllEspecialidades(Especialidade especialidade) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public InternalResultsResponse<Especialidade> fetchEspecialidadesByRequest(PagedInquiryRequest request) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public InternalResultsResponse<EspecialidadePessoa> fetchEspecialidadePessoaById(FetchByIdRequest request) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public InternalResponse insertEspecialidadePessoa(EspecialidadePessoa especialidade) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public InternalResponse updateEspecialidadePessoa(EspecialidadePessoa especialidade) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public InternalResponse deleteEspecialidadePessoaById(EspecialidadePessoa especialidade) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public InternalResponse deleteAllEspecialidadePessoas() {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public InternalResultsResponse<EspecialidadePessoa> fetchAllEspecialidadePessoas(EspecialidadePessoa especialidade) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public InternalResultsResponse<EspecialidadePessoa> fetchEspecialidadePessoasByRequest(PagedInquiryRequest request) {
+	// TODO Auto-generated method stub
+	return null;
+}
 
 }
