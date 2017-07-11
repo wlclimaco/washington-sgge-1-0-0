@@ -6,26 +6,19 @@ import com.qat.samples.sysmgmt.banco.model.BancoPessoa;
 import com.qat.samples.sysmgmt.condpag.model.CondPagPessoa;
 import com.qat.samples.sysmgmt.condpag.model.FormaPgPessoa;
 import com.qat.samples.sysmgmt.contato.model.Contato;
-import com.qat.samples.sysmgmt.fiscal.model.Regime;
-import com.qat.samples.sysmgmt.util.model.Documento;
-import com.qat.samples.sysmgmt.util.model.Email;
-import com.qat.samples.sysmgmt.util.model.Endereco;
-import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
-import com.qat.samples.sysmgmt.util.model.Telefone;
+import com.qat.samples.sysmgmt.entidade.model.Entidade;
 
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
  * setting.
  */
 @SuppressWarnings("serial")
-public class Pessoa extends ModelCosmeDamiao
+public class Pessoa extends Entidade
 {
 	/** The SendSolv id for the account. */
 	private Integer id;
 
-	private String nome;
-
-	private String nomeFantasia;
+	private String codigo;
 
 	private String nomePai;
 
@@ -44,20 +37,6 @@ public class Pessoa extends ModelCosmeDamiao
 
 	/** The sexo. */
 	private Integer sexo;
-
-	private Regime regime;
-
-	/** The enderecos. */
-	private List<Endereco> enderecos;
-
-	/** The documentos. */
-	private List<Documento> documentos;
-
-	/** The emails. */
-	private List<Email> emails;
-
-	/** The Telefones. */
-	private List<Telefone> Telefones;
 
 	private List<BancoPessoa> bancos;
 
@@ -94,22 +73,6 @@ public class Pessoa extends ModelCosmeDamiao
 	public void setId(Integer id)
 	{
 		this.id = id;
-	}
-
-	/**
-	 * @return the nome
-	 */
-	public String getNome()
-	{
-		return nome;
-	}
-
-	/**
-	 * @param nome the nome to set
-	 */
-	public void setNome(String nome)
-	{
-		this.nome = nome;
 	}
 
 	/**
@@ -251,69 +214,6 @@ public class Pessoa extends ModelCosmeDamiao
 		this.sexo = sexo;
 	}
 
-	/**
-	 * @return the enderecos
-	 */
-	public List<Endereco> getEnderecos()
-	{
-		return enderecos;
-	}
-
-	/**
-	 * @param enderecos the enderecos to set
-	 */
-	public void setEnderecos(List<Endereco> enderecos)
-	{
-		this.enderecos = enderecos;
-	}
-
-	/**
-	 * @return the documentos
-	 */
-	public List<Documento> getDocumentos()
-	{
-		return documentos;
-	}
-
-	/**
-	 * @param documentos the documentos to set
-	 */
-	public void setDocumentos(List<Documento> documentos)
-	{
-		this.documentos = documentos;
-	}
-
-	/**
-	 * @return the emails
-	 */
-	public List<Email> getEmails()
-	{
-		return emails;
-	}
-
-	/**
-	 * @param emails the emails to set
-	 */
-	public void setEmails(List<Email> emails)
-	{
-		this.emails = emails;
-	}
-
-	/**
-	 * @return the telefones
-	 */
-	public List<Telefone> getTelefones()
-	{
-		return Telefones;
-	}
-
-	/**
-	 * @param telefones the telefones to set
-	 */
-	public void setTelefones(List<Telefone> telefones)
-	{
-		Telefones = telefones;
-	}
 
 	/**
 	 * @return the bancos
@@ -363,39 +263,25 @@ public class Pessoa extends ModelCosmeDamiao
 		this.condPagList = condPagList;
 	}
 
-	public String getNomeFantasia() {
-		return nomeFantasia;
+
+	public String getCodigo() {
+		return codigo;
 	}
 
-	public void setNomeFantasia(String nomeFantasia) {
-		this.nomeFantasia = nomeFantasia;
-	}
 
-	public Regime getRegime() {
-		return regime;
-	}
-
-	public void setRegime(Regime regime) {
-		this.regime = regime;
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 
 
 	@Override
 	public String toString() {
-		return "Pessoa [getId()=" + getId() + ", getNome()=" + getNome() + ", getNomePai()=" + getNomePai()
-				+ ", getNomeMae()=" + getNomeMae() + ", getNomeConjugue()=" + getNomeConjugue() + ", getEstadoCivil()="
-				+ getEstadoCivil() + ", getDatanasc()=" + getDatanasc() + ", getFoto()=" + getFoto()
-				+ ", getPessoaTipo()=" + getPessoaTipo() + ", getContatoList()=" + getContatoList() + ", getSexo()="
-				+ getSexo() + ", getEnderecos()=" + getEnderecos() + ", getDocumentos()=" + getDocumentos()
-				+ ", getEmails()=" + getEmails() + ", getTelefones()=" + getTelefones() + ", getBancos()=" + getBancos()
-				+ ", getFormaPagamentoList()=" + getFormaPagamentoList() + ", getCondPagList()=" + getCondPagList()
-				+ ", getNomeFantasia()=" + getNomeFantasia() + ", getRegime()=" + getRegime() + ", toString()="
+		return "Pessoa [getId()=" + getId() + ", getNomePai()=" + getNomePai() + ", getNomeMae()=" + getNomeMae()
+				+ ", getNomeConjugue()=" + getNomeConjugue() + ", getEstadoCivil()=" + getEstadoCivil()
+				+ ", getDatanasc()=" + getDatanasc() + ", getFoto()=" + getFoto() + ", getPessoaTipo()="
+				+ getPessoaTipo() + ", getContatoList()=" + getContatoList() + ", getSexo()=" + getSexo()
+				+ ", getBancos()=" + getBancos() + ", getFormaPagamentoList()=" + getFormaPagamentoList()
+				+ ", getCondPagList()=" + getCondPagList() + ", getCodigo()=" + getCodigo() + ", toString()="
 				+ super.toString() + "]";
 	}
-
-
-
-
-
-
 }

@@ -3,7 +3,6 @@ package com.qat.samples.sysmgmt.pessoa.model;
 import java.util.Date;
 import java.util.List;
 
-import com.qat.framework.model.BaseModel.PersistenceActionEnum;
 import com.qat.samples.sysmgmt.convenio.model.ConvenioPessoa;
 import com.qat.samples.sysmgmt.dp.model.Profissao;
 
