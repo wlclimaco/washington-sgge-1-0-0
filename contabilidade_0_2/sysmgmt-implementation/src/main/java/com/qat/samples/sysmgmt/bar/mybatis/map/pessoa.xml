@@ -39,7 +39,6 @@
   </resultMap>
 
   <sql id="allPessoaColumns">
-
 	codigo
 	,nomePai
 	,nomeMae
@@ -48,7 +47,7 @@
 	,datanasc
 	,foto
 	,sexo
-	<include refid="EntidadeMap.allEntidadeColumns" />
+	,<include refid="EntidadeMap.allEntidadeColumns" />
 </sql>
 <sql id="allPessoaValues">
 	#{codigo},

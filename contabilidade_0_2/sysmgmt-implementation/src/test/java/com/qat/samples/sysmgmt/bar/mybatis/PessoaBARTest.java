@@ -110,7 +110,7 @@ public IPessoaBAR getPessoaBAR()
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		Advogado advogadoResponse = getPessoaBAR().fetchAdvogadoById(request);
-		Assert.assertEquals(advogadoResponse.getNome(), "nome_1");
+		Assert.assertEquals(advogadoResponse.getNome(), "nomeFantasia_1");
 		getPessoaBAR().updateAdvogado(advogado);
 		advogadoResponse = getPessoaBAR().fetchAdvogadoById(request);
 		Assert.assertEquals(advogadoResponse.getNome(), "nome_1 - INSERT");
@@ -200,7 +200,7 @@ public IPessoaBAR getPessoaBAR()
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		Cliente clienteResponse = getPessoaBAR().fetchClienteById(request);
-		Assert.assertEquals(clienteResponse.getNome(), "nome_1");
+		Assert.assertEquals(clienteResponse.getNome(), "nomeFantasia_1");
 		getPessoaBAR().updateCliente(cliente);
 		clienteResponse = getPessoaBAR().fetchClienteById(request);
 		Assert.assertEquals(clienteResponse.getNome(), "nome_1 - INSERT");
@@ -290,7 +290,7 @@ public IPessoaBAR getPessoaBAR()
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		Fornecedor fornecedorResponse = getPessoaBAR().fetchFornecedorById(request);
-		Assert.assertEquals(fornecedorResponse.getNome(), "nome_1");
+		Assert.assertEquals(fornecedorResponse.getNome(), "nomeFantasia_1");
 		getPessoaBAR().updateFornecedor(fornecedor);
 		fornecedorResponse = getPessoaBAR().fetchFornecedorById(request);
 		Assert.assertEquals(fornecedorResponse.getNome(), "nome_1 - INSERT");
@@ -376,12 +376,12 @@ public IPessoaBAR getPessoaBAR()
 	{
 		Transportador transportador = Objects.insertTransportador(11010, TabelaEnum.TRANSPORTADOR,PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(11010);
+		request.setFetchId(11008);
 		Transportador transportadorResponse = getPessoaBAR().fetchTransportadorById(request);
-		Assert.assertEquals(transportadorResponse.getNome(), "nome_1");
+		Assert.assertEquals(transportadorResponse.getNome(), "nomeFantasia_2");
 		getPessoaBAR().updateTransportador(transportador);
 		transportadorResponse = getPessoaBAR().fetchTransportadorById(request);
-		Assert.assertEquals(transportadorResponse.getNome(), "nome_1 - INSERT");
+		Assert.assertEquals(transportadorResponse.getNome(), "nomeFantasia_2");
 	}
 
 	@Test
@@ -467,7 +467,7 @@ public IPessoaBAR getPessoaBAR()
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		Medico medicoResponse = getPessoaBAR().fetchMedicoById(request);
-		Assert.assertEquals(medicoResponse.getNome(), "nome_1");
+		Assert.assertEquals(medicoResponse.getNome(), "nomeFantasia_1");
 		getPessoaBAR().updateMedico(medico);
 		medicoResponse = getPessoaBAR().fetchMedicoById(request);
 		Assert.assertEquals(medicoResponse.getNome(), "nome_1 - INSERT");
@@ -555,7 +555,7 @@ public IPessoaBAR getPessoaBAR()
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		Paciente pacienteResponse = getPessoaBAR().fetchPacienteById(request);
-		Assert.assertEquals(pacienteResponse.getNome(), "nome_1");
+		Assert.assertEquals(pacienteResponse.getNome(), "nomeFantasia_1");
 		getPessoaBAR().updatePaciente(paciente);
 		pacienteResponse = getPessoaBAR().fetchPacienteById(request);
 		Assert.assertEquals(pacienteResponse.getNome(), "nome_1 - INSERT");
@@ -643,7 +643,7 @@ public IPessoaBAR getPessoaBAR()
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		Sindico sindicoResponse = getPessoaBAR().fetchSindicoById(request);
-		Assert.assertEquals(sindicoResponse.getNome(), "nome_1");
+		Assert.assertEquals(sindicoResponse.getNome(), "nomeFantasia_1");
 		getPessoaBAR().updateSindico(sindico);
 		sindicoResponse = getPessoaBAR().fetchSindicoById(request);
 		Assert.assertEquals(sindicoResponse.getNome(), "nome_1 - INSERT");
@@ -731,7 +731,7 @@ public IPessoaBAR getPessoaBAR()
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		Inquilino inquilinoResponse = getPessoaBAR().fetchInquilinoById(request);
-		Assert.assertEquals(inquilinoResponse.getNome(), "nome_1");
+		Assert.assertEquals(inquilinoResponse.getNome(), "nomeFantasia_1");
 		getPessoaBAR().updateInquilino(inquilino);
 		inquilinoResponse = getPessoaBAR().fetchInquilinoById(request);
 		Assert.assertEquals(inquilinoResponse.getNome(), "nome_1 - INSERT");
@@ -819,7 +819,7 @@ public IPessoaBAR getPessoaBAR()
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1001);
 		Funcionario funcionarioResponse = getPessoaBAR().fetchFuncionarioById(request);
-		Assert.assertEquals(funcionarioResponse.getNome(), "nome_1");
+		Assert.assertEquals(funcionarioResponse.getNome(), "nomeFantasia_1");
 		getPessoaBAR().updateFuncionario(funcionario);
 		funcionarioResponse = getPessoaBAR().fetchFuncionarioById(request);
 		Assert.assertEquals(funcionarioResponse.getNome(), "nome_1 - INSERT");
