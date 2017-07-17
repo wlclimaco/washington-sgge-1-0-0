@@ -67,7 +67,9 @@ nome
 ,statusEmpresa
 ,dtAbertura
 ,responsavel
+,cpfResponsavel
 ,tipo
+,tipoPessoa
 ,primeiroAcesso
 ,planosServicos
 ,regime
@@ -90,14 +92,16 @@ nome
 #{statusEmpresa},
 #{dtAbertura},
 #{responsavel},
-#{primeiroAcesso},
+#{cpfResponsavel},
 #{tipo},
-#{regime.id},
+#{tipoPessoa},
+#{primeiroAcesso},
 #{planosServicos.id},
+#{regime.id},
 #{createDateUTC},
-#{createUser},
-#{modifyDateUTC},
-#{modifyUser},
+	#{createUser},
+	#{modifyDateUTC},
+	#{modifyUser},
 #{configuracao.id}
 
   </sql>
