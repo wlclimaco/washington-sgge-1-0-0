@@ -14,6 +14,8 @@
 		a query, and the class properties. A result map isnt necessary if the columns
 		(or aliases) match to the properties exactly. -->
 	<resultMap id="clienteResult" type="Cliente" extends="PessoaMap.PessoaResult">
+		<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByCliente"/>
+		<collection property="notes" column="id" select="NoteMap.fetchNoteByClientes"/>
 	</resultMap>
 
 	<sql id="allClienteColumns">
@@ -39,10 +41,11 @@
 		resultMap="clienteResult">
 
 		select p.* from pessoa p left join pessoatipo t  on(p.id = t.parentid) where t.pessoatypeenum = 1
+		<if test="permissaoTypeEnumValue != null">
 		<if test="permissaoTypeEnumValue == 1">
-			and pessoa.id IS NOT NULL
+			and p.id IS NOT NULL
 		</if>
-		<if test="permissaoTypeEnumValue != 1">
+		<if test="permissaoTypeEnumValue != 1 and permissaoTypeEnumValue != 2 and permissaoTypeEnumValue != 3 ">
 			<if test="emprId == null">
 				<if test="emprIds != null"> and p.emprId in
 
@@ -53,7 +56,19 @@
 
 				</if>
 			</if>
-			<if test="emprId != null"> and p.emprId = #{emprId}</if>
+			<if test="emprId != null"> and p.emprId = #{emprId}
+				<if test="emprIds != null"> and p.emprId in
+
+				<foreach item="item" index="index" collection="emprIds"
+		             open="(" separator="," close=")">
+		        #{item}
+		    	</foreach>
+
+				</if>
+			</if>
+		</if>
+			<if test="permissaoTypeEnumValue != 1 and permissaoTypeEnumValue != 4 and permissaoTypeEnumValue != 3 "> and e.parceiroId = #{parceiroId}</if>
+			<if test="permissaoTypeEnumValue != 1 and permissaoTypeEnumValue != 4 and permissaoTypeEnumValue != 2 "> and e.contabilidadeId = #{contabilidadeId}</if>
 		</if>
 		<if test="id != null and id > 0"> and p.id = #{id}</if>
 		ORDER BY p.nome ASC

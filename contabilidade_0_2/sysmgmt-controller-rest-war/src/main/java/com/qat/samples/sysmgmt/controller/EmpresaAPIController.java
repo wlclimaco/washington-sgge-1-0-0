@@ -158,6 +158,20 @@ public class EmpresaAPIController extends BaseController {
 		return empresaResponse;
 	}
 
+	@RequestMapping(value = "/empresa/fetchUser", method = RequestMethod.POST)
+	@ResponseBody
+	public EmpresaResponse fetchEmpresaUser(@RequestBody EmpresaInquiryRequest request) {
+		EmpresaResponse empresaResponse = new EmpresaResponse();
+		try {
+			InternalResultsResponse<Empresa> internalResponse = getEmpresaBAC().fetchAllEmpresasByUser(request);
+			ResponseHandler.handleOperationStatusAndMessages(empresaResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, empresaResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return empresaResponse;
+	}
+
 	/**
 	 * Fetch empresa paged.
 	 *

@@ -955,4 +955,7 @@ notem note the note
 */
 	public InternalResultsResponse<Status> fetchStatussByRequest(PagedInquiryRequest request);
 
+
+	InternalResultsResponse<Empresa> fetchAllEmpresasByUser(EmpresaInquiryRequest request);
+
 }

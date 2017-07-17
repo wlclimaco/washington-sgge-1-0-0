@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.qat.framework.model.SortExpression.Direction;
 import com.qat.framework.model.request.InquiryRequest;
+import com.qat.samples.sysmgmt.util.model.PermissaoTypeEnum;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -15,7 +16,7 @@ public class PagedInquiryRequest extends InquiryRequest {
 	private Integer emprId;
 
 	/** The permissao type enum value. */
-	private Integer permissaoTypeEnumValue;
+	private PermissaoTypeEnum permissaoTypeEnum;
 
 	/** The empr ids. */
 	private List<Integer> emprIds;
@@ -49,6 +50,21 @@ public class PagedInquiryRequest extends InquiryRequest {
 
 	/** The direction. */
 	private Direction direction1 = Direction.Ascending;
+
+
+	public Integer getPermissaoTypeEnumValue()
+	{
+		if (permissaoTypeEnum != null)
+		{
+			return permissaoTypeEnum.getValue();
+		}
+		return null;
+	}
+
+	public void setPermissaoTypeEnumValue(Integer acaoTypeValue)
+	{
+		permissaoTypeEnum = PermissaoTypeEnum.enumForValue(acaoTypeValue);
+	}
 
 	/**
 	 * Gets the string value for the direction for use in SQL.
@@ -126,22 +142,13 @@ public class PagedInquiryRequest extends InquiryRequest {
 		this.emprId = emprId;
 	}
 
-	/**
-	 * Gets the permissao type enum value.
-	 *
-	 * @return the permissao type enum value
-	 */
-	public Integer getPermissaoTypeEnumValue() {
-		return permissaoTypeEnumValue;
+
+	public PermissaoTypeEnum getPermissaoTypeEnum() {
+		return permissaoTypeEnum;
 	}
 
-	/**
-	 * Sets the permissao type enum value.
-	 *
-	 * @param permissaoTypeEnumValue the new permissao type enum value
-	 */
-	public void setPermissaoTypeEnumValue(Integer permissaoTypeEnumValue) {
-		this.permissaoTypeEnumValue = permissaoTypeEnumValue;
+	public void setPermissaoTypeEnum(PermissaoTypeEnum permissaoTypeEnum) {
+		this.permissaoTypeEnum = permissaoTypeEnum;
 	}
 
 	/**
@@ -306,18 +313,17 @@ public class PagedInquiryRequest extends InquiryRequest {
 		this.buscaType = buscaType;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
-		return "PagedInquiryRequest [getDirection1Value()=" + getDirection1Value() + ", getDirection1()="
-				+ getDirection1() + ", getColumnName1()=" + getColumnName1() + ", getEmprId()=" + getEmprId()
-				+ ", getPermissaoTypeEnumValue()=" + getPermissaoTypeEnumValue() + ", getEmprIds()=" + getEmprIds()
+		return "PagedInquiryRequest [getPermissaoTypeEnumValue()=" + getPermissaoTypeEnumValue()
+				+ ", getDirection1Value()=" + getDirection1Value() + ", getDirection1()=" + getDirection1()
+				+ ", getColumnName1()=" + getColumnName1() + ", getEmprId()=" + getEmprId()
+				+ ", getPermissaoTypeEnum()=" + getPermissaoTypeEnum() + ", getEmprIds()=" + getEmprIds()
 				+ ", getParentId()=" + getParentId() + ", getId()=" + getId() + ", getString()=" + getString()
 				+ ", getUserId()=" + getUserId() + ", getSelect()=" + getSelect() + ", getBuscaTable()="
 				+ getBuscaTable() + ", getBuscaValue()=" + getBuscaValue() + ", getBuscaType()=" + getBuscaType()
 				+ ", toString()=" + super.toString() + "]";
 	}
+
 
 }

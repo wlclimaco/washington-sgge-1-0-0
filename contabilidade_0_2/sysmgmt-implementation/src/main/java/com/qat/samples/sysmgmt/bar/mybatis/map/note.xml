@@ -64,6 +64,12 @@ parentId
    FROM notes WHERE parentId = #{fetchid} and tabelaEnumValue in (1,51,52,61,62,63)
  </select>
 
+ <select id="fetchNoteByClientes" parameterType="Integer" resultMap="NoteResult">
+    SELECT id,
+	<include refid="allNoteColumns" />
+   FROM notes WHERE parentId = #{fetchid} and tabelaEnumValue = 17 order by id DESC
+ </select>
+
  <select id="fetchAllNotesRequest" parameterType="PagedInquiryRequest" resultMap="NoteResult">
 
 		SELECT id,<include refid="allNoteColumns" />

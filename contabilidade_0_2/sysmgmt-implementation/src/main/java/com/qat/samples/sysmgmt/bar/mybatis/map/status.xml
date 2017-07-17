@@ -72,6 +72,12 @@
    FROM status WHERE parentId = #{fetchid} and tabelaEnumValue in (1,51,52,61,62,63)
  </select>
 
+   <select id="fetchAllStatusByCliente" parameterType="Integer" resultMap="StatusResult">
+    SELECT id,
+	<include refid="allStatusColumns" />
+   FROM status WHERE parentId = #{fetchid} and tabelaEnumValue = 17 order by id
+ </select>
+
 <select id="fetchAllStatusByTable" parameterType="Integer" resultMap="StatusResult">
     SELECT id,
 	<include refid="allStatusColumns" />

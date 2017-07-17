@@ -257,6 +257,14 @@ public InternalResultsResponse<Empresa> fetchEmpresasByRequest(EmpresaInquiryReq
 	return getEmpresaBAR().fetchEmpresasByRequest(request);
 }
 
+
+
+@Override
+public InternalResultsResponse<Empresa> fetchAllEmpresasByUser(EmpresaInquiryRequest request)
+{
+	return getEmpresaBAR().fetchAllEmpresasByUser(request);
+}
+
 /**
  * Process.
  *

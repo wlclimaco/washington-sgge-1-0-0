@@ -1103,4 +1103,7 @@ public interface IEmpresaBAC
 		public InternalResultsResponse<Message> deleteMessage(MessageMaintenanceRequest request);
 
 		public InternalResultsResponse<Message> fetchMessagesByRequest(MessageInquiryRequest request);
+
+
+		InternalResultsResponse<Empresa> fetchAllEmpresasByUser(EmpresaInquiryRequest request);
 }
