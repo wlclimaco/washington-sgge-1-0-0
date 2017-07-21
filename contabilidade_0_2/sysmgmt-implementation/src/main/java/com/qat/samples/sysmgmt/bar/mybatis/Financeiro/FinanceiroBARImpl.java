@@ -26,7 +26,7 @@ import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
 import com.qat.samples.sysmgmt.bar.Telefone.ITelefoneBAR;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.BaixaTituloBARD;
-import com.qat.samples.sysmgmt.bar.mybatis.delegate.ContaCorrenteBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.ContasBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.EmailBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.EnderecoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.InsertHistBARD;
@@ -2154,7 +2154,7 @@ public class FinanceiroBARImpl extends SqlSessionDaoSupport implements IFinancei
 
 		insertPessoa(caixa, response, TabelaEnum.AGENCIA, historicoId);
 		if (!ValidationUtil.isNullOrEmpty(caixa.getNumeroConta())) {
-			ContaCorrenteBARD.maintainContaCorrenteAssociationsA(caixa.getNumeroConta(), response, caixa.getId(),
+			ContasBARD.maintainContaAssociationsA(caixa.getNumeroConta(), response, caixa.getId(),
 					TypeEnum.HIGH, AcaoTypeEnum.INSERT, TabelaEnum.AGENCIA, getFinanceiroBAR(), statusBAR, historicoBAR,
 					caixa.getEmprId(), caixa.getUserId(), historicoId, historicoId);
 		}

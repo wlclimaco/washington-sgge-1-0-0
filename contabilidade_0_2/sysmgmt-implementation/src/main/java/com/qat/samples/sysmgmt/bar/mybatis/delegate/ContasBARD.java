@@ -5,15 +5,19 @@ import java.util.List;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
+import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.bar.Financeiro.IFinanceiroBAR;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
+import com.qat.samples.sysmgmt.conta.model.Conta;
 import com.qat.samples.sysmgmt.financeiro.model.ContasPagar;
 import com.qat.samples.sysmgmt.financeiro.model.ContasReceber;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
+import com.qat.samples.sysmgmt.util.model.AcaoTypeEnum;
 import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
+import com.qat.samples.sysmgmt.util.model.Email;
 import com.qat.samples.sysmgmt.util.model.Status;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.TypeEnum;
@@ -167,5 +171,49 @@ public final class ContasBARD extends SqlSessionDaoSupport
 		}
 
 		return count;
+	}
+
+
+
+	public static Integer maintainContaAssociationsA(List<Conta> contaList, InternalResponse response, Integer id,
+			TypeEnum high, AcaoTypeEnum insert, TabelaEnum agencia, IFinanceiroBAR financeiroBAR, IStatusBAR statusBAR,
+			IHistoricoBAR historicoBAR, Integer emprId, String userId, Integer historicoId, Integer historicoId2) {
+		Boolean count = false;
+		// First Maintain Empresa
+		if (ValidationUtil.isNullOrEmpty(contaList))
+		{
+			return 0;
+		}
+		// For Each Contact...
+		for (Conta email : contaList)
+		{
+			// Make sure we set the parent key
+			email.setParentId(id);
+			email.setTabelaEnum(agencia);
+			email.setProcessId(historicoId);
+
+			if (ValidationUtil.isNull(email.getModelAction()))
+			{
+				continue;
+			}
+			switch (email.getModelAction())
+			{
+				case INSERT:
+					count = financeiroBAR.insertConta(email).hasSystemError();
+
+					break;
+				case UPDATE:
+					count = financeiroBAR.updateConta(email).hasSystemError();
+
+					break;
+				case DELETE:
+					count = financeiroBAR.deleteContaById(email).hasSystemError();
+
+					break;
+			}
+		}
+
+		return 1;
+
 	}
 }

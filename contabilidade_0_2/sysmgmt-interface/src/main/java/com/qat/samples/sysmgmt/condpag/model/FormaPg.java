@@ -21,9 +21,9 @@ public class FormaPg extends ModelCosmeDamiao
 
 	private Integer diasPg;
 
-	private Integer parcelamentoMax;
+	private DoisValores parcelamentoMax;
 
-	private Integer parcelamentoSemJuros;
+	private DoisValores parcelamentoSemJuros;
 
 	private Double juros;
 
@@ -35,9 +35,9 @@ public class FormaPg extends ModelCosmeDamiao
 
 	private DoisValores tipoDoc;
 
-	private Integer qntIntervalo;
+	private DoisValores qntIntervalo;
 
-	private Integer intervalo;
+	private DoisValores intervalo;
 
 	/** The entrada. */
 	private Integer entrada;
@@ -51,19 +51,19 @@ public class FormaPg extends ModelCosmeDamiao
 		this.observacao = observacao;
 	}
 
-	public Integer getParcelamentoMax() {
+	public DoisValores getParcelamentoMax() {
 		return parcelamentoMax;
 	}
 
-	public void setParcelamentoMax(Integer parcelamentoMax) {
+	public void setParcelamentoMax(DoisValores parcelamentoMax) {
 		this.parcelamentoMax = parcelamentoMax;
 	}
 
-	public Integer getParcelamentoSemJuros() {
+	public DoisValores getParcelamentoSemJuros() {
 		return parcelamentoSemJuros;
 	}
 
-	public void setParcelamentoSemJuros(Integer parcelamentoSemJuros) {
+	public void setParcelamentoSemJuros(DoisValores parcelamentoSemJuros) {
 		this.parcelamentoSemJuros = parcelamentoSemJuros;
 	}
 
@@ -107,19 +107,19 @@ public class FormaPg extends ModelCosmeDamiao
 		this.tipoDoc = tipoDoc;
 	}
 
-	public Integer getQntIntervalo() {
+	public DoisValores getQntIntervalo() {
 		return qntIntervalo;
 	}
 
-	public void setQntIntervalo(Integer qntIntervalo) {
+	public void setQntIntervalo(DoisValores qntIntervalo) {
 		this.qntIntervalo = qntIntervalo;
 	}
 
-	public Integer getIntervalo() {
+	public DoisValores getIntervalo() {
 		return intervalo;
 	}
 
-	public void setIntervalo(Integer intervalo) {
+	public void setIntervalo(DoisValores intervalo) {
 		this.intervalo = intervalo;
 	}
 

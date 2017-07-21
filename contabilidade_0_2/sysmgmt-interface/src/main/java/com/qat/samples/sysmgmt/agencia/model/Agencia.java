@@ -3,7 +3,7 @@ package com.qat.samples.sysmgmt.agencia.model;
 import java.util.List;
 
 import com.qat.samples.sysmgmt.banco.model.Banco;
-import com.qat.samples.sysmgmt.conta.model.ContaCorrente;
+import com.qat.samples.sysmgmt.conta.model.Conta;
 import com.qat.samples.sysmgmt.util.model.Email;
 import com.qat.samples.sysmgmt.util.model.Endereco;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
@@ -22,25 +22,39 @@ public class Agencia extends ModelCosmeDamiao
 	/** The type of an account. */
 	private String nome;
 
+	/** The enderecos. */
 	private List<Endereco> enderecos;
+
+	/** The emails. */
 	private List<Email> emails;
+
+	/** The telefones. */
 	private List<Telefone> telefones;
 
 
+	/** The gerente. */
 	private String gerente;
 
+	/** The responsavel conta. */
 	private String responsavelConta;
 
-	private List<ContaCorrente> numeroConta;
-	
+	/** The numero conta. */
+	private List<Conta> numeroConta;
+
+	/** The banco. */
 	private Banco banco;
 
+	/**
+	 * Instantiates a new agencia.
+	 */
 	public Agencia()
 	{
 
 	}
 
 	/**
+	 * Gets the id.
+	 *
 	 * @return the id
 	 */
 	public Integer getId()
@@ -49,6 +63,8 @@ public class Agencia extends ModelCosmeDamiao
 	}
 
 	/**
+	 * Sets the id.
+	 *
 	 * @param id the id to set
 	 */
 	public void setId(Integer id)
@@ -57,6 +73,8 @@ public class Agencia extends ModelCosmeDamiao
 	}
 
 	/**
+	 * Gets the nome.
+	 *
 	 * @return the nome
 	 */
 	public String getNome()
@@ -65,6 +83,8 @@ public class Agencia extends ModelCosmeDamiao
 	}
 
 	/**
+	 * Sets the nome.
+	 *
 	 * @param nome the nome to set
 	 */
 	public void setNome(String nome)
@@ -73,6 +93,8 @@ public class Agencia extends ModelCosmeDamiao
 	}
 
 	/**
+	 * Gets the enderecos.
+	 *
 	 * @return the enderecos
 	 */
 	public List<Endereco> getEnderecos()
@@ -81,6 +103,8 @@ public class Agencia extends ModelCosmeDamiao
 	}
 
 	/**
+	 * Sets the enderecos.
+	 *
 	 * @param enderecos the enderecos to set
 	 */
 	public void setEnderecos(List<Endereco> enderecos)
@@ -89,6 +113,8 @@ public class Agencia extends ModelCosmeDamiao
 	}
 
 	/**
+	 * Gets the emails.
+	 *
 	 * @return the emails
 	 */
 	public List<Email> getEmails()
@@ -97,6 +123,8 @@ public class Agencia extends ModelCosmeDamiao
 	}
 
 	/**
+	 * Sets the emails.
+	 *
 	 * @param emails the emails to set
 	 */
 	public void setEmails(List<Email> emails)
@@ -105,6 +133,8 @@ public class Agencia extends ModelCosmeDamiao
 	}
 
 	/**
+	 * Gets the telefones.
+	 *
 	 * @return the telefones
 	 */
 	public List<Telefone> getTelefones()
@@ -113,6 +143,8 @@ public class Agencia extends ModelCosmeDamiao
 	}
 
 	/**
+	 * Sets the telefones.
+	 *
 	 * @param telefones the telefones to set
 	 */
 	public void setTelefones(List<Telefone> telefones)
@@ -121,6 +153,8 @@ public class Agencia extends ModelCosmeDamiao
 	}
 
 	/**
+	 * Gets the gerente.
+	 *
 	 * @return the gerente
 	 */
 	public String getGerente()
@@ -129,6 +163,8 @@ public class Agencia extends ModelCosmeDamiao
 	}
 
 	/**
+	 * Sets the gerente.
+	 *
 	 * @param gerente the gerente to set
 	 */
 	public void setGerente(String gerente)
@@ -137,6 +173,8 @@ public class Agencia extends ModelCosmeDamiao
 	}
 
 	/**
+	 * Gets the responsavel conta.
+	 *
 	 * @return the responsavelConta
 	 */
 	public String getResponsavelConta()
@@ -145,6 +183,8 @@ public class Agencia extends ModelCosmeDamiao
 	}
 
 	/**
+	 * Sets the responsavel conta.
+	 *
 	 * @param responsavelConta the responsavelConta to set
 	 */
 	public void setResponsavelConta(String responsavelConta)
@@ -153,29 +193,46 @@ public class Agencia extends ModelCosmeDamiao
 	}
 
 	/**
+	 * Gets the numero conta.
+	 *
 	 * @return the numeroConta
 	 */
-	public List<ContaCorrente> getNumeroConta()
+	public List<Conta> getNumeroConta()
 	{
 		return numeroConta;
 	}
 
 	/**
+	 * Sets the numero conta.
+	 *
 	 * @param numeroConta the numeroConta to set
 	 */
-	public void setNumeroConta(List<ContaCorrente> numeroConta)
+	public void setNumeroConta(List<Conta> numeroConta)
 	{
 		this.numeroConta = numeroConta;
 	}
 
+	/**
+	 * Gets the banco.
+	 *
+	 * @return the banco
+	 */
 	public Banco getBanco() {
 		return banco;
 	}
 
+	/**
+	 * Sets the banco.
+	 *
+	 * @param banco the new banco
+	 */
 	public void setBanco(Banco banco) {
 		this.banco = banco;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Agencia [getId()=" + getId() + ", getNome()=" + getNome() + ", getEnderecos()=" + getEnderecos()

@@ -83,6 +83,12 @@
 		FROM conta ORDER BY id ASC
 	</select>
 
+	<select id="fetchContaByAgencia" parameterType="Integer"  resultMap="ContaResult">
+		SELECT id,
+		<include refid="allContaColumns" />
+		FROM conta WHERE parentId = #{id}
+	</select>
+
 	<select id="fetchBaixaDetalheById" parameterType="Integer"
 		resultMap="BaixaDetalheResult">
 		select c.id, c.descricao,c.datavencimento,c.docid,c.valor as

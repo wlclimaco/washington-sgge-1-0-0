@@ -35,7 +35,7 @@
 		<collection property="telefones" column="id"
 			select="TelefoneMap.fetchTelefoneByAgencia" />
 		<collection property="numeroConta" column="id"
-			select="ContaCorrenteMap.fetchContaCorrenteByAgencia" />
+			select="ContaMap.fetchContaByAgencia" />
 	</resultMap>
 
 	<sql id="allAgenciaColumns">

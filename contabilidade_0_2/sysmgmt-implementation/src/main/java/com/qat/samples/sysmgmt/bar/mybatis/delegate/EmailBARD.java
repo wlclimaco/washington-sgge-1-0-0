@@ -1,6 +1,5 @@
 package com.qat.samples.sysmgmt.bar.mybatis.delegate;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.support.SqlSessionDaoSupport;
@@ -11,9 +10,7 @@ import com.qat.samples.sysmgmt.bar.Email.IEmailBAR;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
-import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
 import com.qat.samples.sysmgmt.util.model.Email;
-import com.qat.samples.sysmgmt.util.model.Status;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.TypeEnum;
 
@@ -23,9 +20,6 @@ import com.qat.samples.sysmgmt.util.model.TypeEnum;
  */
 public final class EmailBARD extends SqlSessionDaoSupport
 {
-
-	/** The Constant ZERO. */
-	private static final Integer ZERO = 0;
 
 	/**
 	 * Fetch objects by request.
@@ -64,39 +58,15 @@ public final class EmailBARD extends SqlSessionDaoSupport
 			{
 				case INSERT:
 					count = emailDAC.insertEmail(email).hasSystemError();
-					if (count == false)
-					{
-						Status status = new Status();
-						status.setStatus(CdStatusTypeEnum.ATIVO);
-						List<Status> statusList = new ArrayList<Status>();
-						statusList.add(status);
-						count =
-								StatusBARD.maintainStatusAssociations(statusList, response, parentId, null,
-										AcaoEnum.INSERT, UserId, empId, TabelaEnum.EMAIL, statusDAC, historicoDAC,
-										processId, historicoId);
-					}
+
 					break;
 				case UPDATE:
 					count = emailDAC.updateEmail(email).hasSystemError();
-					if (count == false)
-					{
-						count =
-								StatusBARD.maintainStatusAssociations(email.getStatusList(), response, email.getId(),
-										null,
-										AcaoEnum.UPDATE, UserId, empId, TabelaEnum.EMAIL, statusDAC, historicoDAC,
-										processId, historicoId);
-					}
+
 					break;
 				case DELETE:
 					count = emailDAC.deleteEmailById(email).hasSystemError();
-					Status status = new Status();
-					status.setStatus(CdStatusTypeEnum.DELETADO);
-					List<Status> statusList = new ArrayList<Status>();
-					statusList.add(status);
-					count =
-							StatusBARD.maintainStatusAssociations(statusList, response, email.getId(), null,
-									AcaoEnum.DELETE, UserId, empId, TabelaEnum.EMAIL, statusDAC, historicoDAC,
-									processId, historicoId);
+
 
 					break;
 			}
