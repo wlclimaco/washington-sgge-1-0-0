@@ -69,7 +69,7 @@
 		#{numeroConta},
 		#{observacao},
 		#{tipoConta.id},
-		#{parentId}
+		#{parentId},
 		#{emprId},
 		#{processId},
 		#{createDateUTC},
