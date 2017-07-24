@@ -53,6 +53,7 @@
 		,numeroConta
 		,observacao
 		,tipoConta
+		,parentId
 		,emprId
 		,processId
 		,create_date
@@ -68,6 +69,7 @@
 		#{numeroConta},
 		#{observacao},
 		#{tipoConta.id},
+		#{parentId}
 		#{emprId},
 		#{processId},
 		#{createDateUTC},
