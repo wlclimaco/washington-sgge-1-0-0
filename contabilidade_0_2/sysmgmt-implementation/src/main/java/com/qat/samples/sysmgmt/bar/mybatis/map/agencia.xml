@@ -19,6 +19,7 @@
 		<result property="nome" column="nome" />
 		<result property="gerente" column="gerente" />
 		<result property="responsavelConta" column="responsavelConta" />
+		<result property="observacao" column="observacao" />
 		<result property="parentId" column="parentId" />
 		<result property="emprId" column="emprId" />
 		<result property="processId" column="processId" />
@@ -42,6 +43,7 @@
 		nome
 		,gerente
 		,responsavelConta
+		,observacao
 		,parentId
 		,banco
 		,emprId
@@ -56,6 +58,7 @@
 		#{nome},
 		#{gerente},
 		#{responsavelConta},
+		#{observacao},
 		#{parentId},
 		#{banco.id},
 		#{emprId},
@@ -144,6 +147,7 @@
 	<update id="updateAgencia" parameterType="Agencia">
 		UPDATE agencia SET
 		<if test="nome!= null"> nome=#{nome},</if>
+		<if test="observacao!= null"> observacao=#{observacao},</if>
 		<if test="gerente!= null"> gerente=#{gerente},</if>
 		<if test="responsavelConta!= null"> responsavelConta=#{responsavelConta},</if>
 		<if test="banco.id!= null"> banco=#{banco.id},</if>

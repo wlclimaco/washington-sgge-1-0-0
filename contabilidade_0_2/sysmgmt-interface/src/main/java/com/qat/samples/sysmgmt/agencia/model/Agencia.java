@@ -10,12 +10,11 @@ import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 import com.qat.samples.sysmgmt.util.model.Telefone;
 
 /**
- * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
- * setting.
+ * This class is a representation of an Account (i.e Checking, Savings, etc.).
+ * This represents an account for a transfer setting.
  */
 @SuppressWarnings("serial")
-public class Agencia extends ModelCosmeDamiao
-{
+public class Agencia extends ModelCosmeDamiao {
 	/** The SendSolv id for the account. */
 	private Integer id;
 
@@ -31,7 +30,6 @@ public class Agencia extends ModelCosmeDamiao
 	/** The telefones. */
 	private List<Telefone> telefones;
 
-
 	/** The gerente. */
 	private String gerente;
 
@@ -44,11 +42,13 @@ public class Agencia extends ModelCosmeDamiao
 	/** The banco. */
 	private Banco banco;
 
+	/** The gerente. */
+	private String observacao;
+
 	/**
 	 * Instantiates a new agencia.
 	 */
-	public Agencia()
-	{
+	public Agencia() {
 
 	}
 
@@ -57,18 +57,17 @@ public class Agencia extends ModelCosmeDamiao
 	 *
 	 * @return the id
 	 */
-	public Integer getId()
-	{
+	public Integer getId() {
 		return id;
 	}
 
 	/**
 	 * Sets the id.
 	 *
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
-	public void setId(Integer id)
-	{
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -77,18 +76,17 @@ public class Agencia extends ModelCosmeDamiao
 	 *
 	 * @return the nome
 	 */
-	public String getNome()
-	{
+	public String getNome() {
 		return nome;
 	}
 
 	/**
 	 * Sets the nome.
 	 *
-	 * @param nome the nome to set
+	 * @param nome
+	 *            the nome to set
 	 */
-	public void setNome(String nome)
-	{
+	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
@@ -97,18 +95,17 @@ public class Agencia extends ModelCosmeDamiao
 	 *
 	 * @return the enderecos
 	 */
-	public List<Endereco> getEnderecos()
-	{
+	public List<Endereco> getEnderecos() {
 		return enderecos;
 	}
 
 	/**
 	 * Sets the enderecos.
 	 *
-	 * @param enderecos the enderecos to set
+	 * @param enderecos
+	 *            the enderecos to set
 	 */
-	public void setEnderecos(List<Endereco> enderecos)
-	{
+	public void setEnderecos(List<Endereco> enderecos) {
 		this.enderecos = enderecos;
 	}
 
@@ -117,18 +114,17 @@ public class Agencia extends ModelCosmeDamiao
 	 *
 	 * @return the emails
 	 */
-	public List<Email> getEmails()
-	{
+	public List<Email> getEmails() {
 		return emails;
 	}
 
 	/**
 	 * Sets the emails.
 	 *
-	 * @param emails the emails to set
+	 * @param emails
+	 *            the emails to set
 	 */
-	public void setEmails(List<Email> emails)
-	{
+	public void setEmails(List<Email> emails) {
 		this.emails = emails;
 	}
 
@@ -137,18 +133,17 @@ public class Agencia extends ModelCosmeDamiao
 	 *
 	 * @return the telefones
 	 */
-	public List<Telefone> getTelefones()
-	{
+	public List<Telefone> getTelefones() {
 		return telefones;
 	}
 
 	/**
 	 * Sets the telefones.
 	 *
-	 * @param telefones the telefones to set
+	 * @param telefones
+	 *            the telefones to set
 	 */
-	public void setTelefones(List<Telefone> telefones)
-	{
+	public void setTelefones(List<Telefone> telefones) {
 		this.telefones = telefones;
 	}
 
@@ -157,18 +152,17 @@ public class Agencia extends ModelCosmeDamiao
 	 *
 	 * @return the gerente
 	 */
-	public String getGerente()
-	{
+	public String getGerente() {
 		return gerente;
 	}
 
 	/**
 	 * Sets the gerente.
 	 *
-	 * @param gerente the gerente to set
+	 * @param gerente
+	 *            the gerente to set
 	 */
-	public void setGerente(String gerente)
-	{
+	public void setGerente(String gerente) {
 		this.gerente = gerente;
 	}
 
@@ -177,18 +171,17 @@ public class Agencia extends ModelCosmeDamiao
 	 *
 	 * @return the responsavelConta
 	 */
-	public String getResponsavelConta()
-	{
+	public String getResponsavelConta() {
 		return responsavelConta;
 	}
 
 	/**
 	 * Sets the responsavel conta.
 	 *
-	 * @param responsavelConta the responsavelConta to set
+	 * @param responsavelConta
+	 *            the responsavelConta to set
 	 */
-	public void setResponsavelConta(String responsavelConta)
-	{
+	public void setResponsavelConta(String responsavelConta) {
 		this.responsavelConta = responsavelConta;
 	}
 
@@ -197,18 +190,17 @@ public class Agencia extends ModelCosmeDamiao
 	 *
 	 * @return the numeroConta
 	 */
-	public List<Conta> getNumeroConta()
-	{
+	public List<Conta> getNumeroConta() {
 		return numeroConta;
 	}
 
 	/**
 	 * Sets the numero conta.
 	 *
-	 * @param numeroConta the numeroConta to set
+	 * @param numeroConta
+	 *            the numeroConta to set
 	 */
-	public void setNumeroConta(List<Conta> numeroConta)
-	{
+	public void setNumeroConta(List<Conta> numeroConta) {
 		this.numeroConta = numeroConta;
 	}
 
@@ -224,13 +216,35 @@ public class Agencia extends ModelCosmeDamiao
 	/**
 	 * Sets the banco.
 	 *
-	 * @param banco the new banco
+	 * @param banco
+	 *            the new banco
 	 */
 	public void setBanco(Banco banco) {
 		this.banco = banco;
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * Gets the observacao.
+	 *
+	 * @return the observacao
+	 */
+	public String getObservacao() {
+		return observacao;
+	}
+
+	/**
+	 * Sets the observacao.
+	 *
+	 * @param observacao
+	 *            the new observacao
+	 */
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao#toString()
 	 */
 	@Override
@@ -238,7 +252,8 @@ public class Agencia extends ModelCosmeDamiao
 		return "Agencia [getId()=" + getId() + ", getNome()=" + getNome() + ", getEnderecos()=" + getEnderecos()
 				+ ", getEmails()=" + getEmails() + ", getTelefones()=" + getTelefones() + ", getGerente()="
 				+ getGerente() + ", getResponsavelConta()=" + getResponsavelConta() + ", getNumeroConta()="
-				+ getNumeroConta() + ", getBanco()=" + getBanco() + ", toString()=" + super.toString() + "]";
+				+ getNumeroConta() + ", getBanco()=" + getBanco() + ", getObservacao()=" + getObservacao()
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 }
