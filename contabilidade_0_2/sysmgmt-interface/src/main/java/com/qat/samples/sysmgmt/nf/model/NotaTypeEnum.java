@@ -20,7 +20,9 @@ public enum NotaTypeEnum implements IIntegerEnum, II18nEnum
 
 	ORCAMENTO(5, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown"),
 
-	PEDIDOCOMPRAS(6, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown");
+	PEDIDOVENDAS(6, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown"),
+
+	PEDIDOCOMPRAS(7, "com.prosperitasglobal.sendsolv.model.payrolltype.unknown");
 
 	/** The code. */
 	private Integer code;
@@ -30,7 +32,7 @@ public enum NotaTypeEnum implements IIntegerEnum, II18nEnum
 
 	/**
 	 * The Constructor.
-	 * 
+	 *
 	 * @param value the value
 	 * @param labelKeyParam the label key param
 	 */
@@ -42,7 +44,7 @@ public enum NotaTypeEnum implements IIntegerEnum, II18nEnum
 
 	/**
 	 * Gets the value.
-	 * 
+	 *
 	 * @return the value
 	 */
 	@Override
@@ -53,7 +55,7 @@ public enum NotaTypeEnum implements IIntegerEnum, II18nEnum
 
 	/**
 	 * Enum for value.
-	 * 
+	 *
 	 * @param value the value
 	 * @return the process status enum
 	 */
@@ -72,7 +74,7 @@ public enum NotaTypeEnum implements IIntegerEnum, II18nEnum
 
 	/**
 	 * Gets the valid values.
-	 * 
+	 *
 	 * @return the valid values
 	 */
 	public static String getValidValues()

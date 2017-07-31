@@ -2,6 +2,8 @@
 package com.qat.samples.sysmgmt.nfe.model;
 
 
+import java.util.List;
+
 import com.qat.samples.sysmgmt.util.model.DoisValores;
 
 /**
@@ -26,6 +28,8 @@ public class NFNota extends NFBase
     private DoisValores assinatura;
 
     private DoisValores tipo;
+
+    private List<NFHistorico> historico;
 
 
 
@@ -168,13 +172,23 @@ public void setAssinatura(DoisValores assinatura)
 		this.tipo = tipo;
 	}
 
+	public List<NFHistorico> getHistorico() {
+		return historico;
+	}
+
+
+	public void setHistorico(List<NFHistorico> historico) {
+		this.historico = historico;
+	}
+
 
 	@Override
 	public String toString() {
 		return "NFNota [getIdentificadorLocal()=" + getIdentificadorLocal() + ", getInfo()=" + getInfo()
 				+ ", getInfoSuplementar()=" + getInfoSuplementar() + ", getAssinatura()=" + getAssinatura()
 				+ ", getIdentificadorlocal()=" + getIdentificadorlocal() + ", getInfosuplementar()="
-				+ getInfosuplementar() + ", getTipo()=" + getTipo() + ", toString()=" + super.toString() + "]";
+				+ getInfosuplementar() + ", getTipo()=" + getTipo() + ", getHistorico()=" + getHistorico()
+				+ ", toString()=" + super.toString() + "]";
 	}
 
  }

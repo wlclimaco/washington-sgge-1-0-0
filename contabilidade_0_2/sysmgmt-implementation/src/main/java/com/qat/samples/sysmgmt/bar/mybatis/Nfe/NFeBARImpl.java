@@ -20,6 +20,7 @@ import com.qat.samples.sysmgmt.bar.Nfe.INFeBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
 import com.qat.samples.sysmgmt.bar.Vendas.IVendasBAR;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.InsertHistBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFHistoricoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFInfoCupomFiscalReferenciadoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFInfoProdutorRuralReferenciadaBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFInfoReferenciadaBARD;
@@ -55,6 +56,7 @@ import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFNotaInfoTransporteBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFNotaInfoVeiculoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.NFPessoaAutorizadaDownloadNFeBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.StatusBARD;
+import com.qat.samples.sysmgmt.nfe.model.NFHistorico;
 import com.qat.samples.sysmgmt.nfe.model.NFInfoCupomFiscalReferenciado;
 import com.qat.samples.sysmgmt.nfe.model.NFInfoModelo1Por1AReferenciada;
 import com.qat.samples.sysmgmt.nfe.model.NFInfoProdutorRuralReferenciada;
@@ -142,6 +144,10 @@ public class NFeBARImpl extends SqlSessionDaoSupport implements INFeBAR {
 
 	/** The Constant STMT_INSERT_NFNOTA. */
 	private static final String STMT_INSERT_NFNOTA = NAMESPACE_NFNOTA + "insertNFNota";
+
+	private static final String STMT_INSERT_NFHISTORICO = NAMESPACE_NFNOTA + "insertNFHistorico";
+
+	private static final String STMT_DELETE_NFHISTORICO = NAMESPACE_NFNOTA + "deleteNFHistoricoById";
 
 	/** The Constant STMT_UPDATE_NFNOTA. */
 	private static final String STMT_UPDATE_NFNOTA = NAMESPACE_NFNOTA + "updateNFNota";
@@ -1446,6 +1452,14 @@ public class NFeBARImpl extends SqlSessionDaoSupport implements INFeBAR {
 
 		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_NFNOTA, nfnota, response);
 
+		if (!ValidationUtil.isNullOrEmpty(nfnota.getHistorico()))
+		{
+			count +=
+					NFHistoricoBARD.maintainNFHistoricoAssociations(nfnota.getHistorico(), response, nfnota.getId(), null,
+							null,
+							TabelaEnum.NFNOTA, getNfeBAR(), statusBAR, historicoBAR, nfnota.getId(),
+							nfnota.getCreateUser(), nfnota.getTransactionId(), nfnota.getTransactionId());
+		}
 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.NFNOTA, AcaoEnum.INSERT,
 				nfnota.getTransactionId(), getHistoricoBAR(), response, nfnota.getId(), nfnota.getUserId());
@@ -8268,5 +8282,20 @@ MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_NFNOTA, nfnota, response)
 							nfnotainfo.getCreateUser(), nfnotainfo.getTransactionId(), nfnotainfo.getTransactionId());
 		}
 		return count;
+	}
+
+	@Override
+	public InternalResponse insertNFHistorico(NFHistorico cnaeempresa)
+	{
+		InternalResponse response = new InternalResponse();
+		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_NFHISTORICO, cnaeempresa, response);
+		return response;
+	}
+	@Override
+	public InternalResponse deleteNFHistoricoById(NFHistorico nfHistorico)
+	{
+		InternalResponse response = new InternalResponse();
+		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_NFHISTORICO, nfHistorico, response);
+		return response;
 	}
 }

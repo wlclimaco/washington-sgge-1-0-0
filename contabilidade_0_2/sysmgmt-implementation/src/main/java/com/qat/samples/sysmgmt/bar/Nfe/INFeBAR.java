@@ -2,6 +2,7 @@
 package com.qat.samples.sysmgmt.bar.Nfe;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.samples.sysmgmt.nfe.model.NFHistorico;
 import com.qat.samples.sysmgmt.nfe.model.NFInfoCupomFiscalReferenciado;
 import com.qat.samples.sysmgmt.nfe.model.NFInfoModelo1Por1AReferenciada;
 import com.qat.samples.sysmgmt.nfe.model.NFInfoProdutorRuralReferenciada;
@@ -2045,6 +2046,10 @@ public interface INFeBAR
 * @return the internal results response
 */
 	public InternalResultsResponse<NFInfoCupomFiscalReferenciado> fetchNFInfoCupomFiscalReferenciadosByRequest(PagedInquiryRequest request);
+
+	InternalResponse insertNFHistorico(NFHistorico nfHistorico);
+
+	InternalResponse deleteNFHistoricoById(NFHistorico nfHistorico);
 
 
 }

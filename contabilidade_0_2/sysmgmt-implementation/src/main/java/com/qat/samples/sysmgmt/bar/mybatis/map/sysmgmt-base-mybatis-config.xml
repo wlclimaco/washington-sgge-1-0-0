@@ -15,6 +15,7 @@
 
      <!--  Nota Fiscal -->
  <typeAlias alias="NFNota" type="com.qat.samples.sysmgmt.nfe.model.NFNota" />
+  <typeAlias alias="NFHistorico" type="com.qat.samples.sysmgmt.nfe.model.NFHistorico" />
 <typeAlias alias="NFNotaInfo" type="com.qat.samples.sysmgmt.nfe.model.NFNotaInfo" />
 <typeAlias alias="NFNotaInfoIdentificacao" type="com.qat.samples.sysmgmt.nfe.model.NFNotaInfoIdentificacao" />
 <typeAlias alias="NFInfoModelo1Por1AReferenciada" type="com.qat.samples.sysmgmt.nfe.model.NFInfoModelo1Por1AReferenciada" />

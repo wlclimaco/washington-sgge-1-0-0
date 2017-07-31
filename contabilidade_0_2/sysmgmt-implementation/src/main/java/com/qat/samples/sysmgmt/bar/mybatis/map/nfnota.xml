@@ -126,6 +126,27 @@ identificadorLocal
    VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allNFNotaValues" /> )
  </insert>
 
+  <insert id="insertNFHistorico" parameterType="NFHistorico" useGeneratedKeys="true" keyProperty="id">
+     INSERT INTO nfhistorico (
+ <if test="id != null"><if test="id > 0">id,</if></if>DateAlter,userId,tipoNFEnumValue,parentId
+,tabelaEnumValue
+,emprId
+,processId
+,create_date
+,create_user
+,modify_date
+,modify_user
+     )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if>#{DateAlter},#{user},#{tipoNFEnumValue},#{parentId},
+     #{tabelaEnumValue},
+     #{emprId},
+     #{processId},
+     #{createDateUTC},
+     #{createUser},
+     #{modifyDateUTC},
+     #{modifyUser} )
+ </insert>
+
  <update id="updateNFNota" parameterType="NFNota">
    UPDATE nfnota SET
 <if test="identificadorLocal!= null">identificadorLocal = #{identificadorLocal},</if>
@@ -145,6 +166,11 @@ identificadorLocal
 
 <delete id="deleteNFNotaById" parameterType="NFNota">
   DELETE FROM nfnota WHERE id = #{id}
+ </delete>
+
+
+ <delete id="deleteNFHistoricoById" parameterType="NFHistorico">
+  DELETE FROM nfhistorico WHERE id = #{id}
  </delete>
 
  <delete id="deleteAllNFNotas">
