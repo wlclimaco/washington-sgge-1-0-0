@@ -30,6 +30,22 @@
     <collection property="infoSuplementar" column="infoSuplementar" select="NFNotaInfoSuplementarMap.fetchNFNotaInfoSuplementarById"/>
     <collection property="assinatura" column="assinatura" select="DoisValorMap.fetchDoisValorById"/>
     <collection property="tipo" column="tipo" select="DoisValorMap.fetchDoisValorById"/>
+    <collection property="historico" column="id" select="NFNotaMap.fetchHistoricoById"/>
+  </resultMap>
+
+<resultMap id="NFHistoricoResult" type="NFHistorico">
+  <result property="id" column="id"/>
+    <result property="dateAlter" column="dateAlter"/>
+    <result property="user" column="userId"/>
+    <result property="tipoNFEnumValue" column="tipoNFEnumValue"/>
+	<result property="parentId" column="parentId"/>
+	<result property="tabelaEnumValue" column="tabelaEnumValue"/>
+	<result property="emprId" column="emprId"/>
+	<result property="processId" column="processId"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
   </resultMap>
 
   <sql id="allNFNotaColumns">
@@ -69,6 +85,10 @@ identificadorLocal
     SELECT id,
  <include refid="allNFNotaColumns" />
    FROM nfnota ORDER BY id ASC
+ </select>
+
+  <select id="fetchHistoricoById" resultMap="NFHistoricoResult">
+    SELECT * FROM nfhistorico where parentId = #{id} ORDER BY dateAlter DESC
  </select>
 
  <select id="fetchNFNotaById" parameterType="Integer" resultMap="NFNotaResult">
@@ -128,7 +148,7 @@ identificadorLocal
 
   <insert id="insertNFHistorico" parameterType="NFHistorico" useGeneratedKeys="true" keyProperty="id">
      INSERT INTO nfhistorico (
- <if test="id != null"><if test="id > 0">id,</if></if>DateAlter,userId,tipoNFEnumValue,parentId
+ <if test="id != null"><if test="id > 0">id,</if></if>dateAlter,userId,tipoNFEnumValue,parentId
 ,tabelaEnumValue
 ,emprId
 ,processId
@@ -137,7 +157,7 @@ identificadorLocal
 ,modify_date
 ,modify_user
      )
-   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if>#{DateAlter},#{user},#{tipoNFEnumValue},#{parentId},
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if>#{dateAlter},#{user},#{tipoNFEnumValue},#{parentId},
      #{tabelaEnumValue},
      #{emprId},
      #{processId},

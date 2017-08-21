@@ -35,7 +35,7 @@ public class FormaPg extends ModelCosmeDamiao
 
 	private DoisValores tipoDoc;
 
-	private DoisValores qntIntervalo;
+	private Integer qntIntervalo;
 
 	private DoisValores intervalo;
 
@@ -107,11 +107,11 @@ public class FormaPg extends ModelCosmeDamiao
 		this.tipoDoc = tipoDoc;
 	}
 
-	public DoisValores getQntIntervalo() {
+	public Integer getQntIntervalo() {
 		return qntIntervalo;
 	}
 
-	public void setQntIntervalo(DoisValores qntIntervalo) {
+	public void setQntIntervalo(Integer qntIntervalo) {
 		this.qntIntervalo = qntIntervalo;
 	}
 

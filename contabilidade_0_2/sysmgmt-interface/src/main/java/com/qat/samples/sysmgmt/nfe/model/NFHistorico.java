@@ -14,7 +14,7 @@ public class NFHistorico extends ModelCosmeDamiao {
 
 	private Integer id;
 	/** The econtabil cnpj for the NFPessoaAutorizadaDownloadNFe. */
-	private Long DateAlter;
+	private Long dateAlter;
 
 	/** The econtabil cpf for the NFPessoaAutorizadaDownloadNFe. */
 	private String user;
@@ -27,7 +27,7 @@ public class NFHistorico extends ModelCosmeDamiao {
 	 *
 	 * @return the nota type enum value
 	 */
-	public Integer getNotaTypeEnumValue() {
+	public Integer getTipoNFEnumValue() {
 		if (tipoNFEnum != null) {
 			return tipoNFEnum.getValue();
 		}
@@ -39,7 +39,7 @@ public class NFHistorico extends ModelCosmeDamiao {
 	 *
 	 * @param acaoTypeValue the new nota type enum value
 	 */
-	public void setNotaTypeEnumValue(Integer acaoTypeValue) {
+	public void setTipoNFEnumValue(Integer acaoTypeValue) {
 		tipoNFEnum = NotaTypeEnum.enumForValue(acaoTypeValue);
 	}
 
@@ -59,22 +59,12 @@ public class NFHistorico extends ModelCosmeDamiao {
 		this.id = id;
 	}
 
-	/**
-	 * Gets the date alter.
-	 *
-	 * @return the date alter
-	 */
 	public Long getDateAlter() {
-		return DateAlter;
+		return dateAlter;
 	}
 
-	/**
-	 * Sets the date alter.
-	 *
-	 * @param dateAlter the new date alter
-	 */
 	public void setDateAlter(Long dateAlter) {
-		DateAlter = dateAlter;
+		this.dateAlter = dateAlter;
 	}
 
 	/**
@@ -115,7 +105,7 @@ public class NFHistorico extends ModelCosmeDamiao {
 
 	@Override
 	public String toString() {
-		return "NFHistorico [getNotaTypeEnumValue()=" + getNotaTypeEnumValue() + ", getId()=" + getId()
+		return "NFHistorico [getNotaTypeEnumValue()=" + getTipoNFEnumValue() + ", getId()=" + getId()
 				+ ", getDateAlter()=" + getDateAlter() + ", getUser()=" + getUser() + ", getTipoNFEnum()="
 				+ getTipoNFEnum() + ", toString()=" + super.toString() + "]";
 	}

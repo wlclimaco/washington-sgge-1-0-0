@@ -55,6 +55,7 @@
     <result property="taxaFixa" column="taxaFixa"/>
     <result property="descAvista" column="descAvista"/>
     <result property="entrada" column="entrada"/>
+    <result property="qntIntervalo" column="qntIntervalo"/>
 <result property="emprId" column="emprId"/>
 <result property="processId" column="processId"/>
 <result property="createUser" column="create_user"/>
@@ -65,7 +66,6 @@
 <collection property="tipoDoc" column="tipoDoc" select="DoisValorMap.fetchDoisValorById"/>
     <collection property="parcelamentoMax" column="parcelamentoMax" select="DoisValorMap.fetchDoisValorById"/>
     <collection property="parcelamentoSemJuros" column="parcelamentoSemJuros" select="DoisValorMap.fetchDoisValorById"/>
-    <collection property="qntIntervalo" column="qntIntervalo" select="DoisValorMap.fetchDoisValorById"/>
     <collection property="intervalo" column="intervalo" select="DoisValorMap.fetchDoisValorById"/>
   </resultMap>
 
@@ -102,7 +102,7 @@ descricao
 #{descAvista},
 #{conta.id},
 #{tipoDoc.id},
-#{qntIntervalo.id},
+#{qntIntervalo},
 #{intervalo.id},
 #{entrada},
 		#{emprId},
@@ -156,7 +156,7 @@ descricao
 <if test="descAvista!= null">descAvista = #{descAvista},</if>
 <if test="conta!= null">conta = #{conta.id},</if>
 <if test="tipoDoc!= null">tipoDoc = #{tipoDoc.id},</if>
-<if test="qntIntervalo!= null">qntIntervalo = #{qntIntervalo.id},</if>
+<if test="qntIntervalo!= null">qntIntervalo = #{qntIntervalo},</if>
 <if test="intervalo!= null">intervalo = #{intervalo.id},</if>
 <if test="entrada!= null">entrada = #{entrada},</if>
 <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
