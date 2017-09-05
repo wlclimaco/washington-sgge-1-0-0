@@ -61,6 +61,7 @@ import com.qat.samples.sysmgmt.produto.model.Produto;
 import com.qat.samples.sysmgmt.produto.model.ProdutoEmpresa;
 import com.qat.samples.sysmgmt.produto.model.Rentabilidade;
 import com.qat.samples.sysmgmt.produto.model.RentabilidadeItens;
+import com.qat.samples.sysmgmt.produto.model.Servico;
 import com.qat.samples.sysmgmt.produto.model.SubGrupo;
 import com.qat.samples.sysmgmt.produto.model.Tributacao;
 import com.qat.samples.sysmgmt.produto.model.UniMed;
@@ -72,6 +73,7 @@ import com.qat.samples.sysmgmt.produto.model.request.MarcaInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.PisInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoEmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ServicoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.SubGrupoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.TributacaoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.UniMedInquiryRequest;
@@ -741,6 +743,36 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 
 	/** The Constant STMT_FETCH_CATEGORIA_ALL_REQUEST. */
 	private static final String STMT_FETCH_CATEGORIA_ALL_REQUEST = NAMESPACE_CATEGORIA + "fetchAllCategoriasRequest";
+
+
+	/// ===================================### Servico
+		/// ####======================================
+		/** The Constant NAMESPACE. */
+		private static final String NAMESPACE_SERVICO = "ServicoMap.";
+
+		/** The Constant STMT_INSERT_SERVICO. */
+		private static final String STMT_INSERT_SERVICO = NAMESPACE_SERVICO + "insertServico";
+
+		/** The Constant STMT_UPDATE_SERVICO. */
+		private static final String STMT_UPDATE_SERVICO = NAMESPACE_SERVICO + "updateServico";
+
+		/** The Constant STMT_DELETE_SERVICO. */
+		private static final String STMT_DELETE_SERVICO = NAMESPACE_SERVICO + "deleteServicoById";
+
+		/** The Constant STMT_DELETE_SERVICO_ALL. */
+		private static final String STMT_DELETE_SERVICO_ALL = NAMESPACE_SERVICO + "deleteAllServicos";
+
+		/** The Constant STMT_FETCH_SERVICO. */
+		private static final String STMT_FETCH_SERVICO = NAMESPACE_SERVICO + "fetchServicoById";
+
+		/** The Constant STMT_FETCH_SERVICO_ALL. */
+		private static final String STMT_FETCH_SERVICO_ALL = NAMESPACE_SERVICO + "fetchAllServicos";
+
+		/** The Constant STMT_FETCH_SERVICO_COUNT. */
+		private static final String STMT_FETCH_SERVICO_COUNT = NAMESPACE_SERVICO + "fetchServicoRowCount";
+
+		/** The Constant STMT_FETCH_SERVICO_ALL_REQUEST. */
+		private static final String STMT_FETCH_SERVICO_ALL_REQUEST = NAMESPACE_SERVICO + "fetchAllServicosRequest";
 
 	// ===================================### PRODUTOEMPRESA
 	// ####======================================
@@ -4859,5 +4891,178 @@ public class ProdutoBARImpl extends SqlSessionDaoSupport implements IProdutoBAR 
 			}
 
 		}
+
+
+
+	// ===================================### SERVICO
+		// ####======================================
+		/**
+		 * /* (non-Javadoc)
+		 *
+		 * @see com.qat.samples.sysmgmt.base.bar.ICategoriaBAR#insertCategoria(com.qat.samples.sysmgmt.base.model.Categoria)
+		 */
+		@Override
+		public InternalResponse insertServico(Servico categoria) {
+			InternalResponse response = new InternalResponse();
+			Integer count = 0;
+			Boolean count1 = false;
+
+			categoria.setProcessId(categoria.getTransactionId());
+
+			MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_SERVICO, categoria, response);
+
+			Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.SERVICO, AcaoEnum.INSERT,
+					categoria.getTransactionId(), getHistoricoBAR(), response, categoria.getId(), categoria.getUserId());
+
+			if (categoria.getId() != 0 && categoria.getId() != null) {
+				Status status = new Status();
+				status.setStatus(CdStatusTypeEnum.ATIVO);
+				List<Status> statusList = new ArrayList<Status>();
+				statusList.add(status);
+				count1 = StatusBARD.maintainStatusAssociations(statusList, response, categoria.getId(), null,
+						AcaoEnum.INSERT, categoria.getCreateUser(), categoria.getId(), TabelaEnum.SERVICO, statusBAR,
+						historicoBAR, categoria.getTransactionId(), categoria.getTransactionId());
+
+			}
+
+			return response;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 *
+		 * @see
+		 * com.qat.samples.sysmgmt.base.bar.IServicoBAR#updateServico(com.qat.
+		 * samples.sysmgmt.base.model.Servico)
+		 */
+		@Override
+		public InternalResponse updateServico(Servico categoria) {
+			InternalResponse response = new InternalResponse();
+			categoria.setProcessId(categoria.getTransactionId());
+			MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_SERVICO, categoria, response);
+
+			Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.SERVICO, AcaoEnum.UPDATE,
+					categoria.getTransactionId(), getHistoricoBAR(), response, categoria.getId(), categoria.getUserId());
+
+			return response;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 *
+		 * @see
+		 * com.qat.samples.sysmgmt.base.bar.IServicoBAR#deleteServico(com.qat.
+		 * samples.sysmgmt.base.model.Servico)
+		 */
+		@Override
+		public InternalResponse deleteServicoById(Servico categoria) {
+			InternalResponse response = new InternalResponse();
+			categoria.setProcessId(categoria.getTransactionId());
+			MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_SERVICO, categoria, response);
+
+			Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.SERVICO, AcaoEnum.DELETE,
+					categoria.getTransactionId(), getHistoricoBAR(), response, categoria.getId(), categoria.getUserId());
+
+			return response;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 *
+		 * @see com.qat.samples.sysmgmt.base.bar.IServicoBAR#deleteAllServicos()
+		 */
+		@Override
+		public InternalResponse deleteAllServicos() {
+			InternalResponse response = new InternalResponse();
+			MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_SERVICO_ALL, response);
+			return response;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 *
+		 * @see
+		 * com.qat.samples.sysmgmt.bar.IServicoBAR#fetchServicoById(com.qat.
+		 * samples.sysmgmt.model.request.FetchByIdRequest)
+		 */
+		@Override
+		public Servico fetchServicoById(FetchByIdRequest request) {
+			return (Servico) MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_SERVICO,
+					request.getFetchId());
+
+		}
+
+		/*
+		 * (non-Javadoc)
+		 *
+		 * @see
+		 * com.qat.samples.sysmgmt.base.bar.IServicoBAR#fetchAllServicosCache()
+		 */
+		@Override
+		public InternalResultsResponse<Servico> fetchAllServicos(Servico categoria) {
+			InternalResultsResponse<Servico> response = new InternalResultsResponse<Servico>();
+			response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(getSqlSession(), STMT_FETCH_SERVICO_ALL));
+			return response;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 *
+		 * @see
+		 * com.qat.samples.sysmgmt.bar.IServicoBAR#fetchServicosByRequest(com.
+		 * qat.samples.sysmgmt.model.request. PagedInquiryRequest)
+		 */
+		@Override
+		public InternalResultsResponse<Servico> fetchServicosByRequest(ServicoInquiryRequest request) {
+			InternalResultsResponse<Servico> response = new InternalResultsResponse<Servico>();
+			fetchServicosByRequest(getSqlSession(), request, STMT_FETCH_SERVICO_COUNT, STMT_FETCH_SERVICO_ALL_REQUEST,
+					response);
+			return response;
+		}
+
+		// ===================================### fetchServicosByRequest
+		// ####======================================
+
+		public static void fetchServicosByRequest(SqlSession sqlSession, ServicoInquiryRequest request,
+				String countStatement, String fetchPagedStatement, InternalResultsResponse<?> response) {
+
+			// If the user requested the total rows/record count
+			if (request.isPreQueryCount()) {
+				// set the total rows available in the response
+				response.getResultsSetInfo().setTotalRowsAvailable(
+						(Integer) MyBatisBARHelper.doQueryForObject(sqlSession, countStatement, request));
+
+				if (response.getResultsSetInfo().getTotalRowsAvailable() == ZERO) {
+					response.setStatus(BusinessErrorCategory.NoRowsFound);
+					return;
+				}
+			}
+
+			// Fetch Objects by InquiryRequest Object, paged of course
+			response.getResultsList().addAll(MyBatisBARHelper.doQueryForList(sqlSession, fetchPagedStatement, request));
+
+			// move request start page to response start page
+			response.getResultsSetInfo().setStartPage(request.getStartPage());
+
+			// move request page size to response page size
+			response.getResultsSetInfo().setPageSize(request.getPageSize());
+
+			// calculate correct startPage for more rows available comparison, since
+			// it is zero based, we have to offset by
+			// 1.
+			int startPage = (request.getStartPage() == 0) ? 1 : (request.getStartPage() + 1);
+
+			// set moreRowsAvailable in response based on total rows compared to
+			// (page size * start page)
+			// remember if the count was not requested the TotalRowsAvailable will
+			// be false because the assumption
+			// is that you your own logic to handle this.
+			if (response.getResultsSetInfo()
+					.getTotalRowsAvailable() > (response.getResultsSetInfo().getPageSize() * startPage)) {
+				response.getResultsSetInfo().setMoreRowsAvailable(true);
+			}
+
+		}
+
 
 }

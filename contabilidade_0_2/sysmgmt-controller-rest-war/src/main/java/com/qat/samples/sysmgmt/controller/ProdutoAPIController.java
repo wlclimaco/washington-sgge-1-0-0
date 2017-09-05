@@ -22,6 +22,7 @@ import com.qat.samples.sysmgmt.produto.model.Grupo;
 import com.qat.samples.sysmgmt.produto.model.Marca;
 import com.qat.samples.sysmgmt.produto.model.Produto;
 import com.qat.samples.sysmgmt.produto.model.ProdutoEmpresa;
+import com.qat.samples.sysmgmt.produto.model.Servico;
 import com.qat.samples.sysmgmt.produto.model.SubGrupo;
 import com.qat.samples.sysmgmt.produto.model.Tributacao;
 import com.qat.samples.sysmgmt.produto.model.UniMed;
@@ -35,6 +36,8 @@ import com.qat.samples.sysmgmt.produto.model.request.ProdutoEmpresaInquiryReques
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoEmpresaMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ServicoInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ServicoMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.SubGrupoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.SubGrupoMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.TributacaoInquiryRequest;
@@ -46,6 +49,7 @@ import com.qat.samples.sysmgmt.produto.model.response.GrupoResponse;
 import com.qat.samples.sysmgmt.produto.model.response.MarcaResponse;
 import com.qat.samples.sysmgmt.produto.model.response.ProdutoEmpresaResponse;
 import com.qat.samples.sysmgmt.produto.model.response.ProdutoResponse;
+import com.qat.samples.sysmgmt.produto.model.response.ServicoResponse;
 import com.qat.samples.sysmgmt.produto.model.response.SubGrupoResponse;
 import com.qat.samples.sysmgmt.produto.model.response.TributacaoResponse;
 import com.qat.samples.sysmgmt.produto.model.response.UniMedResponse;
@@ -989,6 +993,123 @@ public class ProdutoAPIController extends BaseController {
 					new Object[] { ex.toString() });
 		}
 		return tributacaoResponse;
+
+	}
+
+	// ===================================### SERVIÇO
+	// ####======================================
+	/**
+	 * Refresh produtos.
+	 *
+	 * @param refreshInt
+	 *            the refresh int
+	 * @param retList
+	 *            the ret list
+	 * @param retPaged
+	 *            the ret paged
+	 * @return the produto response
+	 */
+	@RequestMapping(value = "/servico/refresh", method = RequestMethod.GET)
+	@ResponseBody
+	public ProdutoResponse refreshServico(@RequestParam("refreshInt") Integer refreshInt,
+			@RequestParam("retList") Boolean retList, @RequestParam("retPaged") Boolean retPaged) {
+		ProdutoResponse produtoResponse = new ProdutoResponse();
+
+		try {
+			RefreshRequest request = new RefreshRequest(refreshInt, retList, retPaged);
+			InternalResultsResponse<Servico> internalResponse = getProdutoBAC().refreshServicos(request);
+			ResponseHandler.handleOperationStatusAndMessages(produtoResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, produtoResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return produtoResponse;
+
+	}
+
+	/**
+	 * Fetch produto paged.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the produto response
+	 */
+	@RequestMapping(value = "/servico/fetchPage", method = RequestMethod.POST)
+	@ResponseBody
+	public ServicoResponse fetchServicoPaged(@RequestBody ServicoInquiryRequest request) {
+		ServicoResponse produtoResponse = new ServicoResponse();
+		try {
+			InternalResultsResponse<Servico> internalResponse = getProdutoBAC().fetchServicosByRequest(request);
+			ResponseHandler.handleOperationStatusAndMessages(produtoResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, produtoResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return produtoResponse;
+	}
+
+	/**
+	 * Insert produto.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the produto response
+	 */
+	@RequestMapping(value = "/servico/insert", method = RequestMethod.POST)
+	@ResponseBody
+	public ServicoResponse insertServico(@RequestBody ServicoMaintenanceRequest request) {
+		ServicoResponse produtoResponse = new ServicoResponse();
+		try {
+			InternalResultsResponse<Servico> internalResponse = getProdutoBAC().insertServico(request);
+			ResponseHandler.handleOperationStatusAndMessages(produtoResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, produtoResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return produtoResponse;
+	}
+
+	/**
+	 * Update produto.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the produto response
+	 */
+	@RequestMapping(value = "/servico/update", method = RequestMethod.POST)
+	@ResponseBody
+	public ServicoResponse updateServico(@RequestBody ServicoMaintenanceRequest request) {
+		ServicoResponse produtoResponse = new ServicoResponse();
+		try {
+			InternalResultsResponse<Servico> internalResponse = getProdutoBAC().updateServico(request);
+			ResponseHandler.handleOperationStatusAndMessages(produtoResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, produtoResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return produtoResponse;
+	}
+
+	/**
+	 * Delete produto.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the produto response
+	 */
+	@RequestMapping(value = "/servico/delete", method = RequestMethod.POST)
+	@ResponseBody
+	public ServicoResponse deleteServico(@RequestBody ServicoMaintenanceRequest request) {
+		ServicoResponse produtoResponse = new ServicoResponse();
+
+		try {
+			InternalResultsResponse<Servico> internalResponse = getProdutoBAC().deleteServico(request);
+			ResponseHandler.handleOperationStatusAndMessages(produtoResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, produtoResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return produtoResponse;
 
 	}
 
