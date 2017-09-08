@@ -37,6 +37,7 @@ import com.qat.samples.sysmgmt.produto.model.Produto;
 import com.qat.samples.sysmgmt.produto.model.ProdutoEmpresa;
 import com.qat.samples.sysmgmt.produto.model.Rentabilidade;
 import com.qat.samples.sysmgmt.produto.model.RentabilidadeItens;
+import com.qat.samples.sysmgmt.produto.model.Servico;
 import com.qat.samples.sysmgmt.produto.model.SubGrupo;
 import com.qat.samples.sysmgmt.produto.model.Tributacao;
 import com.qat.samples.sysmgmt.produto.model.UniMed;
@@ -44,6 +45,7 @@ import com.qat.samples.sysmgmt.produto.model.request.GrupoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.MarcaInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoEmpresaInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ServicoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.SubGrupoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.TributacaoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.UniMedInquiryRequest;
@@ -1832,6 +1834,107 @@ public class ProdutoBARTest extends AbstractTransactionalJUnit4SpringContextTest
 
 	}
 
+
+	// ===================================### SERVICO
+	// ####======================================
+
+	/**
+	 * Test delete produto.
+	 */
+	@Test
+	public void testDeleteServico() {
+		Servico produto = Objects.insertServico(1004, TabelaEnum.PRODUTO, PersistenceActionEnum.INSERT);
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(1004);
+		Servico produtoResponse = getProdutoBAR().fetchServicoById(request);
+		Assert.assertEquals(produtoResponse, null);
+		getProdutoBAR().insertServico(produto);
+		produtoResponse = getProdutoBAR().fetchServicoById(request);
+		Assert.assertEquals(produto.getId(), produtoResponse.getId());
+		getProdutoBAR().deleteServicoById(produto);
+		produtoResponse = getProdutoBAR().fetchServicoById(request);
+		Assert.assertEquals(produtoResponse, null);
+	}
+
+	/**
+	 * Test fetch all produtos.
+	 */
+	@Test
+	public void testFetchAllServicos() {
+		Servico produto = new Servico();
+		List<Servico> response = getProdutoBAR().fetchAllServicos(produto).getResultsList();
+		Assert.assertNotNull(response);
+	}
+
+	/**
+	 * Test delete all produtos.
+	 */
+	@Test
+	public void testDeleteAllServicos() {
+		getProdutoBAR().deleteAllServicos();
+		Servico produto = new Servico();
+		List<Servico> response = getProdutoBAR().fetchAllServicos(new Servico()).getResultsList();
+		Assert.assertEquals(response.size(), 0);
+	}
+
+	/**
+	 * Test update produto.
+	 */
+	@Test
+	public void testUpdateServico() {
+		Servico produto = Objects.insertServico(1001, TabelaEnum.PRODUTO, PersistenceActionEnum.UPDATE);
+		FetchByIdRequest request = new FetchByIdRequest();
+		request.setFetchId(1001);
+		Servico produtoResponse = getProdutoBAR().fetchServicoById(request);
+		Assert.assertEquals(produtoResponse.getNome(), "nome");
+		getProdutoBAR().updateServico(produto);
+		produtoResponse = getProdutoBAR().fetchServicoById(request);
+		Assert.assertEquals(produtoResponse.getNome(), "nome_1 - UPDATE");
+	}
+
+	/**
+	 * Test fetch produtos by request.
+	 *
+	 * @throws Exception the exception
+	 */
+	@Test
+	public void testFetchServicosByRequest() throws Exception {
+		// check for valid and precount
+		ServicoInquiryRequest request = new ServicoInquiryRequest();
+		request.setPreQueryCount(true);
+		request.setStartPage(0);
+		request.setPageSize(3);
+		InternalResultsResponse<Servico> response = getProdutoBAR().fetchServicosByRequest(request);
+		// Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+		// check for valid and precount and start 2nd page
+		request.setPreQueryCount(true);
+		request.setStartPage(1);
+		request.setPageSize(3);
+		response = getProdutoBAR().fetchServicosByRequest(request);
+		// Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+		Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+		Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+
+		// check for valid and no precount
+		ServicoInquiryRequest request2 = new ServicoInquiryRequest();
+		request2.setPreQueryCount(false);
+		InternalResultsResponse<Servico> response2 = getProdutoBAR().fetchServicosByRequest(request2);
+		Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
+		Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
+		// this is because we did not choose to precount
+		Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
+
+		// check for zero rows
+		getProdutoBAR().deleteAllServicos();
+		ServicoInquiryRequest request3 = new ServicoInquiryRequest();
+		request3.setPreQueryCount(true);
+		InternalResultsResponse<Servico> response3 = getProdutoBAR().fetchServicosByRequest(request3);
+		Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
+
+	}
+
 	/**
 	 * Setup.
 	 */
@@ -1858,6 +1961,7 @@ public class ProdutoBARTest extends AbstractTransactionalJUnit4SpringContextTest
 		executeSqlScript("conf/insertRentabilidade.sql", false);
 		executeSqlScript("conf/insertRentabilidadeItens.sql", false);
 		executeSqlScript("conf/insertIcmsopInter.sql", false);
+		executeSqlScript("conf/insertServico.sql", false);
 	}
 
 	/**

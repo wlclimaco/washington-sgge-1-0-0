@@ -13,6 +13,7 @@ import com.qat.samples.sysmgmt.produto.model.Porcao;
 import com.qat.samples.sysmgmt.produto.model.Produto;
 import com.qat.samples.sysmgmt.produto.model.ProdutoEmpresa;
 import com.qat.samples.sysmgmt.produto.model.Rentabilidade;
+import com.qat.samples.sysmgmt.produto.model.Servico;
 import com.qat.samples.sysmgmt.produto.model.SubGrupo;
 import com.qat.samples.sysmgmt.produto.model.Tributacao;
 import com.qat.samples.sysmgmt.produto.model.UniMed;
@@ -29,6 +30,8 @@ import com.qat.samples.sysmgmt.produto.model.request.ProdutoEmpresaMaintenanceRe
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.ProdutoMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.RentabilidadeMaintenanceRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ServicoInquiryRequest;
+import com.qat.samples.sysmgmt.produto.model.request.ServicoMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.SubGrupoInquiryRequest;
 import com.qat.samples.sysmgmt.produto.model.request.SubGrupoMaintenanceRequest;
 import com.qat.samples.sysmgmt.produto.model.request.TributacaoInquiryRequest;
@@ -780,8 +783,8 @@ public interface IProdutoBAC
 * @return the internal results response
 */
 	public InternalResultsResponse<Rentabilidade> fetchRentabilidadesByRequest(PagedInquiryRequest request);
-	
-	
+
+
 	//===================================### CATEGORIA ####======================================
 		/**
 
@@ -842,6 +845,65 @@ public interface IProdutoBAC
 	*/
 		public InternalResultsResponse<Categoria> fetchCategoriasByRequest(PagedInquiryRequest request);
 
+		//===================================### Serviço ####======================================
+		/**
+
+		/**
+		 * Insert produto.
+		 *
+	* @param request the produto maintenance request
+	*
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Servico> insertServico(ServicoMaintenanceRequest request);
+
+		/**
+	* Update produto.
+	*
+	* @param request the produto maintenance request
+	*
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Servico> updateServico(ServicoMaintenanceRequest request);
+
+		/**
+	* Delete produto.
+	*
+	* @param request the produto maintenance request
+	*
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Servico> deleteServico(ServicoMaintenanceRequest request);
+
+		/**
+	* Refresh produtos.
+	*
+	* @param request containing the number to refresh with and whether to return the result
+	*/
+		public InternalResultsResponse<Servico> refreshServicos(RefreshRequest request);
+
+		/**
+	* Fetch produto by id.
+	*
+	* @param request the request
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Servico> fetchServicoById(FetchByIdRequest request);
+
+		/**
+	* Fetch all produtos.
+	*
+	* @return the internal results response< produto>
+	*/
+		public InternalResultsResponse<Servico> fetchAllServicos(Servico  produto);
+
+		/**
+	* Fetch produtos by request.
+	*
+	* @param request the request
+	* @return the internal results response
+	*/
+		public InternalResultsResponse<Servico> fetchServicosByRequest(ServicoInquiryRequest request);
 
 
 }
