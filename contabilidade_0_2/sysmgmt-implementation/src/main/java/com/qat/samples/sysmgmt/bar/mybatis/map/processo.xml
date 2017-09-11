@@ -16,25 +16,80 @@
       necessary if the columns (or aliases) match to the properties
        exactly. -->
   <resultMap id="ProcessoResult" type="Processo">
+
     <result property="id" column="id"/>
-    <result property="dataProcess" column="dataProcess"/>
-    <result property="valor" column="valor"/>
-<result property="parentId" column="parentId"/>
-<result property="tabelaEnumValue" column="tabelaEnumValue"/>
-<result property="emprId" column="emprId"/>
-<result property="processId" column="processId"/>
-<result property="createUser" column="create_user"/>
-<result property="createDateUTC" column="create_date"/>
-<result property="modifyUser" column="modify_user"/>
-<result property="modifyDateUTC" column="modify_date"/>
-<collection property="advogadoList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
-<collection property="clienteList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
-<collection property="audienciaList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+	<result property="dataProcess" column="dataProcess"/>
+	<result property="dataFim" column="dataFim"/>
+	<result property="valor" column="valor"/>
+	<result property="assunto" column="assunto"/>
+	<result property="processo" column="processo"/>
+	<result property="orgao" column="orgao"/>
+	<result property="npadraocnj" column="npadraocnj"/>
+	<result property="npadrao" column="npadrao"/>
+	<result property="agendarCap" column="agendarCap"/>
+	<result property="distribuido" column="distribuido"/>
+	<result property="valorAcao" column="valorAcao"/>
+	<result property="pasta" column="pasta"/>
+	<result property="observacaoProc" column="pasta"/>
+	<result property="numeroprocesso" column="pasta"/>
+	<result property="parentId" column="parentId"/>
+	<result property="tabelaEnumValue" column="tabelaEnumValue"/>
+	<result property="emprId" column="emprId"/>
+	<result property="processId" column="processId"/>
+	<result property="createUser" column="create_user"/>
+	<result property="createDateUTC" column="create_date"/>
+	<result property="modifyUser" column="modify_user"/>
+	<result property="modifyDateUTC" column="modify_date"/>
+	<collection property="justica"  column="justica" select="DoisValorMap.fetchDoisValorById" />
+	<collection property="tribunal"  column="tribunal" select="DoisValorMap.fetchDoisValorById" />
+	<collection property="instancia1"  column="instancia1" select="DoisValorMap.fetchDoisValorById" />
+	<collection property="localidade"  column="localidade" select="DoisValorMap.fetchDoisValorById" />
+	<collection property="capturpor"  column="capturpor" select="DoisValorMap.fetchDoisValorById" />
+	<collection property="acao"  column="acao" select="DoisValorMap.fetchDoisValorById" />
+	<collection property="statusProc"  column="statusProc"select="DoisValorMap.fetchDoisValorById" />
+	<collection property="descricaoProc"  column="descricaoProc" select="DoisValorMap.fetchDoisValorById" />
+	<collection property="situacao"  column="situacao" select="DoisValorMap.fetchDoisValorById" />
+	<collection property="instancia"  column="instancia" select="DoisValorMap.fetchDoisValorById" />
+	<collection property="capautomatica"  column="capautomatica" select="DoisValorMap.fetchDoisValorById" />
+<!-- 	private List<ContasReceber> tituloList; -->
+<!-- 	private List<Advogado> advogadoList; -->
+<!-- 	private List<Audiencia> audienciaList; -->
+<!-- 	private List<ProcessoStatus> processoStatusList; -->
+<!-- 	private List<Envolvidos> envolvList; -->
+
   </resultMap>
 
   <sql id="allProcessoColumns">
-dataProcess
-,valor
+	private Long dataProcess;
+	private Long dataFim;
+	private Double valor;
+	private ProcessoAcao acao;
+	private List<ContasReceber> tituloList;
+	private List<Advogado> advogadoList;
+	private List<Audiencia> audienciaList;
+	private List<ProcessoStatus> processoStatusList;
+	private String assunto;
+	private DoisValores statusProc;
+	private String descricaoProc;
+	private List<Envolvidos> envolvList;
+	private String processo;
+	private DoisValores situacao;
+	private DoisValores instancia;
+	private String orgao;
+	private String npadraocnj;
+	private String npadrao;
+	private Integer agendarCap;
+	private String distribuido;
+	private Float valorAcao;
+	private String observacaoProc;
+	private DoisValores justica;
+	private DoisValores tribunal;
+	private DoisValores instancia1;
+	private DoisValores localidade;
+	private DoisValores capturpor;
+	private String numeroprocesso;
+	private DoisValores capautomatica;
+	private String pasta;
 ,parentId
 ,tabelaEnumValue
 ,emprId
@@ -46,8 +101,36 @@ dataProcess
 
 </sql>
 <sql id="allProcessoValues">
-#{dataProcess},
-#{valor},
+	private Long dataProcess;
+	private Long dataFim;
+	private Double valor;
+	private ProcessoAcao acao;
+	private List<ContasReceber> tituloList;
+	private List<Advogado> advogadoList;
+	private List<Audiencia> audienciaList;
+	private List<ProcessoStatus> processoStatusList;
+	private String assunto;
+	private DoisValores statusProc;
+	private String descricaoProc;
+	private List<Envolvidos> envolvList;
+	private String processo;
+	private DoisValores situacao;
+	private DoisValores instancia;
+	private String orgao;
+	private String npadraocnj;
+	private String npadrao;
+	private Integer agendarCap;
+	private String distribuido;
+	private Float valorAcao;
+	private String observacaoProc;
+	private DoisValores justica;
+	private DoisValores tribunal;
+	private DoisValores instancia1;
+	private DoisValores localidade;
+	private DoisValores capturpor;
+	private String numeroprocesso;
+	private DoisValores capautomatica;
+	private String pasta;
      #{parentId},
      #{tabelaEnumValue},
      #{emprId},
@@ -123,8 +206,36 @@ dataProcess
 
  <update id="updateProcesso" parameterType="Processo">
    UPDATE processo SET
-<if test="dataProcess!= null">dataProcess = #{dataProcess},</if>
-<if test="valor!= null">valor = #{valor},</if>
+	private Long dataProcess;
+	private Long dataFim;
+	private Double valor;
+	private ProcessoAcao acao;
+	private List<ContasReceber> tituloList;
+	private List<Advogado> advogadoList;
+	private List<Audiencia> audienciaList;
+	private List<ProcessoStatus> processoStatusList;
+	private String assunto;
+	private DoisValores statusProc;
+	private String descricaoProc;
+	private List<Envolvidos> envolvList;
+	private String processo;
+	private DoisValores situacao;
+	private DoisValores instancia;
+	private String orgao;
+	private String npadraocnj;
+	private String npadrao;
+	private Integer agendarCap;
+	private String distribuido;
+	private Float valorAcao;
+	private String observacaoProc;
+	private DoisValores justica;
+	private DoisValores tribunal;
+	private DoisValores instancia1;
+	private DoisValores localidade;
+	private DoisValores capturpor;
+	private String numeroprocesso;
+	private DoisValores capautomatica;
+	private String pasta;
 <if test="parentId!= null"> parentId=#{parentId},</if>
 <if test="emprId!= null"> emprId=#{emprId},</if>
 <if test="processId!= null"> processId=#{processId},</if>
