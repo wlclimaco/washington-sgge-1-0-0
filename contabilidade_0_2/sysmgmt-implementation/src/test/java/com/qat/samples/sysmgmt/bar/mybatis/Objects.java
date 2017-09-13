@@ -8,7 +8,10 @@ import com.qat.framework.model.BaseModel.PersistenceActionEnum;
 import com.qat.samples.sysmgmt.advocacia.Advocacia;
 import com.qat.samples.sysmgmt.advocacia.Advogado;
 import com.qat.samples.sysmgmt.advocacia.Audiencia;
+import com.qat.samples.sysmgmt.advocacia.Envolvidos;
 import com.qat.samples.sysmgmt.advocacia.Processo;
+import com.qat.samples.sysmgmt.advocacia.ProcessoAcao;
+import com.qat.samples.sysmgmt.advocacia.ProcessoStatus;
 import com.qat.samples.sysmgmt.agencia.model.Agencia;
 import com.qat.samples.sysmgmt.arquivo.model.Arquivo;
 import com.qat.samples.sysmgmt.banco.model.Banco;
@@ -655,16 +658,62 @@ public class Objects {
 		return audiencia;
 	}
 
+	public static Envolvidos insertEnvolvidos(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
+		Envolvidos processo = new Envolvidos();
+		Date a = new Date();
+		processo.setId(id);
+		processo.setCliente(insertCliente(id, TabelaEnum.PROCESSO, action));
+		processo.setTipoEnvolvido(insertDoisValor(id, tabela, action));
+		processo.setEnvolvimento(insertDoisValor(id, tabela, action));
+		processo.setbCliente(0);
+		processo.setTabelaEnum(tabela);
+		processo.setParentId(id);
+		processo.setEmprId(EMPID);
+		processo.setModifyDateUTC(a.getTime());
+		processo.setCreateDateUTC(a.getTime());
+		processo.setCreateUser("system");
+		processo.setModifyUser("system");
+		processo.setProcessId(1);
+		processo.setModelAction(action);
+
+		return processo;
+	}
+
 	public static Processo insertProcesso(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
 		Processo processo = new Processo();
 		Date a = new Date();
 		processo.setId(id);
 		processo.setDataProcess(a.getTime());
 		processo.setValor(new Double(11.00));
+		processo.setDataFim(a.getTime());
+		processo.setAcao(insertDoisValor(id, tabela, action));
+		processo.setProcessoStatusList(new ArrayList<ProcessoStatus>());
+		processo.getProcessoStatusList().add(new ProcessoStatus(a.getTime(), "Teste", insertDoisValor(id, tabela, action)));
+		processo.setAssunto("ASSUNTO");;
+		processo.setStatusProc(insertDoisValor(id, tabela, action));
+		processo.setDescricaoProc("Descricao");;
+		processo.setEnvolvList(new ArrayList<>());
+		processo.getEnvolvList().add(insertEnvolvidos(id, tabela, action));
+		processo.setProcesso("processo");
+		processo.setSituacao(insertDoisValor(id, tabela, action));
+		processo.setInstancia(insertDoisValor(id, tabela, action));
+		processo.setOrgao("orgao");
+		processo.setNpadraocnj("npadraocnj");
+		processo.setNpadrao("npadrao");
+		processo.setAgendarCap(1);
+		processo.setDistribuido("distribuido");
+		processo.setValorAcao(new Float(1.99));
+		processo.setObservacaoProc("observacaoProc");
+		processo.setJustica(insertDoisValor(id, tabela, action));
+		processo.setTribunal(insertDoisValor(id, tabela, action));
+		processo.setInstancia1(insertDoisValor(id, tabela, action));
+		processo.setLocalidade(insertDoisValor(id, tabela, action));
+		processo.setCapturpor(insertDoisValor(id, tabela, action));
+		processo.setNumeroprocesso("1001");
+		processo.setCapautomatica(insertDoisValor(id, tabela, action));
+		processo.setPasta("1001");
 		processo.setAdvogadoList(new ArrayList<Advogado>());
 		processo.getAdvogadoList().add(insertAdvogado(id, TabelaEnum.PROCESSO, action));
-		processo.setClienteList(new ArrayList<Cliente>());
-		processo.getClienteList().add(insertCliente(id, TabelaEnum.PROCESSO, action));
 		processo.setAudienciaList(new ArrayList<Audiencia>());
 		processo.getAudienciaList().add(insertAudiencia(id, TabelaEnum.PROCESSO, action));
 		processo.setTabelaEnum(tabela);

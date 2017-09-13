@@ -117,6 +117,8 @@
     	<typeAlias alias="TransactionInquiryRequest" type="com.qat.samples.sysmgmt.condominio.model.request.TransactionInquiryRequest" />
 
     	<typeAlias alias="Processo" type="com.qat.samples.sysmgmt.advocacia.Processo" />
+    	<typeAlias alias="ProcessoStatus" type="com.qat.samples.sysmgmt.advocacia.ProcessoStatus" />
+    	<typeAlias alias="Envolvidos" type="com.qat.samples.sysmgmt.advocacia.Envolvidos" />
     	<typeAlias alias="ProcessoInquiryRequest" type="com.qat.samples.sysmgmt.advocacia.request.ProcessoInquiryRequest" />
 
     	<typeAlias alias="Avisos" type="com.qat.samples.sysmgmt.condominio.model.Avisos" />

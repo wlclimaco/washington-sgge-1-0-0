@@ -1,5 +1,6 @@
 package com.qat.samples.sysmgmt.advocacia;
 
+import com.qat.samples.sysmgmt.util.model.DoisValores;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 import com.qat.samples.sysmgmt.util.model.Note;
 
@@ -14,15 +15,22 @@ public class ProcessoStatus extends ModelCosmeDamiao
 	private Integer id;
 
 	/** The type of an account. */
-	private Integer dataProcesso;
+	private Long dataProcesso;
 
-	private Note note;
+	private String note;
 
-	private ProcessoTypeEnum statusProcess;
+	private DoisValores statusProcess;
 
 	public ProcessoStatus()
 	{
 
+	}
+
+	public ProcessoStatus(Long dataProcesso, String note, DoisValores statusProcess) {
+		super();
+		this.dataProcesso = dataProcesso;
+		this.note = note;
+		this.statusProcess = statusProcess;
 	}
 
 	public Integer getId()
@@ -35,32 +43,32 @@ public class ProcessoStatus extends ModelCosmeDamiao
 		this.id = id;
 	}
 
-	public Integer getDataProcesso()
+	public Long getDataProcesso()
 	{
 		return dataProcesso;
 	}
 
-	public void setDataProcesso(Integer dataProcesso)
+	public void setDataProcesso(Long dataProcesso)
 	{
 		this.dataProcesso = dataProcesso;
 	}
 
-	public Note getNote()
+	public String getNote()
 	{
 		return note;
 	}
 
-	public void setNote(Note note)
+	public void setNote(String note)
 	{
 		this.note = note;
 	}
 
-	public ProcessoTypeEnum getStatusProcess()
+	public DoisValores getStatusProcess()
 	{
 		return statusProcess;
 	}
 
-	public void setStatusProcess(ProcessoTypeEnum statusProcess)
+	public void setStatusProcess(DoisValores statusProcess)
 	{
 		this.statusProcess = statusProcess;
 	}

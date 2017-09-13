@@ -1,257 +1,584 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 
-<!-- create by system gera-java version 1.0.0 03/08/2016 12:24 : 19-->
+<!-- create by system gera-java version 1.0.0 03/08/2016 12:24 : 19 -->
 
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="ProcessoMap">
- <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
- <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+	<cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+	<cache type="org.mybatis.caches.ehcache.EhcacheCache" />
 
-  <!-- Result maps describe the mapping between the columns returned
-      from a query, and the class properties.  A result map isnt
-      necessary if the columns (or aliases) match to the properties
-       exactly. -->
-  <resultMap id="ProcessoResult" type="Processo">
+	<!-- Result maps describe the mapping between the columns returned from
+		a query, and the class properties. A result map isnt necessary if the columns
+		(or aliases) match to the properties exactly. -->
+	<resultMap id="ProcessoResult" type="Processo">
 
-    <result property="id" column="id"/>
-	<result property="dataProcess" column="dataProcess"/>
-	<result property="dataFim" column="dataFim"/>
-	<result property="valor" column="valor"/>
-	<result property="assunto" column="assunto"/>
-	<result property="processo" column="processo"/>
-	<result property="orgao" column="orgao"/>
-	<result property="npadraocnj" column="npadraocnj"/>
-	<result property="npadrao" column="npadrao"/>
-	<result property="agendarCap" column="agendarCap"/>
-	<result property="distribuido" column="distribuido"/>
-	<result property="valorAcao" column="valorAcao"/>
-	<result property="pasta" column="pasta"/>
-	<result property="observacaoProc" column="pasta"/>
-	<result property="numeroprocesso" column="pasta"/>
-	<result property="parentId" column="parentId"/>
-	<result property="tabelaEnumValue" column="tabelaEnumValue"/>
-	<result property="emprId" column="emprId"/>
-	<result property="processId" column="processId"/>
-	<result property="createUser" column="create_user"/>
-	<result property="createDateUTC" column="create_date"/>
-	<result property="modifyUser" column="modify_user"/>
-	<result property="modifyDateUTC" column="modify_date"/>
-	<collection property="justica"  column="justica" select="DoisValorMap.fetchDoisValorById" />
-	<collection property="tribunal"  column="tribunal" select="DoisValorMap.fetchDoisValorById" />
-	<collection property="instancia1"  column="instancia1" select="DoisValorMap.fetchDoisValorById" />
-	<collection property="localidade"  column="localidade" select="DoisValorMap.fetchDoisValorById" />
-	<collection property="capturpor"  column="capturpor" select="DoisValorMap.fetchDoisValorById" />
-	<collection property="acao"  column="acao" select="DoisValorMap.fetchDoisValorById" />
-	<collection property="statusProc"  column="statusProc"select="DoisValorMap.fetchDoisValorById" />
-	<collection property="descricaoProc"  column="descricaoProc" select="DoisValorMap.fetchDoisValorById" />
-	<collection property="situacao"  column="situacao" select="DoisValorMap.fetchDoisValorById" />
-	<collection property="instancia"  column="instancia" select="DoisValorMap.fetchDoisValorById" />
-	<collection property="capautomatica"  column="capautomatica" select="DoisValorMap.fetchDoisValorById" />
-<!-- 	private List<ContasReceber> tituloList; -->
-<!-- 	private List<Advogado> advogadoList; -->
-<!-- 	private List<Audiencia> audienciaList; -->
-<!-- 	private List<ProcessoStatus> processoStatusList; -->
-<!-- 	private List<Envolvidos> envolvList; -->
+		<result property="id" column="id" />
+		<result property="dataProcess" column="dataProcess" />
+		<result property="dataFim" column="dataFim" />
+		<result property="valor" column="valor" />
+		<result property="assunto" column="assunto" />
+		<result property="processo" column="processo" />
+		<result property="orgao" column="orgao" />
+		<result property="npadraocnj" column="npadraocnj" />
+		<result property="npadrao" column="npadrao" />
+		<result property="agendarCap" column="agendarCap" />
+		<result property="distribuido" column="distribuido" />
+		<result property="valorAcao" column="valorAcao" />
+		<result property="pasta" column="pasta" />
+		<result property="observacaoProc" column="observacaoProc" />
+		<result property="numeroprocesso" column="numeroprocesso" />
+		<result property="descricaoProc" column="descricaoProc" />
+		<result property="parentId" column="parentId" />
+		<result property="tabelaEnumValue" column="tabelaEnumValue" />
+		<result property="emprId" column="emprId" />
+		<result property="processId" column="processId" />
+		<result property="createUser" column="create_user" />
+		<result property="createDateUTC" column="create_date" />
+		<result property="modifyUser" column="modify_user" />
+		<result property="modifyDateUTC" column="modify_date" />
+		<collection property="justica" column="justica"
+			select="DoisValorMap.fetchDoisValorById" />
+		<collection property="tribunal" column="tribunal"
+			select="DoisValorMap.fetchDoisValorById" />
+		<collection property="instancia1" column="instancia1"
+			select="DoisValorMap.fetchDoisValorById" />
+		<collection property="localidade" column="localidade"
+			select="DoisValorMap.fetchDoisValorById" />
+		<collection property="capturpor" column="capturpor"
+			select="DoisValorMap.fetchDoisValorById" />
+		<collection property="acao" column="acao"
+			select="DoisValorMap.fetchDoisValorById" />
+		<collection property="statusProc" column="statusProc"
+			select="DoisValorMap.fetchDoisValorById" />
+		<collection property="situacao" column="situacao"
+			select="DoisValorMap.fetchDoisValorById" />
+		<collection property="instancia" column="instancia"
+			select="DoisValorMap.fetchDoisValorById" />
+		<collection property="capautomatica" column="capautomatica"
+			select="DoisValorMap.fetchDoisValorById" />
+		<!-- private List<ContasReceber> tituloList; -->
+		<!-- private List<Advogado> advogadoList; -->
+		<!-- private List<Audiencia> audienciaList; -->
+		<!-- private List<ProcessoStatus> processoStatusList; -->
+		<!-- private List<Envolvidos> envolvList; -->
 
-  </resultMap>
+	</resultMap>
 
-  <sql id="allProcessoColumns">
-	private Long dataProcess;
-	private Long dataFim;
-	private Double valor;
-	private ProcessoAcao acao;
-	private List<ContasReceber> tituloList;
-	private List<Advogado> advogadoList;
-	private List<Audiencia> audienciaList;
-	private List<ProcessoStatus> processoStatusList;
-	private String assunto;
-	private DoisValores statusProc;
-	private String descricaoProc;
-	private List<Envolvidos> envolvList;
-	private String processo;
-	private DoisValores situacao;
-	private DoisValores instancia;
-	private String orgao;
-	private String npadraocnj;
-	private String npadrao;
-	private Integer agendarCap;
-	private String distribuido;
-	private Float valorAcao;
-	private String observacaoProc;
-	private DoisValores justica;
-	private DoisValores tribunal;
-	private DoisValores instancia1;
-	private DoisValores localidade;
-	private DoisValores capturpor;
-	private String numeroprocesso;
-	private DoisValores capautomatica;
-	private String pasta;
-,parentId
-,tabelaEnumValue
-,emprId
-,processId
-,create_date
-,create_user
-,modify_date
-,modify_user
+	<sql id="allProcessoColumns">
+		dataProcess,
+		dataFim,
+		valor,
+		acao,
+		assunto,
+		statusProc,
+		descricaoProc,
+		processo,
+		situacao,
+		instancia,
+		orgao,
+		npadraocnj,
+		npadrao,
+		agendarCap,
+		distribuido,
+		valorAcao,
+		observacaoProc,
+		justica,
+		tribunal,
+		instancia1,
+		localidade,
+		capturpor,
+		numeroprocesso,
+		capautomatica,
+		pasta
+		,parentId
+		,tabelaEnumValue
+		,emprId
+		,processId
+		,create_date
+		,create_user
+		,modify_date
+		,modify_user
 
-</sql>
-<sql id="allProcessoValues">
-	private Long dataProcess;
-	private Long dataFim;
-	private Double valor;
-	private ProcessoAcao acao;
-	private List<ContasReceber> tituloList;
-	private List<Advogado> advogadoList;
-	private List<Audiencia> audienciaList;
-	private List<ProcessoStatus> processoStatusList;
-	private String assunto;
-	private DoisValores statusProc;
-	private String descricaoProc;
-	private List<Envolvidos> envolvList;
-	private String processo;
-	private DoisValores situacao;
-	private DoisValores instancia;
-	private String orgao;
-	private String npadraocnj;
-	private String npadrao;
-	private Integer agendarCap;
-	private String distribuido;
-	private Float valorAcao;
-	private String observacaoProc;
-	private DoisValores justica;
-	private DoisValores tribunal;
-	private DoisValores instancia1;
-	private DoisValores localidade;
-	private DoisValores capturpor;
-	private String numeroprocesso;
-	private DoisValores capautomatica;
-	private String pasta;
-     #{parentId},
-     #{tabelaEnumValue},
-     #{emprId},
-     #{processId},
-     #{createDateUTC},
-     #{createUser},
-     #{modifyDateUTC},
-     #{modifyUser}
-  </sql>
+	</sql>
+	<sql id="allProcessoValues">
+		#{dataProcess},
+		#{dataFim},
+		#{valor},
+		#{acao.id},
+		#{assunto},
+		#{statusProc.id},
+		#{descricaoProc},
+		#{processo},
+		#{situacao.id},
+		#{instancia.id},
+		#{orgao},
+		#{npadraocnj},
+		#{npadrao},
+		#{agendarCap},
+		#{distribuido},
+		#{valorAcao},
+		#{observacaoProc},
+		#{justica.id},
+		#{tribunal.id},
+		#{instancia1.id},
+		#{localidade.id},
+		#{capturpor.id},
+		#{numeroprocesso},
+		#{capautomatica.id},
+		#{pasta},
+		#{parentId},
+		#{tabelaEnumValue},
+		#{emprId},
+		#{processId},
+		#{createDateUTC},
+		#{createUser},
+		#{modifyDateUTC},
+		#{modifyUser}
+	</sql>
 
 
- <select id="fetchAllProcessos" resultMap="ProcessoResult">
-    SELECT id,
- <include refid="allProcessoColumns" />
-   FROM processo ORDER BY id ASC
- </select>
+	<select id="fetchAllProcessos" resultMap="ProcessoResult">
+		SELECT id,
+		<include refid="allProcessoColumns" />
+		FROM processo ORDER BY id ASC
+	</select>
 
- <select id="fetchProcessoById" parameterType="Integer" resultMap="ProcessoResult">
-    SELECT id,
- <include refid="allProcessoColumns" />
-   FROM processo WHERE id = #{fetchid}
- </select>
+	<select id="fetchProcessoById" parameterType="Integer"
+		resultMap="ProcessoResult">
+		SELECT id,
+		<include refid="allProcessoColumns" />
+		FROM processo WHERE id = #{fetchid}
+	</select>
 
- <select id="fetchAllProcessosRequest" parameterType="ProcessoInquiryRequest" resultMap="ProcessoResult">
+	<select id="fetchAllProcessosRequest" parameterType="ProcessoInquiryRequest"
+		resultMap="ProcessoResult">
 
-     SELECT id,<include refid="allProcessoColumns" />
-           FROM processo where 0 = 0 <if test="permissaoTypeEnumValue == 1">
+		SELECT id,
+		<include refid="allProcessoColumns" />
+		FROM processo where 0 = 0
+		<if test="permissaoTypeEnumValue == 1">
 			and id IS NOT NULL
 		</if>
 		<if test="permissaoTypeEnumValue != 1">
 			<if test="emprId == null">
-				<if test="emprIds != null"> and emprId in
+				<if test="emprIds != null">
+					and emprId in
 
-				<foreach item="item" index="index" collection="emprIds"
-		             open="(" separator="," close=")">
-		        #{item}
-		    	</foreach>
-
-				</if>
-			</if>
-			<if test="emprId != null"> and emprId = #{emprId}</if>
-		</if> ORDER BY id ASC
-       OFFSET ( #{startPage} * #{pageSize} )
-       LIMIT #{pageSize}
-</select>
-
-<select id="fetchProcessoRowCount" resultType="Integer">
-     SELECT COUNT(*) AS RECORD_COUNT FROM processo WHERE id IS NOT NULL <if test="permissaoTypeEnumValue == 1">
-			and id IS NOT NULL
-		</if>
-		<if test="permissaoTypeEnumValue != 1">
-			<if test="emprId == null">
-				<if test="emprIds != null"> and emprId in
-
-				<foreach item="item" index="index" collection="emprIds"
-		             open="(" separator="," close=")">
-		        #{item}
-		    	</foreach>
+					<foreach item="item" index="index" collection="emprIds"
+						open="(" separator="," close=")">
+						#{item}
+					</foreach>
 
 				</if>
 			</if>
 			<if test="emprId != null"> and emprId = #{emprId}</if>
 		</if>
+	</select>
 
- </select>
+	<select id="fetchProcessoRowCount" resultType="Integer">
+		SELECT COUNT(*) AS RECORD_COUNT FROM processo WHERE id IS NOT NULL
+		<if test="permissaoTypeEnumValue == 1">
+			and id IS NOT NULL
+		</if>
+		<if test="permissaoTypeEnumValue != 1">
+			<if test="emprId == null">
+				<if test="emprIds != null">
+					and emprId in
 
- <insert id="insertProcesso" parameterType="Processo" useGeneratedKeys="true" keyProperty="id">
-     INSERT INTO processo (
- <if test="id != null"><if test="id > 0">id,</if></if><include refid="allProcessoColumns" />
-     )
-   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allProcessoValues" /> )
- </insert>
+					<foreach item="item" index="index" collection="emprIds"
+						open="(" separator="," close=")">
+						#{item}
+					</foreach>
 
- <update id="updateProcesso" parameterType="Processo">
-   UPDATE processo SET
-	private Long dataProcess;
-	private Long dataFim;
-	private Double valor;
-	private ProcessoAcao acao;
-	private List<ContasReceber> tituloList;
-	private List<Advogado> advogadoList;
-	private List<Audiencia> audienciaList;
-	private List<ProcessoStatus> processoStatusList;
-	private String assunto;
-	private DoisValores statusProc;
-	private String descricaoProc;
-	private List<Envolvidos> envolvList;
-	private String processo;
-	private DoisValores situacao;
-	private DoisValores instancia;
-	private String orgao;
-	private String npadraocnj;
-	private String npadrao;
-	private Integer agendarCap;
-	private String distribuido;
-	private Float valorAcao;
-	private String observacaoProc;
-	private DoisValores justica;
-	private DoisValores tribunal;
-	private DoisValores instancia1;
-	private DoisValores localidade;
-	private DoisValores capturpor;
-	private String numeroprocesso;
-	private DoisValores capautomatica;
-	private String pasta;
-<if test="parentId!= null"> parentId=#{parentId},</if>
-<if test="emprId!= null"> emprId=#{emprId},</if>
-<if test="processId!= null"> processId=#{processId},</if>
-<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
-<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
-   WHERE
-    id = #{id}
- </update>
+				</if>
+			</if>
+			<if test="emprId != null"> and emprId = #{emprId}</if>
+		</if>
 
-<delete id="deleteProcessoById" parameterType="Processo">
-  DELETE FROM processo WHERE id = #{id}
- </delete>
+	</select>
 
- <delete id="deleteAllProcessos">
- DELETE FROM processo
-  </delete>
+	<insert id="insertProcesso" parameterType="Processo"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO processo (
+		<if test="id != null">
+			<if test="id > 0">id,</if>
+		</if>
+		<include refid="allProcessoColumns" />
+		)
+		VALUES (
+		<if test="id != null">
+			<if test="id > 0">#{id},</if>
+		</if>
+		<include refid="allProcessoValues" />
+		)
+	</insert>
+
+	<update id="updateProcesso" parameterType="Processo">
+		UPDATE processo SET
+		<if test="dataProcess!= null"> dataProcess=#{dataProcess},</if>
+		<if test="dataFim!= null"> dataFim=#{dataFim},</if>
+		<if test="valor!= null"> valor=#{valor},</if>
+		<if test="acao.id!= null"> acao=#{acao.id},</if>
+		<if test="assunto!= null"> assunto=#{assunto},</if>
+		<if test="statusProc.id!= null"> statusProc.id=#{statusProc.id},</if>
+		<if test="descricaoProc != null"> descricaoProc=#{descricaoProc},</if>
+		<if test="processo != null"> processo=#{processo},</if>
+		<if test="situacao.id != null"> situacao=#{situacao.id},</if>
+		<if test="instancia.id != null"> instancia=#{instancia.id},</if>
+		<if test="orgao != null"> orgao=#{orgao},</if>
+		<if test="npadraocnj != null"> npadraocnj=#{npadraocnj},</if>
+		<if test="npadrao != null"> npadrao=#{npadrao},</if>
+		<if test="agendarCap != null"> agendarCap=#{agendarCap},</if>
+		<if test="distribuido != null"> distribuido=#{distribuido},</if>
+		<if test="valorAcao != null"> valorAcao=#{valorAcao},</if>
+		<if test="observacaoProc != null"> observacaoProc=#{observacaoProc},</if>
+		<if test="justica.id != null"> justica=#{justica.id},</if>
+		<if test="tribunal.id != null"> tribunal=#{tribunal.id},</if>
+		<if test="instancia1.id != null"> instancia1=#{instancia1.id},</if>
+		<if test="localidade.id != null"> localidade=#{localidade.id},</if>
+		<if test="capturpor.id != null"> capturpor=#{capturpor.id},</if>
+		<if test="numeroprocesso != null"> numeroprocesso=#{numeroprocesso},</if>
+		<if test="capautomatica.id != null"> capautomatica=#{capautomatica.id},</if>
+		<if test="pasta != null"> pasta=#{pasta},</if>
+		<if test="parentId!= null"> parentId=#{parentId},</if>
+		<if test="emprId!= null"> emprId=#{emprId},</if>
+		<if test="processId!= null"> processId=#{processId},</if>
+		<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+		<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		WHERE
+		id = #{id}
+	</update>
+
+	<delete id="deleteProcessoById" parameterType="Processo">
+		DELETE FROM
+		processo WHERE id = #{id}
+	</delete>
+
+	<delete id="deleteAllProcessos">
+		DELETE FROM processo
+	</delete>
+
+
+
+
+
+
+	<!-- Result maps describe the mapping between the columns returned from
+		a query, and the class properties. A result map isnt necessary if the columns
+		(or aliases) match to the properties exactly. -->
+	<resultMap id="ProcessoStatusResult" type="ProcessoStatus">
+
+		<result property="id" column="id" />
+		<result property="dataProcesso" column="dataProcesso" />
+		<result property="note" column="note" />
+		<result property="parentId" column="parentId" />
+		<result property="tabelaEnumValue" column="tabelaEnumValue" />
+		<result property="emprId" column="emprId" />
+		<result property="processId" column="processId" />
+		<result property="createUser" column="create_user" />
+		<result property="createDateUTC" column="create_date" />
+		<result property="modifyUser" column="modify_user" />
+		<result property="modifyDateUTC" column="modify_date" />
+		<collection property="statusProcess" column="statusProcess"
+			select="DoisValorMap.fetchDoisValorById" />
+
+	</resultMap>
+
+	<sql id="allProcessoStatusColumns">
+		dataProcesso,
+		note,
+		statusProcess
+		,parentId
+		,tabelaEnumValue
+		,emprId
+		,processId
+		,create_date
+		,create_user
+		,modify_date
+		,modify_user
+
+	</sql>
+	<sql id="allProcessoStatusValues">
+		#{dataProcesso},
+		#{note},
+		#{statusProcess.id},
+		#{parentId},
+		#{tabelaEnumValue},
+		#{emprId},
+		#{processId},
+		#{createDateUTC},
+		#{createUser},
+		#{modifyDateUTC},
+		#{modifyUser}
+	</sql>
+
+
+	<select id="fetchAllProcessosStatus" resultMap="ProcessoStatusResult">
+		SELECT id,
+		<include refid="allProcessoColumns" />
+		FROM processoStatus ORDER BY id ASC
+	</select>
+
+	<select id="fetchProcessoStatusById" parameterType="Integer"
+		resultMap="ProcessoStatusResult">
+		SELECT id,
+		<include refid="allProcessoStatusColumns" />
+		FROM processoStatus WHERE id = #{fetchid}
+	</select>
+
+	<select id="fetchAllProcessosStatusRequest" parameterType="PagedInquiryRequest"
+		resultMap="ProcessoStatusResult">
+
+		SELECT id,
+		<include refid="allProcessoStatusColumns" />
+		FROM processo where 0 = 0
+		<if test="permissaoTypeEnumValue == 1">
+			and id IS NOT NULL
+		</if>
+		<if test="permissaoTypeEnumValue != 1">
+			<if test="emprId == null">
+				<if test="emprIds != null">
+					and emprId in
+
+					<foreach item="item" index="index" collection="emprIds"
+						open="(" separator="," close=")">
+						#{item}
+					</foreach>
+
+				</if>
+			</if>
+			<if test="emprId != null"> and emprId = #{emprId}</if>
+		</if>
+		ORDER BY id ASC
+	</select>
+
+	<select id="fetchProcessoStatusRowCount" resultType="Integer">
+		SELECT COUNT(*) AS RECORD_COUNT FROM processoStatus WHERE id IS NOT
+		NULL
+		<if test="permissaoTypeEnumValue == 1">
+			and id IS NOT NULL
+		</if>
+		<if test="permissaoTypeEnumValue != 1">
+			<if test="emprId == null">
+				<if test="emprIds != null">
+					and emprId in
+
+					<foreach item="item" index="index" collection="emprIds"
+						open="(" separator="," close=")">
+						#{item}
+					</foreach>
+
+				</if>
+			</if>
+			<if test="emprId != null"> and emprId = #{emprId}</if>
+		</if>
+
+	</select>
+
+	<insert id="insertProcessoStatus" parameterType="ProcessoStatus"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO processoStatus (
+		<if test="id != null">
+			<if test="id > 0">id,</if>
+		</if>
+		<include refid="allProcessoStatusColumns" />
+		)
+		VALUES (
+		<if test="id != null">
+			<if test="id > 0">#{id},</if>
+		</if>
+		<include refid="allProcessoStatusValues" />
+		)
+	</insert>
+
+	<update id="updateProcessoStatus" parameterType="ProcessoStatus">
+		UPDATE processo SET
+		<if test="dataProcesso!= null"> dataProcesso=#{dataProcesso},</if>
+		<if test="note!= null"> note=#{note},</if>
+		<if test="statusProcess!= null"> statusProcess=#{statusProcess.id},</if>
+		<if test="parentId!= null"> parentId=#{parentId},</if>
+		<if test="emprId!= null"> emprId=#{emprId},</if>
+		<if test="processId!= null"> processId=#{processId},</if>
+		<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+		<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		WHERE
+		id = #{id}
+	</update>
+
+	<delete id="deleteProcessoStatusById" parameterType="ProcessoStatus">
+		DELETE FROM
+		processoStatus WHERE id = #{id}
+	</delete>
+
+	<delete id="deleteAllProcessosStatus">
+		DELETE FROM processoStatus
+	</delete>
+
+
+
+
+	<!-- Result maps describe the mapping between the columns returned from
+		a query, and the class properties. A result map isnt necessary if the columns
+		(or aliases) match to the properties exactly. private Integer id; /** The
+		type of an account. */ private Cliente cliente; /** The tipo envolvido. */
+		private DoisValores tipoEnvolvido; /** The envolvimento. */ private DoisValores
+		envolvimento; private Integer bCliente; -->
+	<resultMap id="EnvolvidosResult" type="Envolvidos">
+
+		<result property="id" column="id" />
+		<result property="bCliente" column="bCliente" />
+		<result property="parentId" column="parentId" />
+		<result property="tabelaEnumValue" column="tabelaEnumValue" />
+		<result property="emprId" column="emprId" />
+		<result property="processId" column="processId" />
+		<result property="createUser" column="create_user" />
+		<result property="createDateUTC" column="create_date" />
+		<result property="modifyUser" column="modify_user" />
+		<result property="modifyDateUTC" column="modify_date" />
+		<collection property="cliente" column="cliente"
+			select="ClienteMap.fetchClienteById" />
+		<collection property="tipoEnvolvido" column="tipoEnvolvido"
+			select="DoisValorMap.fetchDoisValorById" />
+		<collection property="envolvimento" column="envolvimento"
+			select="DoisValorMap.fetchDoisValorById" />
+
+	</resultMap>
+
+	<sql id="allEnvolvidosColumns">
+		bCliente,
+		cliente,
+		tipoEnvolvido,
+		envolvimento
+		,parentId
+		,tabelaEnumValue
+		,emprId
+		,processId
+		,create_date
+		,create_user
+		,modify_date
+		,modify_user
+
+	</sql>
+	<sql id="allEnvolvidosValues">
+		#{bCliente},
+		#{cliente.id},
+		#{tipoEnvolvido.id},
+		#{envolvimento.id},
+		#{parentId},
+		#{tabelaEnumValue},
+		#{emprId},
+		#{processId},
+		#{createDateUTC},
+		#{createUser},
+		#{modifyDateUTC},
+		#{modifyUser}
+	</sql>
+
+
+	<select id="fetchAllEnvolvidos" resultMap="EnvolvidosResult">
+		SELECT id,
+		<include refid="allEnvolvidosColumns" />
+		FROM Envolvidos ORDER BY id ASC
+	</select>
+
+	<select id="fetchEnvolvidosById" parameterType="Integer"
+		resultMap="EnvolvidosResult">
+		SELECT id,
+		<include refid="allEnvolvidosColumns" />
+		FROM Envolvidos WHERE id = #{fetchid}
+	</select>
+
+	<select id="fetchAllEnvolvidosRequest" parameterType="PagedInquiryRequest"
+		resultMap="EnvolvidosResult">
+
+		SELECT id,
+		<include refid="allEnvolvidosColumns" />
+		FROM Envolvidos where 0 = 0
+		<if test="permissaoTypeEnumValue == 1">
+			and id IS NOT NULL
+		</if>
+		<if test="permissaoTypeEnumValue != 1">
+			<if test="emprId == null">
+				<if test="emprIds != null">
+					and emprId in
+
+					<foreach item="item" index="index" collection="emprIds"
+						open="(" separator="," close=")">
+						#{item}
+					</foreach>
+
+				</if>
+			</if>
+			<if test="emprId != null"> and emprId = #{emprId}</if>
+		</if>
+		ORDER BY id ASC
+	</select>
+
+	<select id="fetchEnvolvidosRowCount" resultType="Integer">
+		SELECT COUNT(*) AS RECORD_COUNT FROM Envolvidos WHERE id IS NOT NULL
+		<if test="permissaoTypeEnumValue == 1">
+			and id IS NOT NULL
+		</if>
+		<if test="permissaoTypeEnumValue != 1">
+			<if test="emprId == null">
+				<if test="emprIds != null">
+					and emprId in
+
+					<foreach item="item" index="index" collection="emprIds"
+						open="(" separator="," close=")">
+						#{item}
+					</foreach>
+
+				</if>
+			</if>
+			<if test="emprId != null"> and emprId = #{emprId}</if>
+		</if>
+
+	</select>
+
+	<insert id="insertEnvolvidos" parameterType="Envolvidos"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO Envolvidos (
+		<if test="id != null">
+			<if test="id > 0">id,</if>
+		</if>
+		<include refid="allEnvolvidosColumns" />
+		)
+		VALUES (
+		<if test="id != null">
+			<if test="id > 0">#{id},</if>
+		</if>
+		<include refid="allEnvolvidosValues" />
+		)
+	</insert>
+
+	<update id="updateEnvolvidos" parameterType="Envolvidos">
+		UPDATE Envolvidos SET
+		<if test="dataProcesso!= null"> dataProcesso=#{dataProcesso},</if>
+		<if test="note!= null"> note=#{note},</if>
+		<if test="statusProcess!= null"> statusProcess=#{statusProcess.id},</if>
+		<if test="parentId!= null"> parentId=#{parentId},</if>
+		<if test="emprId!= null"> emprId=#{emprId},</if>
+		<if test="processId!= null"> processId=#{processId},</if>
+		<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+		<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		WHERE
+		id = #{id}
+	</update>
+
+	<delete id="deleteEnvolvidosById" parameterType="Envolvidos">
+		DELETE FROM
+		Envolvidos WHERE id = #{id}
+	</delete>
+
+	<delete id="deleteAllEnvolvidos">
+		DELETE FROM Envolvidos
+	</delete>
+
 </mapper>
 
 

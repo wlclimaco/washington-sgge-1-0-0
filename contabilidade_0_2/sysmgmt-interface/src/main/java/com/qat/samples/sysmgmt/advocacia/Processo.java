@@ -26,7 +26,7 @@ public class Processo extends ModelCosmeDamiao {
 	private Double valor;
 
 	/** The acao. */
-	private ProcessoAcao acao;
+	private DoisValores acao;
 
 	/** The titulo list. */
 	private List<ContasReceber> tituloList;
@@ -207,7 +207,7 @@ public class Processo extends ModelCosmeDamiao {
 	 *
 	 * @return the acao
 	 */
-	public ProcessoAcao getAcao() {
+	public DoisValores getAcao() {
 		return acao;
 	}
 
@@ -217,7 +217,7 @@ public class Processo extends ModelCosmeDamiao {
 	 * @param acao
 	 *            the new acao
 	 */
-	public void setAcao(ProcessoAcao acao) {
+	public void setAcao(DoisValores acao) {
 		this.acao = acao;
 	}
 

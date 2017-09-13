@@ -22,6 +22,8 @@ public class Envolvidos extends ModelCosmeDamiao {
 	/** The envolvimento. */
 	private DoisValores envolvimento;
 
+	private Integer bCliente;
+
 	/**
 	 * Instantiates a new envolvidos.
 	 */
@@ -118,16 +120,19 @@ public class Envolvidos extends ModelCosmeDamiao {
 		this.envolvimento = envolvimento;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao#toString()
-	 */
+	public Integer getbCliente() {
+		return bCliente;
+	}
+
+	public void setbCliente(Integer bCliente) {
+		this.bCliente = bCliente;
+	}
+
 	@Override
 	public String toString() {
 		return "Envolvidos [getId()=" + getId() + ", getCliente()=" + getCliente() + ", getTipoEnvolvido()="
-				+ getTipoEnvolvido() + ", getEnvolvimento()=" + getEnvolvimento() + ", toString()=" + super.toString()
-				+ "]";
+				+ getTipoEnvolvido() + ", getEnvolvimento()=" + getEnvolvimento() + ", getbCliente()=" + getbCliente()
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 }

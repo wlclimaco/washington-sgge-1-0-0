@@ -4,11 +4,14 @@ import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.advocacia.Advogado;
 import com.qat.samples.sysmgmt.advocacia.Audiencia;
+import com.qat.samples.sysmgmt.advocacia.Envolvidos;
 import com.qat.samples.sysmgmt.advocacia.Processo;
+import com.qat.samples.sysmgmt.advocacia.ProcessoStatus;
 import com.qat.samples.sysmgmt.advocacia.request.AdvogadoInquiryRequest;
 import com.qat.samples.sysmgmt.advocacia.request.AudienciaInquiryRequest;
 import com.qat.samples.sysmgmt.advocacia.request.ProcessoInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
+import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
 
 /**
  * The Interface AdvocaciaBAR.. (Data Access Component - DAC)
@@ -186,5 +189,102 @@ public interface IAdvocaciaBAR
 * @return the internal results response
 */
 	public InternalResultsResponse<Processo> fetchProcessosByRequest(ProcessoInquiryRequest request);
+
+
+	public Envolvidos fetchEnvolvidosById(FetchByIdRequest request);
+
+	public ProcessoStatus fetchProcessoStatusById(FetchByIdRequest request);
+
+	/**
+* Insert processo.
+*
+* @param processo the processo
+*
+* @return the internal response
+*/
+	public InternalResponse insertProcessoStatus(ProcessoStatus processo);
+
+	/**
+* Update processo.
+*
+* @param processo the processo
+*
+* @return the internal response
+*/
+	public InternalResponse updateProcessoStatus(ProcessoStatus processo);
+
+	/**
+* Delete processo.
+*
+* @param processo the processo
+*
+* @return the internal response
+*/
+	public InternalResponse deleteProcessoStatusById(ProcessoStatus processo);
+
+	/**
+* Delete all processos.
+*
+* @return the internal response
+*/
+	public InternalResponse deleteAllProcessoStatuss();
+
+	/**
+* Fetch all processos.
+*
+* @return the list< processo>
+*/
+	public InternalResultsResponse<ProcessoStatus> fetchAllProcessoStatuss(ProcessoStatus  processo);
+
+	/**
+* Fetch processos by request.
+*
+* @param request the request
+* @return the internal results response
+*/
+	public InternalResultsResponse<ProcessoStatus> fetchProcessoStatussByRequest(PagedInquiryRequest request);
+
+
+	public InternalResponse insertEnvolvidos(Envolvidos processo);
+
+	/**
+* Update processo.
+*
+* @param processo the processo
+*
+* @return the internal response
+*/
+	public InternalResponse updateEnvolvidos(Envolvidos processo);
+
+	/**
+* Delete processo.
+*
+* @param processo the processo
+*
+* @return the internal response
+*/
+	public InternalResponse deleteEnvolvidosById(Envolvidos processo);
+
+	/**
+* Delete all processos.
+*
+* @return the internal response
+*/
+	public InternalResponse deleteAllEnvolvidoss();
+
+	/**
+* Fetch all processos.
+*
+* @return the list< processo>
+*/
+	public InternalResultsResponse<Envolvidos> fetchAllEnvolvidoss(Envolvidos  processo);
+
+	/**
+* Fetch processos by request.
+*
+* @param request the request
+* @return the internal results response
+*/
+	public InternalResultsResponse<Envolvidos> fetchEnvolvidossByRequest(PagedInquiryRequest request);
 
 }
