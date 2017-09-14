@@ -51,6 +51,13 @@
 		<property name="nfnotaInfoItemBAR" ref="nfnotainfoitemBARTarget" />
 	</bean>
 
+			<bean id="advocaciaBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Advogado.AdvocaciaBARImpl">
+		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
+				<property name="statusBAR" ref="statusBARTarget" />
+		<property name="historicoBAR" ref="historicoBARTarget" />
+		<property name="advocaciaBAR" ref="advocaciaBARTarget" />
+	</bean>
+
 	<bean id="nfeBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Nfe.NFeBARImpl">
 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
 		<property name="statusBAR" ref="statusBARTarget" />
@@ -189,10 +196,6 @@
 		<property name="enderecoBAR" ref="enderecoBARTarget" />
 		<property name="telefoneBAR" ref="telefoneBARTarget" />
 		<property name="emailBAR" ref="emailBARTarget" />
-	</bean>
-
-		<bean id="advocaciaBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Advogado.AdvocaciaBARImpl">
-		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
 	</bean>
 
 	<bean id="clinicaBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Clinica.ClinicaBARImpl">

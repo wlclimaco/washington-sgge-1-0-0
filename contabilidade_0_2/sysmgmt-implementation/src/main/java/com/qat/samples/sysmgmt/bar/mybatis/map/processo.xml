@@ -52,8 +52,6 @@
 			select="DoisValorMap.fetchDoisValorById" />
 		<collection property="acao" column="acao"
 			select="DoisValorMap.fetchDoisValorById" />
-		<collection property="statusProc" column="statusProc"
-			select="DoisValorMap.fetchDoisValorById" />
 		<collection property="situacao" column="situacao"
 			select="DoisValorMap.fetchDoisValorById" />
 		<collection property="instancia" column="instancia"
@@ -74,7 +72,6 @@
 		valor,
 		acao,
 		assunto,
-		statusProc,
 		descricaoProc,
 		processo,
 		situacao,
@@ -110,7 +107,6 @@
 		#{valor},
 		#{acao.id},
 		#{assunto},
-		#{statusProc.id},
 		#{descricaoProc},
 		#{processo},
 		#{situacao.id},
@@ -224,7 +220,6 @@
 		<if test="valor!= null"> valor=#{valor},</if>
 		<if test="acao.id!= null"> acao=#{acao.id},</if>
 		<if test="assunto!= null"> assunto=#{assunto},</if>
-		<if test="statusProc.id!= null"> statusProc.id=#{statusProc.id},</if>
 		<if test="descricaoProc != null"> descricaoProc=#{descricaoProc},</if>
 		<if test="processo != null"> processo=#{processo},</if>
 		<if test="situacao.id != null"> situacao=#{situacao.id},</if>
@@ -558,9 +553,12 @@
 
 	<update id="updateEnvolvidos" parameterType="Envolvidos">
 		UPDATE Envolvidos SET
-		<if test="dataProcesso!= null"> dataProcesso=#{dataProcesso},</if>
-		<if test="note!= null"> note=#{note},</if>
-		<if test="statusProcess!= null"> statusProcess=#{statusProcess.id},</if>
+
+		<if test="bCliente!= null"> bCliente=#{bCliente},</if>
+		<if test="cliente!= null"> cliente=#{cliente.id},</if>
+		<if test="tipoEnvolvido!= null"> tipoEnvolvido=#{tipoEnvolvido.id},</if>
+		<if test="envolvimento!= null"> envolvimento=#{envolvimento.id},</if>
+
 		<if test="parentId!= null"> parentId=#{parentId},</if>
 		<if test="emprId!= null"> emprId=#{emprId},</if>
 		<if test="processId!= null"> processId=#{processId},</if>

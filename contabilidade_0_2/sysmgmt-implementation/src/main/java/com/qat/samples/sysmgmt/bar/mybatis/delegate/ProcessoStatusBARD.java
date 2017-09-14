@@ -59,21 +59,21 @@ public final class ProcessoStatusBARD extends SqlSessionDaoSupport
 			{
 				continue;
 			}
-//			switch (socio.getModelAction())
-//			{
-//				case INSERT:
+			switch (socio.getModelAction())
+			{
+				case INSERT:
 					count = socioDAC.insertProcessoStatus(socio).hasSystemError();
-//
-//					break;
-//				case UPDATE:
-//					count = socioDAC.updateProcessoStatus(socio).hasSystemError();
-//
-//					break;
-//				case DELETE:
-//					count = socioDAC.deleteProcessoStatusById(socio).hasSystemError();
-//
-//					break;
-//			}
+
+					break;
+				case UPDATE:
+					count = socioDAC.insertProcessoStatus(socio).hasSystemError();
+
+					break;
+				case DELETE:
+					count = socioDAC.deleteProcessoStatusById(socio).hasSystemError();
+
+					break;
+			}
 
 
 		}

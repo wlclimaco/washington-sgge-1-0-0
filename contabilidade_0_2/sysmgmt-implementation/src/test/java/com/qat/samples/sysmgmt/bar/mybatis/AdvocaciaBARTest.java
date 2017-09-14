@@ -153,6 +153,7 @@ public void setAdvocaciaBAR(IAdvocaciaBAR advocaciaBAR) {
 		getAdvocaciaBAR().insertProcesso(processo);
 		processoResponse = getAdvocaciaBAR().fetchProcessoById(request);
 		Assert.assertEquals(processo.getId(), processoResponse.getId());
+		 processo = Objects.insertProcesso(1004, TabelaEnum.PROCESSO, PersistenceActionEnum.DELETE);
 		getAdvocaciaBAR().deleteProcessoById(processo);
 		processoResponse = getAdvocaciaBAR().fetchProcessoById(request);
 		Assert.assertEquals(processoResponse, null);
