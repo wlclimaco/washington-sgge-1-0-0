@@ -13,7 +13,10 @@
 
 	<!-- Result maps describe the mapping between the columns returned from
 		a query, and the class properties. A result map isnt necessary if the columns
-		(or aliases) match to the properties exactly. -->
+		(or aliases) match to the properties exactly. private Integer id; /** The
+		type of an account. */ -->
+
+
 	<resultMap id="ProcessoResult" type="Processo">
 
 		<result property="id" column="id" />
@@ -29,6 +32,15 @@
 		<result property="distribuido" column="distribuido" />
 		<result property="valorAcao" column="valorAcao" />
 		<result property="pasta" column="pasta" />
+
+		<result property="enviarEmail" column="enviarEmail" />
+		<result property="enviarMdgTelefone" column="enviarMdgTelefone" />
+		<result property="fundamentacaoJuridica" column="fundamentacaoJuridica" />
+		<result property="fatos" column="fatos" />
+		<result property="pretensoesCliente" column="pretensoesCliente" />
+		<result property="estrategia" column="estrategia" />
+		<result property="retringirProcesso" column="retringirProcesso" />
+
 		<result property="observacaoProc" column="observacaoProc" />
 		<result property="numeroprocesso" column="numeroprocesso" />
 		<result property="descricaoProc" column="descricaoProc" />
@@ -40,6 +52,8 @@
 		<result property="createDateUTC" column="create_date" />
 		<result property="modifyUser" column="modify_user" />
 		<result property="modifyDateUTC" column="modify_date" />
+		<collection property="quando" column="quando"
+			select="DoisValorMap.fetchDoisValorById" />
 		<collection property="justica" column="justica"
 			select="DoisValorMap.fetchDoisValorById" />
 		<collection property="tribunal" column="tribunal"
@@ -58,11 +72,30 @@
 			select="DoisValorMap.fetchDoisValorById" />
 		<collection property="capautomatica" column="capautomatica"
 			select="DoisValorMap.fetchDoisValorById" />
-		<!-- private List<ContasReceber> tituloList; -->
-		<!-- private List<Advogado> advogadoList; -->
-		<!-- private List<Audiencia> audienciaList; -->
-		<!-- private List<ProcessoStatus> processoStatusList; -->
-		<!-- private List<Envolvidos> envolvList; -->
+
+		<collection property="tituloList" column="id"
+			select="ContasReceberMap.fetchContasReceberByParentId" />
+
+		<collection property="advogadoList" column="id"
+			select="DoisValorMap.fetchDoisValorById" />
+
+		<collection property="audienciaList" column="id"
+			select="DoisValorMap.fetchDoisValorById" />
+
+		<collection property="processoStatusList" column="id"
+			select="ProcessoMap.fetchProcessoStatusByParentId" />
+
+		<collection property="envolvList" column="id"
+			select="ProcessoMap.fetchEnvolvidosByParentId" />
+
+		<collection property="documentos" column="id"
+			select="DocumentoMap.fetchDocumentoByParentId" />
+
+		<collection property="envolvidosExterno" column="id"
+			select="ProcessoMap.fetchParticipanteExternoByParentId" />
+
+		<collection property="usuariosRestricaoProc" column="id"
+			select="UsuarioMap.fetchUsuarioByParentId" />
 
 	</resultMap>
 
@@ -90,7 +123,15 @@
 		capturpor,
 		numeroprocesso,
 		capautomatica,
-		pasta
+		pasta,
+		enviarEmail,
+		enviarMdgTelefone,
+		quando,
+		fundamentacaoJuridica,
+		fatos,
+		pretensoesCliente,
+		estrategia,
+		retringirProcesso
 		,parentId
 		,tabelaEnumValue
 		,emprId
@@ -126,6 +167,14 @@
 		#{numeroprocesso},
 		#{capautomatica.id},
 		#{pasta},
+		#{enviarEmail},
+		#{enviarMdgTelefone},
+		#{quando.id},
+		#{fundamentacaoJuridica},
+		#{fatos},
+		#{pretensoesCliente},
+		#{estrategia},
+		#{retringirProcesso},
 		#{parentId},
 		#{tabelaEnumValue},
 		#{emprId},
@@ -239,6 +288,14 @@
 		<if test="numeroprocesso != null"> numeroprocesso=#{numeroprocesso},</if>
 		<if test="capautomatica.id != null"> capautomatica=#{capautomatica.id},</if>
 		<if test="pasta != null"> pasta=#{pasta},</if>
+		<if test="enviarEmail != null"> enviarEmail=#{enviarEmail},</if>
+		<if test="enviarMdgTelefone != null"> enviarMdgTelefone=#{enviarMdgTelefone},</if>
+		<if test="quando != null"> quando=#{quando.id},</if>
+		<if test="fundamentacaoJuridica != null"> fundamentacaoJuridica=#{fundamentacaoJuridica},</if>
+		<if test="fatos != null"> fatos=#{fatos},</if>
+		<if test="pretensoesCliente != null"> pretensoesCliente=#{pretensoesCliente},</if>
+		<if test="estrategia != null"> estrategia=#{estrategia},</if>
+		<if test="retringirProcesso != null"> retringirProcesso=#{retringirProcesso},</if>
 		<if test="parentId!= null"> parentId=#{parentId},</if>
 		<if test="emprId!= null"> emprId=#{emprId},</if>
 		<if test="processId!= null"> processId=#{processId},</if>
@@ -323,6 +380,13 @@
 		SELECT id,
 		<include refid="allProcessoStatusColumns" />
 		FROM processoStatus WHERE id = #{fetchid}
+	</select>
+
+	<select id="fetchProcessoStatusByParentId" parameterType="Integer"
+		resultMap="ProcessoStatusResult">
+		SELECT id,
+		<include refid="allProcessoStatusColumns" />
+		FROM processoStatus WHERE parentId = #{fetchid}
 	</select>
 
 	<select id="fetchAllProcessosStatusRequest" parameterType="PagedInquiryRequest"
@@ -487,6 +551,13 @@
 		FROM Envolvidos WHERE id = #{fetchid}
 	</select>
 
+	<select id="fetchEnvolvidosByParentId" parameterType="Integer"
+		resultMap="EnvolvidosResult">
+		SELECT id,
+		<include refid="allEnvolvidosColumns" />
+		FROM Envolvidos WHERE parentid = #{fetchid}
+	</select>
+
 	<select id="fetchAllEnvolvidosRequest" parameterType="PagedInquiryRequest"
 		resultMap="EnvolvidosResult">
 
@@ -575,6 +646,350 @@
 
 	<delete id="deleteAllEnvolvidos">
 		DELETE FROM Envolvidos
+	</delete>
+
+
+	<!-- Result maps describe the mapping between the columns returned from
+		a query, and the class properties. A result map isnt necessary if the columns
+		(or aliases) match to the properties exactly. private Integer id; /** The
+		type of an account. */ private Cliente cliente; /** The tipo envolvido. */
+		private DoisValores tipoEnvolvido; /** The envolvimento. */ private DoisValores
+		envolvimento; private Integer bCliente; -->
+	<resultMap id="ParticipanteExternoResult" type="ParticipanteExterno">
+		<result property="id" column="id" />
+		<result property="nome" column="nome" />
+		<result property="parentId" column="parentId" />
+		<result property="tabelaEnumValue" column="tabelaEnumValue" />
+		<result property="emprId" column="emprId" />
+		<result property="processId" column="processId" />
+		<result property="createUser" column="create_user" />
+		<result property="createDateUTC" column="create_date" />
+		<result property="modifyUser" column="modify_user" />
+		<result property="modifyDateUTC" column="modify_date" />
+		<collection property="email" column="id"
+			select="EmailMap.fetchEmailById" />
+		<collection property="telefones" column="id"
+			select="TelefoneMap.fetchTelefoneById" />
+
+
+	</resultMap>
+
+	<sql id="allParticipanteExternoColumns">
+		nome,
+		,parentId
+		,tabelaEnumValue
+		,emprId
+		,processId
+		,create_date
+		,create_user
+		,modify_date
+		,modify_user
+
+	</sql>
+	<sql id="allParticipanteExternoValues">
+		#{nome},
+		#{parentId},
+		#{tabelaEnumValue},
+		#{emprId},
+		#{processId},
+		#{createDateUTC},
+		#{createUser},
+		#{modifyDateUTC},
+		#{modifyUser}
+	</sql>
+
+
+	<select id="fetchAllParticipanteExterno" resultMap="ParticipanteExternoResult">
+		SELECT id,
+		<include refid="allParticipanteExternoColumns" />
+		FROM ParticipanteExterno ORDER BY id ASC
+	</select>
+
+	<select id="fetchParticipanteExternoById" parameterType="Integer"
+		resultMap="ParticipanteExternoResult">
+		SELECT id,
+		<include refid="allParticipanteExternoColumns" />
+		FROM ParticipanteExterno WHERE id = #{fetchid}
+	</select>
+
+	<select id="fetchParticipanteExternoByParentId" parameterType="Integer"
+		resultMap="ParticipanteExternoResult">
+		SELECT id,
+		<include refid="allParticipanteExternoColumns" />
+		FROM ParticipanteExterno WHERE parentid = #{fetchid}
+	</select>
+
+	<select id="fetchAllParticipanteExternoRequest" parameterType="PagedInquiryRequest"
+		resultMap="ParticipanteExternoResult">
+
+		SELECT id,
+		<include refid="allParticipanteExternoColumns" />
+		FROM ParticipanteExterno where 0 = 0
+		<if test="permissaoTypeEnumValue == 1">
+			and id IS NOT NULL
+		</if>
+		<if test="permissaoTypeEnumValue != 1">
+			<if test="emprId == null">
+				<if test="emprIds != null">
+					and emprId in
+
+					<foreach item="item" index="index" collection="emprIds"
+						open="(" separator="," close=")">
+						#{item}
+					</foreach>
+
+				</if>
+			</if>
+			<if test="emprId != null"> and emprId = #{emprId}</if>
+		</if>
+		ORDER BY id ASC
+	</select>
+
+	<select id="fetchParticipanteExternoRowCount" resultType="Integer">
+		SELECT COUNT(*) AS RECORD_COUNT FROM ParticipanteExterno WHERE id IS
+		NOT NULL
+		<if test="permissaoTypeEnumValue == 1">
+			and id IS NOT NULL
+		</if>
+		<if test="permissaoTypeEnumValue != 1">
+			<if test="emprId == null">
+				<if test="emprIds != null">
+					and emprId in
+
+					<foreach item="item" index="index" collection="emprIds"
+						open="(" separator="," close=")">
+						#{item}
+					</foreach>
+
+				</if>
+			</if>
+			<if test="emprId != null"> and emprId = #{emprId}</if>
+		</if>
+
+	</select>
+
+	<insert id="insertParticipanteExterno" parameterType="ParticipanteExterno"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO ParticipanteExterno (
+		<if test="id != null">
+			<if test="id > 0">id,</if>
+		</if>
+		<include refid="allParticipanteExternoColumns" />
+		)
+		VALUES (
+		<if test="id != null">
+			<if test="id > 0">#{id},</if>
+		</if>
+		<include refid="allParticipanteExternoValues" />
+		)
+	</insert>
+
+	<update id="updateParticipanteExterno" parameterType="ParticipanteExterno">
+		UPDATE ParticipanteExterno SET
+
+		<if test="nome!= null"> nome=#{nome},</if>
+		<if test="parentId!= null"> parentId=#{parentId},</if>
+		<if test="emprId!= null"> emprId=#{emprId},</if>
+		<if test="processId!= null"> processId=#{processId},</if>
+		<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+		<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		WHERE
+		id = #{id}
+	</update>
+
+	<delete id="deleteParticipanteExternoById" parameterType="ParticipanteExterno">
+		DELETE
+		FROM
+		ParticipanteExterno WHERE id = #{id}
+	</delete>
+
+	<delete id="deleteAllParticipanteExterno">
+		DELETE FROM ParticipanteExterno
+	</delete>
+
+
+
+
+	<!-- Result maps describe the mapping between the columns returned from
+		a query, and the class properties. A result map isnt necessary if the columns
+		(or aliases) match to the properties exactly. private Integer id; /** The
+		type of an account. */ private Cliente cliente; /** The tipo envolvido. */
+		private DoisValores tipoEnvolvido; /** The envolvimento. */ private DoisValores
+		envolvimento; private Integer bCliente;
+			/** The dias semanas. */
+	private String titulo;
+	private String local;
+	private Integer enviarEmail;
+	private Integer enviarMdgTelefone;
+	private DoisValores quando;
+	private Advogado responsavel;
+	private DoisValores tipoCompromisso;
+	private DoisValores vinculado;
+	private DiasHoras horaFinal;
+	private List<Cliente> participante;
+	private List<ParticipanteExterno> participanteExterno;
+	private List<Documento> documentos;
+
+		 -->
+	<resultMap id="CompromissoResult" type="Compromisso">
+		<result property="id" column="id" />
+		<result property="titulo" column="titulo" />
+		<result property="local" column="local" />
+		<result property="enviarEmail" column="enviarEmail" />
+		<result property="enviarMdgTelefone" column="enviarMdgTelefone" />
+		<result property="parentId" column="parentId" />
+		<result property="tabelaEnumValue" column="tabelaEnumValue" />
+		<result property="emprId" column="emprId" />
+		<result property="processId" column="processId" />
+		<result property="createUser" column="create_user" />
+		<result property="createDateUTC" column="create_date" />
+		<result property="modifyUser" column="modify_user" />
+		<result property="modifyDateUTC" column="modify_date" />
+	<collection property="quando" column="quando"
+			select="DoisValorMap.fetchDoisValorById" />
+	<collection property="responsavel" column="responsavel"
+			select="DoisValorMap.fetchDoisValorById" />
+	<collection property="tipoCompromisso" column="tipoCompromisso"
+			select="DoisValorMap.fetchDoisValorById" />
+	<collection property="vinculado" column="vinculado"
+			select="DoisValorMap.fetchDoisValorById" />
+	<collection property="horaFinal" column="horaFinal"
+			select="DoisValorMap.fetchDoisValorById" />
+
+
+	</resultMap>
+
+	<sql id="allCompromissoColumns">
+		nome,
+		,parentId
+		,tabelaEnumValue
+		,emprId
+		,processId
+		,create_date
+		,create_user
+		,modify_date
+		,modify_user
+
+	</sql>
+	<sql id="allCompromissoValues">
+		#{nome},
+		#{parentId},
+		#{tabelaEnumValue},
+		#{emprId},
+		#{processId},
+		#{createDateUTC},
+		#{createUser},
+		#{modifyDateUTC},
+		#{modifyUser}
+	</sql>
+
+
+	<select id="fetchAllCompromisso" resultMap="CompromissoResult">
+		SELECT id,
+		<include refid="allCompromissoColumns" />
+		FROM Compromisso ORDER BY id ASC
+	</select>
+
+	<select id="fetchCompromissoById" parameterType="Integer"
+		resultMap="CompromissoResult">
+		SELECT id,
+		<include refid="allCompromissoColumns" />
+		FROM Compromisso WHERE id = #{fetchid}
+	</select>
+
+	<select id="fetchCompromissoByParentId" parameterType="Integer"
+		resultMap="CompromissoResult">
+		SELECT id,
+		<include refid="allCompromissoColumns" />
+		FROM Compromisso WHERE parentid = #{fetchid}
+	</select>
+
+	<select id="fetchAllCompromissoRequest" parameterType="PagedInquiryRequest"
+		resultMap="CompromissoResult">
+
+		SELECT id,
+		<include refid="allCompromissoColumns" />
+		FROM Compromisso where 0 = 0
+		<if test="permissaoTypeEnumValue == 1">
+			and id IS NOT NULL
+		</if>
+		<if test="permissaoTypeEnumValue != 1">
+			<if test="emprId == null">
+				<if test="emprIds != null">
+					and emprId in
+
+					<foreach item="item" index="index" collection="emprIds"
+						open="(" separator="," close=")">
+						#{item}
+					</foreach>
+
+				</if>
+			</if>
+			<if test="emprId != null"> and emprId = #{emprId}</if>
+		</if>
+		ORDER BY id ASC
+	</select>
+
+	<select id="fetchCompromissoRowCount" resultType="Integer">
+		SELECT COUNT(*) AS RECORD_COUNT FROM Compromisso WHERE id IS
+		NOT NULL
+		<if test="permissaoTypeEnumValue == 1">
+			and id IS NOT NULL
+		</if>
+		<if test="permissaoTypeEnumValue != 1">
+			<if test="emprId == null">
+				<if test="emprIds != null">
+					and emprId in
+
+					<foreach item="item" index="index" collection="emprIds"
+						open="(" separator="," close=")">
+						#{item}
+					</foreach>
+
+				</if>
+			</if>
+			<if test="emprId != null"> and emprId = #{emprId}</if>
+		</if>
+
+	</select>
+
+	<insert id="insertCompromisso" parameterType="Compromisso"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO Compromisso (
+		<if test="id != null">
+			<if test="id > 0">id,</if>
+		</if>
+		<include refid="allCompromissoColumns" />
+		)
+		VALUES (
+		<if test="id != null">
+			<if test="id > 0">#{id},</if>
+		</if>
+		<include refid="allCompromissoValues" />
+		)
+	</insert>
+
+	<update id="updateCompromisso" parameterType="Compromisso">
+		UPDATE Compromisso SET
+
+		<if test="nome!= null"> nome=#{nome},</if>
+		<if test="parentId!= null"> parentId=#{parentId},</if>
+		<if test="emprId!= null"> emprId=#{emprId},</if>
+		<if test="processId!= null"> processId=#{processId},</if>
+		<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+		<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+		WHERE
+		id = #{id}
+	</update>
+
+	<delete id="deleteCompromissoById" parameterType="Compromisso">
+		DELETE
+		FROM
+		Compromisso WHERE id = #{id}
+	</delete>
+
+	<delete id="deleteAllCompromisso">
+		DELETE FROM Compromisso
 	</delete>
 
 </mapper>

@@ -138,6 +138,7 @@
         <typeAlias alias="PagedInquiryRequest" type="com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest" />
 
         <typeAlias alias="QATModel1" type="com.qat.samples.sysmgmt.util.model.QATModel1" />
+        <typeAlias alias="ParticipanteExterno" type="com.qat.samples.sysmgmt.util.model.ParticipanteExterno" />
         <typeAlias alias="FetchByIdRequest" type="com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest" />
         <typeAlias alias="Entidade" type="com.qat.samples.sysmgmt.entidade.model.Entidade" />
 

@@ -44,6 +44,13 @@
 		FROM contasreceber WHERE id = #{fetchid}
 	</select>
 
+	<select id="fetchContasReceberByParentId" parameterType="Integer"
+		resultMap="ContasReceberResult">
+		SELECT id,
+		<include refid="allContasReceberColumns" />
+		FROM contasreceber WHERE parentId = #{fetchid}
+	</select>
+
 	<select id="fetchAllContasRecebersRequest" parameterType="ContasReceberInquiryRequest"
 		resultMap="ContasReceberResult">
 

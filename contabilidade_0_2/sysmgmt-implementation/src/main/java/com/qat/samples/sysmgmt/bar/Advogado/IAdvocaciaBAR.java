@@ -3,6 +3,7 @@ package com.qat.samples.sysmgmt.bar.Advogado;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.advocacia.Advogado;
+import com.qat.samples.sysmgmt.advocacia.Advogados;
 import com.qat.samples.sysmgmt.advocacia.Audiencia;
 import com.qat.samples.sysmgmt.advocacia.Envolvidos;
 import com.qat.samples.sysmgmt.advocacia.Processo;
@@ -286,5 +287,35 @@ public interface IAdvocaciaBAR
 * @return the internal results response
 */
 	public InternalResultsResponse<Envolvidos> fetchEnvolvidossByRequest(PagedInquiryRequest request);
+
+
+
+
+	public InternalResponse insertAdvogados(Advogados advogado);
+
+	/**
+* Update advogado.
+*
+* @param advogado the advogado
+*
+* @return the internal response
+*/
+	public InternalResponse updateAdvogados(Advogados advogado);
+
+	/**
+* Delete advogado.
+*
+* @param advogado the advogado
+*
+* @return the internal response
+*/
+	public InternalResponse deleteAdvogadosById(Advogados advogado);
+
+	/**
+* Delete all advogados.
+*
+* @return the internal response
+*/
+	public InternalResponse deleteAllAdvogadoss();
 
 }

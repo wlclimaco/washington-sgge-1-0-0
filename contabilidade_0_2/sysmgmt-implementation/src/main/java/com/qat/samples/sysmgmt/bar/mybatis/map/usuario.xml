@@ -101,6 +101,13 @@
 		FROM users WHERE id = #{fetchid}
 	</select>
 
+	<select id="fetchUsuarioByParentId" parameterType="Integer" resultMap="UsuarioResult">
+		SELECT
+		id,
+		<include refid="allUsuarioColumns" />
+		FROM users WHERE parentId = #{fetchid}
+	</select>
+
 	<select id="fetchUsuarioByEmnprId" parameterType="Integer"
 		resultMap="UsuarioResult">
 		SELECT

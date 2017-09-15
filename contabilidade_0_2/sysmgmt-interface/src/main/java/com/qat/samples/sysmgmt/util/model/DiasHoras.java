@@ -1,12 +1,11 @@
 package com.qat.samples.sysmgmt.util.model;
 
 /**
- * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
- * setting.
+ * This class is a representation of an Account (i.e Checking, Savings, etc.).
+ * This represents an account for a transfer setting.
  */
 @SuppressWarnings("serial")
-public class DiasHoras extends ModelCosmeDamiao
-{
+public class DiasHoras extends ModelCosmeDamiao {
 	/** The SendSolv id for the account. */
 	private Integer id;
 
@@ -19,19 +18,35 @@ public class DiasHoras extends ModelCosmeDamiao
 	/** The hora final. */
 	private Long horaFinal;
 
+	/** The diario. */
+	private Integer diario;
+
+	/** The semanal. */
+	private Integer semanal;
+
+	/** The quinzenal. */
+	private Integer quinzenal;
+
+	/** The mensal. */
+	private Integer mensal;
+
+	/** The anual. */
+	private Integer anual;
+
 	/**
 	 * Default constructor.
 	 */
-	public DiasHoras()
-	{
+	public DiasHoras() {
 		super();
 	}
 
 	/**
 	 * Instantiates a new dias horas.
 	 *
-	 * @param i the i
-	 * @param string the string
+	 * @param i
+	 *            the i
+	 * @param string
+	 *            the string
 	 */
 	public DiasHoras(int i, String string) {
 		// TODO Auto-generated constructor stub
@@ -42,18 +57,17 @@ public class DiasHoras extends ModelCosmeDamiao
 	 *
 	 * @return the id
 	 */
-	public Integer getId()
-	{
+	public Integer getId() {
 		return id;
 	}
 
 	/**
 	 * Sets the id.
 	 *
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
-	public void setId(Integer id)
-	{
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -69,7 +83,8 @@ public class DiasHoras extends ModelCosmeDamiao
 	/**
 	 * Sets the dias semanas.
 	 *
-	 * @param diasSemanas the new dias semanas
+	 * @param diasSemanas
+	 *            the new dias semanas
 	 */
 	public void setDiasSemanas(DoisValores diasSemanas) {
 		this.diasSemanas = diasSemanas;
@@ -87,7 +102,8 @@ public class DiasHoras extends ModelCosmeDamiao
 	/**
 	 * Sets the hora inicio.
 	 *
-	 * @param horaInicio the new hora inicio
+	 * @param horaInicio
+	 *            the new hora inicio
 	 */
 	public void setHoraInicio(Long horaInicio) {
 		this.horaInicio = horaInicio;
@@ -105,20 +121,119 @@ public class DiasHoras extends ModelCosmeDamiao
 	/**
 	 * Sets the hora final.
 	 *
-	 * @param horaFinal the new hora final
+	 * @param horaFinal
+	 *            the new hora final
 	 */
 	public void setHoraFinal(Long horaFinal) {
 		this.horaFinal = horaFinal;
 	}
 
-	/* (non-Javadoc)
+	/**
+	 * Gets the diario.
+	 *
+	 * @return the diario
+	 */
+	public Integer getDiario() {
+		return diario;
+	}
+
+	/**
+	 * Sets the diario.
+	 *
+	 * @param diario
+	 *            the new diario
+	 */
+	public void setDiario(Integer diario) {
+		this.diario = diario;
+	}
+
+	/**
+	 * Gets the semanal.
+	 *
+	 * @return the semanal
+	 */
+	public Integer getSemanal() {
+		return semanal;
+	}
+
+	/**
+	 * Sets the semanal.
+	 *
+	 * @param semanal
+	 *            the new semanal
+	 */
+	public void setSemanal(Integer semanal) {
+		this.semanal = semanal;
+	}
+
+	/**
+	 * Gets the quinzenal.
+	 *
+	 * @return the quinzenal
+	 */
+	public Integer getQuinzenal() {
+		return quinzenal;
+	}
+
+	/**
+	 * Sets the quinzenal.
+	 *
+	 * @param quinzenal
+	 *            the new quinzenal
+	 */
+	public void setQuinzenal(Integer quinzenal) {
+		this.quinzenal = quinzenal;
+	}
+
+	/**
+	 * Gets the mensal.
+	 *
+	 * @return the mensal
+	 */
+	public Integer getMensal() {
+		return mensal;
+	}
+
+	/**
+	 * Sets the mensal.
+	 *
+	 * @param mensal
+	 *            the new mensal
+	 */
+	public void setMensal(Integer mensal) {
+		this.mensal = mensal;
+	}
+
+	/**
+	 * Gets the anual.
+	 *
+	 * @return the anual
+	 */
+	public Integer getAnual() {
+		return anual;
+	}
+
+	/**
+	 * Sets the anual.
+	 *
+	 * @param anual
+	 *            the new anual
+	 */
+	public void setAnual(Integer anual) {
+		this.anual = anual;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
 	 * @see com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao#toString()
 	 */
 	@Override
 	public String toString() {
 		return "DiasHoras [getId()=" + getId() + ", getDiasSemanas()=" + getDiasSemanas() + ", getHoraInicio()="
-				+ getHoraInicio() + ", getHoraFinal()=" + getHoraFinal() + ", toString()=" + super.toString() + "]";
+				+ getHoraInicio() + ", getHoraFinal()=" + getHoraFinal() + ", getDiario()=" + getDiario()
+				+ ", getSemanal()=" + getSemanal() + ", getQuinzenal()=" + getQuinzenal() + ", getMensal()="
+				+ getMensal() + ", getAnual()=" + getAnual() + ", toString()=" + super.toString() + "]";
 	}
-
 
 }

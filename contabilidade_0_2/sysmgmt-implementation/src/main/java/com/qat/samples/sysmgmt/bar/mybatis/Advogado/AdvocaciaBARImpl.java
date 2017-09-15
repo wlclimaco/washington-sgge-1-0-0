@@ -11,6 +11,7 @@ import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.MyBatisBARHelper;
 import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.advocacia.Advogado;
+import com.qat.samples.sysmgmt.advocacia.Advogados;
 import com.qat.samples.sysmgmt.advocacia.Audiencia;
 import com.qat.samples.sysmgmt.advocacia.Envolvidos;
 import com.qat.samples.sysmgmt.advocacia.Processo;
@@ -19,8 +20,11 @@ import com.qat.samples.sysmgmt.advocacia.request.AdvogadoInquiryRequest;
 import com.qat.samples.sysmgmt.advocacia.request.AudienciaInquiryRequest;
 import com.qat.samples.sysmgmt.advocacia.request.ProcessoInquiryRequest;
 import com.qat.samples.sysmgmt.bar.Advogado.IAdvocaciaBAR;
+import com.qat.samples.sysmgmt.bar.Financeiro.IFinanceiroBAR;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.AdvogadosBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.ContasReceberBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.EnvolvidosBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.InsertHistBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.ProcessoStatusBARD;
@@ -135,6 +139,8 @@ public class AdvocaciaBARImpl extends SqlSessionDaoSupport implements IAdvocacia
 	/** The advocacia BAR. */
 	IAdvocaciaBAR advocaciaBAR;
 
+	IFinanceiroBAR financeiroBAR;
+
 	/**
 	 * Gets the status BAR.
 	 *
@@ -178,6 +184,14 @@ public class AdvocaciaBARImpl extends SqlSessionDaoSupport implements IAdvocacia
 	 */
 	public IAdvocaciaBAR getAdvocaciaBAR() {
 		return advocaciaBAR;
+	}
+
+	public IFinanceiroBAR getFinanceiroBAR() {
+		return financeiroBAR;
+	}
+
+	public void setFinanceiroBAR(IFinanceiroBAR financeiroBAR) {
+		this.financeiroBAR = financeiroBAR;
 	}
 
 	/**
@@ -526,6 +540,60 @@ public class AdvocaciaBARImpl extends SqlSessionDaoSupport implements IAdvocacia
 					processo.getCreateUser(), historicoId, historicoId);
 		}
 
+
+		if (!ValidationUtil.isNullOrEmpty(processo.getTituloList())) {
+			count += ContasReceberBARD.maintainContasReceberAssociations(processo.getTituloList(), response, processo.getId(),
+					null, null, TabelaEnum.PROCESSO, getFinanceiroBAR(), statusBAR, historicoBAR, processo.getId(),
+					processo.getCreateUser(), historicoId, historicoId);
+		}
+
+			if (!ValidationUtil.isNullOrEmpty(processo.getAdvogadoList())) {
+				count += AdvogadosBARD.maintainAdvogadosAssociations(processo.getAdvogadoList(), response, processo.getId(),
+						null, null, TabelaEnum.PROCESSO, getAdvocaciaBAR(), statusBAR, historicoBAR, processo.getId(),
+						processo.getCreateUser(), historicoId, historicoId);
+			}
+			<collection property="audienciaList" column="id"
+				select="DoisValorMap.fetchDoisValorById" />
+			if (!ValidationUtil.isNullOrEmpty(processo.getEnvolvList())) {
+				count += EnvolvidosBARD.maintainEnvolvidosAssociations(processo.getEnvolvList(), response, processo.getId(),
+						null, null, TabelaEnum.PROCESSO, getAdvocaciaBAR(), statusBAR, historicoBAR, processo.getId(),
+						processo.getCreateUser(), historicoId, historicoId);
+			}
+			<collection property="processoStatusList" column="id"
+				select="ProcessoMap.fetchProcessoStatusByParentId" />
+			if (!ValidationUtil.isNullOrEmpty(processo.getEnvolvList())) {
+				count += EnvolvidosBARD.maintainEnvolvidosAssociations(processo.getEnvolvList(), response, processo.getId(),
+						null, null, TabelaEnum.PROCESSO, getAdvocaciaBAR(), statusBAR, historicoBAR, processo.getId(),
+						processo.getCreateUser(), historicoId, historicoId);
+			}
+			<collection property="envolvList" column="id"
+				select="ProcessoMap.fetchEnvolvidosByParentId" />
+			if (!ValidationUtil.isNullOrEmpty(processo.getEnvolvList())) {
+				count += EnvolvidosBARD.maintainEnvolvidosAssociations(processo.getEnvolvList(), response, processo.getId(),
+						null, null, TabelaEnum.PROCESSO, getAdvocaciaBAR(), statusBAR, historicoBAR, processo.getId(),
+						processo.getCreateUser(), historicoId, historicoId);
+			}
+			<collection property="documentos" column="id"
+				select="DocumentoMap.fetchDocumentoByParentId" />
+			if (!ValidationUtil.isNullOrEmpty(processo.getEnvolvList())) {
+				count += EnvolvidosBARD.maintainEnvolvidosAssociations(processo.getEnvolvList(), response, processo.getId(),
+						null, null, TabelaEnum.PROCESSO, getAdvocaciaBAR(), statusBAR, historicoBAR, processo.getId(),
+						processo.getCreateUser(), historicoId, historicoId);
+			}
+			<collection property="envolvidosExterno" column="id"
+				select="ProcessoMap.fetchParticipanteExternoByParentId" />
+			if (!ValidationUtil.isNullOrEmpty(processo.getEnvolvList())) {
+				count += EnvolvidosBARD.maintainEnvolvidosAssociations(processo.getEnvolvList(), response, processo.getId(),
+						null, null, TabelaEnum.PROCESSO, getAdvocaciaBAR(), statusBAR, historicoBAR, processo.getId(),
+						processo.getCreateUser(), historicoId, historicoId);
+			}
+			<collection property="usuariosRestricaoProc" column="id"
+				select="UsuarioMap.fetchUsuarioByParentId" />
+			if (!ValidationUtil.isNullOrEmpty(processo.getEnvolvList())) {
+				count += EnvolvidosBARD.maintainEnvolvidosAssociations(processo.getEnvolvList(), response, processo.getId(),
+						null, null, TabelaEnum.PROCESSO, getAdvocaciaBAR(), statusBAR, historicoBAR, processo.getId(),
+						processo.getCreateUser(), historicoId, historicoId);
+			}
 		return response;
 	}
 
@@ -1014,6 +1082,61 @@ public class AdvocaciaBARImpl extends SqlSessionDaoSupport implements IAdvocacia
 			response.getResultsSetInfo().setMoreRowsAvailable(true);
 		}
 
+	}
+
+	/**
+	 * /* (non-Javadoc).
+	 *
+	 * @param processo the processo
+	 * @return the internal response
+	 * @see com.qat.samples.sysmgmt.base.bar.IProcessoStatusBAR#insertProcessoStatus(com.qat.samples.sysmgmt.base.model.Processo)
+	 */
+	@Override
+	public InternalResponse insertAdvogados(Advogados processo) {
+		InternalResponse response = new InternalResponse();
+		MyBatisBARHelper.doInsert(getSqlSession(), "ProcessoMap.insertAdvogados", processo, response);
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see
+	 * com.qat.samples.sysmgmt.base.bar.IAdvogadosBAR#updateAdvogados(com.qat.
+	 * samples.sysmgmt.base.model.Advogados)
+	 */
+	@Override
+	public InternalResponse updateAdvogados(Advogados processo) {
+		InternalResponse response = new InternalResponse();
+		MyBatisBARHelper.doUpdate(getSqlSession(), "ProcessoMap.updateAdvogados", processo, response);
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see
+	 * com.qat.samples.sysmgmt.base.bar.IAdvogadosBAR#deleteAdvogados(com.qat.
+	 * samples.sysmgmt.base.model.Advogados)
+	 */
+	@Override
+	public InternalResponse deleteAdvogadosById(Advogados processo) {
+		InternalResponse response = new InternalResponse();
+		MyBatisBARHelper.doRemove(getSqlSession(), "ProcessoMap.deleteAdvogadosById", processo, response);
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see
+	 * com.qat.samples.sysmgmt.base.bar.IAdvogadosBAR#deleteAllAdvogadoss()
+	 */
+	@Override
+	public InternalResponse deleteAllAdvogadoss() {
+		InternalResponse response = new InternalResponse();
+		MyBatisBARHelper.doRemove(getSqlSession(), "ProcessoMap.deleteAllAdvogados", response);
+		return response;
 	}
 
 }

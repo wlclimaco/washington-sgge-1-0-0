@@ -2,10 +2,13 @@ package com.qat.samples.sysmgmt.advocacia;
 
 import java.util.List;
 
+import com.qat.samples.sysmgmt.entidade.model.Usuario;
 import com.qat.samples.sysmgmt.financeiro.model.ContasReceber;
+import com.qat.samples.sysmgmt.util.model.Compromisso;
+import com.qat.samples.sysmgmt.util.model.Documento;
 import com.qat.samples.sysmgmt.util.model.DoisValores;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
-
+import com.qat.samples.sysmgmt.util.model.ParticipanteExterno;
 
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.).
@@ -32,10 +35,10 @@ public class Processo extends ModelCosmeDamiao {
 	private List<ContasReceber> tituloList;
 
 	/** The advogado list. */
-	private List<Advogado> advogadoList;
+	private List<Advogados> advogadoList;
 
 	/** The audiencia list. */
-	private List<Audiencia> audienciaList;
+	private List<Compromisso> audienciaList;
 
 	/** The processo status list. */
 	private List<ProcessoStatus> processoStatusList;
@@ -51,6 +54,12 @@ public class Processo extends ModelCosmeDamiao {
 
 	/** The envolv list. */
 	private List<Envolvidos> envolvList;
+
+	/** The documentos. */
+	private List<Documento> documentos;
+
+	/** The envolvidos externo. */
+	private List<ParticipanteExterno> envolvidosExterno;
 
 	/** The processo. */
 	private String processo;
@@ -105,6 +114,27 @@ public class Processo extends ModelCosmeDamiao {
 
 	/** The pasta. */
 	private String pasta;
+
+	/** The enviar email. */
+	private Integer enviarEmail;
+
+	/** The enviar mdg telefone. */
+	private Integer enviarMdgTelefone;
+
+	/** The quando. */
+	private DoisValores quando;
+
+	private String fundamentacaoJuridica;
+
+	private String fatos;
+
+	private String pretensoesCliente;
+
+	private String estrategia;
+
+	private Integer retringirProcesso;
+
+	private List<Usuario> usuariosRestricaoProc;
 
 	/**
 	 * Instantiates a new processo.
@@ -245,7 +275,7 @@ public class Processo extends ModelCosmeDamiao {
 	 *
 	 * @return the advogado list
 	 */
-	public List<Advogado> getAdvogadoList() {
+	public List<Advogados> getAdvogadoList() {
 		return advogadoList;
 	}
 
@@ -255,7 +285,7 @@ public class Processo extends ModelCosmeDamiao {
 	 * @param advogadoList
 	 *            the new advogado list
 	 */
-	public void setAdvogadoList(List<Advogado> advogadoList) {
+	public void setAdvogadoList(List<Advogados> advogadoList) {
 		this.advogadoList = advogadoList;
 	}
 
@@ -264,7 +294,7 @@ public class Processo extends ModelCosmeDamiao {
 	 *
 	 * @return the audiencia list
 	 */
-	public List<Audiencia> getAudienciaList() {
+	public List<Compromisso> getAudienciaList() {
 		return audienciaList;
 	}
 
@@ -274,7 +304,7 @@ public class Processo extends ModelCosmeDamiao {
 	 * @param audienciaList
 	 *            the new audiencia list
 	 */
-	public void setAudienciaList(List<Audiencia> audienciaList) {
+	public void setAudienciaList(List<Compromisso> audienciaList) {
 		this.audienciaList = audienciaList;
 	}
 
@@ -715,11 +745,150 @@ public class Processo extends ModelCosmeDamiao {
 		this.pasta = pasta;
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * Gets the documentos.
 	 *
-	 * @see com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao#toString()
+	 * @return the documentos
 	 */
+	public List<Documento> getDocumentos() {
+		return documentos;
+	}
+
+	/**
+	 * Sets the documentos.
+	 *
+	 * @param documentos
+	 *            the new documentos
+	 */
+	public void setDocumentos(List<Documento> documentos) {
+		this.documentos = documentos;
+	}
+
+	/**
+	 * Gets the envolvidos externo.
+	 *
+	 * @return the envolvidos externo
+	 */
+	public List<ParticipanteExterno> getEnvolvidosExterno() {
+		return envolvidosExterno;
+	}
+
+	/**
+	 * Sets the envolvidos externo.
+	 *
+	 * @param envolvidosExterno
+	 *            the new envolvidos externo
+	 */
+	public void setEnvolvidosExterno(List<ParticipanteExterno> envolvidosExterno) {
+		this.envolvidosExterno = envolvidosExterno;
+	}
+
+	/**
+	 * Gets the enviar email.
+	 *
+	 * @return the enviar email
+	 */
+	public Integer getEnviarEmail() {
+		return enviarEmail;
+	}
+
+	/**
+	 * Sets the enviar email.
+	 *
+	 * @param enviarEmail
+	 *            the new enviar email
+	 */
+	public void setEnviarEmail(Integer enviarEmail) {
+		this.enviarEmail = enviarEmail;
+	}
+
+	/**
+	 * Gets the enviar mdg telefone.
+	 *
+	 * @return the enviar mdg telefone
+	 */
+	public Integer getEnviarMdgTelefone() {
+		return enviarMdgTelefone;
+	}
+
+	/**
+	 * Sets the enviar mdg telefone.
+	 *
+	 * @param enviarMdgTelefone
+	 *            the new enviar mdg telefone
+	 */
+	public void setEnviarMdgTelefone(Integer enviarMdgTelefone) {
+		this.enviarMdgTelefone = enviarMdgTelefone;
+	}
+
+	/**
+	 * Gets the quando.
+	 *
+	 * @return the quando
+	 */
+	public DoisValores getQuando() {
+		return quando;
+	}
+
+	/**
+	 * Sets the quando.
+	 *
+	 * @param quando
+	 *            the new quando
+	 */
+	public void setQuando(DoisValores quando) {
+		this.quando = quando;
+	}
+
+
+	public String getFundamentacaoJuridica() {
+		return fundamentacaoJuridica;
+	}
+
+	public void setFundamentacaoJuridica(String fundamentacaoJuridica) {
+		this.fundamentacaoJuridica = fundamentacaoJuridica;
+	}
+
+	public String getFatos() {
+		return fatos;
+	}
+
+	public void setFatos(String fatos) {
+		this.fatos = fatos;
+	}
+
+	public String getPretensoesCliente() {
+		return pretensoesCliente;
+	}
+
+	public void setPretensoesCliente(String pretensoesCliente) {
+		this.pretensoesCliente = pretensoesCliente;
+	}
+
+	public String getEstrategia() {
+		return estrategia;
+	}
+
+	public void setEstrategia(String estrategia) {
+		this.estrategia = estrategia;
+	}
+
+	public Integer getRetringirProcesso() {
+		return retringirProcesso;
+	}
+
+	public void setRetringirProcesso(Integer retringirProcesso) {
+		this.retringirProcesso = retringirProcesso;
+	}
+
+	public List<Usuario> getUsuariosRestricaoProc() {
+		return usuariosRestricaoProc;
+	}
+
+	public void setUsuariosRestricaoProc(List<Usuario> usuariosRestricaoProc) {
+		this.usuariosRestricaoProc = usuariosRestricaoProc;
+	}
+
 	@Override
 	public String toString() {
 		return "Processo [getId()=" + getId() + ", getDataProcess()=" + getDataProcess() + ", getValor()=" + getValor()
@@ -734,8 +903,14 @@ public class Processo extends ModelCosmeDamiao {
 				+ ", getObservacaoProc()=" + getObservacaoProc() + ", getJustica()=" + getJustica() + ", getTribunal()="
 				+ getTribunal() + ", getInstancia1()=" + getInstancia1() + ", getLocalidade()=" + getLocalidade()
 				+ ", getCapturpor()=" + getCapturpor() + ", getNumeroprocesso()=" + getNumeroprocesso()
-				+ ", getCapautomatica()=" + getCapautomatica() + ", getPasta()=" + getPasta() + ", toString()="
-				+ super.toString() + "]";
+				+ ", getCapautomatica()=" + getCapautomatica() + ", getPasta()=" + getPasta() + ", getDocumentos()="
+				+ getDocumentos() + ", getEnvolvidosExterno()=" + getEnvolvidosExterno() + ", getEnviarEmail()="
+				+ getEnviarEmail() + ", getEnviarMdgTelefone()=" + getEnviarMdgTelefone() + ", getQuando()="
+				+ getQuando() + ", getFundamentacaoJuridica()=" + getFundamentacaoJuridica() + ", getFatos()="
+				+ getFatos() + ", getPretensoesCliente()=" + getPretensoesCliente() + ", getEstrategia()="
+				+ getEstrategia() + ", getRetringirProcesso()=" + getRetringirProcesso()
+				+ ", getUsuariosRestricaoProc()=" + getUsuariosRestricaoProc() + ", toString()=" + super.toString()
+				+ "]";
 	}
 
 }
