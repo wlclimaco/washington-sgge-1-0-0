@@ -1,16 +1,16 @@
-/** create by system gera-java version 1.0.0 28/04/2016 20:29 : 56*/
+/** create by system gera-java version 1.0.0 15/09/2017 11:19 : 10*/
 package com.qat.samples.sysmgmt.bar.Advogado;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.samples.sysmgmt.advocacia.Advogado;
 import com.qat.samples.sysmgmt.advocacia.Advogados;
-import com.qat.samples.sysmgmt.advocacia.Audiencia;
 import com.qat.samples.sysmgmt.advocacia.Envolvidos;
 import com.qat.samples.sysmgmt.advocacia.Processo;
 import com.qat.samples.sysmgmt.advocacia.ProcessoStatus;
-import com.qat.samples.sysmgmt.advocacia.request.AdvogadoInquiryRequest;
-import com.qat.samples.sysmgmt.advocacia.request.AudienciaInquiryRequest;
 import com.qat.samples.sysmgmt.advocacia.request.ProcessoInquiryRequest;
+import com.qat.samples.sysmgmt.clinica.model.Especialidade;
+import com.qat.samples.sysmgmt.util.model.Compromisso;
+import com.qat.samples.sysmgmt.util.model.DiasHoras;
+import com.qat.samples.sysmgmt.util.model.ParticipanteExterno;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
 
@@ -21,118 +21,403 @@ public interface IAdvocaciaBAR
 {
 
 	/**
-	 * Fetch advogado by id.
+	 * Fetch processostatus by id.
 	 *
 	 * @param request the request
 * @return the internal results response
 */
-	public Advogado fetchAdvogadoById(FetchByIdRequest request);
+	public ProcessoStatus fetchProcessoStatusById(FetchByIdRequest request);
 
 	/**
-* Insert advogado.
+* Insert processostatus.
 *
-* @param advogado the advogado
+* @param processostatus the processostatus
 *
 * @return the internal response
 */
-	public InternalResponse insertAdvogado(Advogado advogado);
+	public InternalResponse insertProcessoStatus(ProcessoStatus processostatus);
 
 	/**
-* Update advogado.
+* Update processostatus.
 *
-* @param advogado the advogado
+* @param processostatus the processostatus
 *
 * @return the internal response
 */
-	public InternalResponse updateAdvogado(Advogado advogado);
+	public InternalResponse updateProcessoStatus(ProcessoStatus processostatus);
 
 	/**
-* Delete advogado.
+* Delete processostatus.
 *
-* @param advogado the advogado
-*
-* @return the internal response
-*/
-	public InternalResponse deleteAdvogadoById(Advogado advogado);
-
-	/**
-* Delete all advogados.
+* @param processostatus the processostatus
 *
 * @return the internal response
 */
-	public InternalResponse deleteAllAdvogados();
+	public InternalResponse deleteProcessoStatusById(ProcessoStatus processostatus);
 
 	/**
-* Fetch all advogados.
+* Delete all processostatuss.
 *
-* @return the list< advogado>
+* @return the internal response
 */
-	public InternalResultsResponse<Advogado> fetchAllAdvogados(Advogado  advogado);
+	public InternalResponse deleteAllProcessoStatuss();
 
 	/**
-* Fetch advogados by request.
+* Fetch all processostatuss.
+*
+* @return the list< processostatus>
+*/
+	public InternalResultsResponse<ProcessoStatus> fetchAllProcessoStatuss(ProcessoStatus  processostatus);
+
+	/**
+* Fetch processostatuss by request.
 *
 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Advogado> fetchAdvogadosByRequest(AdvogadoInquiryRequest request);
+	public InternalResultsResponse<ProcessoStatus> fetchProcessoStatussByRequest(PagedInquiryRequest request);
 
 	/**
-	 * Fetch audiencia by id.
+	 * Fetch diashoras by id.
 	 *
 	 * @param request the request
 * @return the internal results response
 */
-	public Audiencia fetchAudienciaById(FetchByIdRequest request);
+	public DiasHoras fetchDiasHorasById(FetchByIdRequest request);
 
 	/**
-* Insert audiencia.
+* Insert diashoras.
 *
-* @param audiencia the audiencia
+* @param diashoras the diashoras
 *
 * @return the internal response
 */
-	public InternalResponse insertAudiencia(Audiencia audiencia);
+	public InternalResponse insertDiasHoras(DiasHoras diashoras);
 
 	/**
-* Update audiencia.
+* Update diashoras.
 *
-* @param audiencia the audiencia
+* @param diashoras the diashoras
 *
 * @return the internal response
 */
-	public InternalResponse updateAudiencia(Audiencia audiencia);
+	public InternalResponse updateDiasHoras(DiasHoras diashoras);
 
 	/**
-* Delete audiencia.
+* Delete diashoras.
 *
-* @param audiencia the audiencia
-*
-* @return the internal response
-*/
-	public InternalResponse deleteAudienciaById(Audiencia audiencia);
-
-	/**
-* Delete all audiencias.
+* @param diashoras the diashoras
 *
 * @return the internal response
 */
-	public InternalResponse deleteAllAudiencias();
+	public InternalResponse deleteDiasHorasById(DiasHoras diashoras);
 
 	/**
-* Fetch all audiencias.
+* Delete all diashorass.
 *
-* @return the list< audiencia>
+* @return the internal response
 */
-	public InternalResultsResponse<Audiencia> fetchAllAudiencias(Audiencia  audiencia);
+	public InternalResponse deleteAllDiasHorass();
 
 	/**
-* Fetch audiencias by request.
+* Fetch all diashorass.
+*
+* @return the list< diashoras>
+*/
+	public InternalResultsResponse<DiasHoras> fetchAllDiasHorass(DiasHoras  diashoras);
+
+	/**
+* Fetch diashorass by request.
 *
 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Audiencia> fetchAudienciasByRequest(AudienciaInquiryRequest request);
+	public InternalResultsResponse<DiasHoras> fetchDiasHorassByRequest(PagedInquiryRequest request);
+
+	/**
+	 * Fetch especialidade by id.
+	 *
+	 * @param request the request
+* @return the internal results response
+*/
+	public Especialidade fetchEspecialidadeById(FetchByIdRequest request);
+
+	/**
+* Insert especialidade.
+*
+* @param especialidade the especialidade
+*
+* @return the internal response
+*/
+	public InternalResponse insertEspecialidade(Especialidade especialidade);
+
+	/**
+* Update especialidade.
+*
+* @param especialidade the especialidade
+*
+* @return the internal response
+*/
+	public InternalResponse updateEspecialidade(Especialidade especialidade);
+
+	/**
+* Delete especialidade.
+*
+* @param especialidade the especialidade
+*
+* @return the internal response
+*/
+	public InternalResponse deleteEspecialidadeById(Especialidade especialidade);
+
+	/**
+* Delete all especialidades.
+*
+* @return the internal response
+*/
+	public InternalResponse deleteAllEspecialidades();
+
+	/**
+* Fetch all especialidades.
+*
+* @return the list< especialidade>
+*/
+	public InternalResultsResponse<Especialidade> fetchAllEspecialidades(Especialidade  especialidade);
+
+	/**
+* Fetch especialidades by request.
+*
+* @param request the request
+* @return the internal results response
+*/
+	public InternalResultsResponse<Especialidade> fetchEspecialidadesByRequest(PagedInquiryRequest request);
+
+	/**
+	 * Fetch compromisso by id.
+	 *
+	 * @param request the request
+* @return the internal results response
+*/
+	public Compromisso fetchCompromissoById(FetchByIdRequest request);
+
+	/**
+* Insert compromisso.
+*
+* @param compromisso the compromisso
+*
+* @return the internal response
+*/
+	public InternalResponse insertCompromisso(Compromisso compromisso);
+
+	/**
+* Update compromisso.
+*
+* @param compromisso the compromisso
+*
+* @return the internal response
+*/
+	public InternalResponse updateCompromisso(Compromisso compromisso);
+
+	/**
+* Delete compromisso.
+*
+* @param compromisso the compromisso
+*
+* @return the internal response
+*/
+	public InternalResponse deleteCompromissoById(Compromisso compromisso);
+
+	/**
+* Delete all compromissos.
+*
+* @return the internal response
+*/
+	public InternalResponse deleteAllCompromissos();
+
+	/**
+* Fetch all compromissos.
+*
+* @return the list< compromisso>
+*/
+	public InternalResultsResponse<Compromisso> fetchAllCompromissos(Compromisso  compromisso);
+
+	/**
+* Fetch compromissos by request.
+*
+* @param request the request
+* @return the internal results response
+*/
+	public InternalResultsResponse<Compromisso> fetchCompromissosByRequest(PagedInquiryRequest request);
+
+	/**
+	 * Fetch advogados by id.
+	 *
+	 * @param request the request
+* @return the internal results response
+*/
+	public Advogados fetchAdvogadosById(FetchByIdRequest request);
+
+	/**
+* Insert advogados.
+*
+* @param advogados the advogados
+*
+* @return the internal response
+*/
+	public InternalResponse insertAdvogados(Advogados advogados);
+
+	/**
+* Update advogados.
+*
+* @param advogados the advogados
+*
+* @return the internal response
+*/
+	public InternalResponse updateAdvogados(Advogados advogados);
+
+	/**
+* Delete advogados.
+*
+* @param advogados the advogados
+*
+* @return the internal response
+*/
+	public InternalResponse deleteAdvogadosById(Advogados advogados);
+
+	/**
+* Delete all advogadoss.
+*
+* @return the internal response
+*/
+	public InternalResponse deleteAllAdvogadoss();
+
+	/**
+* Fetch all advogadoss.
+*
+* @return the list< advogados>
+*/
+	public InternalResultsResponse<Advogados> fetchAllAdvogadoss(Advogados  advogados);
+
+	/**
+* Fetch advogadoss by request.
+*
+* @param request the request
+* @return the internal results response
+*/
+	public InternalResultsResponse<Advogados> fetchAdvogadossByRequest(PagedInquiryRequest request);
+
+	/**
+	 * Fetch envolvidos by id.
+	 *
+	 * @param request the request
+* @return the internal results response
+*/
+	public Envolvidos fetchEnvolvidosById(FetchByIdRequest request);
+
+	/**
+* Insert envolvidos.
+*
+* @param envolvidos the envolvidos
+*
+* @return the internal response
+*/
+	public InternalResponse insertEnvolvidos(Envolvidos envolvidos);
+
+	/**
+* Update envolvidos.
+*
+* @param envolvidos the envolvidos
+*
+* @return the internal response
+*/
+	public InternalResponse updateEnvolvidos(Envolvidos envolvidos);
+
+	/**
+* Delete envolvidos.
+*
+* @param envolvidos the envolvidos
+*
+* @return the internal response
+*/
+	public InternalResponse deleteEnvolvidosById(Envolvidos envolvidos);
+
+	/**
+* Delete all envolvidoss.
+*
+* @return the internal response
+*/
+	public InternalResponse deleteAllEnvolvidoss();
+
+	/**
+* Fetch all envolvidoss.
+*
+* @return the list< envolvidos>
+*/
+	public InternalResultsResponse<Envolvidos> fetchAllEnvolvidoss(Envolvidos  envolvidos);
+
+	/**
+* Fetch envolvidoss by request.
+*
+* @param request the request
+* @return the internal results response
+*/
+	public InternalResultsResponse<Envolvidos> fetchEnvolvidossByRequest(PagedInquiryRequest request);
+
+	/**
+	 * Fetch participante by id.
+	 *
+	 * @param request the request
+* @return the internal results response
+*/
+	public ParticipanteExterno fetchParticipanteExternoById(FetchByIdRequest request);
+
+	/**
+* Insert participante.
+*
+* @param participante the participante
+*
+* @return the internal response
+*/
+	public InternalResponse insertParticipanteExterno(ParticipanteExterno participante);
+
+	/**
+* Update participante.
+*
+* @param participante the participante
+*
+* @return the internal response
+*/
+	public InternalResponse updateParticipanteExterno(ParticipanteExterno participante);
+
+	/**
+* Delete participante.
+*
+* @param participante the participante
+*
+* @return the internal response
+*/
+	public InternalResponse deleteParticipanteExternoById(ParticipanteExterno participante);
+
+	/**
+* Delete all participantes.
+*
+* @return the internal response
+*/
+	public InternalResponse deleteAllParticipanteExternos();
+
+	/**
+* Fetch all participantes.
+*
+* @return the list< participante>
+*/
+	public InternalResultsResponse<ParticipanteExterno> fetchAllParticipanteExternos(ParticipanteExterno  participante);
+
+	/**
+* Fetch participantes by request.
+*
+* @param request the request
+* @return the internal results response
+*/
+	public InternalResultsResponse<ParticipanteExterno> fetchParticipanteExternosByRequest(PagedInquiryRequest request);
 
 	/**
 	 * Fetch processo by id.
@@ -190,132 +475,5 @@ public interface IAdvocaciaBAR
 * @return the internal results response
 */
 	public InternalResultsResponse<Processo> fetchProcessosByRequest(ProcessoInquiryRequest request);
-
-
-	public Envolvidos fetchEnvolvidosById(FetchByIdRequest request);
-
-	public ProcessoStatus fetchProcessoStatusById(FetchByIdRequest request);
-
-	/**
-* Insert processo.
-*
-* @param processo the processo
-*
-* @return the internal response
-*/
-	public InternalResponse insertProcessoStatus(ProcessoStatus processo);
-
-	/**
-* Update processo.
-*
-* @param processo the processo
-*
-* @return the internal response
-*/
-	public InternalResponse updateProcessoStatus(ProcessoStatus processo);
-
-	/**
-* Delete processo.
-*
-* @param processo the processo
-*
-* @return the internal response
-*/
-	public InternalResponse deleteProcessoStatusById(ProcessoStatus processo);
-
-	/**
-* Delete all processos.
-*
-* @return the internal response
-*/
-	public InternalResponse deleteAllProcessoStatuss();
-
-	/**
-* Fetch all processos.
-*
-* @return the list< processo>
-*/
-	public InternalResultsResponse<ProcessoStatus> fetchAllProcessoStatuss(ProcessoStatus  processo);
-
-	/**
-* Fetch processos by request.
-*
-* @param request the request
-* @return the internal results response
-*/
-	public InternalResultsResponse<ProcessoStatus> fetchProcessoStatussByRequest(PagedInquiryRequest request);
-
-
-	public InternalResponse insertEnvolvidos(Envolvidos processo);
-
-	/**
-* Update processo.
-*
-* @param processo the processo
-*
-* @return the internal response
-*/
-	public InternalResponse updateEnvolvidos(Envolvidos processo);
-
-	/**
-* Delete processo.
-*
-* @param processo the processo
-*
-* @return the internal response
-*/
-	public InternalResponse deleteEnvolvidosById(Envolvidos processo);
-
-	/**
-* Delete all processos.
-*
-* @return the internal response
-*/
-	public InternalResponse deleteAllEnvolvidoss();
-
-	/**
-* Fetch all processos.
-*
-* @return the list< processo>
-*/
-	public InternalResultsResponse<Envolvidos> fetchAllEnvolvidoss(Envolvidos  processo);
-
-	/**
-* Fetch processos by request.
-*
-* @param request the request
-* @return the internal results response
-*/
-	public InternalResultsResponse<Envolvidos> fetchEnvolvidossByRequest(PagedInquiryRequest request);
-
-
-
-
-	public InternalResponse insertAdvogados(Advogados advogado);
-
-	/**
-* Update advogado.
-*
-* @param advogado the advogado
-*
-* @return the internal response
-*/
-	public InternalResponse updateAdvogados(Advogados advogado);
-
-	/**
-* Delete advogado.
-*
-* @param advogado the advogado
-*
-* @return the internal response
-*/
-	public InternalResponse deleteAdvogadosById(Advogados advogado);
-
-	/**
-* Delete all advogados.
-*
-* @return the internal response
-*/
-	public InternalResponse deleteAllAdvogadoss();
 
 }

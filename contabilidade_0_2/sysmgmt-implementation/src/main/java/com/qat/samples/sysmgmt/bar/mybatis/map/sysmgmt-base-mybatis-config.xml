@@ -139,6 +139,9 @@
 
         <typeAlias alias="QATModel1" type="com.qat.samples.sysmgmt.util.model.QATModel1" />
         <typeAlias alias="ParticipanteExterno" type="com.qat.samples.sysmgmt.util.model.ParticipanteExterno" />
+        <typeAlias alias="DiasHoras" type="com.qat.samples.sysmgmt.util.model.DiasHoras" />
+        <typeAlias alias="Compromisso" type="com.qat.samples.sysmgmt.util.model.Compromisso" />
+        <typeAlias alias="Advogados" type="com.qat.samples.sysmgmt.advocacia.Advogados" />
         <typeAlias alias="FetchByIdRequest" type="com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest" />
         <typeAlias alias="Entidade" type="com.qat.samples.sysmgmt.entidade.model.Entidade" />
 
@@ -707,6 +710,12 @@
 <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/nfnotaInfoItemImpostoICMSUFDestino.xml" />
 <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/conta.xml" />
 <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/message.xml" />
+
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/diasHoras.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/compromisso.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/advogados.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/envolvidos.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/participanteExterno.xml" />
     </mappers>
 
 </configuration>

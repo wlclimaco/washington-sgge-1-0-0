@@ -1,20 +1,17 @@
 package com.qat.samples.sysmgmt.advocacia;
 
 import java.util.Date;
-import java.util.List;
 
-import com.qat.samples.sysmgmt.clinica.model.Especialidade;
-import com.qat.samples.sysmgmt.pessoa.model.Pessoa;
-import com.qat.samples.sysmgmt.util.model.Compromisso;
-import com.qat.samples.sysmgmt.util.model.DiasHoras;
+import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.).
  * This represents an account for a transfer setting.
  */
 @SuppressWarnings("serial")
-public class Advogados extends Pessoa {
+public class Advogados extends ModelCosmeDamiao {
 
+	private Integer id;
 	/** The horas trabalhos. */
 	private Advogado advogado;
 
@@ -39,7 +36,6 @@ public class Advogados extends Pessoa {
 	 */
 	public Advogados(int i, String string) {
 		setId(i);
-		setNome(string);
 		setModelAction(PersistenceActionEnum.INSERT);
 		setModifyDateUTC((new Date()).getTime());
 		setModifyUser("system");
@@ -54,6 +50,15 @@ public class Advogados extends Pessoa {
 	 */
 	public Advogados(String string, String string2, Object object) {
 		// TODO Auto-generated constructor stub
+	}
+
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public Advogado getAdvogado() {

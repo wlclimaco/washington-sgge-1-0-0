@@ -7,7 +7,7 @@
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="EspecialidadeMap">
+<mapper namespace="advogadosMap">
  <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
  <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
 
@@ -15,9 +15,10 @@
       from a query, and the class properties.  A result map isnt
       necessary if the columns (or aliases) match to the properties
        exactly. -->
-  <resultMap id="EspecialidadeResult" type="Especialidade">
+  <resultMap id="advogadosResult" type="Advogados">
     <result property="id" column="id"/>
-    <result property="nome" column="nome"/>
+    <result property="advogado" column="advogado"/>
+    <result property="advogadoPrincipal" column="advogadoPrincipal"/>
 <result property="parentId" column="parentId"/>
 <result property="tabelaEnumValue" column="tabelaEnumValue"/>
 <result property="emprId" column="emprId"/>
@@ -28,8 +29,9 @@
 <result property="modifyDateUTC" column="modify_date"/>
   </resultMap>
 
-  <sql id="allEspecialidadeColumns">
-,nome
+  <sql id="alladvogadosColumns">
+,advogado
+,advogadoPrincipal
 ,parentId
 ,tabelaEnumValue
 ,emprId
@@ -40,8 +42,9 @@
 ,modify_user
 
 </sql>
-<sql id="allEspecialidadeValues">
-#{nome},
+<sql id="alladvogadosValues">
+#{advogado},
+#{advogadoPrincipal},
      #{parentId},
      #{tabelaEnumValue},
      #{emprId},
@@ -53,22 +56,22 @@
   </sql>
 
 
- <select id="fetchAllEspecialidades" resultMap="EspecialidadeResult">
+ <select id="fetchAlladvogadoss" resultMap="advogadosResult">
     SELECT id,
- <include refid="allEspecialidadeColumns" />
-   FROM especialidade ORDER BY id ASC
+ <include refid="alladvogadosColumns" />
+   FROM advogados ORDER BY id ASC
  </select>
 
- <select id="fetchEspecialidadeById" parameterType="Integer" resultMap="EspecialidadeResult">
+ <select id="fetchadvogadosById" parameterType="Integer" resultMap="advogadosResult">
     SELECT id,
- <include refid="allEspecialidadeColumns" />
-   FROM especialidade WHERE id = #{fetchid}
+ <include refid="alladvogadosColumns" />
+   FROM advogados WHERE id = #{fetchid}
  </select>
 
- <select id="fetchAllEspecialidadesRequest" parameterType="PagedInquiryRequest" resultMap="EspecialidadeResult">
+ <select id="fetchAlladvogadossRequest" parameterType="PagedInquiryRequest" resultMap="advogadosResult">
 
-     SELECT id,<include refid="allEspecialidadeColumns" />
-           FROM especialidade
+     SELECT id,<include refid="alladvogadosColumns" />
+           FROM advogados
            where 0 = 0
            <if test="permissaoTypeEnumValue == 1">
                and id IS NOT NULL
@@ -90,21 +93,22 @@
            ORDER BY id ASC
 </select>
 
-<select id="fetchEspecialidadeRowCount" resultType="Integer">
-     SELECT COUNT(*) AS RECORD_COUNT FROM especialidade WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
+<select id="fetchadvogadosRowCount" resultType="Integer">
+     SELECT COUNT(*) AS RECORD_COUNT FROM advogados WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
 
  </select>
 
- <insert id="insertEspecialidade" parameterType="Especialidade" useGeneratedKeys="true" keyProperty="id">
-     INSERT INTO especialidade (
- <if test="id != null"><if test="id > 0">id,</if></if><include refid="allEspecialidadeColumns" />
+ <insert id="insertadvogados" parameterType="Advogados" useGeneratedKeys="true" keyProperty="id">
+     INSERT INTO advogados (
+ <if test="id != null"><if test="id > 0">id,</if></if><include refid="alladvogadosColumns" />
      )
-   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allEspecialidadeValues" /> )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="alladvogadosValues" /> )
  </insert>
 
- <update id="updateEspecialidade" parameterType="Especialidade">
-   UPDATE especialidade SET
-<if test="nome!= null">nome = #{nome},</if>
+ <update id="updateadvogados" parameterType="Advogados">
+   UPDATE advogados SET
+<if test="advogado!= null">advogado = #{advogado},</if>
+<if test="advogadoPrincipal!= null">advogadoPrincipal = #{advogadoPrincipal},</if>
 <if test="parentId!= null"> parentId=#{parentId},</if>
 <if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
 <if test="emprId!= null"> emprId=#{emprId},</if>
@@ -115,12 +119,12 @@
     id = #{id}
  </update>
 
-<delete id="deleteEspecialidadeById" parameterType="Especialidade">
-  DELETE FROM especialidade WHERE id = #{id}
+<delete id="deleteadvogadosById" parameterType="Advogados">
+  DELETE FROM advogados WHERE id = #{id}
  </delete>
 
- <delete id="deleteAllEspecialidades">
- DELETE FROM especialidade
+ <delete id="deleteAlladvogadoss">
+ DELETE FROM advogados
   </delete>
 </mapper>
 

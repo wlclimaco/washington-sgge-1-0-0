@@ -7,6 +7,7 @@ import java.util.List;
 import com.qat.framework.model.BaseModel.PersistenceActionEnum;
 import com.qat.samples.sysmgmt.advocacia.Advocacia;
 import com.qat.samples.sysmgmt.advocacia.Advogado;
+import com.qat.samples.sysmgmt.advocacia.Advogados;
 import com.qat.samples.sysmgmt.advocacia.Audiencia;
 import com.qat.samples.sysmgmt.advocacia.Envolvidos;
 import com.qat.samples.sysmgmt.advocacia.Processo;
@@ -21,6 +22,7 @@ import com.qat.samples.sysmgmt.cfop.model.Cfop;
 import com.qat.samples.sysmgmt.cfop.model.CfopParentId;
 import com.qat.samples.sysmgmt.clinica.model.Clinica;
 import com.qat.samples.sysmgmt.clinica.model.Consulta;
+import com.qat.samples.sysmgmt.clinica.model.Especialidade;
 import com.qat.samples.sysmgmt.clinica.model.EspecialidadePessoa;
 import com.qat.samples.sysmgmt.clinica.model.Exame;
 import com.qat.samples.sysmgmt.clinica.model.ExamePessoa;
@@ -214,12 +216,15 @@ import com.qat.samples.sysmgmt.site.model.PlanoByEmpresa;
 import com.qat.samples.sysmgmt.site.model.ServicoAndPlano;
 import com.qat.samples.sysmgmt.site.model.Site;
 import com.qat.samples.sysmgmt.util.model.Cidade;
+import com.qat.samples.sysmgmt.util.model.Compromisso;
+import com.qat.samples.sysmgmt.util.model.DiasHoras;
 import com.qat.samples.sysmgmt.util.model.Documento;
 import com.qat.samples.sysmgmt.util.model.DoisValorType;
 import com.qat.samples.sysmgmt.util.model.DoisValores;
 import com.qat.samples.sysmgmt.util.model.Email;
 import com.qat.samples.sysmgmt.util.model.Endereco;
 import com.qat.samples.sysmgmt.util.model.Note;
+import com.qat.samples.sysmgmt.util.model.ParticipanteExterno;
 import com.qat.samples.sysmgmt.util.model.Status;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.Tarefa;
@@ -656,77 +661,6 @@ public class Objects {
 		audiencia.setModelAction(action);
 
 		return audiencia;
-	}
-
-	public static Envolvidos insertEnvolvidos(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
-		Envolvidos processo = new Envolvidos();
-		Date a = new Date();
-		processo.setId(id);
-		processo.setCliente(insertCliente(id, TabelaEnum.PROCESSO, action));
-		processo.setTipoEnvolvido(insertDoisValor(id, tabela, action));
-		processo.setEnvolvimento(insertDoisValor(id, tabela, action));
-		processo.setbCliente(0);
-		processo.setTabelaEnum(tabela);
-		processo.setParentId(id);
-		processo.setEmprId(EMPID);
-		processo.setModifyDateUTC(a.getTime());
-		processo.setCreateDateUTC(a.getTime());
-		processo.setCreateUser("system");
-		processo.setModifyUser("system");
-		processo.setProcessId(1);
-		processo.setModelAction(action);
-
-		return processo;
-	}
-
-	public static Processo insertProcesso(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
-		Processo processo = new Processo();
-		Date a = new Date();
-		processo.setId(id);
-		processo.setDataProcess(a.getTime());
-		processo.setValor(new Double(11.00));
-		processo.setDataFim(a.getTime());
-		processo.setAcao(insertDoisValor(id, tabela, action));
-		processo.setProcessoStatusList(new ArrayList<ProcessoStatus>());
-		processo.getProcessoStatusList().add(new ProcessoStatus(a.getTime(), "Teste", insertDoisValor(id, tabela, action)));
-		processo.setAssunto("ASSUNTO");;
-		processo.setStatusProc(insertDoisValor(id, tabela, action));
-		processo.setDescricaoProc("Descricao");;
-		processo.setEnvolvList(new ArrayList<>());
-		processo.getEnvolvList().add(insertEnvolvidos(id, tabela, action));
-		processo.setProcesso("processo");
-		processo.setSituacao(insertDoisValor(id, tabela, action));
-		processo.setInstancia(insertDoisValor(id, tabela, action));
-		processo.setOrgao("orgao");
-		processo.setNpadraocnj("npadraocnj");
-		processo.setNpadrao("npadrao");
-		processo.setAgendarCap(1);
-		processo.setDistribuido("distribuido");
-		processo.setValorAcao(new Float(1.99));
-		processo.setObservacaoProc("observacaoProc");
-		processo.setJustica(insertDoisValor(id, tabela, action));
-		processo.setTribunal(insertDoisValor(id, tabela, action));
-		processo.setInstancia1(insertDoisValor(id, tabela, action));
-		processo.setLocalidade(insertDoisValor(id, tabela, action));
-		processo.setCapturpor(insertDoisValor(id, tabela, action));
-		processo.setNumeroprocesso("1001");
-		processo.setCapautomatica(insertDoisValor(id, tabela, action));
-		processo.setPasta("1001");
-		processo.setAdvogadoList(new ArrayList<Advogado>());
-		processo.getAdvogadoList().add(insertAdvogado(id, TabelaEnum.PROCESSO, action));
-		processo.setAudienciaList(new ArrayList<Audiencia>());
-		processo.getAudienciaList().add(insertAudiencia(id, TabelaEnum.PROCESSO, action));
-		processo.setTabelaEnum(tabela);
-		processo.setParentId(id);
-		processo.setEmprId(EMPID);
-		processo.setModifyDateUTC(a.getTime());
-		processo.setCreateDateUTC(a.getTime());
-		processo.setCreateUser("system");
-		processo.setModifyUser("system");
-		processo.setProcessId(1);
-		processo.setModelAction(action);
-
-		return processo;
 	}
 
 	public static Convenio insertConvenio(Integer id, TabelaEnum tabela, PersistenceActionEnum action) {
@@ -5582,5 +5516,236 @@ public class Objects {
 
 		return cnae;
 	}
+
+
+	public static ProcessoStatus insertProcessoStatus(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+		{
+			ProcessoStatus processostatus = new ProcessoStatus();
+			Date a = new Date();
+			processostatus.setId(100);
+			processostatus.setDataProcesso(a.getTime());
+			processostatus.setNote("NATIVE INSERT UPDATE");
+			processostatus.setParentId(id);
+			processostatus.setEmprId(1);
+			processostatus.setModifyDateUTC(a.getTime());
+			processostatus.setCreateDateUTC(a.getTime());
+			processostatus.setCreateUser("system");
+			processostatus.setModifyUser("system");
+			processostatus.setProcessId(1);
+			processostatus.setModelAction(action);
+
+			return processostatus;
+		}
+
+
+	public static DiasHoras insertDiasHoras(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+		{
+			DiasHoras diashoras = new DiasHoras();
+			Date a = new Date();
+			diashoras.setId(100);
+			diashoras.setDiasSemanas(Objects.insertDoisValor(id, tabela, action));
+			diashoras.setHoraInicio(a.getTime());
+			diashoras.setHoraFinal(a.getTime());
+			diashoras.setDiario(100);
+			diashoras.setSemanal(100);
+			diashoras.setQuinzenal(100);
+			diashoras.setMensal(100);
+			diashoras.setAnual(100);
+			diashoras.setParentId(id);
+			diashoras.setEmprId(1);
+			diashoras.setModifyDateUTC(a.getTime());
+			diashoras.setCreateDateUTC(a.getTime());
+			diashoras.setCreateUser("system");
+			diashoras.setModifyUser("system");
+			diashoras.setProcessId(1);
+			diashoras.setModelAction(action);
+
+			return diashoras;
+		}
+
+
+	public static Especialidade insertEspecialidade(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+		{
+			Especialidade especialidade = new Especialidade();
+			Date a = new Date();
+			especialidade.setId(100);
+			especialidade.setNome("NATIVE INSERT UPDATE");
+			especialidade.setParentId(id);
+			especialidade.setEmprId(1);
+			especialidade.setModifyDateUTC(a.getTime());
+			especialidade.setCreateDateUTC(a.getTime());
+			especialidade.setCreateUser("system");
+			especialidade.setModifyUser("system");
+			especialidade.setProcessId(1);
+			especialidade.setModelAction(action);
+
+			return especialidade;
+		}
+
+
+	public static Compromisso insertCompromisso(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+		{
+			Compromisso compromisso = new Compromisso();
+			Date a = new Date();
+			compromisso.setId(100);
+			compromisso.setTitulo("NATIVE INSERT UPDATE");
+			compromisso.setTipoCompromisso(Objects.insertDoisValor(id, tabela, action));
+			compromisso.setVinculado(Objects.insertDoisValor(id, tabela, action));
+			compromisso.setHoraFinal(insertDiasHoras(id, tabela, action));
+			compromisso.setLocal("NATIVE INSERT UPDATE");
+			compromisso.setResponsavel(Objects.insertAdvogado(id, tabela, action));
+			compromisso.setEnviarEmail(100);
+			compromisso.setEnviarMdgTelefone(100);
+			compromisso.setQuando(Objects.insertDoisValor(id, tabela, action));
+	//		compromisso.setParticipante(Objects.insertDoisValor(id, tabela, action));
+//			compromisso.getundefined().add(insertundefined(id,TabelaEnum.COMPROMISSO,action));
+//			compromisso.setParticipanteExterno(10000);
+//			compromisso.getundefined().add(insertundefined(id,TabelaEnum.COMPROMISSO,action));
+//			compromisso.setDocumentos(10000);
+//			compromisso.getundefined().add(insertundefined(id,TabelaEnum.COMPROMISSO,action));
+			compromisso.setParentId(id);
+			compromisso.setEmprId(1);
+			compromisso.setModifyDateUTC(a.getTime());
+			compromisso.setCreateDateUTC(a.getTime());
+			compromisso.setCreateUser("system");
+			compromisso.setModifyUser("system");
+			compromisso.setProcessId(1);
+			compromisso.setModelAction(action);
+
+			return compromisso;
+		}
+
+
+	public static Advogados insertAdvogados(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+		{
+			Advogados advogados = new Advogados();
+			Date a = new Date();
+			advogados.setId(100);
+			advogados.setAdvogado(Objects.insertAdvogado(id, tabela, action));
+			advogados.setAdvogadoPrincipal(100);
+			advogados.setParentId(id);
+			advogados.setEmprId(1);
+			advogados.setModifyDateUTC(a.getTime());
+			advogados.setCreateDateUTC(a.getTime());
+			advogados.setCreateUser("system");
+			advogados.setModifyUser("system");
+			advogados.setProcessId(1);
+			advogados.setModelAction(action);
+
+			return advogados;
+		}
+
+
+	public static Envolvidos insertEnvolvidos(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+		{
+			Envolvidos envolvidos = new Envolvidos();
+			Date a = new Date();
+			envolvidos.setId(100);
+			envolvidos.setCliente(Objects.insertCliente(id, tabela, action));
+			envolvidos.setTipoEnvolvido(Objects.insertDoisValor(id, tabela, action));
+			envolvidos.setEnvolvimento(Objects.insertDoisValor(id, tabela, action));
+			envolvidos.setbCliente(1);
+			envolvidos.setParentId(id);
+			envolvidos.setEmprId(1);
+			envolvidos.setModifyDateUTC(a.getTime());
+			envolvidos.setCreateDateUTC(a.getTime());
+			envolvidos.setCreateUser("system");
+			envolvidos.setModifyUser("system");
+			envolvidos.setProcessId(1);
+			envolvidos.setModelAction(action);
+
+			return envolvidos;
+		}
+
+
+	public static ParticipanteExterno insertParticipanteExterno(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+		{
+			ParticipanteExterno participanteexterno = new ParticipanteExterno();
+			Date a = new Date();
+			participanteexterno.setId(100);
+			participanteexterno.setNome("NATIVE INSERT UPDATE");
+			//participanteexterno.getEmail().add(Objects.insertEmail(id, tabela, action));
+			//participanteexterno.getundefined().add(insertundefined(id,TabelaEnum.PARTICIPANTEEXTERNO,action));
+			//participanteexterno.setTelefones(10000);
+			//participanteexterno.getundefined().add(insertundefined(id,TabelaEnum.PARTICIPANTEEXTERNO,action));
+			participanteexterno.setParentId(id);
+			participanteexterno.setEmprId(1);
+			participanteexterno.setModifyDateUTC(a.getTime());
+			participanteexterno.setCreateDateUTC(a.getTime());
+			participanteexterno.setCreateUser("system");
+			participanteexterno.setModifyUser("system");
+			participanteexterno.setProcessId(1);
+			participanteexterno.setModelAction(action);
+
+			return participanteexterno;
+		}
+
+
+	public static Processo insertProcesso(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+		{
+			Processo processo = new Processo();
+			Date a = new Date();
+			processo.setId(100);
+			processo.setDataProcess(a.getTime());
+			processo.setDataFim(a.getTime());
+			processo.setValor(new Double(1.99));
+			processo.setAcao(Objects.insertDoisValor(id, tabela, action));
+			processo.setAssunto("NATIVE INSERT UPDATE");
+			processo.setStatusProc(Objects.insertDoisValor(id, tabela, action));
+			processo.setDescricaoProc("NATIVE INSERT UPDATE");
+			processo.setProcesso("NATIVE INSERT UPDATE");
+			processo.setSituacao(Objects.insertDoisValor(id, tabela, action));
+			processo.setInstancia(Objects.insertDoisValor(id, tabela, action));
+			processo.setOrgao("NATIVE INSERT UPDATE");
+			processo.setNpadraocnj("NATIVE INSERT UPDATE");
+			processo.setNpadrao("NATIVE INSERT UPDATE");
+			processo.setAgendarCap(100);
+			processo.setDistribuido("NATIVE INSERT UPDATE");
+		//	processo.setPo("NATIVE INSERT UPDATE");
+			processo.setValorAcao(new Float(1.99));
+			processo.setObservacaoProc("NATIVE INSERT UPDATE");
+			processo.setJustica(Objects.insertDoisValor(id, tabela, action));
+			processo.setTribunal(Objects.insertDoisValor(id, tabela, action));
+			processo.setInstancia1(Objects.insertDoisValor(id, tabela, action));
+			processo.setLocalidade(Objects.insertDoisValor(id, tabela, action));
+			processo.setCapturpor(Objects.insertDoisValor(id, tabela, action));
+			processo.setNumeroprocesso("NATIVE INSERT UPDATE");
+			processo.setCapautomatica(Objects.insertDoisValor(id, tabela, action));
+			processo.setPasta("NATIVE INSERT UPDATE");
+			processo.setEnviarEmail(100);
+			processo.setEnviarMdgTelefone(100);
+			processo.setQuando(Objects.insertDoisValor(id, tabela, action));
+			processo.setFundamentacaoJuridica("NATIVE INSERT UPDATE");
+			processo.setFatos("NATIVE INSERT UPDATE");
+			processo.setPretensoesCliente("NATIVE INSERT UPDATE");
+			processo.setEstrategia("NATIVE INSERT UPDATE");
+			processo.setRetringirProcesso(100);
+//			processo.setUsuariosRestricaoProc(10000);
+//			processo.getundefined().add(insertundefined(id,TabelaEnum.PROCESSO,action));
+//			processo.setTituloList(10000);
+//			processo.getundefined().add(insertundefined(id,TabelaEnum.PROCESSO,action));
+//			processo.setAdvogadoList(10000);
+//			processo.getundefined().add(insertundefined(id,TabelaEnum.PROCESSO,action));
+//			processo.setAudienciaList(10000);
+//			processo.getundefined().add(insertundefined(id,TabelaEnum.PROCESSO,action));
+//			processo.setProcessoStatusList(10000);
+//			processo.getundefined().add(insertundefined(id,TabelaEnum.PROCESSO,action));
+//			processo.setEnvolvList(10000);
+//			processo.getundefined().add(insertundefined(id,TabelaEnum.PROCESSO,action));
+//			processo.setDocumentos(10000);
+//			processo.getundefined().add(insertundefined(id,TabelaEnum.PROCESSO,action));
+//			processo.setEnvolvidosExterno(10000);
+//			processo.getundefined().add(insertundefined(id,TabelaEnum.PROCESSO,action));
+			processo.setParentId(id);
+			processo.setEmprId(1);
+			processo.setModifyDateUTC(a.getTime());
+			processo.setCreateDateUTC(a.getTime());
+			processo.setCreateUser("system");
+			processo.setModifyUser("system");
+			processo.setProcessId(1);
+			processo.setModelAction(action);
+
+			return processo;
+		}
 
 }

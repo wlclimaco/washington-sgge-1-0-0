@@ -46,6 +46,8 @@ public class Processo extends ModelCosmeDamiao {
 	/** The assunto. */
 	private String assunto;
 
+	private String porcValorAcao;
+
 	/** The status proc. */
 	private DoisValores statusProc;
 
@@ -889,6 +891,14 @@ public class Processo extends ModelCosmeDamiao {
 		this.usuariosRestricaoProc = usuariosRestricaoProc;
 	}
 
+	public String getPorcValorAcao() {
+		return porcValorAcao;
+	}
+
+	public void setPorcValorAcao(String porcValorAcao) {
+		this.porcValorAcao = porcValorAcao;
+	}
+
 	@Override
 	public String toString() {
 		return "Processo [getId()=" + getId() + ", getDataProcess()=" + getDataProcess() + ", getValor()=" + getValor()
@@ -909,8 +919,8 @@ public class Processo extends ModelCosmeDamiao {
 				+ getQuando() + ", getFundamentacaoJuridica()=" + getFundamentacaoJuridica() + ", getFatos()="
 				+ getFatos() + ", getPretensoesCliente()=" + getPretensoesCliente() + ", getEstrategia()="
 				+ getEstrategia() + ", getRetringirProcesso()=" + getRetringirProcesso()
-				+ ", getUsuariosRestricaoProc()=" + getUsuariosRestricaoProc() + ", toString()=" + super.toString()
-				+ "]";
+				+ ", getUsuariosRestricaoProc()=" + getUsuariosRestricaoProc() + ", getPorcValorAcao()="
+				+ getPorcValorAcao() + ", toString()=" + super.toString() + "]";
 	}
 
 }

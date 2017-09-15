@@ -389,6 +389,14 @@ public enum TabelaEnum implements IIntegerEnum, II18nEnum
 	NFNOTAINFOITEMIMPOSTOICMSUFDESTINO(73, "sendsolv.base.model.risklevelenum.medium"),
 	NFIMPOSTODEVOLVIDO(73, "sendsolv.base.model.risklevelenum.medium"),
 	NFNOTAINFOITEMPRODUTOCOMBUSTIVEL(73, "sendsolv.base.model.risklevelenum.medium"),
+	PROCESSOSTATUS(73, "sendsolv.base.model.risklevelenum.medium"),
+	DIASHORAS(73, "sendsolv.base.model.risklevelenum.medium"),
+	ESPECIALIDADE(73, "sendsolv.base.model.risklevelenum.medium"),
+	COMPROMISSO(73, "sendsolv.base.model.risklevelenum.medium"),
+	ADVOGADOS(73, "sendsolv.base.model.risklevelenum.medium"),
+	ENVOLVIDOS(73, "sendsolv.base.model.risklevelenum.medium"),
+	PARTICIPANTE(73, "sendsolv.base.model.risklevelenum.medium"),
+	PARTICIPANTEEXTERNO(73, "sendsolv.base.model.risklevelenum.medium"),
 	CONTA(103, "sendsolv.base.model.risklevelenum.medium");
 
 	/** The code. */
