@@ -29,7 +29,7 @@
   </resultMap>
 
   <sql id="allEspecialidadeColumns">
-,nome
+nome
 ,parentId
 ,tabelaEnumValue
 ,emprId

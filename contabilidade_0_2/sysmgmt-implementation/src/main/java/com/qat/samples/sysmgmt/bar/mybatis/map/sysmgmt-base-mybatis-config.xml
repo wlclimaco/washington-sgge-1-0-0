@@ -716,6 +716,7 @@
 <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/advogados.xml" />
 <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/envolvidos.xml" />
 <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/participanteExterno.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/processoStatus.xml" />
     </mappers>
 
 </configuration>

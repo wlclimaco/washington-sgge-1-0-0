@@ -27,7 +27,6 @@
     <result property="npadraocnj" column="npadraocnj"/>
     <result property="npadrao" column="npadrao"/>
     <result property="distribuido" column="distribuido"/>
-    <result property="porcValorAcao" column="porcValorAcao"/>
     <result property="valorAcao" column="valorAcao"/>
     <result property="observacaoProc" column="observacaoProc"/>
     <result property="numeroprocesso" column="numeroprocesso"/>
@@ -77,24 +76,24 @@
 		<collection property="audienciaList" column="id"
 			select="DoisValorMap.fetchDoisValorById" />
 
-		<collection property="processoStatusList" column="id"
-			select="ProcessoMap.fetchProcessoStatusByParentId" />
+<!-- 		<collection property="processoStatusList" column="id" -->
+<!-- 			select="ProcessoMap.fetchProcessoStatusByParentId" /> -->
 
-		<collection property="envolvList" column="id"
-			select="ProcessoMap.fetchEnvolvidosByParentId" />
+<!-- 		<collection property="envolvList" column="id" -->
+<!-- 			select="ProcessoMap.fetchEnvolvidosByParentId" /> -->
 
-		<collection property="documentos" column="id"
-			select="DocumentoMap.fetchDocumentoByParentId" />
+<!-- 		<collection property="documentos" column="id" -->
+<!-- 			select="DocumentoMap.fetchDocumentoByParentId" /> -->
 
-		<collection property="envolvidosExterno" column="id"
-			select="ProcessoMap.fetchParticipanteExternoByParentId" />
+<!-- 		<collection property="envolvidosExterno" column="id" -->
+<!-- 			select="ProcessoMap.fetchParticipanteExternoByParentId" /> -->
 
-		<collection property="usuariosRestricaoProc" column="id"
-			select="UsuarioMap.fetchUsuarioByParentId" />
+<!-- 		<collection property="usuariosRestricaoProc" column="id" -->
+<!-- 			select="UsuarioMap.fetchUsuarioByParentId" /> -->
   </resultMap>
 
   <sql id="allProcessoColumns">
-,dataProcess
+dataProcess
 ,dataFim
 ,valor
 ,acao
@@ -139,8 +138,8 @@
 
 </sql>
 <sql id="allProcessoValues">
-#{dataProcess.id},
-#{dataFim.id},
+#{dataProcess},
+#{dataFim},
 #{valor},
 #{acao.id},
 #{assunto},
@@ -235,8 +234,8 @@
 
  <update id="updateProcesso" parameterType="Processo">
    UPDATE processo SET
-<if test="dataProcess!= null">dataProcess = #{dataProcess.id},</if>
-<if test="dataFim!= null">dataFim = #{dataFim.id},</if>
+<if test="dataProcess!= null">dataProcess = #{dataProcess},</if>
+<if test="dataFim!= null">dataFim = #{dataFim},</if>
 <if test="valor!= null">valor = #{valor},</if>
 <if test="acao!= null">acao = #{acao.id},</if>
 <if test="assunto!= null">assunto = #{assunto},</if>

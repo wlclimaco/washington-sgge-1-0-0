@@ -1,16 +1,19 @@
-/** create by system gera-java version 1.0.0 28/04/2016 14:1 : 44*/
+/** create by system gera-java version 1.0.0 15/09/2017 16:6 : 45*/
 package com.qat.samples.sysmgmt.bac.Advogado;
 import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.samples.sysmgmt.advocacia.Advogado;
-import com.qat.samples.sysmgmt.advocacia.Audiencia;
+import com.qat.samples.sysmgmt.advocacia.Advogados;
+import com.qat.samples.sysmgmt.advocacia.Envolvidos;
 import com.qat.samples.sysmgmt.advocacia.Processo;
-import com.qat.samples.sysmgmt.advocacia.request.AdvogadoInquiryRequest;
-import com.qat.samples.sysmgmt.advocacia.request.AdvogadoMaintenanceRequest;
-import com.qat.samples.sysmgmt.advocacia.request.AudienciaInquiryRequest;
-import com.qat.samples.sysmgmt.advocacia.request.AudienciaMaintenanceRequest;
+import com.qat.samples.sysmgmt.advocacia.ProcessoStatus;
+import com.qat.samples.sysmgmt.advocacia.request.CompromissoMaintenanceRequest;
 import com.qat.samples.sysmgmt.advocacia.request.ProcessoInquiryRequest;
 import com.qat.samples.sysmgmt.advocacia.request.ProcessoMaintenanceRequest;
+import com.qat.samples.sysmgmt.clinica.model.Especialidade;
+import com.qat.samples.sysmgmt.util.model.Compromisso;
+import com.qat.samples.sysmgmt.util.model.DiasHoras;
+import com.qat.samples.sysmgmt.util.model.ParticipanteExterno;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
+import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**
@@ -21,126 +24,266 @@ public interface IAdvocaciaBAC
 
 
 
-//===================================### ADVOGADO ####======================================
-	/**
+//===================================### ProcessoStatus ####======================================
+
 
 	/**
-	 * Insert advogado.
-	 *
-* @param request the advogado maintenance request
-*
-* @return the internal results response
-*/
-	public InternalResultsResponse<Advogado> insertAdvogado(AdvogadoMaintenanceRequest request);
-
-	/**
-* Update advogado.
-*
-* @param request the advogado maintenance request
-*
-* @return the internal results response
-*/
-	public InternalResultsResponse<Advogado> updateAdvogado(AdvogadoMaintenanceRequest request);
-
-	/**
-* Delete advogado.
-*
-* @param request the advogado maintenance request
-*
-* @return the internal results response
-*/
-	public InternalResultsResponse<Advogado> deleteAdvogado(AdvogadoMaintenanceRequest request);
-
-	/**
-* Refresh advogados.
+* Refresh ProcessoStatuss.
 *
 * @param request containing the number to refresh with and whether to return the result
 */
-	public InternalResultsResponse<Advogado> refreshAdvogados(RefreshRequest request);
+	public InternalResultsResponse<ProcessoStatus> refreshProcessoStatuss(RefreshRequest request);
 
 	/**
-* Fetch advogado by id.
+* Fetch ProcessoStatus by id.
 *
 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Advogado> fetchAdvogadoById(FetchByIdRequest request);
+	public InternalResultsResponse<ProcessoStatus> fetchProcessoStatusById(FetchByIdRequest request);
 
 	/**
-* Fetch all advogados.
+* Fetch all ProcessoStatuss.
 *
-* @return the internal results response< advogado>
+* @return the internal results response< ProcessoStatus>
 */
-	public InternalResultsResponse<Advogado> fetchAllAdvogados(Advogado  advogado);
+	public InternalResultsResponse<ProcessoStatus> fetchAllProcessoStatuss(ProcessoStatus  ProcessoStatus);
 
 	/**
-* Fetch advogados by request.
+* Fetch ProcessoStatuss by request.
 *
 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Advogado> fetchAdvogadosByRequest(AdvogadoInquiryRequest request);
+	public InternalResultsResponse<ProcessoStatus> fetchProcessoStatussByRequest(PagedInquiryRequest request);
 
 
-//===================================### AUDIENCIA ####======================================
-	/**
-
-	/**
-	 * Insert audiencia.
-	 *
-* @param request the audiencia maintenance request
-*
-* @return the internal results response
-*/
-	public InternalResultsResponse<Audiencia> insertAudiencia(AudienciaMaintenanceRequest request);
+//===================================### DiasHoras ####======================================
 
 	/**
-* Update audiencia.
-*
-* @param request the audiencia maintenance request
-*
-* @return the internal results response
-*/
-	public InternalResultsResponse<Audiencia> updateAudiencia(AudienciaMaintenanceRequest request);
-
-	/**
-* Delete audiencia.
-*
-* @param request the audiencia maintenance request
-*
-* @return the internal results response
-*/
-	public InternalResultsResponse<Audiencia> deleteAudiencia(AudienciaMaintenanceRequest request);
-
-	/**
-* Refresh audiencias.
+* Refresh DiasHorass.
 *
 * @param request containing the number to refresh with and whether to return the result
 */
-	public InternalResultsResponse<Audiencia> refreshAudiencias(RefreshRequest request);
+	public InternalResultsResponse<DiasHoras> refreshDiasHorass(RefreshRequest request);
 
 	/**
-* Fetch audiencia by id.
+* Fetch DiasHoras by id.
 *
 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Audiencia> fetchAudienciaById(FetchByIdRequest request);
+	public InternalResultsResponse<DiasHoras> fetchDiasHorasById(FetchByIdRequest request);
 
 	/**
-* Fetch all audiencias.
+* Fetch all DiasHorass.
 *
-* @return the internal results response< audiencia>
+* @return the internal results response< DiasHoras>
 */
-	public InternalResultsResponse<Audiencia> fetchAllAudiencias(Audiencia  audiencia);
+	public InternalResultsResponse<DiasHoras> fetchAllDiasHorass(DiasHoras  DiasHoras);
 
 	/**
-* Fetch audiencias by request.
+* Fetch DiasHorass by request.
 *
 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Audiencia> fetchAudienciasByRequest(AudienciaInquiryRequest request);
+	public InternalResultsResponse<DiasHoras> fetchDiasHorassByRequest(PagedInquiryRequest request);
+
+
+//===================================### ESPECIALIDADE ####======================================
+
+	/**
+* Refresh especialidades.
+*
+* @param request containing the number to refresh with and whether to return the result
+*/
+	public InternalResultsResponse<Especialidade> refreshEspecialidades(RefreshRequest request);
+
+	/**
+* Fetch especialidade by id.
+*
+* @param request the request
+* @return the internal results response
+*/
+	public InternalResultsResponse<Especialidade> fetchEspecialidadeById(FetchByIdRequest request);
+
+	/**
+* Fetch all especialidades.
+*
+* @return the internal results response< especialidade>
+*/
+	public InternalResultsResponse<Especialidade> fetchAllEspecialidades(Especialidade  especialidade);
+
+	/**
+* Fetch especialidades by request.
+*
+* @param request the request
+* @return the internal results response
+*/
+	public InternalResultsResponse<Especialidade> fetchEspecialidadesByRequest(PagedInquiryRequest request);
+
+
+//===================================### COMPROMISSO ####======================================
+	/**
+
+	/**
+	 * Insert compromisso.
+	 *
+* @param request the compromisso maintenance request
+*
+* @return the internal results response
+*/
+	public InternalResultsResponse<Compromisso> insertCompromisso(CompromissoMaintenanceRequest request);
+
+	/**
+* Update compromisso.
+*
+* @param request the compromisso maintenance request
+*
+* @return the internal results response
+*/
+	public InternalResultsResponse<Compromisso> updateCompromisso(CompromissoMaintenanceRequest request);
+
+	/**
+* Delete compromisso.
+*
+* @param request the compromisso maintenance request
+*
+* @return the internal results response
+*/
+	public InternalResultsResponse<Compromisso> deleteCompromisso(CompromissoMaintenanceRequest request);
+
+	/**
+* Refresh compromissos.
+*
+* @param request containing the number to refresh with and whether to return the result
+*/
+	public InternalResultsResponse<Compromisso> refreshCompromissos(RefreshRequest request);
+
+	/**
+* Fetch compromisso by id.
+*
+* @param request the request
+* @return the internal results response
+*/
+	public InternalResultsResponse<Compromisso> fetchCompromissoById(FetchByIdRequest request);
+
+	/**
+* Fetch all compromissos.
+*
+* @return the internal results response< compromisso>
+*/
+	public InternalResultsResponse<Compromisso> fetchAllCompromissos(Compromisso  compromisso);
+
+	/**
+* Fetch compromissos by request.
+*
+* @param request the request
+* @return the internal results response
+*/
+	public InternalResultsResponse<Compromisso> fetchCompromissosByRequest(PagedInquiryRequest request);
+
+
+//===================================### ADVOGADOS ####======================================
+
+
+	/**
+* Refresh advogadoss.
+*
+* @param request containing the number to refresh with and whether to return the result
+*/
+	public InternalResultsResponse<Advogados> refreshAdvogadoss(RefreshRequest request);
+
+	/**
+* Fetch advogados by id.
+*
+* @param request the request
+* @return the internal results response
+*/
+	public InternalResultsResponse<Advogados> fetchAdvogadosById(FetchByIdRequest request);
+
+	/**
+* Fetch all advogadoss.
+*
+* @return the internal results response< advogados>
+*/
+	public InternalResultsResponse<Advogados> fetchAllAdvogadoss(Advogados  advogados);
+
+	/**
+* Fetch advogadoss by request.
+*
+* @param request the request
+* @return the internal results response
+*/
+	public InternalResultsResponse<Advogados> fetchAdvogadossByRequest(PagedInquiryRequest request);
+
+
+//===================================### ENVOLVIDOS ####======================================
+
+
+	/**
+* Refresh envolvidoss.
+*
+* @param request containing the number to refresh with and whether to return the result
+*/
+	public InternalResultsResponse<Envolvidos> refreshEnvolvidoss(RefreshRequest request);
+
+	/**
+* Fetch envolvidos by id.
+*
+* @param request the request
+* @return the internal results response
+*/
+	public InternalResultsResponse<Envolvidos> fetchEnvolvidosById(FetchByIdRequest request);
+
+	/**
+* Fetch all envolvidoss.
+*
+* @return the internal results response< envolvidos>
+*/
+	public InternalResultsResponse<Envolvidos> fetchAllEnvolvidoss(Envolvidos  envolvidos);
+
+	/**
+* Fetch envolvidoss by request.
+*
+* @param request the request
+* @return the internal results response
+*/
+	public InternalResultsResponse<Envolvidos> fetchEnvolvidossByRequest(PagedInquiryRequest request);
+
+
+//===================================### PARTICIPANTEEXTERNO ####======================================
+
+	/**
+* Refresh participanteexternos.
+*
+* @param request containing the number to refresh with and whether to return the result
+*/
+	public InternalResultsResponse<ParticipanteExterno> refreshParticipanteExternos(RefreshRequest request);
+
+	/**
+* Fetch participanteexterno by id.
+*
+* @param request the request
+* @return the internal results response
+*/
+	public InternalResultsResponse<ParticipanteExterno> fetchParticipanteExternoById(FetchByIdRequest request);
+
+	/**
+* Fetch all participanteexternos.
+*
+* @return the internal results response< participanteexterno>
+*/
+	public InternalResultsResponse<ParticipanteExterno> fetchAllParticipanteExternos(ParticipanteExterno  participanteexterno);
+
+	/**
+* Fetch participanteexternos by request.
+*
+* @param request the request
+* @return the internal results response
+*/
+	public InternalResultsResponse<ParticipanteExterno> fetchParticipanteExternosByRequest(PagedInquiryRequest request);
 
 
 //===================================### PROCESSO ####======================================

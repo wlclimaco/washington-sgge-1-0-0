@@ -5522,7 +5522,7 @@ public class Objects {
 		{
 			ProcessoStatus processostatus = new ProcessoStatus();
 			Date a = new Date();
-			processostatus.setId(100);
+			processostatus.setId(id);
 			processostatus.setDataProcesso(a.getTime());
 			processostatus.setNote("NATIVE INSERT UPDATE");
 			processostatus.setParentId(id);
@@ -5542,7 +5542,7 @@ public class Objects {
 		{
 			DiasHoras diashoras = new DiasHoras();
 			Date a = new Date();
-			diashoras.setId(100);
+			diashoras.setId(id);
 			diashoras.setDiasSemanas(Objects.insertDoisValor(id, tabela, action));
 			diashoras.setHoraInicio(a.getTime());
 			diashoras.setHoraFinal(a.getTime());
@@ -5568,7 +5568,7 @@ public class Objects {
 		{
 			Especialidade especialidade = new Especialidade();
 			Date a = new Date();
-			especialidade.setId(100);
+			especialidade.setId(id);
 			especialidade.setNome("NATIVE INSERT UPDATE");
 			especialidade.setParentId(id);
 			especialidade.setEmprId(1);
@@ -5587,7 +5587,7 @@ public class Objects {
 		{
 			Compromisso compromisso = new Compromisso();
 			Date a = new Date();
-			compromisso.setId(100);
+			compromisso.setId(id);
 			compromisso.setTitulo("NATIVE INSERT UPDATE");
 			compromisso.setTipoCompromisso(Objects.insertDoisValor(id, tabela, action));
 			compromisso.setVinculado(Objects.insertDoisValor(id, tabela, action));
@@ -5620,7 +5620,7 @@ public class Objects {
 		{
 			Advogados advogados = new Advogados();
 			Date a = new Date();
-			advogados.setId(100);
+			advogados.setId(id);
 			advogados.setAdvogado(Objects.insertAdvogado(id, tabela, action));
 			advogados.setAdvogadoPrincipal(100);
 			advogados.setParentId(id);
@@ -5640,7 +5640,7 @@ public class Objects {
 		{
 			Envolvidos envolvidos = new Envolvidos();
 			Date a = new Date();
-			envolvidos.setId(100);
+			envolvidos.setId(id);
 			envolvidos.setCliente(Objects.insertCliente(id, tabela, action));
 			envolvidos.setTipoEnvolvido(Objects.insertDoisValor(id, tabela, action));
 			envolvidos.setEnvolvimento(Objects.insertDoisValor(id, tabela, action));
@@ -5662,7 +5662,7 @@ public class Objects {
 		{
 			ParticipanteExterno participanteexterno = new ParticipanteExterno();
 			Date a = new Date();
-			participanteexterno.setId(100);
+			participanteexterno.setId(id);
 			participanteexterno.setNome("NATIVE INSERT UPDATE");
 			//participanteexterno.getEmail().add(Objects.insertEmail(id, tabela, action));
 			//participanteexterno.getundefined().add(insertundefined(id,TabelaEnum.PARTICIPANTEEXTERNO,action));
@@ -5685,7 +5685,7 @@ public class Objects {
 		{
 			Processo processo = new Processo();
 			Date a = new Date();
-			processo.setId(100);
+			processo.setId(id);
 			processo.setDataProcess(a.getTime());
 			processo.setDataFim(a.getTime());
 			processo.setValor(new Double(1.99));

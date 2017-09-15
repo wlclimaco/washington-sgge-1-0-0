@@ -31,7 +31,7 @@
   </resultMap>
 
   <sql id="allParticipanteExternoColumns">
-,nome
+nome
 ,parentId
 ,tabelaEnumValue
 ,emprId

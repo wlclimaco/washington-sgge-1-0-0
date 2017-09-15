@@ -1,4 +1,4 @@
-/** create by system gera-java version 1.0.0 28/04/2016 20:29 : 56*/
+/** create by system gera-java version 1.0.0 15/09/2017 16:12 : 30*/
 package com.qat.samples.sysmgmt.bac.Advogado;
 
 
@@ -12,21 +12,23 @@ import com.qat.framework.model.MessageSeverity;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResponse.SystemErrorCategory;
 import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.framework.validation.ValidationContext;
 import com.qat.framework.validation.ValidationContextIndicator;
 import com.qat.framework.validation.ValidationController;
 import com.qat.framework.validation.ValidationUtil;
-import com.qat.samples.sysmgmt.advocacia.Advogado;
-import com.qat.samples.sysmgmt.advocacia.Audiencia;
+import com.qat.samples.sysmgmt.advocacia.Advogados;
+import com.qat.samples.sysmgmt.advocacia.Envolvidos;
 import com.qat.samples.sysmgmt.advocacia.Processo;
-import com.qat.samples.sysmgmt.advocacia.request.AdvogadoInquiryRequest;
-import com.qat.samples.sysmgmt.advocacia.request.AdvogadoMaintenanceRequest;
-import com.qat.samples.sysmgmt.advocacia.request.AudienciaInquiryRequest;
-import com.qat.samples.sysmgmt.advocacia.request.AudienciaMaintenanceRequest;
+import com.qat.samples.sysmgmt.advocacia.ProcessoStatus;
+import com.qat.samples.sysmgmt.advocacia.request.CompromissoMaintenanceRequest;
 import com.qat.samples.sysmgmt.advocacia.request.ProcessoInquiryRequest;
 import com.qat.samples.sysmgmt.advocacia.request.ProcessoMaintenanceRequest;
 import com.qat.samples.sysmgmt.bar.Advogado.IAdvocaciaBAR;
+import com.qat.samples.sysmgmt.clinica.model.Especialidade;
+import com.qat.samples.sysmgmt.util.model.Compromisso;
+import com.qat.samples.sysmgmt.util.model.DiasHoras;
+import com.qat.samples.sysmgmt.util.model.ParticipanteExterno;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
+import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**
@@ -81,94 +83,52 @@ public class AdvocaciaBACImpl implements IAdvocaciaBAC
 		this.validationController = validationController;
 	}
 
-//===================================### ADVOGADO ####======================================
-	/**
-/*
-/*
- * (non-Javadoc)
- * @see
- * com.qat.samples.sysmgmt.bac.ICountyBAC#insertAdvogado(com.qat.samples.sysmgmt.model.request.AdvogadoMaintenanceRequest
- * )
- */
-@Override
-public InternalResultsResponse<Advogado> insertAdvogado(AdvogadoMaintenanceRequest request)
-{
-	InternalResultsResponse<Advogado> response =
-			processAdvogado(ValidationContextIndicator.INSERT, PersistenceActionEnum.INSERT, request);
-	return response;
-}
+//===================================### PROCESSOSTATUS ####======================================
+
 
 /*
  * (non-Javadoc)
- * @see
- * com.qat.samples.sysmgmt.bac.IAdvogadoBAC#updateAdvogado(com.qat.samples.sysmgmt.model.request.AdvogadoMaintenanceRequest
- * )
+ * @see com.qat.samples.sysmgmt.bac.IProcessoStatusBAC#refreshProcessoStatuss(com.qat.samples.sysmgmt.model.request.RefreshRequest)
  */
 @Override
-public InternalResultsResponse<Advogado> updateAdvogado(AdvogadoMaintenanceRequest request)
-{
-	InternalResultsResponse<Advogado> response =
-			processAdvogado(ValidationContextIndicator.UPDATE, PersistenceActionEnum.UPDATE, request);
-	return response;
-}
-
-/*
- * (non-Javadoc)
- * @see
- * com.qat.samples.sysmgmt.bac.IAdvogadoBAC#deleteAdvogado(com.qat.samples.sysmgmt.model.request.AdvogadoMaintenanceRequest
- * )
- */
-@Override
-public InternalResultsResponse<Advogado> deleteAdvogado(AdvogadoMaintenanceRequest request)
-{
-	InternalResultsResponse<Advogado> response =
-			processAdvogado(ValidationContextIndicator.DELETE, PersistenceActionEnum.DELETE, request);
-	return response;
-}
-
-/*
- * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.bac.IAdvogadoBAC#refreshAdvogados(com.qat.samples.sysmgmt.model.request.RefreshRequest)
- */
-@Override
-public InternalResultsResponse<Advogado> refreshAdvogados(RefreshRequest request)
+public InternalResultsResponse<ProcessoStatus> refreshProcessoStatuss(RefreshRequest request)
 {
 	// This method is demo code only. Do not view this as a QAT Global Standard.
-	getAdvocaciaBAR().deleteAllAdvogados();
+	getAdvocaciaBAR().deleteAllProcessoStatuss();
 	int refreshNumber = request.getRefreshInt();
 	refreshNumber = (refreshNumber < 1) ? MINIMUM_ENTRIES : refreshNumber;
 
 	for (int i = 1; i <= refreshNumber; i++)
 	{
-	getAdvocaciaBAR().insertAdvogado(new Advogado(i, "AdvogadoDesc" + i));
+	//getAdvocaciaBAR().insertProcessoStatus(new ProcessoStatus(i, "ProcessoStatusDesc" + i));
 	}
 
-	// Call maintain to see if we need to return the advogado list and if so whether it should be paged or not
-	return maintainReturnListAdvogado(request.getReturnList(), request.getReturnListPaged(),new Advogado());
+	// Call maintain to see if we need to return the processostatus list and if so whether it should be paged or not
+	return maintainReturnListProcessoStatus(request.getReturnList(), request.getReturnListPaged(),new ProcessoStatus());
 }
 
 /*
  * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.bac.IAdvogadoBAC#fetchAllAdvogados(Advogado advogado)
+ * @see com.qat.samples.sysmgmt.bac.IProcessoStatusBAC#fetchAllProcessoStatuss(ProcessoStatus processostatus)
  */
 @Override
-public InternalResultsResponse<Advogado> fetchAllAdvogados(Advogado advogado)
+public InternalResultsResponse<ProcessoStatus> fetchAllProcessoStatuss(ProcessoStatus processostatus)
 {
-	InternalResultsResponse<Advogado> response = new InternalResultsResponse<Advogado>();
-	response.getResultsList().addAll(getAdvocaciaBAR().fetchAllAdvogados(advogado).getResultsList());
+	InternalResultsResponse<ProcessoStatus> response = new InternalResultsResponse<ProcessoStatus>();
+	response.getResultsList().addAll(getAdvocaciaBAR().fetchAllProcessoStatuss(processostatus).getResultsList());
 	return response;
 }
 
 /*
  * (non-Javadoc)
  * @see
- * com.qat.samples.sysmgmt.bac.IAdvogadoBAC#fetchAdvogadoById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest
+ * com.qat.samples.sysmgmt.bac.IProcessoStatusBAC#fetchProcessoStatusById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest
  * )
  */
 @Override
-public InternalResultsResponse<Advogado> fetchAdvogadoById(FetchByIdRequest request)
+public InternalResultsResponse<ProcessoStatus> fetchProcessoStatusById(FetchByIdRequest request)
 {
-	InternalResultsResponse<Advogado> response = new InternalResultsResponse<Advogado>();
+	InternalResultsResponse<ProcessoStatus> response = new InternalResultsResponse<ProcessoStatus>();
 	// validate fetchId field
 	if (ValidationUtil.isNull(request.getFetchId()))
 	{
@@ -177,7 +137,7 @@ public InternalResultsResponse<Advogado> fetchAdvogadoById(FetchByIdRequest requ
 	}
 	else
 	{
-		response.getResultsList().add(getAdvocaciaBAR().fetchAdvogadoById(request));
+		response.getResultsList().add(getAdvocaciaBAR().fetchProcessoStatusById(request));
 	}
 
 	return response;
@@ -185,13 +145,13 @@ public InternalResultsResponse<Advogado> fetchAdvogadoById(FetchByIdRequest requ
 
 /*
  * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.bac.IAdvogadoBAC#fetchAdvogadosByRequest(com.qat.samples.sysmgmt.model.request.
+ * @see com.qat.samples.sysmgmt.bac.IProcessoStatusBAC#fetchProcessoStatussByRequest(com.qat.samples.sysmgmt.model.request.
  * PagedInquiryRequest)
  */
 @Override
-public InternalResultsResponse<Advogado> fetchAdvogadosByRequest(AdvogadoInquiryRequest request)
+public InternalResultsResponse<ProcessoStatus> fetchProcessoStatussByRequest(PagedInquiryRequest request)
 {
-	return getAdvocaciaBAR().fetchAdvogadosByRequest(request);
+	return getAdvocaciaBAR().fetchProcessoStatussByRequest(request);
 }
 
 /**
@@ -200,29 +160,417 @@ public InternalResultsResponse<Advogado> fetchAdvogadosByRequest(AdvogadoInquiry
  * @param indicator the indicator
  * @param persistType the persist type
  * @param request the request
- * @return the advogado response
+ * @return the processostatus response
  */
-private InternalResultsResponse<Advogado> processAdvogado(ValidationContextIndicator indicator,
-		PersistenceActionEnum persistType,
-		AdvogadoMaintenanceRequest request)
+
+
+	/**
+	 * Maintain return list.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 */
+	private InternalResultsResponse<ProcessoStatus> maintainReturnListProcessoStatus(Boolean listIndicator, Boolean pageListIndicator,ProcessoStatus processostatus)
+	{
+		// Fetch again if requested.
+		if (listIndicator)
 		{
-	InternalResultsResponse<Advogado> response = null;
+			// Fetch Paged is requested.
+			if (pageListIndicator)
+			{
+				PagedInquiryRequest request = new PagedInquiryRequest();
+				request.setPreQueryCount(true);
+				return fetchProcessoStatussByRequest(request);
+			}
+			else
+			{
+				// otherwise return all rows not paged
+				return fetchAllProcessoStatuss(processostatus);
+			}
+		}
+		else
+		{
+			return new InternalResultsResponse<ProcessoStatus>();
+		}
+	}
+
+//===================================### DIASHORAS ####======================================
+
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.bac.IDiasHorasBAC#refreshDiasHorass(com.qat.samples.sysmgmt.model.request.RefreshRequest)
+ */
+@Override
+public InternalResultsResponse<DiasHoras> refreshDiasHorass(RefreshRequest request)
+{
+	// This method is demo code only. Do not view this as a QAT Global Standard.
+	getAdvocaciaBAR().deleteAllDiasHorass();
+	int refreshNumber = request.getRefreshInt();
+	refreshNumber = (refreshNumber < 1) ? MINIMUM_ENTRIES : refreshNumber;
+
+	for (int i = 1; i <= refreshNumber; i++)
+	{
+	getAdvocaciaBAR().insertDiasHoras(new DiasHoras(i, "DiasHorasDesc" + i));
+	}
+
+	// Call maintain to see if we need to return the diashoras list and if so whether it should be paged or not
+	return maintainReturnListDiasHoras(request.getReturnList(), request.getReturnListPaged(),new DiasHoras());
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.bac.IDiasHorasBAC#fetchAllDiasHorass(DiasHoras diashoras)
+ */
+@Override
+public InternalResultsResponse<DiasHoras> fetchAllDiasHorass(DiasHoras diashoras)
+{
+	InternalResultsResponse<DiasHoras> response = new InternalResultsResponse<DiasHoras>();
+	response.getResultsList().addAll(getAdvocaciaBAR().fetchAllDiasHorass(diashoras).getResultsList());
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see
+ * com.qat.samples.sysmgmt.bac.IDiasHorasBAC#fetchDiasHorasById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest
+ * )
+ */
+@Override
+public InternalResultsResponse<DiasHoras> fetchDiasHorasById(FetchByIdRequest request)
+{
+	InternalResultsResponse<DiasHoras> response = new InternalResultsResponse<DiasHoras>();
+	// validate fetchId field
+	if (ValidationUtil.isNull(request.getFetchId()))
+	{
+		response.addFieldErrorMessage(SYSMGMT_BASE_ID_REQUIRED);
+		response.setStatus(SystemErrorCategory.SystemValidation);
+	}
+	else
+	{
+		response.getResultsList().add(getAdvocaciaBAR().fetchDiasHorasById(request));
+	}
+
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.bac.IDiasHorasBAC#fetchDiasHorassByRequest(com.qat.samples.sysmgmt.model.request.
+ * PagedInquiryRequest)
+ */
+@Override
+public InternalResultsResponse<DiasHoras> fetchDiasHorassByRequest(PagedInquiryRequest request)
+{
+	return getAdvocaciaBAR().fetchDiasHorassByRequest(request);
+}
+
+
+
+	/**
+	 * Maintain return list.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 */
+	private InternalResultsResponse<DiasHoras> maintainReturnListDiasHoras(Boolean listIndicator, Boolean pageListIndicator,DiasHoras diashoras)
+	{
+		// Fetch again if requested.
+		if (listIndicator)
+		{
+			// Fetch Paged is requested.
+			if (pageListIndicator)
+			{
+				PagedInquiryRequest request = new PagedInquiryRequest();
+				request.setPreQueryCount(true);
+				return fetchDiasHorassByRequest(request);
+			}
+			else
+			{
+				// otherwise return all rows not paged
+				return fetchAllDiasHorass(diashoras);
+			}
+		}
+		else
+		{
+			return new InternalResultsResponse<DiasHoras>();
+		}
+	}
+
+//===================================### ESPECIALIDADE ####======================================
+
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.bac.IEspecialidadeBAC#refreshEspecialidades(com.qat.samples.sysmgmt.model.request.RefreshRequest)
+ */
+@Override
+public InternalResultsResponse<Especialidade> refreshEspecialidades(RefreshRequest request)
+{
+	// This method is demo code only. Do not view this as a QAT Global Standard.
+	getAdvocaciaBAR().deleteAllEspecialidades();
+	int refreshNumber = request.getRefreshInt();
+	refreshNumber = (refreshNumber < 1) ? MINIMUM_ENTRIES : refreshNumber;
+
+	for (int i = 1; i <= refreshNumber; i++)
+	{
+//	getAdvocaciaBAR().insertEspecialidade(new Especialidade(i, "EspecialidadeDesc" + i));
+	}
+
+	// Call maintain to see if we need to return the especialidade list and if so whether it should be paged or not
+	return maintainReturnListEspecialidade(request.getReturnList(), request.getReturnListPaged(),new Especialidade());
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.bac.IEspecialidadeBAC#fetchAllEspecialidades(Especialidade especialidade)
+ */
+@Override
+public InternalResultsResponse<Especialidade> fetchAllEspecialidades(Especialidade especialidade)
+{
+	InternalResultsResponse<Especialidade> response = new InternalResultsResponse<Especialidade>();
+	response.getResultsList().addAll(getAdvocaciaBAR().fetchAllEspecialidades(especialidade).getResultsList());
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see
+ * com.qat.samples.sysmgmt.bac.IEspecialidadeBAC#fetchEspecialidadeById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest
+ * )
+ */
+@Override
+public InternalResultsResponse<Especialidade> fetchEspecialidadeById(FetchByIdRequest request)
+{
+	InternalResultsResponse<Especialidade> response = new InternalResultsResponse<Especialidade>();
+	// validate fetchId field
+	if (ValidationUtil.isNull(request.getFetchId()))
+	{
+		response.addFieldErrorMessage(SYSMGMT_BASE_ID_REQUIRED);
+		response.setStatus(SystemErrorCategory.SystemValidation);
+	}
+	else
+	{
+		response.getResultsList().add(getAdvocaciaBAR().fetchEspecialidadeById(request));
+	}
+
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.bac.IEspecialidadeBAC#fetchEspecialidadesByRequest(com.qat.samples.sysmgmt.model.request.
+ * PagedInquiryRequest)
+ */
+@Override
+public InternalResultsResponse<Especialidade> fetchEspecialidadesByRequest(PagedInquiryRequest request)
+{
+	return getAdvocaciaBAR().fetchEspecialidadesByRequest(request);
+}
+
+
+	/**
+	 * Do persistenceEspecialidade.
+	 *
+	 * @param request the request
+	 * @param updateType the update type
+	 * @return the internal response
+	 */
+	private InternalResponse doPersistenceEspecialidade(Especialidade especialidade, PersistenceActionEnum updateType)
+	{
+		switch (updateType)
+		{
+			case INSERT:
+				return getAdvocaciaBAR().insertEspecialidade(especialidade);
+
+			case UPDATE:
+				return getAdvocaciaBAR().updateEspecialidade(especialidade);
+
+			case DELETE:
+				return getAdvocaciaBAR().deleteEspecialidadeById(especialidade);
+			default:
+				if (LOG.isDebugEnabled())
+				{
+					LOG.debug("updateType missing!");
+				}
+				break;
+		}
+
+		return null;
+	}
+
+	/**
+	 * Maintain return list.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 */
+	private InternalResultsResponse<Especialidade> maintainReturnListEspecialidade(Boolean listIndicator, Boolean pageListIndicator,Especialidade especialidade)
+	{
+		// Fetch again if requested.
+		if (listIndicator)
+		{
+			// Fetch Paged is requested.
+			if (pageListIndicator)
+			{
+				PagedInquiryRequest request = new PagedInquiryRequest();
+				request.setPreQueryCount(true);
+				return fetchEspecialidadesByRequest(request);
+			}
+			else
+			{
+				// otherwise return all rows not paged
+				return fetchAllEspecialidades(especialidade);
+			}
+		}
+		else
+		{
+			return new InternalResultsResponse<Especialidade>();
+		}
+	}
+
+//===================================### COMPROMISSO ####======================================
+	/**
+/*
+/*
+ * (non-Javadoc)
+ * @see
+ * com.qat.samples.sysmgmt.bac.ICountyBAC#insertCompromisso(com.qat.samples.sysmgmt.model.request.CompromissoMaintenanceRequest
+ * )
+ */
+@Override
+public InternalResultsResponse<Compromisso> insertCompromisso(CompromissoMaintenanceRequest request)
+{
+	InternalResultsResponse<Compromisso> response =
+			processCompromisso(ValidationContextIndicator.INSERT, PersistenceActionEnum.INSERT, request);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see
+ * com.qat.samples.sysmgmt.bac.ICompromissoBAC#updateCompromisso(com.qat.samples.sysmgmt.model.request.CompromissoMaintenanceRequest
+ * )
+ */
+@Override
+public InternalResultsResponse<Compromisso> updateCompromisso(CompromissoMaintenanceRequest request)
+{
+	InternalResultsResponse<Compromisso> response =
+			processCompromisso(ValidationContextIndicator.UPDATE, PersistenceActionEnum.UPDATE, request);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see
+ * com.qat.samples.sysmgmt.bac.ICompromissoBAC#deleteCompromisso(com.qat.samples.sysmgmt.model.request.CompromissoMaintenanceRequest
+ * )
+ */
+@Override
+public InternalResultsResponse<Compromisso> deleteCompromisso(CompromissoMaintenanceRequest request)
+{
+	InternalResultsResponse<Compromisso> response =
+			processCompromisso(ValidationContextIndicator.DELETE, PersistenceActionEnum.DELETE, request);
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.bac.ICompromissoBAC#refreshCompromissos(com.qat.samples.sysmgmt.model.request.RefreshRequest)
+ */
+@Override
+public InternalResultsResponse<Compromisso> refreshCompromissos(RefreshRequest request)
+{
+	// This method is demo code only. Do not view this as a QAT Global Standard.
+	getAdvocaciaBAR().deleteAllCompromissos();
+	int refreshNumber = request.getRefreshInt();
+	refreshNumber = (refreshNumber < 1) ? MINIMUM_ENTRIES : refreshNumber;
+
+	for (int i = 1; i <= refreshNumber; i++)
+	{
+	getAdvocaciaBAR().insertCompromisso(new Compromisso(i, "CompromissoDesc" + i));
+	}
+
+	// Call maintain to see if we need to return the compromisso list and if so whether it should be paged or not
+	return maintainReturnListCompromisso(request.getReturnList(), request.getReturnListPaged(),new Compromisso());
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.bac.ICompromissoBAC#fetchAllCompromissos(Compromisso compromisso)
+ */
+@Override
+public InternalResultsResponse<Compromisso> fetchAllCompromissos(Compromisso compromisso)
+{
+	InternalResultsResponse<Compromisso> response = new InternalResultsResponse<Compromisso>();
+	response.getResultsList().addAll(getAdvocaciaBAR().fetchAllCompromissos(compromisso).getResultsList());
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see
+ * com.qat.samples.sysmgmt.bac.ICompromissoBAC#fetchCompromissoById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest
+ * )
+ */
+@Override
+public InternalResultsResponse<Compromisso> fetchCompromissoById(FetchByIdRequest request)
+{
+	InternalResultsResponse<Compromisso> response = new InternalResultsResponse<Compromisso>();
+	// validate fetchId field
+	if (ValidationUtil.isNull(request.getFetchId()))
+	{
+		response.addFieldErrorMessage(SYSMGMT_BASE_ID_REQUIRED);
+		response.setStatus(SystemErrorCategory.SystemValidation);
+	}
+	else
+	{
+		response.getResultsList().add(getAdvocaciaBAR().fetchCompromissoById(request));
+	}
+
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.bac.ICompromissoBAC#fetchCompromissosByRequest(com.qat.samples.sysmgmt.model.request.
+ * PagedInquiryRequest)
+ */
+@Override
+public InternalResultsResponse<Compromisso> fetchCompromissosByRequest(PagedInquiryRequest request)
+{
+	return getAdvocaciaBAR().fetchCompromissosByRequest(request);
+}
+
+/**
+ * Process.
+ *
+ * @param indicator the indicator
+ * @param persistType the persist type
+ * @param request the request
+ * @return the compromisso response
+ */
+private InternalResultsResponse<Compromisso> processCompromisso(ValidationContextIndicator indicator,
+		PersistenceActionEnum persistType,
+		CompromissoMaintenanceRequest request)
+		{
+	InternalResultsResponse<Compromisso> response = null;
 
 	// Validate
-	ValidationContext context = new ValidationContext(Advogado.class.getSimpleName(), request.getAdvogado(), indicator);
-	if (!getValidationController().validate(context))
-	{
-		response = new InternalResultsResponse<Advogado>();
-		response.setStatus(SystemErrorCategory.SystemValidation);
-		response.addMessages(context.getMessages());
-		return response;
-	}
+	//ValidationContext context = new ValidationContext(Compromisso.class.getSimpleName(), request.getCompromisso(), indicator);
+	//if (!getValidationController().validate(context))
+	//{
+	//	response = new InternalResultsResponse<Compromisso>();
+	//	response.setStatus(SystemErrorCategory.SystemValidation);
+	//	response.addMessages(context.getMessages());
+	//	return response;
+	//}
 
 		// Persist
-		InternalResponse internalResponse = doPersistenceAdvogado(request.getAdvogado(), persistType);
+		InternalResponse internalResponse = doPersistenceCompromisso(request.getCompromisso(), persistType);
 		if (internalResponse.isInError())
 		{
-			response = new InternalResultsResponse<Advogado>();
+			response = new InternalResultsResponse<Compromisso>();
 			response.setStatus(internalResponse.getError());
 			response.addMessages(internalResponse.getMessageInfoList());
 			response.addMessage(DEFAULT_ADVOGADO_BAC_EXCEPTION_MSG, MessageSeverity.Error,
@@ -231,32 +579,32 @@ private InternalResultsResponse<Advogado> processAdvogado(ValidationContextIndic
 			return response;
 		}
 
-		// Call maintainReurnList to see if we need to return the advogado list and if so whether it should be paged or
+		// Call maintainReurnList to see if we need to return the compromisso list and if so whether it should be paged or
 		// not
-		response = maintainReturnListAdvogado(request.getReturnList(), request.getReturnListPaged(),new Advogado());
+		response = maintainReturnListCompromisso(request.getReturnList(), request.getReturnListPaged(),new Compromisso());
 
 		return response;
 			}
 
 	/**
-	 * Do persistenceAdvogado.
+	 * Do persistenceCompromisso.
 	 *
 	 * @param request the request
 	 * @param updateType the update type
 	 * @return the internal response
 	 */
-	private InternalResponse doPersistenceAdvogado(Advogado advogado, PersistenceActionEnum updateType)
+	private InternalResponse doPersistenceCompromisso(Compromisso compromisso, PersistenceActionEnum updateType)
 	{
 		switch (updateType)
 		{
 			case INSERT:
-				return getAdvocaciaBAR().insertAdvogado(advogado);
+				return getAdvocaciaBAR().insertCompromisso(compromisso);
 
 			case UPDATE:
-				return getAdvocaciaBAR().updateAdvogado(advogado);
+				return getAdvocaciaBAR().updateCompromisso(compromisso);
 
 			case DELETE:
-				return getAdvocaciaBAR().deleteAdvogadoById(advogado);
+				return getAdvocaciaBAR().deleteCompromissoById(compromisso);
 			default:
 				if (LOG.isDebugEnabled())
 				{
@@ -274,7 +622,7 @@ private InternalResultsResponse<Advogado> processAdvogado(ValidationContextIndic
 	 * @param request the request
 	 * @param response the response
 	 */
-	private InternalResultsResponse<Advogado> maintainReturnListAdvogado(Boolean listIndicator, Boolean pageListIndicator,Advogado advogado)
+	private InternalResultsResponse<Compromisso> maintainReturnListCompromisso(Boolean listIndicator, Boolean pageListIndicator,Compromisso compromisso)
 	{
 		// Fetch again if requested.
 		if (listIndicator)
@@ -282,110 +630,67 @@ private InternalResultsResponse<Advogado> processAdvogado(ValidationContextIndic
 			// Fetch Paged is requested.
 			if (pageListIndicator)
 			{
-				AdvogadoInquiryRequest request = new AdvogadoInquiryRequest();
+				PagedInquiryRequest request = new PagedInquiryRequest();
 				request.setPreQueryCount(true);
-				return fetchAdvogadosByRequest(request);
+				return fetchCompromissosByRequest(request);
 			}
 			else
 			{
 				// otherwise return all rows not paged
-				return fetchAllAdvogados(advogado);
+				return fetchAllCompromissos(compromisso);
 			}
 		}
 		else
 		{
-			return new InternalResultsResponse<Advogado>();
+			return new InternalResultsResponse<Compromisso>();
 		}
 	}
 
-//===================================### AUDIENCIA ####======================================
-	/**
-/*
-/*
- * (non-Javadoc)
- * @see
- * com.qat.samples.sysmgmt.bac.ICountyBAC#insertAudiencia(com.qat.samples.sysmgmt.model.request.AudienciaMaintenanceRequest
- * )
- */
-@Override
-public InternalResultsResponse<Audiencia> insertAudiencia(AudienciaMaintenanceRequest request)
-{
-	InternalResultsResponse<Audiencia> response =
-			processAudiencia(ValidationContextIndicator.INSERT, PersistenceActionEnum.INSERT, request);
-	return response;
-}
+//===================================### ADVOGADOS ####======================================
 
 /*
  * (non-Javadoc)
- * @see
- * com.qat.samples.sysmgmt.bac.IAudienciaBAC#updateAudiencia(com.qat.samples.sysmgmt.model.request.AudienciaMaintenanceRequest
- * )
+ * @see com.qat.samples.sysmgmt.bac.IAdvogadosBAC#refreshAdvogadoss(com.qat.samples.sysmgmt.model.request.RefreshRequest)
  */
 @Override
-public InternalResultsResponse<Audiencia> updateAudiencia(AudienciaMaintenanceRequest request)
-{
-	InternalResultsResponse<Audiencia> response =
-			processAudiencia(ValidationContextIndicator.UPDATE, PersistenceActionEnum.UPDATE, request);
-	return response;
-}
-
-/*
- * (non-Javadoc)
- * @see
- * com.qat.samples.sysmgmt.bac.IAudienciaBAC#deleteAudiencia(com.qat.samples.sysmgmt.model.request.AudienciaMaintenanceRequest
- * )
- */
-@Override
-public InternalResultsResponse<Audiencia> deleteAudiencia(AudienciaMaintenanceRequest request)
-{
-	InternalResultsResponse<Audiencia> response =
-			processAudiencia(ValidationContextIndicator.DELETE, PersistenceActionEnum.DELETE, request);
-	return response;
-}
-
-/*
- * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.bac.IAudienciaBAC#refreshAudiencias(com.qat.samples.sysmgmt.model.request.RefreshRequest)
- */
-@Override
-public InternalResultsResponse<Audiencia> refreshAudiencias(RefreshRequest request)
+public InternalResultsResponse<Advogados> refreshAdvogadoss(RefreshRequest request)
 {
 	// This method is demo code only. Do not view this as a QAT Global Standard.
-	getAdvocaciaBAR().deleteAllAudiencias();
+	getAdvocaciaBAR().deleteAllAdvogadoss();
 	int refreshNumber = request.getRefreshInt();
 	refreshNumber = (refreshNumber < 1) ? MINIMUM_ENTRIES : refreshNumber;
 
 	for (int i = 1; i <= refreshNumber; i++)
 	{
-	getAdvocaciaBAR().insertAudiencia(new Audiencia(i, "AudienciaDesc" + i));
+	//getAdvocaciaBAR().insertAdvogados(new Advogados(i, "AdvogadosDesc" + i));
 	}
 
-	// Call maintain to see if we need to return the audiencia list and if so whether it should be paged or not
-	return maintainReturnListAudiencia(request.getReturnList(), request.getReturnListPaged(),new Audiencia());
+	// Call maintain to see if we need to return the advogados list and if so whether it should be paged or not
+	return maintainReturnListAdvogados(request.getReturnList(), request.getReturnListPaged(),new Advogados());
 }
 
 /*
  * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.bac.IAudienciaBAC#fetchAllAudiencias(Audiencia audiencia)
+ * @see com.qat.samples.sysmgmt.bac.IAdvogadosBAC#fetchAllAdvogadoss(Advogados advogados)
  */
 @Override
-public InternalResultsResponse<Audiencia> fetchAllAudiencias(Audiencia audiencia)
+public InternalResultsResponse<Advogados> fetchAllAdvogadoss(Advogados advogados)
 {
-	InternalResultsResponse<Audiencia> response = new InternalResultsResponse<Audiencia>();
-	response.getResultsList().addAll(getAdvocaciaBAR().fetchAllAudiencias(audiencia).getResultsList());
+	InternalResultsResponse<Advogados> response = new InternalResultsResponse<Advogados>();
+	response.getResultsList().addAll(getAdvocaciaBAR().fetchAllAdvogadoss(advogados).getResultsList());
 	return response;
 }
 
 /*
  * (non-Javadoc)
  * @see
- * com.qat.samples.sysmgmt.bac.IAudienciaBAC#fetchAudienciaById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest
+ * com.qat.samples.sysmgmt.bac.IAdvogadosBAC#fetchAdvogadosById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest
  * )
  */
 @Override
-public InternalResultsResponse<Audiencia> fetchAudienciaById(FetchByIdRequest request)
+public InternalResultsResponse<Advogados> fetchAdvogadosById(FetchByIdRequest request)
 {
-	InternalResultsResponse<Audiencia> response = new InternalResultsResponse<Audiencia>();
+	InternalResultsResponse<Advogados> response = new InternalResultsResponse<Advogados>();
 	// validate fetchId field
 	if (ValidationUtil.isNull(request.getFetchId()))
 	{
@@ -394,7 +699,7 @@ public InternalResultsResponse<Audiencia> fetchAudienciaById(FetchByIdRequest re
 	}
 	else
 	{
-		response.getResultsList().add(getAdvocaciaBAR().fetchAudienciaById(request));
+		response.getResultsList().add(getAdvocaciaBAR().fetchAdvogadosById(request));
 	}
 
 	return response;
@@ -402,78 +707,17 @@ public InternalResultsResponse<Audiencia> fetchAudienciaById(FetchByIdRequest re
 
 /*
  * (non-Javadoc)
- * @see com.qat.samples.sysmgmt.bac.IAudienciaBAC#fetchAudienciasByRequest(com.qat.samples.sysmgmt.model.request.
+ * @see com.qat.samples.sysmgmt.bac.IAdvogadosBAC#fetchAdvogadossByRequest(com.qat.samples.sysmgmt.model.request.
  * PagedInquiryRequest)
  */
 @Override
-public InternalResultsResponse<Audiencia> fetchAudienciasByRequest(AudienciaInquiryRequest request)
+public InternalResultsResponse<Advogados> fetchAdvogadossByRequest(PagedInquiryRequest request)
 {
-	return getAdvocaciaBAR().fetchAudienciasByRequest(request);
+	return getAdvocaciaBAR().fetchAdvogadossByRequest(request);
 }
 
-/**
- * Process.
- *
- * @param indicator the indicator
- * @param persistType the persist type
- * @param request the request
- * @return the audiencia response
- */
-private InternalResultsResponse<Audiencia> processAudiencia(ValidationContextIndicator indicator,
-		PersistenceActionEnum persistType,
-		AudienciaMaintenanceRequest request)
-		{
-	InternalResultsResponse<Audiencia> response = null;
 
-		// Persist
-		InternalResponse internalResponse = doPersistenceAudiencia(request.getAudiencia(), persistType);
-		if (internalResponse.isInError())
-		{
-			response = new InternalResultsResponse<Audiencia>();
-			response.setStatus(internalResponse.getError());
-			response.addMessages(internalResponse.getMessageInfoList());
-			response.addMessage(DEFAULT_ADVOGADO_BAC_EXCEPTION_MSG, MessageSeverity.Error,
-					MessageLevel.Object, new Object[] {internalResponse.errorToString()});
 
-			return response;
-		}
-
-		// Call maintainReurnList to see if we need to return the audiencia list and if so whether it should be paged or
-		// not
-		response = maintainReturnListAudiencia(request.getReturnList(), request.getReturnListPaged(),new Audiencia());
-
-		return response;
-			}
-
-	/**
-	 * Do persistenceAudiencia.
-	 *
-	 * @param request the request
-	 * @param updateType the update type
-	 * @return the internal response
-	 */
-	private InternalResponse doPersistenceAudiencia(Audiencia audiencia, PersistenceActionEnum updateType)
-	{
-		switch (updateType)
-		{
-			case INSERT:
-				return getAdvocaciaBAR().insertAudiencia(audiencia);
-
-			case UPDATE:
-				return getAdvocaciaBAR().updateAudiencia(audiencia);
-
-			case DELETE:
-				return getAdvocaciaBAR().deleteAudienciaById(audiencia);
-			default:
-				if (LOG.isDebugEnabled())
-				{
-					LOG.debug("updateType missing!");
-				}
-				break;
-		}
-
-		return null;
-	}
 
 	/**
 	 * Maintain return list.
@@ -481,7 +725,7 @@ private InternalResultsResponse<Audiencia> processAudiencia(ValidationContextInd
 	 * @param request the request
 	 * @param response the response
 	 */
-	private InternalResultsResponse<Audiencia> maintainReturnListAudiencia(Boolean listIndicator, Boolean pageListIndicator,Audiencia audiencia)
+	private InternalResultsResponse<Advogados> maintainReturnListAdvogados(Boolean listIndicator, Boolean pageListIndicator,Advogados advogados)
 	{
 		// Fetch again if requested.
 		if (listIndicator)
@@ -489,19 +733,223 @@ private InternalResultsResponse<Audiencia> processAudiencia(ValidationContextInd
 			// Fetch Paged is requested.
 			if (pageListIndicator)
 			{
-				AudienciaInquiryRequest request = new AudienciaInquiryRequest();
+				PagedInquiryRequest request = new PagedInquiryRequest();
 				request.setPreQueryCount(true);
-				return fetchAudienciasByRequest(request);
+				return fetchAdvogadossByRequest(request);
 			}
 			else
 			{
 				// otherwise return all rows not paged
-				return fetchAllAudiencias(audiencia);
+				return fetchAllAdvogadoss(advogados);
 			}
 		}
 		else
 		{
-			return new InternalResultsResponse<Audiencia>();
+			return new InternalResultsResponse<Advogados>();
+		}
+	}
+
+//===================================### ENVOLVIDOS ####======================================
+
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.bac.IEnvolvidosBAC#refreshEnvolvidoss(com.qat.samples.sysmgmt.model.request.RefreshRequest)
+ */
+@Override
+public InternalResultsResponse<Envolvidos> refreshEnvolvidoss(RefreshRequest request)
+{
+	// This method is demo code only. Do not view this as a QAT Global Standard.
+	getAdvocaciaBAR().deleteAllEnvolvidoss();
+	int refreshNumber = request.getRefreshInt();
+	refreshNumber = (refreshNumber < 1) ? MINIMUM_ENTRIES : refreshNumber;
+
+	for (int i = 1; i <= refreshNumber; i++)
+	{
+	//getAdvocaciaBAR().insertEnvolvidos(new Envolvidos(i, "EnvolvidosDesc" + i));
+	}
+
+	// Call maintain to see if we need to return the envolvidos list and if so whether it should be paged or not
+	return maintainReturnListEnvolvidos(request.getReturnList(), request.getReturnListPaged(),new Envolvidos());
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.bac.IEnvolvidosBAC#fetchAllEnvolvidoss(Envolvidos envolvidos)
+ */
+@Override
+public InternalResultsResponse<Envolvidos> fetchAllEnvolvidoss(Envolvidos envolvidos)
+{
+	InternalResultsResponse<Envolvidos> response = new InternalResultsResponse<Envolvidos>();
+	response.getResultsList().addAll(getAdvocaciaBAR().fetchAllEnvolvidoss(envolvidos).getResultsList());
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see
+ * com.qat.samples.sysmgmt.bac.IEnvolvidosBAC#fetchEnvolvidosById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest
+ * )
+ */
+@Override
+public InternalResultsResponse<Envolvidos> fetchEnvolvidosById(FetchByIdRequest request)
+{
+	InternalResultsResponse<Envolvidos> response = new InternalResultsResponse<Envolvidos>();
+	// validate fetchId field
+	if (ValidationUtil.isNull(request.getFetchId()))
+	{
+		response.addFieldErrorMessage(SYSMGMT_BASE_ID_REQUIRED);
+		response.setStatus(SystemErrorCategory.SystemValidation);
+	}
+	else
+	{
+		response.getResultsList().add(getAdvocaciaBAR().fetchEnvolvidosById(request));
+	}
+
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.bac.IEnvolvidosBAC#fetchEnvolvidossByRequest(com.qat.samples.sysmgmt.model.request.
+ * PagedInquiryRequest)
+ */
+@Override
+public InternalResultsResponse<Envolvidos> fetchEnvolvidossByRequest(PagedInquiryRequest request)
+{
+	return getAdvocaciaBAR().fetchEnvolvidossByRequest(request);
+}
+
+
+	/**
+	 * Maintain return list.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 */
+	private InternalResultsResponse<Envolvidos> maintainReturnListEnvolvidos(Boolean listIndicator, Boolean pageListIndicator,Envolvidos envolvidos)
+	{
+		// Fetch again if requested.
+		if (listIndicator)
+		{
+			// Fetch Paged is requested.
+			if (pageListIndicator)
+			{
+				PagedInquiryRequest request = new PagedInquiryRequest();
+				request.setPreQueryCount(true);
+				return fetchEnvolvidossByRequest(request);
+			}
+			else
+			{
+				// otherwise return all rows not paged
+				return fetchAllEnvolvidoss(envolvidos);
+			}
+		}
+		else
+		{
+			return new InternalResultsResponse<Envolvidos>();
+		}
+	}
+
+//===================================### PARTICIPANTEEXTERNO ####======================================
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.bac.IParticipanteExternoBAC#refreshParticipanteExternos(com.qat.samples.sysmgmt.model.request.RefreshRequest)
+ */
+@Override
+public InternalResultsResponse<ParticipanteExterno> refreshParticipanteExternos(RefreshRequest request)
+{
+	// This method is demo code only. Do not view this as a QAT Global Standard.
+	getAdvocaciaBAR().deleteAllParticipanteExternos();
+	int refreshNumber = request.getRefreshInt();
+	refreshNumber = (refreshNumber < 1) ? MINIMUM_ENTRIES : refreshNumber;
+
+	for (int i = 1; i <= refreshNumber; i++)
+	{
+//	getAdvocaciaBAR().insertParticipanteExterno(new ParticipanteExterno(i, "ParticipanteExternoDesc" + i));
+	}
+
+	// Call maintain to see if we need to return the participanteexterno list and if so whether it should be paged or not
+	return maintainReturnListParticipanteExterno(request.getReturnList(), request.getReturnListPaged(),new ParticipanteExterno());
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.bac.IParticipanteExternoBAC#fetchAllParticipanteExternos(ParticipanteExterno participanteexterno)
+ */
+@Override
+public InternalResultsResponse<ParticipanteExterno> fetchAllParticipanteExternos(ParticipanteExterno participanteexterno)
+{
+	InternalResultsResponse<ParticipanteExterno> response = new InternalResultsResponse<ParticipanteExterno>();
+	response.getResultsList().addAll(getAdvocaciaBAR().fetchAllParticipanteExternos(participanteexterno).getResultsList());
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see
+ * com.qat.samples.sysmgmt.bac.IParticipanteExternoBAC#fetchParticipanteExternoById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest
+ * )
+ */
+@Override
+public InternalResultsResponse<ParticipanteExterno> fetchParticipanteExternoById(FetchByIdRequest request)
+{
+	InternalResultsResponse<ParticipanteExterno> response = new InternalResultsResponse<ParticipanteExterno>();
+	// validate fetchId field
+	if (ValidationUtil.isNull(request.getFetchId()))
+	{
+		response.addFieldErrorMessage(SYSMGMT_BASE_ID_REQUIRED);
+		response.setStatus(SystemErrorCategory.SystemValidation);
+	}
+	else
+	{
+		response.getResultsList().add(getAdvocaciaBAR().fetchParticipanteExternoById(request));
+	}
+
+	return response;
+}
+
+/*
+ * (non-Javadoc)
+ * @see com.qat.samples.sysmgmt.bac.IParticipanteExternoBAC#fetchParticipanteExternosByRequest(com.qat.samples.sysmgmt.model.request.
+ * PagedInquiryRequest)
+ */
+@Override
+public InternalResultsResponse<ParticipanteExterno> fetchParticipanteExternosByRequest(PagedInquiryRequest request)
+{
+	return getAdvocaciaBAR().fetchParticipanteExternosByRequest(request);
+}
+
+
+
+	/**
+	 * Maintain return list.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 */
+	private InternalResultsResponse<ParticipanteExterno> maintainReturnListParticipanteExterno(Boolean listIndicator, Boolean pageListIndicator,ParticipanteExterno participanteexterno)
+	{
+		// Fetch again if requested.
+		if (listIndicator)
+		{
+			// Fetch Paged is requested.
+			if (pageListIndicator)
+			{
+				PagedInquiryRequest request = new PagedInquiryRequest();
+				request.setPreQueryCount(true);
+				return fetchParticipanteExternosByRequest(request);
+			}
+			else
+			{
+				// otherwise return all rows not paged
+				return fetchAllParticipanteExternos(participanteexterno);
+			}
+		}
+		else
+		{
+			return new InternalResultsResponse<ParticipanteExterno>();
 		}
 	}
 
@@ -631,6 +1079,16 @@ private InternalResultsResponse<Processo> processProcesso(ValidationContextIndic
 		ProcessoMaintenanceRequest request)
 		{
 	InternalResultsResponse<Processo> response = null;
+
+	// Validate
+	//ValidationContext context = new ValidationContext(Processo.class.getSimpleName(), request.getProcesso(), indicator);
+	//if (!getValidationController().validate(context))
+	//{
+	//	response = new InternalResultsResponse<Processo>();
+	//	response.setStatus(SystemErrorCategory.SystemValidation);
+	//	response.addMessages(context.getMessages());
+	//	return response;
+	//}
 
 		// Persist
 		InternalResponse internalResponse = doPersistenceProcesso(request.getProcesso(), persistType);

@@ -2,7 +2,6 @@ package com.qat.samples.sysmgmt.advocacia;
 
 import com.qat.samples.sysmgmt.util.model.DoisValores;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
-import com.qat.samples.sysmgmt.util.model.Note;
 
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer

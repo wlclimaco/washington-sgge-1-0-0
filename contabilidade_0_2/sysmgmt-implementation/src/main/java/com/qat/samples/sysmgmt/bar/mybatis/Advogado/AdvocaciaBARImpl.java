@@ -393,17 +393,6 @@ public class AdvocaciaBARImpl extends SqlSessionDaoSupport implements IAdvocacia
 				processostatus.getTransactionId(), getHistoricoBAR(), response, processostatus.getId(),
 				processostatus.getUserId());
 
-		if (processostatus.getId() != 0 && processostatus.getId() != null) {
-			Status status = new Status();
-			status.setStatus(CdStatusTypeEnum.ATIVO);
-			List<Status> statusList = new ArrayList<Status>();
-			statusList.add(status);
-			count1 = StatusBARD.maintainStatusAssociations(statusList, response, processostatus.getId(), null,
-					AcaoEnum.INSERT, processostatus.getCreateUser(), processostatus.getId(), TabelaEnum.PROCESSOSTATUS,
-					statusBAR, historicoBAR, processostatus.getTransactionId(), processostatus.getTransactionId());
-
-		}
-
 		return response;
 	}
 

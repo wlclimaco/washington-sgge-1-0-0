@@ -47,7 +47,7 @@
 	</resultMap>
 
 	<sql id="allCompromissoColumns">
-		,titulo
+		titulo
 		,tipoCompromisso
 		,vinculado
 		,horaFinal

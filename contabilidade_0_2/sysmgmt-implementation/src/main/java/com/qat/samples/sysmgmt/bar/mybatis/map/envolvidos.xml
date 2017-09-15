@@ -33,7 +33,7 @@
   </resultMap>
 
   <sql id="allEnvolvidosColumns">
-,cliente
+cliente
 ,tipoEnvolvido
 ,envolvimento
 ,bCliente

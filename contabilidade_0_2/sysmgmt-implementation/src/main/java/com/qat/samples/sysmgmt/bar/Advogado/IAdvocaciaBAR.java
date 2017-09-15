@@ -2,6 +2,7 @@
 package com.qat.samples.sysmgmt.bar.Advogado;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
+import com.qat.samples.sysmgmt.advocacia.Advogado;
 import com.qat.samples.sysmgmt.advocacia.Advogados;
 import com.qat.samples.sysmgmt.advocacia.Envolvidos;
 import com.qat.samples.sysmgmt.advocacia.Processo;
@@ -475,5 +476,7 @@ public interface IAdvocaciaBAR
 * @return the internal results response
 */
 	public InternalResultsResponse<Processo> fetchProcessosByRequest(ProcessoInquiryRequest request);
+
+
 
 }
