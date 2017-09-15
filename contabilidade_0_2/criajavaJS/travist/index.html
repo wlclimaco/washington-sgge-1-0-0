@@ -459,8 +459,6 @@ var
 	, $ = function(id) {
 		return document.getElementById(id);
 	}
-	, session = view.sessionStorage
-	// only get URL when necessary in case Blob.js hasn't defined it yet
 	, get_blob = function() {
 		return view.Blob;
 	}
