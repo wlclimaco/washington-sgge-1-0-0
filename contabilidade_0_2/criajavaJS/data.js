@@ -6599,6 +6599,86 @@ function InsertUtilModel() {
 }
 
 //================ PROCESSO
+function ClienteCompromissoModel() {
+    a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "ClienteId",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "CompromissoId",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    return a;
+}
+
+//================ PROCESSO
+function ProcessoClienteModel() {
+    a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "ClienteId",
+            tipo: "Cliente",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "ProcessoId",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    return a;
+}
+
+//================ PROCESSO
 function ProcessModel() {
 
     a = [];
@@ -7155,6 +7235,47 @@ function AdvogadosModel() {
         });
         return a;
 }
+
+//================ Advogados
+function ProcessoUsuariosModel() {
+    
+        a = [];
+        a.push({
+            field: {
+                campo: "id",
+                tipo: "Integer",
+                requerid: true,
+                primaryKey: true,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+            a.push({
+                field: {
+                    campo: "usuarioId",
+                    tipo: "Usuario",
+                    requerid: false,
+                    primaryKey: false,
+                    forenkey: false,
+                    model: true,
+                    xml: true
+                }
+            });
+    
+            a.push({
+                field: {
+                    campo: "processo",
+                    tipo: "Integer",
+                    requerid: false,
+                    primaryKey: false,
+                    forenkey: false,
+                    model: true,
+                    xml: true
+                }
+            });
+            return a;
+    }
 
 //================ public class Advogado extends Pessoa
     function AdvogadoModel() {
@@ -8890,8 +9011,235 @@ function ConvenioModel() {
             xml: true
         }
     });
+    a.push({
+        field: {
+            campo: "nome",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "razao",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "cnpj",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "registroANS",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "retornoDias",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "versaoTISS",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "numeroAtualGuia",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "endereco",
+            tipo: "Endereco",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "telefones",
+            tipo: "List<Telefone>",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "emails",
+            tipo: "List<Emails>",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "percentual2Procs",
+            tipo: "Double",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "percentual3Procs",
+            tipo: "Double",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "percentual4Procs",
+            tipo: "Double",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "contratosConvenio",
+            tipo: "List<ContratoConvenio>",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
     return a;
 }
+
+//================ Convenio
+function ContratoConvenioModel() {
+    
+        var a = [];
+        a.push({
+            field: {
+                campo: "id",
+                tipo: "Integer",
+                requerid: true,
+                primaryKey: true,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
+                campo: "codigoOperadora",
+                tipo: "String",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
+                campo: "Contratado",
+                tipo: "String",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
+                campo: "contaRecebimento",
+                tipo: "Conta",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
+                campo: "loginWS",
+                tipo: "String",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
+                campo: "senhaWS",
+                tipo: "String",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        return a;
+    }
 
 //================ Convenio
 function ClasseModel() {
@@ -10306,7 +10654,730 @@ function EmpresaModel() {
     return a;
 }
 
+//================ Medico
+function EspecialidadeMedicoModel() {
+    
+        var a = [];
+        a.push({
+            field: {
+                campo: "id",
+                tipo: "Integer",
+                requerid: true,
+                primaryKey: true,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
+                campo: "especialidade",
+                tipo: "Especialidade",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+
+        a.push({
+            field: {
+                campo: "conselho",
+                tipo: "DoisValores",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+
+        a.push({
+            field: {
+                campo: "registro",
+                tipo: "String",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+
+        a.push({
+            field: {
+                campo: "uf",
+                tipo: "Estado",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        return a;
+    }
 //================ Consulta
+
+//================ Medico
+function MedicoModel() {
+    
+        var a = [];
+        var a = PessoaModel();
+        a.push({
+            field: {
+                campo: "id",
+                tipo: "Integer",
+                requerid: true,
+                primaryKey: true,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
+                campo: "especialidadeMedica",
+                tipo: "EspecialidadeMedico",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
+                campo: "anamnesePadrao",
+                tipo: "DoisValores",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
+                campo: "evolucaoPadrao",
+                tipo: "DoisValores",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
+                campo: "grauParticipacaoPadrao",
+                tipo: "DoisValores",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
+                campo: "conveniosAceito",
+                tipo: "List<MedicoConvenio>",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+
+        a.push({
+            field: {
+                campo: "msginforNaAgenda",
+                tipo: "String",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+
+        a.push({
+            field: {
+                campo: "horaDia",
+                tipo: "List<HoraDias>",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        return a;
+    }
+
+
+    //================ Consulta
+
+
+function AnamneseModel() {
+    
+        var a = [];
+        a.push({
+            field: {
+                campo: "id",
+                tipo: "Integer",
+                requerid: true,
+                primaryKey: true,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
+                campo: "dataRelatorio",
+                tipo: "Long",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
+                campo: "queixaPrincipal",
+                tipo: "String",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
+                campo: "historiaDoencaAtual",
+                tipo: "String",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
+                campo: "medicamentoUso",
+                tipo: "String",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
+                campo: "etilismo",
+                tipo: "String",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
+                campo: "tabagismo",
+                tipo: "String",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
+                campo: "usoSubstanciaIlicitas",
+                tipo: "String",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
+                campo: "praticaAtividadesFisicas",
+                tipo: "String",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
+                campo: "dst",
+                tipo: "String",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
+                campo: "exameFisico",
+                tipo: "String",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
+                campo: "conduta",
+                tipo: "String",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
+                campo: "doencas",
+                tipo: "List<DoisValores>",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+
+        a.push({
+            field: {
+                campo: "historicoFamiliar",
+                tipo: "List<DoisValores>",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        return a;
+    }
+
+//================ Consulta
+
+function EquipamentoModel() {
+    
+        var a = [];
+        a.push({
+            field: {
+                campo: "id",
+                tipo: "Integer",
+                requerid: true,
+                primaryKey: true,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
+                campo: "nomeEquipamento",
+                tipo: "String",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
+                campo: "proprietario",
+                tipo: "DoisValores",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
+                campo: "gradeHorarios",
+                tipo: "DiasHorarios",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        return a;
+    }
+
+
+    //================ Consulta
+
+function KitModel() {
+    
+        var a = [];
+        a.push({
+            field: {
+                campo: "id",
+                tipo: "Integer",
+                requerid: true,
+                primaryKey: true,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
+                campo: "nomeKit",
+                tipo: "String",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
+                campo: "tabela",
+                tipo: "DoisValores",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
+                campo: "produtos",
+                tipo: "List<ProdutoKit>",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        return a;
+    }
+    function ProdutoKitModel() {
+        
+            var a = [];
+            a.push({
+                field: {
+                    campo: "id",
+                    tipo: "Integer",
+                    requerid: true,
+                    primaryKey: true,
+                    forenkey: false,
+                    model: true,
+                    xml: true
+                }
+            });
+            a.push({
+                field: {
+                    campo: "quantidade",
+                    tipo: "Double",
+                    requerid: false,
+                    primaryKey: false,
+                    forenkey: false,
+                    model: true,
+                    xml: true
+                }
+            });
+            a.push({
+                field: {
+                    campo: "produto",
+                    tipo: "Produto",
+                    requerid: false,
+                    primaryKey: false,
+                    forenkey: false,
+                    model: true,
+                    xml: true
+                }
+            });
+            a.push({
+                field: {
+                    campo: "variavel",
+                    tipo: "Integer",
+                    requerid: false,
+                    primaryKey: false,
+                    forenkey: false,
+                    model: true,
+                    xml: true
+                }
+            });
+            return a;
+        }
+function ProcedimentoModel() {
+    
+        var a = [];
+        a.push({
+            field: {
+                campo: "id",
+                tipo: "Integer",
+                requerid: true,
+                primaryKey: true,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
+                campo: "nomeProcedimento",
+                tipo: "String",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
+                campo: "tipo",
+                tipo: "DoisValores",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
+                campo: "valor",
+                tipo: "Double",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
+                campo: "tempoMinutos",
+                tipo: "Integer",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
+                campo: "maxPacienteHorario",
+                tipo: "Integer",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
+                campo: "diasRetorno",
+                tipo: "Integer",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+
+        a.push({
+            field: {
+                campo: "equipamentoPadrao",
+                tipo: "Equipamento",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+
+        a.push({
+            field: {
+                campo: "grupo",
+                tipo: "GrupoProcedimento",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
+                campo: "sigla",
+                tipo: "String",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
+                campo: "codigo",
+                tipo: "String",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
+                campo: "obrigarRespTempo",
+                tipo: "Integer",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
+                campo: "SolicitarIndicClinica",
+                tipo: "Integer",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
+                campo: "limitarConvenios",
+                tipo: "Convenio",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
+                campo: "limitarLocais",
+                tipo: "String",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
+                campo: "avisosLembretesAgendar",
+                tipo: "String",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
+                campo: "enviarEmailSMS",
+                tipo: "DoisValores",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
+                campo: "textoEmail",
+                tipo: "DoisValores",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
+                campo: "textoSMS",
+                tipo: "DoisValores",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
+                campo: "kits",
+                tipo: "List<Kit>",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
+                campo: "participantes",
+                tipo: "List<Participantes>",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+
+        return a;
+    }
+//================ Consulta
+
+
 function ConsultaModel() {
 
     var a = [];
@@ -10325,6 +11396,17 @@ function ConsultaModel() {
         field: {
             campo: "dataConsulta",
             tipo: "Long",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "anamnese",
+            tipo: "List<Anamnese>",
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -14551,6 +15633,50 @@ function ArquivoModel() {
             xml: true
         }
     });
+    a.push({
+        field: {
+            campo: "nome",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "local",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "tipo",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "tamanho",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
     return a;
 }
 //================ Orcamento
@@ -16242,11 +17368,22 @@ dataModel = function() {
         }, {
             classe: "Processo",
             model: ProcessModel()
+        }, {
+            classe: "ClienteCompromisso",
+            model: ClienteCompromissoModel()
+        }, {
+            classe: "Arquivo",
+            model: ArquivoModel()
+        }, {
+            classe: "ProcessoUsuarios",
+            model: ProcessoUsuariosModel()
+        }, {
+            classe: "ProcessoCliente",
+            model: ProcessoClienteModel()
         }],
         interfaces: "Advogado",
         local: "Advocacia"
     })
-
     oProjet.push({
         classes: [{
             classe: "Convenio",
