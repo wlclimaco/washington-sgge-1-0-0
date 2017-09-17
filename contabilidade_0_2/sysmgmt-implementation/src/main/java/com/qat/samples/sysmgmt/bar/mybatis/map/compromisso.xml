@@ -29,21 +29,21 @@
 		<result property="modifyUser" column="modify_user" />
 		<result property="modifyDateUTC" column="modify_date" />
 		<collection property="tipoCompromisso" column="tipoCompromisso"
-			select="RegimeMap.fetchRegimeById" />
+			select="DoisValorMap.fetchDoisValorById" />
 		<collection property="vinculado" column="vinculado"
-			select="RegimeMap.fetchRegimeById" />
+			select="DoisValorMap.fetchDoisValorById" />
 		<collection property="horaFinal" column="horaFinal"
-			select="RegimeMap.fetchRegimeById" />
+			select="DoisValorMap.fetchDoisValorById" />
 		<collection property="responsavel" column="responsavel"
-			select="RegimeMap.fetchRegimeById" />
+			select="ClienteMap.fetchClienteById" />
 		<collection property="quando" column="quando"
-			select="RegimeMap.fetchRegimeById" />
+			select="DoisValorMap.fetchDoisValorById" />
 		<collection property="participante" column="id"
-			select="DocumentoMap.fetchDocumentoByEmpresa" />
+			select="ClienteCompromissoMap.fetchClienteCompromissoByClienteId" />
 		<collection property="participanteExterno" column="id"
-			select="DocumentoMap.fetchDocumentoByEmpresa" />
-		<collection property="documentos" column="id"
-			select="DocumentoMap.fetchDocumentoByEmpresa" />
+			select="ParticipanteExternoMap.fetchParticipanteExternoByParentId" />
+<!-- 		<collection property="documentos" column="id" -->
+<!-- 			select="DocumentoMap.fetchDocumentoByEmpresa" /> -->
 	</resultMap>
 
 	<sql id="allCompromissoColumns">
@@ -98,6 +98,13 @@
 		SELECT id,
 		<include refid="allCompromissoColumns" />
 		FROM compromisso WHERE id = #{fetchid}
+	</select>
+
+		<select id="fetchCompromissoByParentId" parameterType="Integer"
+		resultMap="CompromissoResult">
+		SELECT id,
+		<include refid="allCompromissoColumns" />
+		FROM compromisso WHERE parentId = #{fetchid}
 	</select>
 
 	<select id="fetchAllCompromissosRequest" parameterType="PagedInquiryRequest"

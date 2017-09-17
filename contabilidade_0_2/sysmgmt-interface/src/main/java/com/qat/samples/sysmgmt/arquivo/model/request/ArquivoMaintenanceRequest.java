@@ -2,8 +2,9 @@ package com.qat.samples.sysmgmt.arquivo.model.request;
 
 import com.qat.framework.model.request.Request;
 import com.qat.samples.sysmgmt.arquivo.model.Arquivo;
+import com.qat.samples.sysmgmt.util.model.request.UtilMaintenanceRequest;
 
-public class ArquivoMaintenanceRequest extends Request
+public class ArquivoMaintenanceRequest extends UtilMaintenanceRequest
 {
 
 	/** Attributes */

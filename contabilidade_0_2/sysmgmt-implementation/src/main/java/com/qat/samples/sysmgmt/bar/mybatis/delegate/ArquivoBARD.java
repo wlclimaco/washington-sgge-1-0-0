@@ -1,4 +1,4 @@
-/** create by system gera-java version 1.0.0 16/09/2017 20:14 : 40*/
+/** create by system gera-java version 1.0.0 16/09/2017 20:9 : 48*/
 
 
 package com.qat.samples.sysmgmt.bar.mybatis.delegate;
@@ -9,10 +9,10 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.validation.ValidationUtil;
-import com.qat.samples.sysmgmt.bar.Empresa.IEmpresaBAR;
+import com.qat.samples.sysmgmt.arquivo.model.Arquivo;
+import com.qat.samples.sysmgmt.bar.Advogado.IAdvocaciaBAR;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
-import com.qat.samples.sysmgmt.entidade.model.Usuario;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.TypeEnum;
@@ -21,7 +21,7 @@ import com.qat.samples.sysmgmt.util.model.TypeEnum;
  * Delegate class for the SysMgmt DACs. Note this is a final class with ONLY static methods so everything must be
  * passed into the methods. Nothing injected.
  */
-public final class UsuarioBARD extends SqlSessionDaoSupport
+public final class ArquivoBARD extends SqlSessionDaoSupport
 {
 
 	/** The Constant ZERO. */
@@ -37,39 +37,39 @@ public final class UsuarioBARD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainUsuarioAssociations(Usuario usuario,
+	public static Integer maintainArquivoAssociations(Arquivo arquivo,
 			InternalResponse response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
-			TabelaEnum tabelaEnum, IEmpresaBAR usuarioDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,
+			TabelaEnum tabelaEnum, IAdvocaciaBAR arquivoDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,
 			String UserId, Integer processId, Integer historicoId)
 	{
 		Boolean count = false;
 		// First Maintain Empresa
-		if (ValidationUtil.isNull(usuario))
+		if (ValidationUtil.isNull(arquivo))
 		{
 			return 0;
 		}
 		// For Each Contact...
 			// Make sure we set the parent key
-			usuario.setParentId(parentId);
-			usuario.setTabelaEnum(tabelaEnum);
-			usuario.setProcessId(processId);
+			arquivo.setParentId(parentId);
+			arquivo.setTabelaEnum(tabelaEnum);
+			arquivo.setProcessId(processId);
 
-		//	if (ValidationUtil.isNull(usuario.getModelAction()))
+		//	if (ValidationUtil.isNull(arquivo.getModelAction()))
 		//	{
 		//		continue;
 		//	}
-			switch (usuario.getModelAction())
+			switch (arquivo.getModelAction())
 			{
 				case INSERT:
-					count = usuarioDAC.insertUsuario(usuario).hasSystemError();
+					count = arquivoDAC.insertArquivo(arquivo).hasSystemError();
 
 					break;
 				case UPDATE:
-					count = usuarioDAC.updateUsuario(usuario).hasSystemError();
+					count = arquivoDAC.updateArquivo(arquivo).hasSystemError();
 
 					break;
 				case DELETE:
-					count = usuarioDAC.deleteUsuarioById(usuario).hasSystemError();
+					count = arquivoDAC.deleteArquivoById(arquivo).hasSystemError();
 
 
 					break;
@@ -83,41 +83,41 @@ public final class UsuarioBARD extends SqlSessionDaoSupport
 
 	}
 @SuppressWarnings("unchecked")
-	public static Integer maintainUsuarioAssociations(List<Usuario> usuarioList,
+	public static Integer maintainArquivoAssociations(List<Arquivo> arquivoList,
 			InternalResponse response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
-			TabelaEnum tabelaEnum, IEmpresaBAR usuarioDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,
+			TabelaEnum tabelaEnum, IAdvocaciaBAR arquivoDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC, Integer empId,
 			String UserId, Integer processId, Integer historicoId)
 	{
 		Boolean count = false;
-		// First Maintain Usuario
-		if (ValidationUtil.isNullOrEmpty(usuarioList))
+		// First Maintain Arquivo
+		if (ValidationUtil.isNullOrEmpty(arquivoList))
 		{
 			return 0;
 		}
-		// For Each Usuario...
-		for (Usuario usuario : usuarioList)
+		// For Each Arquivo...
+		for (Arquivo arquivo : arquivoList)
 		{
 			// Make sure we set the parent key
-			usuario.setParentId(parentId);
-			usuario.setTabelaEnum(tabelaEnum);
-			usuario.setProcessId(processId);
+			arquivo.setParentId(parentId);
+			arquivo.setTabelaEnum(tabelaEnum);
+			arquivo.setProcessId(processId);
 
-			if (ValidationUtil.isNull(usuario.getModelAction()))
+			if (ValidationUtil.isNull(arquivo.getModelAction()))
 			{
 				continue;
 			}
-         switch (usuario.getModelAction())
+         switch (arquivo.getModelAction())
 			{
 				case INSERT:
-					count = usuarioDAC.insertUsuario(usuario).hasSystemError();
+					count = arquivoDAC.insertArquivo(arquivo).hasSystemError();
 
 					break;
 				case UPDATE:
-					count = usuarioDAC.updateUsuario(usuario).hasSystemError();
+					count = arquivoDAC.updateArquivo(arquivo).hasSystemError();
 
 					break;
 				case DELETE:
-					count = usuarioDAC.deleteUsuarioById(usuario).hasSystemError();
+					count = arquivoDAC.deleteArquivoById(arquivo).hasSystemError();
 
 
 					break;

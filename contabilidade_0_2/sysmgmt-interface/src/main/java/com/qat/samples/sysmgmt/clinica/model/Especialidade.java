@@ -1,6 +1,5 @@
 package com.qat.samples.sysmgmt.clinica.model;
 
-import com.qat.framework.model.BaseModel.PersistenceActionEnum;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 
 /**

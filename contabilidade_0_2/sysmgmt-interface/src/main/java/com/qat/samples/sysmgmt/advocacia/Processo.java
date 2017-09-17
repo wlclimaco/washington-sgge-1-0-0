@@ -2,10 +2,9 @@ package com.qat.samples.sysmgmt.advocacia;
 
 import java.util.List;
 
-import com.qat.samples.sysmgmt.entidade.model.Usuario;
+import com.qat.samples.sysmgmt.arquivo.model.Arquivo;
 import com.qat.samples.sysmgmt.financeiro.model.ContasReceber;
 import com.qat.samples.sysmgmt.util.model.Compromisso;
-import com.qat.samples.sysmgmt.util.model.Documento;
 import com.qat.samples.sysmgmt.util.model.DoisValores;
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
 import com.qat.samples.sysmgmt.util.model.ParticipanteExterno;
@@ -31,18 +30,6 @@ public class Processo extends ModelCosmeDamiao {
 	/** The acao. */
 	private DoisValores acao;
 
-	/** The titulo list. */
-	private List<ContasReceber> tituloList;
-
-	/** The advogado list. */
-	private List<Advogados> advogadoList;
-
-	/** The audiencia list. */
-	private List<Compromisso> audienciaList;
-
-	/** The processo status list. */
-	private List<ProcessoStatus> processoStatusList;
-
 	/** The assunto. */
 	private String assunto;
 
@@ -54,11 +41,23 @@ public class Processo extends ModelCosmeDamiao {
 	/** The descricao proc. */
 	private String descricaoProc;
 
+	/** The titulo list. */
+	private List<ContasReceber> tituloList;
+
+	/** The advogado list. */
+	private List<ProcessoCliente> advogadoList;
+
+	/** The audiencia list. */
+	private List<Compromisso> audienciaList;
+
+	/** The processo status list. */
+	private List<ProcessoStatus> processoStatusList;
+
 	/** The envolv list. */
 	private List<Envolvidos> envolvList;
 
 	/** The documentos. */
-	private List<Documento> documentos;
+	private List<Arquivo> arquivos;
 
 	/** The envolvidos externo. */
 	private List<ParticipanteExterno> envolvidosExterno;
@@ -82,7 +81,7 @@ public class Processo extends ModelCosmeDamiao {
 	private String npadrao;
 
 	/** The agendar cap. */
-	private Integer agendarCap;
+	private DoisValores agendarCap;
 
 	/** The distribuido. */
 	private String distribuido;
@@ -136,7 +135,7 @@ public class Processo extends ModelCosmeDamiao {
 
 	private Integer retringirProcesso;
 
-	private List<Usuario> usuariosRestricaoProc;
+	private List<ProcessoUsuarios> usuariosRestricaoProc;
 
 	/**
 	 * Instantiates a new processo.
@@ -277,7 +276,7 @@ public class Processo extends ModelCosmeDamiao {
 	 *
 	 * @return the advogado list
 	 */
-	public List<Advogados> getAdvogadoList() {
+	public List<ProcessoCliente> getAdvogadoList() {
 		return advogadoList;
 	}
 
@@ -287,7 +286,7 @@ public class Processo extends ModelCosmeDamiao {
 	 * @param advogadoList
 	 *            the new advogado list
 	 */
-	public void setAdvogadoList(List<Advogados> advogadoList) {
+	public void setAdvogadoList(List<ProcessoCliente> advogadoList) {
 		this.advogadoList = advogadoList;
 	}
 
@@ -524,7 +523,7 @@ public class Processo extends ModelCosmeDamiao {
 	 *
 	 * @return the agendar cap
 	 */
-	public Integer getAgendarCap() {
+	public DoisValores getAgendarCap() {
 		return agendarCap;
 	}
 
@@ -534,7 +533,7 @@ public class Processo extends ModelCosmeDamiao {
 	 * @param agendarCap
 	 *            the new agendar cap
 	 */
-	public void setAgendarCap(Integer agendarCap) {
+	public void setAgendarCap(DoisValores agendarCap) {
 		this.agendarCap = agendarCap;
 	}
 
@@ -748,25 +747,6 @@ public class Processo extends ModelCosmeDamiao {
 	}
 
 	/**
-	 * Gets the documentos.
-	 *
-	 * @return the documentos
-	 */
-	public List<Documento> getDocumentos() {
-		return documentos;
-	}
-
-	/**
-	 * Sets the documentos.
-	 *
-	 * @param documentos
-	 *            the new documentos
-	 */
-	public void setDocumentos(List<Documento> documentos) {
-		this.documentos = documentos;
-	}
-
-	/**
 	 * Gets the envolvidos externo.
 	 *
 	 * @return the envolvidos externo
@@ -883,11 +863,11 @@ public class Processo extends ModelCosmeDamiao {
 		this.retringirProcesso = retringirProcesso;
 	}
 
-	public List<Usuario> getUsuariosRestricaoProc() {
+	public List<ProcessoUsuarios> getUsuariosRestricaoProc() {
 		return usuariosRestricaoProc;
 	}
 
-	public void setUsuariosRestricaoProc(List<Usuario> usuariosRestricaoProc) {
+	public void setUsuariosRestricaoProc(List<ProcessoUsuarios> usuariosRestricaoProc) {
 		this.usuariosRestricaoProc = usuariosRestricaoProc;
 	}
 
@@ -897,6 +877,14 @@ public class Processo extends ModelCosmeDamiao {
 
 	public void setPorcValorAcao(String porcValorAcao) {
 		this.porcValorAcao = porcValorAcao;
+	}
+
+	public List<Arquivo> getArquivos() {
+		return arquivos;
+	}
+
+	public void setArquivos(List<Arquivo> arquivos) {
+		this.arquivos = arquivos;
 	}
 
 	@Override
@@ -913,8 +901,8 @@ public class Processo extends ModelCosmeDamiao {
 				+ ", getObservacaoProc()=" + getObservacaoProc() + ", getJustica()=" + getJustica() + ", getTribunal()="
 				+ getTribunal() + ", getInstancia1()=" + getInstancia1() + ", getLocalidade()=" + getLocalidade()
 				+ ", getCapturpor()=" + getCapturpor() + ", getNumeroprocesso()=" + getNumeroprocesso()
-				+ ", getCapautomatica()=" + getCapautomatica() + ", getPasta()=" + getPasta() + ", getDocumentos()="
-				+ getDocumentos() + ", getEnvolvidosExterno()=" + getEnvolvidosExterno() + ", getEnviarEmail()="
+				+ ", getCapautomatica()=" + getCapautomatica() + ", getPasta()=" + getPasta() + ", getArquivos()="
+				+ getArquivos() + ", getEnvolvidosExterno()=" + getEnvolvidosExterno() + ", getEnviarEmail()="
 				+ getEnviarEmail() + ", getEnviarMdgTelefone()=" + getEnviarMdgTelefone() + ", getQuando()="
 				+ getQuando() + ", getFundamentacaoJuridica()=" + getFundamentacaoJuridica() + ", getFatos()="
 				+ getFatos() + ", getPretensoesCliente()=" + getPretensoesCliente() + ", getEstrategia()="

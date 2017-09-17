@@ -3,7 +3,7 @@ package com.qat.samples.sysmgmt.util.model;
 import java.util.List;
 
 import com.qat.samples.sysmgmt.advocacia.Advogado;
-import com.qat.samples.sysmgmt.pessoa.model.Cliente;
+import com.qat.samples.sysmgmt.arquivo.model.Arquivo;
 
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.).
@@ -42,13 +42,13 @@ public class Compromisso extends ModelCosmeDamiao {
 	private DoisValores quando;
 
 	/** The participante. */
-	private List<Cliente> participante;
+	private List<ClienteCompromisso> participante;
 
 	/** The participante externo. */
 	private List<ParticipanteExterno> participanteExterno;
 
 	/** The documentos. */
-	private List<Documento> documentos;
+	private List<Arquivo> arquivo;
 	/**
 	 * Default constructor.
 	 */
@@ -206,7 +206,7 @@ public class Compromisso extends ModelCosmeDamiao {
 	 *
 	 * @return the participante
 	 */
-	public List<Cliente> getParticipante() {
+	public List<ClienteCompromisso> getParticipante() {
 		return participante;
 	}
 
@@ -216,7 +216,7 @@ public class Compromisso extends ModelCosmeDamiao {
 	 * @param participante
 	 *            the new participante
 	 */
-	public void setParticipante(List<Cliente> participante) {
+	public void setParticipante(List<ClienteCompromisso> participante) {
 		this.participante = participante;
 	}
 
@@ -239,23 +239,14 @@ public class Compromisso extends ModelCosmeDamiao {
 		this.participanteExterno = participanteExterno;
 	}
 
-	/**
-	 * Gets the documentos.
-	 *
-	 * @return the documentos
-	 */
-	public List<Documento> getDocumentos() {
-		return documentos;
+
+
+	public List<Arquivo> getArquivo() {
+		return arquivo;
 	}
 
-	/**
-	 * Sets the documentos.
-	 *
-	 * @param documentos
-	 *            the new documentos
-	 */
-	public void setDocumentos(List<Documento> documentos) {
-		this.documentos = documentos;
+	public void setArquivo(List<Arquivo> arquivo) {
+		this.arquivo = arquivo;
 	}
 
 	/**
@@ -315,18 +306,13 @@ public class Compromisso extends ModelCosmeDamiao {
 		this.quando = quando;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao#toString()
-	 */
 	@Override
 	public String toString() {
 		return "Compromisso [getId()=" + getId() + ", getTitulo()=" + getTitulo() + ", getTipoCompromisso()="
 				+ getTipoCompromisso() + ", getVinculado()=" + getVinculado() + ", getHoraFinal()=" + getHoraFinal()
 				+ ", getLocal()=" + getLocal() + ", getResponsavel()=" + getResponsavel() + ", getParticipante()="
-				+ getParticipante() + ", getParticipanteExterno()=" + getParticipanteExterno() + ", getDocumentos()="
-				+ getDocumentos() + ", getEnviarEmail()=" + getEnviarEmail() + ", getEnviarMdgTelefone()="
+				+ getParticipante() + ", getParticipanteExterno()=" + getParticipanteExterno() + ", getArquivo()="
+				+ getArquivo() + ", getEnviarEmail()=" + getEnviarEmail() + ", getEnviarMdgTelefone()="
 				+ getEnviarMdgTelefone() + ", getQuando()=" + getQuando() + ", toString()=" + super.toString() + "]";
 	}
 

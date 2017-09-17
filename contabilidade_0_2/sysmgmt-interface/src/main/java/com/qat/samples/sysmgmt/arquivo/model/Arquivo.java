@@ -1,109 +1,117 @@
 package com.qat.samples.sysmgmt.arquivo.model;
 
 import com.qat.samples.sysmgmt.util.model.ModelCosmeDamiao;
+/** create by system gera-java version 1.0.0 17/09/2017 13:48 : 47*/
 
 /**
- * The Class Document represents a generic formal business or personal document, such as driver's license or bylaws.
+ * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
+ * setting.
  */
+
 @SuppressWarnings("serial")
 public class Arquivo extends ModelCosmeDamiao
 {
 
-	/** Attributes. */
-	private Integer id;
+    /** The econtabil id for the Arquivo. */
+    private Integer id;
 
-	/** The parent key. */
-	private Integer parentKey;
+    /** The econtabil nome for the Arquivo. */
+    private String nome;
 
-	/**
-	 * The parent key type. *
-	 * 
-	 * /** The keyword text.
-	 */
-	private String keywordText;
+    /** The econtabil local for the Arquivo. */
+    private String local;
 
-	/** The is action required. */
-	private Boolean isActionRequired;
+    /** The econtabil tipo for the Arquivo. */
+    private String tipo;
 
-	/** The note text. */
-	private String noteText;
+    /** The econtabil tamanho for the Arquivo. */
+    private String tamanho;
 
-	/** The expiration date. */
-	private Long expirationDate;
 
-	/** The value. */
-	private String value;
 
-	/**
-	 * The Constructor.
-	 */
-	public Arquivo()
-	{
+    /**
+     * Default constructor.
+     */
+    public Arquivo()
+    {
+        super();
+    }
 
+
+
+	public Arquivo(int i, String string) {
+		// TODO Auto-generated constructor stub
 	}
+
+
 
 	public Integer getId() {
 		return id;
 	}
 
+
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public Integer getParentKey() {
-		return parentKey;
+
+
+	public String getNome() {
+		return nome;
 	}
 
-	public void setParentKey(Integer parentKey) {
-		this.parentKey = parentKey;
+
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
-	public String getKeywordText() {
-		return keywordText;
+
+
+	public String getLocal() {
+		return local;
 	}
 
-	public void setKeywordText(String keywordText) {
-		this.keywordText = keywordText;
+
+
+	public void setLocal(String local) {
+		this.local = local;
 	}
 
-	public Boolean getIsActionRequired() {
-		return isActionRequired;
+
+
+	public String getTipo() {
+		return tipo;
 	}
 
-	public void setIsActionRequired(Boolean isActionRequired) {
-		this.isActionRequired = isActionRequired;
+
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
-	public String getNoteText() {
-		return noteText;
+
+
+	public String getTamanho() {
+		return tamanho;
 	}
 
-	public void setNoteText(String noteText) {
-		this.noteText = noteText;
+
+
+	public void setTamanho(String tamanho) {
+		this.tamanho = tamanho;
 	}
 
-	public Long getExpirationDate() {
-		return expirationDate;
-	}
 
-	public void setExpirationDate(Long expirationDate) {
-		this.expirationDate = expirationDate;
-	}
-
-	public String getValue() {
-		return value;
-	}
-
-	public void setValue(String value) {
-		this.value = value;
-	}
 
 	@Override
 	public String toString() {
-		return "Arquivo [getId()=" + getId() + ", getParentKey()=" + getParentKey() + ", getKeywordText()="
-				+ getKeywordText() + ", getIsActionRequired()=" + getIsActionRequired() + ", getNoteText()="
-				+ getNoteText() + ", getExpirationDate()=" + getExpirationDate() + ", getValue()=" + getValue()
-				+ ", toString()=" + super.toString() + "]";
+		return "Arquivo [getId()=" + getId() + ", getNome()=" + getNome() + ", getLocal()=" + getLocal()
+				+ ", getTipo()=" + getTipo() + ", getTamanho()=" + getTamanho() + ", toString()=" + super.toString()
+				+ "]";
 	}
 
-}
+
+
+ }

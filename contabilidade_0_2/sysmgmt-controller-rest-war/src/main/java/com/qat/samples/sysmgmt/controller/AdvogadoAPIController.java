@@ -15,15 +15,24 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.ResponseHandler;
-import com.qat.samples.sysmgmt.advocacia.Audiencia;
 import com.qat.samples.sysmgmt.advocacia.Processo;
-import com.qat.samples.sysmgmt.advocacia.request.AudienciaInquiryRequest;
-import com.qat.samples.sysmgmt.advocacia.request.AudienciaMaintenanceRequest;
+import com.qat.samples.sysmgmt.advocacia.ProcessoCliente;
+import com.qat.samples.sysmgmt.advocacia.request.CompromissoMaintenanceRequest;
+import com.qat.samples.sysmgmt.advocacia.request.EspecialidadeMaintenanceRequest;
 import com.qat.samples.sysmgmt.advocacia.request.ProcessoInquiryRequest;
 import com.qat.samples.sysmgmt.advocacia.request.ProcessoMaintenanceRequest;
-import com.qat.samples.sysmgmt.advocacia.response.AudienciaResponse;
+import com.qat.samples.sysmgmt.advocacia.response.ProcessoClientesResponse;
 import com.qat.samples.sysmgmt.advocacia.response.ProcessoResponse;
+import com.qat.samples.sysmgmt.arquivo.model.Arquivo;
+import com.qat.samples.sysmgmt.arquivo.model.request.ArquivoInquiryRequest;
+import com.qat.samples.sysmgmt.arquivo.model.request.ArquivoMaintenanceRequest;
+import com.qat.samples.sysmgmt.arquivo.model.response.ArquivoResponse;
 import com.qat.samples.sysmgmt.bac.Advogado.IAdvocaciaBAC;
+import com.qat.samples.sysmgmt.clinica.model.Especialidade;
+import com.qat.samples.sysmgmt.clinica.model.response.CompromissoResponse;
+import com.qat.samples.sysmgmt.clinica.model.response.EspecialidadeResponse;
+import com.qat.samples.sysmgmt.util.model.Compromisso;
+import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.RefreshRequest;
 
 /**
@@ -50,10 +59,10 @@ public class AdvogadoAPIController extends BaseController {
 		this.advocaciaBAC = advocaciaBAC;
 	}
 
-	// ===================================### AUDIENCIA
+	// ===================================### ESPECIALIDADE
 	// ####======================================
 	/**
-	 * Refresh audiencias.
+	 * Refresh especialidades.
 	 *
 	 * @param refreshInt
 	 *            the refresh int
@@ -61,109 +70,228 @@ public class AdvogadoAPIController extends BaseController {
 	 *            the ret list
 	 * @param retPaged
 	 *            the ret paged
-	 * @return the audiencia response
+	 * @return the especialidade response
 	 */
-	@RequestMapping(value = "/audiencia/refresh", method = RequestMethod.GET)
+	@RequestMapping(value = "/refresh", method = RequestMethod.GET)
 	@ResponseBody
-	public AudienciaResponse refreshAudiencias(@RequestParam("refreshInt") Integer refreshInt,
+	public EspecialidadeResponse refreshEspecialidades(@RequestParam("refreshInt") Integer refreshInt,
 			@RequestParam("retList") Boolean retList, @RequestParam("retPaged") Boolean retPaged) {
-		AudienciaResponse audienciaResponse = new AudienciaResponse();
+		EspecialidadeResponse especialidadeResponse = new EspecialidadeResponse();
 
 		try {
 			RefreshRequest request = new RefreshRequest(refreshInt, retList, retPaged);
-			InternalResultsResponse<Audiencia> internalResponse = getAdvocaciaBAC().refreshAudiencias(request);
-			ResponseHandler.handleOperationStatusAndMessages(audienciaResponse, internalResponse, true);
+			InternalResultsResponse<Especialidade> internalResponse = getAdvocaciaBAC().refreshEspecialidades(request);
+			ResponseHandler.handleOperationStatusAndMessages(especialidadeResponse, internalResponse, true);
 		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, audienciaResponse, ex, DEFAULT_EXCEPTION_MSG,
+			ResponseHandler.handleException(LOG, especialidadeResponse, ex, DEFAULT_EXCEPTION_MSG,
 					new Object[] { ex.toString() });
 		}
-		return audienciaResponse;
+		return especialidadeResponse;
 
 	}
 
 	/**
-	 * Fetch audiencia paged.
+	 * Fetch especialidade paged.
 	 *
 	 * @param request
 	 *            the request
-	 * @return the audiencia response
+	 * @return the especialidade response
 	 */
-	@RequestMapping(value = "/audiencia/fetchPage", method = RequestMethod.POST)
+	@RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
 	@ResponseBody
-	public AudienciaResponse fetchAudienciaPaged(@RequestBody AudienciaInquiryRequest request) {
-		AudienciaResponse audienciaResponse = new AudienciaResponse();
+	public EspecialidadeResponse fetchEspecialidadePaged(@RequestBody PagedInquiryRequest request) {
+		EspecialidadeResponse especialidadeResponse = new EspecialidadeResponse();
 		try {
-			InternalResultsResponse<Audiencia> internalResponse = getAdvocaciaBAC().fetchAudienciasByRequest(request);
-			ResponseHandler.handleOperationStatusAndMessages(audienciaResponse, internalResponse, true);
+			InternalResultsResponse<Especialidade> internalResponse = getAdvocaciaBAC()
+					.fetchEspecialidadesByRequest(request);
+			ResponseHandler.handleOperationStatusAndMessages(especialidadeResponse, internalResponse, true);
 		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, audienciaResponse, ex, DEFAULT_EXCEPTION_MSG,
+			ResponseHandler.handleException(LOG, especialidadeResponse, ex, DEFAULT_EXCEPTION_MSG,
 					new Object[] { ex.toString() });
 		}
-		return audienciaResponse;
+		return especialidadeResponse;
 	}
 
 	/**
-	 * Insert audiencia.
+	 * Insert especialidade.
 	 *
 	 * @param request
 	 *            the request
-	 * @return the audiencia response
+	 * @return the especialidade response
 	 */
-	@RequestMapping(value = "/audiencia/insert", method = RequestMethod.POST)
+	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	@ResponseBody
-	public AudienciaResponse insertAudiencia(@RequestBody AudienciaMaintenanceRequest request) {
-		AudienciaResponse audienciaResponse = new AudienciaResponse();
+	public EspecialidadeResponse insertEspecialidade(@RequestBody EspecialidadeMaintenanceRequest request) {
+		EspecialidadeResponse especialidadeResponse = new EspecialidadeResponse();
 		try {
-			InternalResultsResponse<Audiencia> internalResponse = getAdvocaciaBAC().insertAudiencia(request);
-			ResponseHandler.handleOperationStatusAndMessages(audienciaResponse, internalResponse, true);
+			InternalResultsResponse<Especialidade> internalResponse = getAdvocaciaBAC().insertEspecialidade(request);
+			ResponseHandler.handleOperationStatusAndMessages(especialidadeResponse, internalResponse, true);
 		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, audienciaResponse, ex, DEFAULT_EXCEPTION_MSG,
+			ResponseHandler.handleException(LOG, especialidadeResponse, ex, DEFAULT_EXCEPTION_MSG,
 					new Object[] { ex.toString() });
 		}
-		return audienciaResponse;
+		return especialidadeResponse;
 	}
 
 	/**
-	 * Update audiencia.
+	 * Update especialidade.
 	 *
 	 * @param request
 	 *            the request
-	 * @return the audiencia response
+	 * @return the especialidade response
 	 */
-	@RequestMapping(value = "/audiencia/update", method = RequestMethod.POST)
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ResponseBody
-	public AudienciaResponse updateAudiencia(@RequestBody AudienciaMaintenanceRequest request) {
-		AudienciaResponse audienciaResponse = new AudienciaResponse();
+	public EspecialidadeResponse updateEspecialidade(@RequestBody EspecialidadeMaintenanceRequest request) {
+		EspecialidadeResponse especialidadeResponse = new EspecialidadeResponse();
 		try {
-			InternalResultsResponse<Audiencia> internalResponse = getAdvocaciaBAC().updateAudiencia(request);
-			ResponseHandler.handleOperationStatusAndMessages(audienciaResponse, internalResponse, true);
+			InternalResultsResponse<Especialidade> internalResponse = getAdvocaciaBAC().updateEspecialidade(request);
+			ResponseHandler.handleOperationStatusAndMessages(especialidadeResponse, internalResponse, true);
 		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, audienciaResponse, ex, DEFAULT_EXCEPTION_MSG,
+			ResponseHandler.handleException(LOG, especialidadeResponse, ex, DEFAULT_EXCEPTION_MSG,
 					new Object[] { ex.toString() });
 		}
-		return audienciaResponse;
+		return especialidadeResponse;
 	}
 
 	/**
-	 * Delete audiencia.
+	 * Delete especialidade.
 	 *
 	 * @param request
 	 *            the request
-	 * @return the audiencia response
+	 * @return the especialidade response
 	 */
-	@RequestMapping(value = "/audiencia/delete", method = RequestMethod.POST)
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	@ResponseBody
-	public AudienciaResponse deleteAudiencia(@RequestBody AudienciaMaintenanceRequest request) {
-		AudienciaResponse audienciaResponse = new AudienciaResponse();
+	public EspecialidadeResponse deleteEspecialidade(@RequestBody EspecialidadeMaintenanceRequest request) {
+		EspecialidadeResponse especialidadeResponse = new EspecialidadeResponse();
 
 		try {
-			InternalResultsResponse<Audiencia> internalResponse = getAdvocaciaBAC().deleteAudiencia(request);
-			ResponseHandler.handleOperationStatusAndMessages(audienciaResponse, internalResponse, true);
+			InternalResultsResponse<Especialidade> internalResponse = getAdvocaciaBAC().deleteEspecialidade(request);
+			ResponseHandler.handleOperationStatusAndMessages(especialidadeResponse, internalResponse, true);
 		} catch (Exception ex) {
-			ResponseHandler.handleException(LOG, audienciaResponse, ex, DEFAULT_EXCEPTION_MSG,
+			ResponseHandler.handleException(LOG, especialidadeResponse, ex, DEFAULT_EXCEPTION_MSG,
 					new Object[] { ex.toString() });
 		}
-		return audienciaResponse;
+		return especialidadeResponse;
+
+	}
+
+	// ===================================### COMPROMISSO
+	// ####======================================
+	/**
+	 * Refresh compromissos.
+	 *
+	 * @param refreshInt
+	 *            the refresh int
+	 * @param retList
+	 *            the ret list
+	 * @param retPaged
+	 *            the ret paged
+	 * @return the compromisso response
+	 */
+	@RequestMapping(value = "/refresh", method = RequestMethod.GET)
+	@ResponseBody
+	public CompromissoResponse refreshCompromissos(@RequestParam("refreshInt") Integer refreshInt,
+			@RequestParam("retList") Boolean retList, @RequestParam("retPaged") Boolean retPaged) {
+		CompromissoResponse compromissoResponse = new CompromissoResponse();
+
+		try {
+			RefreshRequest request = new RefreshRequest(refreshInt, retList, retPaged);
+			InternalResultsResponse<Compromisso> internalResponse = getAdvocaciaBAC().refreshCompromissos(request);
+			ResponseHandler.handleOperationStatusAndMessages(compromissoResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, compromissoResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return compromissoResponse;
+
+	}
+
+	/**
+	 * Fetch compromisso paged.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the compromisso response
+	 */
+	@RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
+	@ResponseBody
+	public CompromissoResponse fetchCompromissoPaged(@RequestBody PagedInquiryRequest request) {
+		CompromissoResponse compromissoResponse = new CompromissoResponse();
+		try {
+			InternalResultsResponse<Compromisso> internalResponse = getAdvocaciaBAC()
+					.fetchCompromissosByRequest(request);
+			ResponseHandler.handleOperationStatusAndMessages(compromissoResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, compromissoResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return compromissoResponse;
+	}
+
+	/**
+	 * Insert compromisso.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the compromisso response
+	 */
+	@RequestMapping(value = "/insert", method = RequestMethod.POST)
+	@ResponseBody
+	public CompromissoResponse insertCompromisso(@RequestBody CompromissoMaintenanceRequest request) {
+		CompromissoResponse compromissoResponse = new CompromissoResponse();
+		try {
+			InternalResultsResponse<Compromisso> internalResponse = getAdvocaciaBAC().insertCompromisso(request);
+			ResponseHandler.handleOperationStatusAndMessages(compromissoResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, compromissoResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return compromissoResponse;
+	}
+
+	/**
+	 * Update compromisso.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the compromisso response
+	 */
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	@ResponseBody
+	public CompromissoResponse updateCompromisso(@RequestBody CompromissoMaintenanceRequest request) {
+		CompromissoResponse compromissoResponse = new CompromissoResponse();
+		try {
+			InternalResultsResponse<Compromisso> internalResponse = getAdvocaciaBAC().updateCompromisso(request);
+			ResponseHandler.handleOperationStatusAndMessages(compromissoResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, compromissoResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return compromissoResponse;
+	}
+
+	/**
+	 * Delete compromisso.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the compromisso response
+	 */
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	@ResponseBody
+	public CompromissoResponse deleteCompromisso(@RequestBody CompromissoMaintenanceRequest request) {
+		CompromissoResponse compromissoResponse = new CompromissoResponse();
+
+		try {
+			InternalResultsResponse<Compromisso> internalResponse = getAdvocaciaBAC().deleteCompromisso(request);
+			ResponseHandler.handleOperationStatusAndMessages(compromissoResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, compromissoResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return compromissoResponse;
 
 	}
 
@@ -180,7 +308,7 @@ public class AdvogadoAPIController extends BaseController {
 	 *            the ret paged
 	 * @return the processo response
 	 */
-	@RequestMapping(value = "/processo/refresh", method = RequestMethod.GET)
+	@RequestMapping(value = "/refresh", method = RequestMethod.GET)
 	@ResponseBody
 	public ProcessoResponse refreshProcessos(@RequestParam("refreshInt") Integer refreshInt,
 			@RequestParam("retList") Boolean retList, @RequestParam("retPaged") Boolean retPaged) {
@@ -205,7 +333,7 @@ public class AdvogadoAPIController extends BaseController {
 	 *            the request
 	 * @return the processo response
 	 */
-	@RequestMapping(value = "/processo/fetchPage", method = RequestMethod.POST)
+	@RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
 	@ResponseBody
 	public ProcessoResponse fetchProcessoPaged(@RequestBody ProcessoInquiryRequest request) {
 		ProcessoResponse processoResponse = new ProcessoResponse();
@@ -226,7 +354,7 @@ public class AdvogadoAPIController extends BaseController {
 	 *            the request
 	 * @return the processo response
 	 */
-	@RequestMapping(value = "/processo/insert", method = RequestMethod.POST)
+	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	@ResponseBody
 	public ProcessoResponse insertProcesso(@RequestBody ProcessoMaintenanceRequest request) {
 		ProcessoResponse processoResponse = new ProcessoResponse();
@@ -247,7 +375,7 @@ public class AdvogadoAPIController extends BaseController {
 	 *            the request
 	 * @return the processo response
 	 */
-	@RequestMapping(value = "/processo/update", method = RequestMethod.POST)
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ResponseBody
 	public ProcessoResponse updateProcesso(@RequestBody ProcessoMaintenanceRequest request) {
 		ProcessoResponse processoResponse = new ProcessoResponse();
@@ -268,7 +396,7 @@ public class AdvogadoAPIController extends BaseController {
 	 *            the request
 	 * @return the processo response
 	 */
-	@RequestMapping(value = "/processo/delete", method = RequestMethod.POST)
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	@ResponseBody
 	public ProcessoResponse deleteProcesso(@RequestBody ProcessoMaintenanceRequest request) {
 		ProcessoResponse processoResponse = new ProcessoResponse();
@@ -282,6 +410,148 @@ public class AdvogadoAPIController extends BaseController {
 		}
 		return processoResponse;
 
+	}
+
+	// ===================================### ARQUIVO
+	// ####======================================
+	/**
+	 * Refresh arquivos.
+	 *
+	 * @param refreshInt
+	 *            the refresh int
+	 * @param retList
+	 *            the ret list
+	 * @param retPaged
+	 *            the ret paged
+	 * @return the arquivo response
+	 */
+	@RequestMapping(value = "/refresh", method = RequestMethod.GET)
+	@ResponseBody
+	public ArquivoResponse refreshArquivos(@RequestParam("refreshInt") Integer refreshInt,
+			@RequestParam("retList") Boolean retList, @RequestParam("retPaged") Boolean retPaged) {
+		ArquivoResponse arquivoResponse = new ArquivoResponse();
+
+		try {
+			RefreshRequest request = new RefreshRequest(refreshInt, retList, retPaged);
+			InternalResultsResponse<Arquivo> internalResponse = getAdvocaciaBAC().refreshArquivos(request);
+			ResponseHandler.handleOperationStatusAndMessages(arquivoResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, arquivoResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return arquivoResponse;
+
+	}
+
+	/**
+	 * Fetch arquivo paged.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the arquivo response
+	 */
+	@RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
+	@ResponseBody
+	public ArquivoResponse fetchArquivoPaged(@RequestBody ArquivoInquiryRequest request) {
+		ArquivoResponse arquivoResponse = new ArquivoResponse();
+		try {
+			InternalResultsResponse<Arquivo> internalResponse = getAdvocaciaBAC().fetchArquivosByRequest(request);
+			ResponseHandler.handleOperationStatusAndMessages(arquivoResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, arquivoResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return arquivoResponse;
+	}
+
+	/**
+	 * Insert arquivo.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the arquivo response
+	 */
+	@RequestMapping(value = "/insert", method = RequestMethod.POST)
+	@ResponseBody
+	public ArquivoResponse insertArquivo(@RequestBody ArquivoMaintenanceRequest request) {
+		ArquivoResponse arquivoResponse = new ArquivoResponse();
+		try {
+			InternalResultsResponse<Arquivo> internalResponse = getAdvocaciaBAC().insertArquivo(request);
+			ResponseHandler.handleOperationStatusAndMessages(arquivoResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, arquivoResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return arquivoResponse;
+	}
+
+	/**
+	 * Update arquivo.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the arquivo response
+	 */
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	@ResponseBody
+	public ArquivoResponse updateArquivo(@RequestBody ArquivoMaintenanceRequest request) {
+		ArquivoResponse arquivoResponse = new ArquivoResponse();
+		try {
+			InternalResultsResponse<Arquivo> internalResponse = getAdvocaciaBAC().updateArquivo(request);
+			ResponseHandler.handleOperationStatusAndMessages(arquivoResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, arquivoResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return arquivoResponse;
+	}
+
+	/**
+	 * Delete arquivo.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the arquivo response
+	 */
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	@ResponseBody
+	public ArquivoResponse deleteArquivo(@RequestBody ArquivoMaintenanceRequest request) {
+		ArquivoResponse arquivoResponse = new ArquivoResponse();
+
+		try {
+			InternalResultsResponse<Arquivo> internalResponse = getAdvocaciaBAC().deleteArquivo(request);
+			ResponseHandler.handleOperationStatusAndMessages(arquivoResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, arquivoResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return arquivoResponse;
+
+	}
+
+	// ===================================### PROCESSOCLIENTE
+	// ####======================================
+
+	/**
+	 * Fetch processocliente paged.
+	 *
+	 * @param request
+	 *            the request
+	 * @return the processocliente response
+	 */
+	@RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
+	@ResponseBody
+	public ProcessoClientesResponse fetchProcessoClientePaged(@RequestBody PagedInquiryRequest request) {
+		ProcessoClientesResponse processoclienteResponse = new ProcessoClientesResponse();
+		try {
+			InternalResultsResponse<ProcessoCliente> internalResponse = getAdvocaciaBAC()
+					.fetchProcessoClientesByRequest(request);
+			ResponseHandler.handleOperationStatusAndMessages(processoclienteResponse, internalResponse, true);
+		} catch (Exception ex) {
+			ResponseHandler.handleException(LOG, processoclienteResponse, ex, DEFAULT_EXCEPTION_MSG,
+					new Object[] { ex.toString() });
+		}
+		return processoclienteResponse;
 	}
 
 }

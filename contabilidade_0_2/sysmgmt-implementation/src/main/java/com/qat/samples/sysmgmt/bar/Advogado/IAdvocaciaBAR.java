@@ -2,13 +2,16 @@
 package com.qat.samples.sysmgmt.bar.Advogado;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
-import com.qat.samples.sysmgmt.advocacia.Advogado;
 import com.qat.samples.sysmgmt.advocacia.Advogados;
 import com.qat.samples.sysmgmt.advocacia.Envolvidos;
 import com.qat.samples.sysmgmt.advocacia.Processo;
+import com.qat.samples.sysmgmt.advocacia.ProcessoCliente;
 import com.qat.samples.sysmgmt.advocacia.ProcessoStatus;
+import com.qat.samples.sysmgmt.advocacia.ProcessoUsuarios;
 import com.qat.samples.sysmgmt.advocacia.request.ProcessoInquiryRequest;
+import com.qat.samples.sysmgmt.arquivo.model.Arquivo;
 import com.qat.samples.sysmgmt.clinica.model.Especialidade;
+import com.qat.samples.sysmgmt.util.model.ClienteCompromisso;
 import com.qat.samples.sysmgmt.util.model.Compromisso;
 import com.qat.samples.sysmgmt.util.model.DiasHoras;
 import com.qat.samples.sysmgmt.util.model.ParticipanteExterno;
@@ -477,6 +480,230 @@ public interface IAdvocaciaBAR
 */
 	public InternalResultsResponse<Processo> fetchProcessosByRequest(ProcessoInquiryRequest request);
 
+	/**
+	 * Fetch clientecompromisso by id.
+	 *
+	 * @param request the request
+* @return the internal results response
+*/
+	public ClienteCompromisso fetchClienteCompromissoById(FetchByIdRequest request);
 
+	/**
+* Insert clientecompromisso.
+*
+* @param clientecompromisso the clientecompromisso
+*
+* @return the internal response
+*/
+	public InternalResponse insertClienteCompromisso(ClienteCompromisso clientecompromisso);
 
+	/**
+* Update clientecompromisso.
+*
+* @param clientecompromisso the clientecompromisso
+*
+* @return the internal response
+*/
+	public InternalResponse updateClienteCompromisso(ClienteCompromisso clientecompromisso);
+
+	/**
+* Delete clientecompromisso.
+*
+* @param clientecompromisso the clientecompromisso
+*
+* @return the internal response
+*/
+	public InternalResponse deleteClienteCompromissoById(ClienteCompromisso clientecompromisso);
+
+	/**
+* Delete all clientecompromissos.
+*
+* @return the internal response
+*/
+	public InternalResponse deleteAllClienteCompromissos();
+
+	/**
+* Fetch all clientecompromissos.
+*
+* @return the list< clientecompromisso>
+*/
+	public InternalResultsResponse<ClienteCompromisso> fetchAllClienteCompromissos(ClienteCompromisso  clientecompromisso);
+
+	/**
+* Fetch clientecompromissos by request.
+*
+* @param request the request
+* @return the internal results response
+*/
+	public InternalResultsResponse<ClienteCompromisso> fetchClienteCompromissosByRequest(PagedInquiryRequest request);
+
+	/**
+	 * Fetch arquivo by id.
+	 *
+	 * @param request the request
+* @return the internal results response
+*/
+	public Arquivo fetchArquivoById(FetchByIdRequest request);
+
+	/**
+* Insert arquivo.
+*
+* @param arquivo the arquivo
+*
+* @return the internal response
+*/
+	public InternalResponse insertArquivo(Arquivo arquivo);
+
+	/**
+* Update arquivo.
+*
+* @param arquivo the arquivo
+*
+* @return the internal response
+*/
+	public InternalResponse updateArquivo(Arquivo arquivo);
+
+	/**
+* Delete arquivo.
+*
+* @param arquivo the arquivo
+*
+* @return the internal response
+*/
+	public InternalResponse deleteArquivoById(Arquivo arquivo);
+
+	/**
+* Delete all arquivos.
+*
+* @return the internal response
+*/
+	public InternalResponse deleteAllArquivos();
+
+	/**
+* Fetch all arquivos.
+*
+* @return the list< arquivo>
+*/
+	public InternalResultsResponse<Arquivo> fetchAllArquivos(Arquivo  arquivo);
+
+	/**
+* Fetch arquivos by request.
+*
+* @param request the request
+* @return the internal results response
+*/
+	public InternalResultsResponse<Arquivo> fetchArquivosByRequest(PagedInquiryRequest request);
+	/**
+	 * Fetch processousuarios by id.
+	 *
+	 * @param request the request
+* @return the internal results response
+*/
+	public ProcessoUsuarios fetchProcessoUsuariosById(FetchByIdRequest request);
+
+	/**
+* Insert processousuarios.
+*
+* @param processousuarios the processousuarios
+*
+* @return the internal response
+*/
+	public InternalResponse insertProcessoUsuarios(ProcessoUsuarios processousuarios);
+
+	/**
+* Update processousuarios.
+*
+* @param processousuarios the processousuarios
+*
+* @return the internal response
+*/
+	public InternalResponse updateProcessoUsuarios(ProcessoUsuarios processousuarios);
+
+	/**
+* Delete processousuarios.
+*
+* @param processousuarios the processousuarios
+*
+* @return the internal response
+*/
+	public InternalResponse deleteProcessoUsuariosById(ProcessoUsuarios processousuarios);
+
+	/**
+* Delete all processousuarioss.
+*
+* @return the internal response
+*/
+	public InternalResponse deleteAllProcessoUsuarioss();
+
+	/**
+* Fetch all processousuarioss.
+*
+* @return the list< processousuarios>
+*/
+	public InternalResultsResponse<ProcessoUsuarios> fetchAllProcessoUsuarioss(ProcessoUsuarios  processousuarios);
+
+	/**
+* Fetch processousuarioss by request.
+*
+* @param request the request
+* @return the internal results response
+*/
+	public InternalResultsResponse<ProcessoUsuarios> fetchProcessoUsuariossByRequest(PagedInquiryRequest request);
+
+	/**
+	 * Fetch processocliente by id.
+	 *
+	 * @param request the request
+* @return the internal results response
+*/
+	public ProcessoCliente fetchProcessoClienteById(FetchByIdRequest request);
+
+	/**
+* Insert processocliente.
+*
+* @param processocliente the processocliente
+*
+* @return the internal response
+*/
+	public InternalResponse insertProcessoCliente(ProcessoCliente processocliente);
+
+	/**
+* Update processocliente.
+*
+* @param processocliente the processocliente
+*
+* @return the internal response
+*/
+	public InternalResponse updateProcessoCliente(ProcessoCliente processocliente);
+
+	/**
+* Delete processocliente.
+*
+* @param processocliente the processocliente
+*
+* @return the internal response
+*/
+	public InternalResponse deleteProcessoClienteById(ProcessoCliente processocliente);
+
+	/**
+* Delete all processoclientes.
+*
+* @return the internal response
+*/
+	public InternalResponse deleteAllProcessoClientes();
+
+	/**
+* Fetch all processoclientes.
+*
+* @return the list< processocliente>
+*/
+	public InternalResultsResponse<ProcessoCliente> fetchAllProcessoClientes(ProcessoCliente  processocliente);
+
+	/**
+* Fetch processoclientes by request.
+*
+* @param request the request
+* @return the internal results response
+*/
+	public InternalResultsResponse<ProcessoCliente> fetchProcessoClientesByRequest(PagedInquiryRequest request);
 }

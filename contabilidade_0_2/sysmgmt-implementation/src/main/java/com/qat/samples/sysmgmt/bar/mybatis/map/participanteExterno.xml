@@ -26,8 +26,8 @@
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
-<collection property="email" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
-<collection property="telefones" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<collection property="email" column="id" select="EmailMap.fetchEmailByParticipante"/>
+<collection property="telefones" column="id" select="TelefoneMap.fetchTelefoneByParticipante"/>
   </resultMap>
 
   <sql id="allParticipanteExternoColumns">
@@ -65,6 +65,12 @@ nome
     SELECT id,
  <include refid="allParticipanteExternoColumns" />
    FROM participanteexterno WHERE id = #{fetchid}
+ </select>
+
+ <select id="fetchParticipanteExternoByParentId" parameterType="Integer" resultMap="ParticipanteExternoResult">
+    SELECT id,
+ <include refid="allParticipanteExternoColumns" />
+   FROM participanteexterno WHERE parentId = #{fetchid}
  </select>
 
  <select id="fetchAllParticipanteExternosRequest" parameterType="PagedInquiryRequest" resultMap="ParticipanteExternoResult">

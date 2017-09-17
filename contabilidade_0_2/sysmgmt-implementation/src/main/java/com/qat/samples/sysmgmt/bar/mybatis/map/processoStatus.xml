@@ -72,6 +72,13 @@
 		FROM processostatus WHERE id = #{fetchid}
 	</select>
 
+	<select id="fetchProcessoStatusByParentId" parameterType="Integer"
+		resultMap="ProcessoStatusResult">
+		SELECT id,
+		<include refid="allProcessoStatusColumns" />
+		FROM processostatus WHERE parentId = #{fetchid}
+	</select>
+
 	<select id="fetchAllProcessoStatussRequest" parameterType="PagedInquiryRequest"
 		resultMap="ProcessoStatusResult">
 

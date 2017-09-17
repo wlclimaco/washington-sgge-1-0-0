@@ -71,25 +71,25 @@
 			select="ContasReceberMap.fetchContasReceberByParentId" />
 
 		<collection property="advogadoList" column="id"
-			select="DoisValorMap.fetchDoisValorById" />
+			select="ProcessoClienteMap.fetchProcessoClienteByProcessoId" />
 
 		<collection property="audienciaList" column="id"
-			select="DoisValorMap.fetchDoisValorById" />
+			select="CompromissoMap.fetchCompromissoByParentId" />
 
-<!-- 		<collection property="processoStatusList" column="id" -->
-<!-- 			select="ProcessoMap.fetchProcessoStatusByParentId" /> -->
+		<collection property="processoStatusList" column="id"
+			select="ProcessoStatusMap.fetchProcessoStatusByParentId" />
 
-<!-- 		<collection property="envolvList" column="id" -->
-<!-- 			select="ProcessoMap.fetchEnvolvidosByParentId" /> -->
+		<collection property="envolvList" column="id"
+			select="EnvolvidosMap.fetchEnvolvidosByParentId" />
 
-<!-- 		<collection property="documentos" column="id" -->
-<!-- 			select="DocumentoMap.fetchDocumentoByParentId" /> -->
+		<collection property="arquivos" column="id"
+			select="ArquivoMap.fetchArquivoByProcessoId" />
 
-<!-- 		<collection property="envolvidosExterno" column="id" -->
-<!-- 			select="ProcessoMap.fetchParticipanteExternoByParentId" /> -->
+		<collection property="envolvidosExterno" column="id"
+			select="ParticipanteExternoMap.fetchParticipanteExternoByParentId" />
 
-<!-- 		<collection property="usuariosRestricaoProc" column="id" -->
-<!-- 			select="UsuarioMap.fetchUsuarioByParentId" /> -->
+		<collection property="usuariosRestricaoProc" column="id"
+			select="ProcessoUsuariosMap.fetchProcessoUsuariosByProcessoId" />
   </resultMap>
 
   <sql id="allProcessoColumns">
@@ -249,7 +249,6 @@ dataProcess
 <if test="npadrao!= null">npadrao = #{npadrao},</if>
 <if test="agendarCap!= null">agendarCap = #{agendarCap.id},</if>
 <if test="distribuido!= null">distribuido = #{distribuido},</if>
-<if test="porcValorAcao!= null">porcValorAcao = #{porcValorAcao},</if>
 <if test="valorAcao!= null">valorAcao = #{valorAcao},</if>
 <if test="observacaoProc!= null">observacaoProc = #{observacaoProc},</if>
 <if test="justica!= null">justica = #{justica.id},</if>

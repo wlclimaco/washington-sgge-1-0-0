@@ -11,8 +11,9 @@ import com.qat.samples.sysmgmt.advocacia.Advogados;
 import com.qat.samples.sysmgmt.advocacia.Audiencia;
 import com.qat.samples.sysmgmt.advocacia.Envolvidos;
 import com.qat.samples.sysmgmt.advocacia.Processo;
-import com.qat.samples.sysmgmt.advocacia.ProcessoAcao;
+import com.qat.samples.sysmgmt.advocacia.ProcessoCliente;
 import com.qat.samples.sysmgmt.advocacia.ProcessoStatus;
+import com.qat.samples.sysmgmt.advocacia.ProcessoUsuarios;
 import com.qat.samples.sysmgmt.agencia.model.Agencia;
 import com.qat.samples.sysmgmt.arquivo.model.Arquivo;
 import com.qat.samples.sysmgmt.banco.model.Banco;
@@ -216,6 +217,7 @@ import com.qat.samples.sysmgmt.site.model.PlanoByEmpresa;
 import com.qat.samples.sysmgmt.site.model.ServicoAndPlano;
 import com.qat.samples.sysmgmt.site.model.Site;
 import com.qat.samples.sysmgmt.util.model.Cidade;
+import com.qat.samples.sysmgmt.util.model.ClienteCompromisso;
 import com.qat.samples.sysmgmt.util.model.Compromisso;
 import com.qat.samples.sysmgmt.util.model.DiasHoras;
 import com.qat.samples.sysmgmt.util.model.Documento;
@@ -5699,7 +5701,7 @@ public class Objects {
 			processo.setOrgao("NATIVE INSERT UPDATE");
 			processo.setNpadraocnj("NATIVE INSERT UPDATE");
 			processo.setNpadrao("NATIVE INSERT UPDATE");
-			processo.setAgendarCap(100);
+			processo.setAgendarCap(Objects.insertDoisValor(id, tabela, action));
 			processo.setDistribuido("NATIVE INSERT UPDATE");
 		//	processo.setPo("NATIVE INSERT UPDATE");
 			processo.setValorAcao(new Float(1.99));
@@ -5747,5 +5749,65 @@ public class Objects {
 
 			return processo;
 		}
+
+
+	public static ProcessoUsuarios insertProcessoUsuarios(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+		{
+			ProcessoUsuarios processousuarios = new ProcessoUsuarios();
+			Date a = new Date();
+			processousuarios.setId(id);
+			processousuarios.setUsuarioId(insertUsuario(id, tabela, action));
+			processousuarios.setProcesso(100);
+			processousuarios.setParentId(id);
+			processousuarios.setEmprId(1);
+			processousuarios.setModifyDateUTC(a.getTime());
+			processousuarios.setCreateDateUTC(a.getTime());
+			processousuarios.setCreateUser("system");
+			processousuarios.setModifyUser("system");
+			processousuarios.setProcessId(1);
+			processousuarios.setModelAction(action);
+
+			return processousuarios;
+		}
+
+
+	public static ProcessoCliente insertProcessoCliente(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+		{
+			ProcessoCliente processocliente = new ProcessoCliente();
+			Date a = new Date();
+			processocliente.setId(id);
+			processocliente.setClienteId(insertCliente(id, tabela, action));
+			processocliente.setProcessoId(100);
+			processocliente.setParentId(id);
+			processocliente.setEmprId(1);
+			processocliente.setModifyDateUTC(a.getTime());
+			processocliente.setCreateDateUTC(a.getTime());
+			processocliente.setCreateUser("system");
+			processocliente.setModifyUser("system");
+			processocliente.setProcessId(1);
+			processocliente.setModelAction(action);
+
+			return processocliente;
+		}
+
+	public static ClienteCompromisso insertClienteCompromisso(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		ClienteCompromisso clientecompromisso = new ClienteCompromisso();
+		Date a = new Date();
+		clientecompromisso.setId(id);
+		clientecompromisso.setClienteId(100);
+		clientecompromisso.setCompromissoId(100);
+		clientecompromisso.setParentId(id);
+		clientecompromisso.setEmprId(1);
+		clientecompromisso.setModifyDateUTC(a.getTime());
+		clientecompromisso.setCreateDateUTC(a.getTime());
+		clientecompromisso.setCreateUser("system");
+		clientecompromisso.setModifyUser("system");
+		clientecompromisso.setProcessId(1);
+		clientecompromisso.setModelAction(action);
+
+		return clientecompromisso;
+	}
+
 
 }

@@ -9,7 +9,6 @@ import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.advocacia.ProcessoStatus;
 import com.qat.samples.sysmgmt.bar.Advogado.IAdvocaciaBAR;
-import com.qat.samples.sysmgmt.bar.Documentos.IDocumentoBAR;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
 import com.qat.samples.sysmgmt.entidade.model.Empresa;

@@ -117,6 +117,7 @@
     	<typeAlias alias="TransactionInquiryRequest" type="com.qat.samples.sysmgmt.condominio.model.request.TransactionInquiryRequest" />
 
     	<typeAlias alias="Processo" type="com.qat.samples.sysmgmt.advocacia.Processo" />
+    	<typeAlias alias="ProcessoCliente" type="com.qat.samples.sysmgmt.advocacia.ProcessoCliente" />
     	<typeAlias alias="ProcessoStatus" type="com.qat.samples.sysmgmt.advocacia.ProcessoStatus" />
     	<typeAlias alias="Envolvidos" type="com.qat.samples.sysmgmt.advocacia.Envolvidos" />
     	<typeAlias alias="ProcessoInquiryRequest" type="com.qat.samples.sysmgmt.advocacia.request.ProcessoInquiryRequest" />
@@ -140,6 +141,7 @@
         <typeAlias alias="QATModel1" type="com.qat.samples.sysmgmt.util.model.QATModel1" />
         <typeAlias alias="ParticipanteExterno" type="com.qat.samples.sysmgmt.util.model.ParticipanteExterno" />
         <typeAlias alias="DiasHoras" type="com.qat.samples.sysmgmt.util.model.DiasHoras" />
+        <typeAlias alias="ClienteCompromisso" type="com.qat.samples.sysmgmt.util.model.ClienteCompromisso" />
         <typeAlias alias="Compromisso" type="com.qat.samples.sysmgmt.util.model.Compromisso" />
         <typeAlias alias="Advogados" type="com.qat.samples.sysmgmt.advocacia.Advogados" />
         <typeAlias alias="FetchByIdRequest" type="com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest" />
@@ -244,6 +246,7 @@
         <!--      <typeAlias alias="Cidade" type="com.qat.samples.sysmgmt.cidade.model.Cidade"/> -->
         <typeAlias alias="Produto" type="com.qat.samples.sysmgmt.produto.model.Produto" />
         <typeAlias alias="ProdutoEmpresa" type="com.qat.samples.sysmgmt.produto.model.ProdutoEmpresa" />
+        <typeAlias alias="Arquivo" type="com.qat.samples.sysmgmt.arquivo.model.Arquivo" />
 
          <typeAlias alias="Icms" type="com.qat.samples.sysmgmt.produto.model.Icms" />
          <typeAlias alias="ICMSOpInter" type="com.qat.samples.sysmgmt.produto.model.ICMSOpInter" />
@@ -469,6 +472,7 @@
         <typeAlias alias="UniMedInquiryRequest" type="com.qat.samples.sysmgmt.produto.model.request.UniMedInquiryRequest" />
 
         <typeAlias alias="Advogado" type="com.qat.samples.sysmgmt.advocacia.Advogado" />
+        <typeAlias alias="ProcessoUsuarios" type="com.qat.samples.sysmgmt.advocacia.ProcessoUsuarios" />
         <typeAlias alias="AdvogadoInquiryRequest" type="com.qat.samples.sysmgmt.advocacia.request.AdvogadoInquiryRequest" />
 
     </typeAliases>
@@ -717,6 +721,10 @@
 <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/envolvidos.xml" />
 <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/participanteExterno.xml" />
 <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/processoStatus.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/clienteCompromisso.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/arquivo.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/processoUsuarios.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/processoCliente.xml" />
     </mappers>
 
 </configuration>

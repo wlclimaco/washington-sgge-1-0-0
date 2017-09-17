@@ -18,10 +18,14 @@ import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.advocacia.Advogados;
 import com.qat.samples.sysmgmt.advocacia.Envolvidos;
 import com.qat.samples.sysmgmt.advocacia.Processo;
+import com.qat.samples.sysmgmt.advocacia.ProcessoCliente;
 import com.qat.samples.sysmgmt.advocacia.ProcessoStatus;
 import com.qat.samples.sysmgmt.advocacia.request.CompromissoMaintenanceRequest;
+import com.qat.samples.sysmgmt.advocacia.request.EspecialidadeMaintenanceRequest;
 import com.qat.samples.sysmgmt.advocacia.request.ProcessoInquiryRequest;
 import com.qat.samples.sysmgmt.advocacia.request.ProcessoMaintenanceRequest;
+import com.qat.samples.sysmgmt.arquivo.model.Arquivo;
+import com.qat.samples.sysmgmt.arquivo.model.request.ArquivoMaintenanceRequest;
 import com.qat.samples.sysmgmt.bar.Advogado.IAdvocaciaBAR;
 import com.qat.samples.sysmgmt.clinica.model.Especialidade;
 import com.qat.samples.sysmgmt.util.model.Compromisso;
@@ -1168,5 +1172,319 @@ private InternalResultsResponse<Processo> processProcesso(ValidationContextIndic
 		{
 			return new InternalResultsResponse<Processo>();
 		}
+	}
+
+	//===================================### ESPECIALIDADE ####======================================
+		/**
+	/*
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.qat.samples.sysmgmt.bac.ICountyBAC#insertEspecialidade(com.qat.samples.sysmgmt.model.request.EspecialidadeMaintenanceRequest
+	 * )
+	 */
+	@Override
+	public InternalResultsResponse<Especialidade> insertEspecialidade(EspecialidadeMaintenanceRequest request)
+	{
+		InternalResultsResponse<Especialidade> response =
+				processEspecialidade(ValidationContextIndicator.INSERT, PersistenceActionEnum.INSERT, request);
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.qat.samples.sysmgmt.bac.IEspecialidadeBAC#updateEspecialidade(com.qat.samples.sysmgmt.model.request.EspecialidadeMaintenanceRequest
+	 * )
+	 */
+	@Override
+	public InternalResultsResponse<Especialidade> updateEspecialidade(EspecialidadeMaintenanceRequest request)
+	{
+		InternalResultsResponse<Especialidade> response =
+				processEspecialidade(ValidationContextIndicator.UPDATE, PersistenceActionEnum.UPDATE, request);
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.qat.samples.sysmgmt.bac.IEspecialidadeBAC#deleteEspecialidade(com.qat.samples.sysmgmt.model.request.EspecialidadeMaintenanceRequest
+	 * )
+	 */
+	@Override
+	public InternalResultsResponse<Especialidade> deleteEspecialidade(EspecialidadeMaintenanceRequest request)
+	{
+		InternalResultsResponse<Especialidade> response =
+				processEspecialidade(ValidationContextIndicator.DELETE, PersistenceActionEnum.DELETE, request);
+		return response;
+	}
+
+
+
+	/**
+	 * Process.
+	 *
+	 * @param indicator the indicator
+	 * @param persistType the persist type
+	 * @param request the request
+	 * @return the especialidade response
+	 */
+	private InternalResultsResponse<Especialidade> processEspecialidade(ValidationContextIndicator indicator,
+			PersistenceActionEnum persistType,
+			EspecialidadeMaintenanceRequest request)
+			{
+		InternalResultsResponse<Especialidade> response = null;
+
+		// Validate
+		//ValidationContext context = new ValidationContext(Especialidade.class.getSimpleName(), request.getEspecialidade(), indicator);
+		//if (!getValidationController().validate(context))
+		//{
+		//	response = new InternalResultsResponse<Especialidade>();
+		//	response.setStatus(SystemErrorCategory.SystemValidation);
+		//	response.addMessages(context.getMessages());
+		//	return response;
+		//}
+
+			// Persist
+			InternalResponse internalResponse = doPersistenceEspecialidade(request.getEspecialidade(), persistType);
+			if (internalResponse.isInError())
+			{
+				response = new InternalResultsResponse<Especialidade>();
+				response.setStatus(internalResponse.getError());
+				response.addMessages(internalResponse.getMessageInfoList());
+				response.addMessage(DEFAULT_ADVOGADO_BAC_EXCEPTION_MSG, MessageSeverity.Error,
+						MessageLevel.Object, new Object[] {internalResponse.errorToString()});
+
+				return response;
+			}
+
+			// Call maintainReurnList to see if we need to return the especialidade list and if so whether it should be paged or
+			// not
+			response = maintainReturnListEspecialidade(request.getReturnList(), request.getReturnListPaged(),new Especialidade());
+
+			return response;
+				}
+
+
+	//===================================### ARQUIVO ####======================================
+		/**
+	/*
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.qat.samples.sysmgmt.bac.ICountyBAC#insertArquivo(com.qat.samples.sysmgmt.model.request.ArquivoMaintenanceRequest
+	 * )
+	 */
+	@Override
+	public InternalResultsResponse<Arquivo> insertArquivo(ArquivoMaintenanceRequest request)
+	{
+		InternalResultsResponse<Arquivo> response =
+				processArquivo(ValidationContextIndicator.INSERT, PersistenceActionEnum.INSERT, request);
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.qat.samples.sysmgmt.bac.IArquivoBAC#updateArquivo(com.qat.samples.sysmgmt.model.request.ArquivoMaintenanceRequest
+	 * )
+	 */
+	@Override
+	public InternalResultsResponse<Arquivo> updateArquivo(ArquivoMaintenanceRequest request)
+	{
+		InternalResultsResponse<Arquivo> response =
+				processArquivo(ValidationContextIndicator.UPDATE, PersistenceActionEnum.UPDATE, request);
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.qat.samples.sysmgmt.bac.IArquivoBAC#deleteArquivo(com.qat.samples.sysmgmt.model.request.ArquivoMaintenanceRequest
+	 * )
+	 */
+	@Override
+	public InternalResultsResponse<Arquivo> deleteArquivo(ArquivoMaintenanceRequest request)
+	{
+		InternalResultsResponse<Arquivo> response =
+				processArquivo(ValidationContextIndicator.DELETE, PersistenceActionEnum.DELETE, request);
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.bac.IArquivoBAC#refreshArquivos(com.qat.samples.sysmgmt.model.request.RefreshRequest)
+	 */
+	@Override
+	public InternalResultsResponse<Arquivo> refreshArquivos(RefreshRequest request)
+	{
+		// This method is demo code only. Do not view this as a QAT Global Standard.
+		getAdvocaciaBAR().deleteAllArquivos();
+		int refreshNumber = request.getRefreshInt();
+		refreshNumber = (refreshNumber < 1) ? MINIMUM_ENTRIES : refreshNumber;
+
+		for (int i = 1; i <= refreshNumber; i++)
+		{
+		getAdvocaciaBAR().insertArquivo(new Arquivo(i, "ArquivoDesc" + i));
+		}
+
+		// Call maintain to see if we need to return the arquivo list and if so whether it should be paged or not
+		return maintainReturnListArquivo(request.getReturnList(), request.getReturnListPaged(),new Arquivo());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.bac.IArquivoBAC#fetchAllArquivos(Arquivo arquivo)
+	 */
+	@Override
+	public InternalResultsResponse<Arquivo> fetchAllArquivos(Arquivo arquivo)
+	{
+		InternalResultsResponse<Arquivo> response = new InternalResultsResponse<Arquivo>();
+		response.getResultsList().addAll(getAdvocaciaBAR().fetchAllArquivos(arquivo).getResultsList());
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.qat.samples.sysmgmt.bac.IArquivoBAC#fetchArquivoById(com.qat.samples.sysmgmt.model.request.FetchByIdRequest
+	 * )
+	 */
+	@Override
+	public InternalResultsResponse<Arquivo> fetchArquivoById(FetchByIdRequest request)
+	{
+		InternalResultsResponse<Arquivo> response = new InternalResultsResponse<Arquivo>();
+		// validate fetchId field
+		if (ValidationUtil.isNull(request.getFetchId()))
+		{
+			response.addFieldErrorMessage(SYSMGMT_BASE_ID_REQUIRED);
+			response.setStatus(SystemErrorCategory.SystemValidation);
+		}
+		else
+		{
+			response.getResultsList().add(getAdvocaciaBAR().fetchArquivoById(request));
+		}
+
+		return response;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.bac.IArquivoBAC#fetchArquivosByRequest(com.qat.samples.sysmgmt.model.request.
+	 * PagedInquiryRequest)
+	 */
+	@Override
+	public InternalResultsResponse<Arquivo> fetchArquivosByRequest(PagedInquiryRequest request)
+	{
+		return getAdvocaciaBAR().fetchArquivosByRequest(request);
+	}
+
+	/**
+	 * Process.
+	 *
+	 * @param indicator the indicator
+	 * @param persistType the persist type
+	 * @param request the request
+	 * @return the arquivo response
+	 */
+	private InternalResultsResponse<Arquivo> processArquivo(ValidationContextIndicator indicator,
+			PersistenceActionEnum persistType,
+			ArquivoMaintenanceRequest request)
+			{
+		InternalResultsResponse<Arquivo> response = null;
+
+		// Validate
+		//ValidationContext context = new ValidationContext(Arquivo.class.getSimpleName(), request.getArquivo(), indicator);
+		//if (!getValidationController().validate(context))
+		//{
+		//	response = new InternalResultsResponse<Arquivo>();
+		//	response.setStatus(SystemErrorCategory.SystemValidation);
+		//	response.addMessages(context.getMessages());
+		//	return response;
+		//}
+
+			// Persist
+			InternalResponse internalResponse = doPersistenceArquivo(request.getArquivo(), persistType);
+			if (internalResponse.isInError())
+			{
+				response = new InternalResultsResponse<Arquivo>();
+				response.setStatus(internalResponse.getError());
+				response.addMessages(internalResponse.getMessageInfoList());
+				response.addMessage(DEFAULT_ADVOGADO_BAC_EXCEPTION_MSG, MessageSeverity.Error,
+						MessageLevel.Object, new Object[] {internalResponse.errorToString()});
+
+				return response;
+			}
+
+			// Call maintainReurnList to see if we need to return the arquivo list and if so whether it should be paged or
+			// not
+			response = maintainReturnListArquivo(request.getReturnList(), request.getReturnListPaged(),new Arquivo());
+
+			return response;
+				}
+
+		/**
+		 * Do persistenceArquivo.
+		 *
+		 * @param request the request
+		 * @param updateType the update type
+		 * @return the internal response
+		 */
+		private InternalResponse doPersistenceArquivo(Arquivo arquivo, PersistenceActionEnum updateType)
+		{
+			switch (updateType)
+			{
+				case INSERT:
+					return getAdvocaciaBAR().insertArquivo(arquivo);
+
+				case UPDATE:
+					return getAdvocaciaBAR().updateArquivo(arquivo);
+
+				case DELETE:
+					return getAdvocaciaBAR().deleteArquivoById(arquivo);
+				default:
+					if (LOG.isDebugEnabled())
+					{
+						LOG.debug("updateType missing!");
+					}
+					break;
+			}
+
+			return null;
+		}
+
+		/**
+		 * Maintain return list.
+		 *
+		 * @param request the request
+		 * @param response the response
+		 */
+		private InternalResultsResponse<Arquivo> maintainReturnListArquivo(Boolean listIndicator, Boolean pageListIndicator,Arquivo arquivo)
+		{
+			// Fetch again if requested.
+			if (listIndicator)
+			{
+				// Fetch Paged is requested.
+				if (pageListIndicator)
+				{
+					PagedInquiryRequest request = new PagedInquiryRequest();
+					request.setPreQueryCount(true);
+					return fetchArquivosByRequest(request);
+				}
+				else
+				{
+					// otherwise return all rows not paged
+					return fetchAllArquivos(arquivo);
+				}
+			}
+			else
+			{
+				return new InternalResultsResponse<Arquivo>();
+			}
+		}
+	@Override
+	public InternalResultsResponse<ProcessoCliente> fetchProcessoClientesByRequest(PagedInquiryRequest request) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

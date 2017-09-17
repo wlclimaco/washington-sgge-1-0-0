@@ -23,10 +23,15 @@ import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.advocacia.Advogados;
 import com.qat.samples.sysmgmt.advocacia.Envolvidos;
 import com.qat.samples.sysmgmt.advocacia.Processo;
+import com.qat.samples.sysmgmt.advocacia.ProcessoCliente;
 import com.qat.samples.sysmgmt.advocacia.ProcessoStatus;
+import com.qat.samples.sysmgmt.advocacia.ProcessoUsuarios;
 import com.qat.samples.sysmgmt.advocacia.request.ProcessoInquiryRequest;
+import com.qat.samples.sysmgmt.arquivo.model.Arquivo;
+import com.qat.samples.sysmgmt.arquivo.model.request.ArquivoInquiryRequest;
 import com.qat.samples.sysmgmt.bar.Advogado.IAdvocaciaBAR;
 import com.qat.samples.sysmgmt.clinica.model.Especialidade;
+import com.qat.samples.sysmgmt.util.model.ClienteCompromisso;
 import com.qat.samples.sysmgmt.util.model.Compromisso;
 import com.qat.samples.sysmgmt.util.model.DiasHoras;
 import com.qat.samples.sysmgmt.util.model.ParticipanteExterno;
@@ -98,11 +103,11 @@ this.advocaciaBAR = advocaciaBAR;
 	@Test
 	public void testUpdateProcessoStatus()
 	{
-		ProcessoStatus processostatus = Objects.insertProcessoStatus(1, TabelaEnum.PROCESSOSTATUS, PersistenceActionEnum.UPDATE);
+		ProcessoStatus processostatus = Objects.insertProcessoStatus(1000, TabelaEnum.PROCESSOSTATUS, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		ProcessoStatus processostatusResponse = getAdvocaciaBAR().fetchProcessoStatusById(request);
-		Assert.assertEquals(processostatusResponse.getNote(), "NATIVE INSERT");
+		Assert.assertEquals(processostatusResponse.getNote(), "note_0");
 		getAdvocaciaBAR().updateProcessoStatus(processostatus);
 		processostatusResponse = getAdvocaciaBAR().fetchProcessoStatusById(request);
 		Assert.assertEquals(processostatusResponse.getNote(), "NATIVE INSERT UPDATE");
@@ -186,14 +191,14 @@ this.advocaciaBAR = advocaciaBAR;
 	@Test
 	public void testUpdateDiasHoras()
 	{
-		DiasHoras diashoras = Objects.insertDiasHoras(1, TabelaEnum.DIASHORAS, PersistenceActionEnum.UPDATE);
+		DiasHoras diashoras = Objects.insertDiasHoras(1000, TabelaEnum.DIASHORAS, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		DiasHoras diashorasResponse = getAdvocaciaBAR().fetchDiasHorasById(request);
-		Assert.assertEquals(diashorasResponse.getDiario(), "NATIVE INSERT");
+		Assert.assertEquals(diashorasResponse.getCreateUser(), "system");
 		getAdvocaciaBAR().updateDiasHoras(diashoras);
 		diashorasResponse = getAdvocaciaBAR().fetchDiasHorasById(request);
-		Assert.assertEquals(diashorasResponse.getDiario(), "NATIVE INSERT");
+		Assert.assertEquals(diashorasResponse.getModifyUser(), "system");
 	}
 
 	@Test
@@ -274,11 +279,11 @@ this.advocaciaBAR = advocaciaBAR;
 	@Test
 	public void testUpdateEspecialidade()
 	{
-		Especialidade especialidade = Objects.insertEspecialidade(1, TabelaEnum.ESPECIALIDADE, PersistenceActionEnum.UPDATE);
+		Especialidade especialidade = Objects.insertEspecialidade(1000, TabelaEnum.ESPECIALIDADE, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		Especialidade especialidadeResponse = getAdvocaciaBAR().fetchEspecialidadeById(request);
-		Assert.assertEquals(especialidadeResponse.getNome(), "NATIVE INSERT");
+		Assert.assertEquals(especialidadeResponse.getNome(), "nome_0");
 		getAdvocaciaBAR().updateEspecialidade(especialidade);
 		especialidadeResponse = getAdvocaciaBAR().fetchEspecialidadeById(request);
 		Assert.assertEquals(especialidadeResponse.getNome(), "NATIVE INSERT UPDATE");
@@ -362,11 +367,11 @@ this.advocaciaBAR = advocaciaBAR;
 	@Test
 	public void testUpdateCompromisso()
 	{
-		Compromisso compromisso = Objects.insertCompromisso(1, TabelaEnum.COMPROMISSO, PersistenceActionEnum.UPDATE);
+		Compromisso compromisso = Objects.insertCompromisso(1000, TabelaEnum.COMPROMISSO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		Compromisso compromissoResponse = getAdvocaciaBAR().fetchCompromissoById(request);
-		Assert.assertEquals(compromissoResponse.getTitulo(), "NATIVE INSERT");
+		Assert.assertEquals(compromissoResponse.getTitulo(), "titulo_0");
 		getAdvocaciaBAR().updateCompromisso(compromisso);
 		compromissoResponse = getAdvocaciaBAR().fetchCompromissoById(request);
 		Assert.assertEquals(compromissoResponse.getTitulo(), "NATIVE INSERT UPDATE");
@@ -450,14 +455,14 @@ this.advocaciaBAR = advocaciaBAR;
 	@Test
 	public void testUpdateAdvogados()
 	{
-		Advogados advogados = Objects.insertAdvogados(1, TabelaEnum.ADVOGADOS, PersistenceActionEnum.UPDATE);
+		Advogados advogados = Objects.insertAdvogados(1000, TabelaEnum.ADVOGADOS, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		Advogados advogadosResponse = getAdvocaciaBAR().fetchAdvogadosById(request);
-		Assert.assertEquals(advogadosResponse.getAdvogadoPrincipal(), "1");
+		Assert.assertEquals(advogadosResponse.getCreateUser(), "system");
 		getAdvocaciaBAR().updateAdvogados(advogados);
 		advogadosResponse = getAdvocaciaBAR().fetchAdvogadosById(request);
-		Assert.assertEquals(advogadosResponse.getAdvogadoPrincipal(), "0");
+		Assert.assertEquals(advogadosResponse.getModifyUser(), "system");
 	}
 
 	@Test
@@ -538,14 +543,14 @@ this.advocaciaBAR = advocaciaBAR;
 	@Test
 	public void testUpdateEnvolvidos()
 	{
-		Envolvidos envolvidos = Objects.insertEnvolvidos(1, TabelaEnum.ENVOLVIDOS, PersistenceActionEnum.UPDATE);
+		Envolvidos envolvidos = Objects.insertEnvolvidos(1000, TabelaEnum.ENVOLVIDOS, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		Envolvidos envolvidosResponse = getAdvocaciaBAR().fetchEnvolvidosById(request);
-		Assert.assertEquals(envolvidosResponse.getbCliente(), "0");
+		Assert.assertEquals(envolvidosResponse.getCreateUser(), "system");
 		getAdvocaciaBAR().updateEnvolvidos(envolvidos);
 		envolvidosResponse = getAdvocaciaBAR().fetchEnvolvidosById(request);
-		Assert.assertEquals(envolvidosResponse.getbCliente(), "1");
+		Assert.assertEquals(envolvidosResponse.getModifyUser(), "system");
 	}
 
 	@Test
@@ -626,11 +631,11 @@ this.advocaciaBAR = advocaciaBAR;
 	@Test
 	public void testUpdateParticipanteExterno()
 	{
-		ParticipanteExterno participanteexterno = Objects.insertParticipanteExterno(1, TabelaEnum.PARTICIPANTEEXTERNO, PersistenceActionEnum.UPDATE);
+		ParticipanteExterno participanteexterno = Objects.insertParticipanteExterno(1000, TabelaEnum.PARTICIPANTEEXTERNO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		ParticipanteExterno participanteexternoResponse = getAdvocaciaBAR().fetchParticipanteExternoById(request);
-		Assert.assertEquals(participanteexternoResponse.getNome(), "NATIVE INSERT");
+		Assert.assertEquals(participanteexternoResponse.getNome(), "nome_0");
 		getAdvocaciaBAR().updateParticipanteExterno(participanteexterno);
 		participanteexternoResponse = getAdvocaciaBAR().fetchParticipanteExternoById(request);
 		Assert.assertEquals(participanteexternoResponse.getNome(), "NATIVE INSERT UPDATE");
@@ -681,9 +686,9 @@ this.advocaciaBAR = advocaciaBAR;
 @Test
 	public void testDeleteProcesso()
 	{
-		Processo processo = Objects.insertProcesso(4, TabelaEnum.PROCESSO, PersistenceActionEnum.INSERT);
+		Processo processo = Objects.insertProcesso(1, TabelaEnum.PROCESSO, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(4);
+		request.setFetchId(1);
 		Processo processoResponse = getAdvocaciaBAR().fetchProcessoById(request);
 		Assert.assertEquals(processoResponse, null);
 		getAdvocaciaBAR().insertProcesso(processo);
@@ -714,11 +719,11 @@ this.advocaciaBAR = advocaciaBAR;
 	@Test
 	public void testUpdateProcesso()
 	{
-		Processo processo = Objects.insertProcesso(1, TabelaEnum.PROCESSO, PersistenceActionEnum.UPDATE);
+		Processo processo = Objects.insertProcesso(1000, TabelaEnum.PROCESSO, PersistenceActionEnum.UPDATE);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(1000);
 		Processo processoResponse = getAdvocaciaBAR().fetchProcessoById(request);
-		Assert.assertEquals(processoResponse.getProcesso(), "NATIVE INSERT");
+		Assert.assertEquals(processoResponse.getProcesso(), "processo_0");
 		getAdvocaciaBAR().updateProcesso(processo);
 		processoResponse = getAdvocaciaBAR().fetchProcessoById(request);
 		Assert.assertEquals(processoResponse.getProcesso(), "NATIVE INSERT UPDATE");
@@ -763,6 +768,359 @@ this.advocaciaBAR = advocaciaBAR;
 
 	}
 
+
+	//===================================### CLIENTECOMPROMISSO ####======================================
+
+
+	@Test
+		public void testDeleteClienteCompromisso()
+		{
+			ClienteCompromisso clientecompromisso = Objects.insertClienteCompromisso(4, TabelaEnum.CLIENTECOMPROMISSO, PersistenceActionEnum.INSERT);
+			FetchByIdRequest request = new FetchByIdRequest();
+			request.setFetchId(4);
+			ClienteCompromisso clientecompromissoResponse = getAdvocaciaBAR().fetchClienteCompromissoById(request);
+			Assert.assertEquals(clientecompromissoResponse, null);
+			getAdvocaciaBAR().insertClienteCompromisso(clientecompromisso);
+			clientecompromissoResponse = getAdvocaciaBAR().fetchClienteCompromissoById(request);
+			Assert.assertEquals(clientecompromisso.getId(), clientecompromissoResponse.getId());
+			getAdvocaciaBAR().deleteClienteCompromissoById(clientecompromisso);
+			clientecompromissoResponse = getAdvocaciaBAR().fetchClienteCompromissoById(request);
+			Assert.assertEquals(clientecompromissoResponse, null);
+		}
+
+		@Test
+		public void testFetchAllClienteCompromissos()
+		{
+		ClienteCompromisso clientecompromisso = new ClienteCompromisso();
+			List<ClienteCompromisso> response = getAdvocaciaBAR().fetchAllClienteCompromissos(clientecompromisso).getResultsList();
+			Assert.assertNotNull(response);
+		}
+
+		@Test
+		public void testDeleteAllClienteCompromissos()
+		{
+			getAdvocaciaBAR().deleteAllClienteCompromissos();
+		ClienteCompromisso clientecompromisso = new ClienteCompromisso();
+			List<ClienteCompromisso> response = getAdvocaciaBAR().fetchAllClienteCompromissos(new ClienteCompromisso()).getResultsList();
+			Assert.assertEquals(response.size(), 0);
+		}
+
+		@Test
+		public void testUpdateClienteCompromisso()
+		{
+			ClienteCompromisso clientecompromisso = Objects.insertClienteCompromisso(1000, TabelaEnum.CLIENTECOMPROMISSO, PersistenceActionEnum.UPDATE);
+			FetchByIdRequest request = new FetchByIdRequest();
+			request.setFetchId(1000);
+			ClienteCompromisso clientecompromissoResponse = getAdvocaciaBAR().fetchClienteCompromissoById(request);
+			Assert.assertEquals(clientecompromissoResponse.getCreateUser(), "system");
+			getAdvocaciaBAR().updateClienteCompromisso(clientecompromisso);
+			clientecompromissoResponse = getAdvocaciaBAR().fetchClienteCompromissoById(request);
+			Assert.assertEquals(clientecompromissoResponse.getModifyUser(), "system");
+		}
+
+		@Test
+		public void testFetchClienteCompromissosByRequest() throws Exception
+		{
+			// check for valid and precount
+			PagedInquiryRequest request = new PagedInquiryRequest();
+			request.setPreQueryCount(true);
+			request.setStartPage(0);
+			request.setPageSize(3);
+			InternalResultsResponse<ClienteCompromisso> response = getAdvocaciaBAR().fetchClienteCompromissosByRequest(request);
+			//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+			Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+			Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+			// check for valid and precount and start 2nd page
+			request.setPreQueryCount(true);
+			request.setStartPage(1);
+			request.setPageSize(3);
+			response = getAdvocaciaBAR().fetchClienteCompromissosByRequest(request);
+			//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+			Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+			Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+
+			// check for valid and no precount
+			PagedInquiryRequest request2 = new PagedInquiryRequest();
+			request2.setPreQueryCount(false);
+			InternalResultsResponse<ClienteCompromisso> response2 = getAdvocaciaBAR().fetchClienteCompromissosByRequest(request2);
+			Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
+			Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
+			// this is because we did not choose to precount
+			Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
+
+			// check for zero rows
+			getAdvocaciaBAR().deleteAllClienteCompromissos();
+			PagedInquiryRequest request3 = new PagedInquiryRequest();
+			request3.setPreQueryCount(true);
+			InternalResultsResponse<ClienteCompromisso> response3 = getAdvocaciaBAR().fetchClienteCompromissosByRequest(request3);
+			Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
+
+		}
+
+	//===================================### ARQUIVO ####======================================
+
+
+	@Test
+		public void testDeleteArquivo()
+		{
+			Arquivo arquivo = Objects.insertArquivo(4, TabelaEnum.ARQUIVO, PersistenceActionEnum.INSERT);
+			FetchByIdRequest request = new FetchByIdRequest();
+			request.setFetchId(4);
+			Arquivo arquivoResponse = getAdvocaciaBAR().fetchArquivoById(request);
+			Assert.assertEquals(arquivoResponse, null);
+			getAdvocaciaBAR().insertArquivo(arquivo);
+			arquivoResponse = getAdvocaciaBAR().fetchArquivoById(request);
+			Assert.assertEquals(arquivo.getId(), arquivoResponse.getId());
+			getAdvocaciaBAR().deleteArquivoById(arquivo);
+			arquivoResponse = getAdvocaciaBAR().fetchArquivoById(request);
+			Assert.assertEquals(arquivoResponse, null);
+		}
+
+		@Test
+		public void testFetchAllArquivos()
+		{
+		Arquivo arquivo = new Arquivo();
+			List<Arquivo> response = getAdvocaciaBAR().fetchAllArquivos(arquivo).getResultsList();
+			Assert.assertNotNull(response);
+		}
+
+		@Test
+		public void testDeleteAllArquivos()
+		{
+			getAdvocaciaBAR().deleteAllArquivos();
+		Arquivo arquivo = new Arquivo();
+			List<Arquivo> response = getAdvocaciaBAR().fetchAllArquivos(new Arquivo()).getResultsList();
+			Assert.assertEquals(response.size(), 0);
+		}
+
+		@Test
+		public void testUpdateArquivo()
+		{
+			Arquivo arquivo = Objects.insertArquivo(1000, TabelaEnum.ARQUIVO, PersistenceActionEnum.UPDATE);
+			FetchByIdRequest request = new FetchByIdRequest();
+			request.setFetchId(1000);
+			Arquivo arquivoResponse = getAdvocaciaBAR().fetchArquivoById(request);
+			Assert.assertEquals(arquivoResponse.getNome(), "nome_0");
+			getAdvocaciaBAR().updateArquivo(arquivo);
+			arquivoResponse = getAdvocaciaBAR().fetchArquivoById(request);
+			Assert.assertEquals(arquivoResponse.getNome(), "nome_0");
+		}
+
+		@Test
+		public void testFetchArquivosByRequest() throws Exception
+		{
+			// check for valid and precount
+			ArquivoInquiryRequest request = new ArquivoInquiryRequest();
+			request.setPreQueryCount(true);
+			request.setStartPage(0);
+			request.setPageSize(3);
+			InternalResultsResponse<Arquivo> response = getAdvocaciaBAR().fetchArquivosByRequest(request);
+			//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+			Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+			Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+			// check for valid and precount and start 2nd page
+			request.setPreQueryCount(true);
+			request.setStartPage(1);
+			request.setPageSize(3);
+			response = getAdvocaciaBAR().fetchArquivosByRequest(request);
+			//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+			Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+			Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+
+			// check for valid and no precount
+			ArquivoInquiryRequest request2 = new ArquivoInquiryRequest();
+			request2.setPreQueryCount(false);
+			InternalResultsResponse<Arquivo> response2 = getAdvocaciaBAR().fetchArquivosByRequest(request2);
+			Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
+			Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
+			// this is because we did not choose to precount
+			Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
+
+			// check for zero rows
+			getAdvocaciaBAR().deleteAllArquivos();
+			ArquivoInquiryRequest request3 = new ArquivoInquiryRequest();
+			request3.setPreQueryCount(true);
+			InternalResultsResponse<Arquivo> response3 = getAdvocaciaBAR().fetchArquivosByRequest(request3);
+			Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
+
+		}
+
+	//===================================### PROCESSOUSUARIOS ####======================================
+
+
+	@Test
+		public void testDeleteProcessoUsuarios()
+		{
+			ProcessoUsuarios processousuarios = Objects.insertProcessoUsuarios(4, TabelaEnum.PROCESSOUSUARIOS, PersistenceActionEnum.INSERT);
+			FetchByIdRequest request = new FetchByIdRequest();
+			request.setFetchId(4);
+			ProcessoUsuarios processousuariosResponse = getAdvocaciaBAR().fetchProcessoUsuariosById(request);
+			Assert.assertEquals(processousuariosResponse, null);
+			getAdvocaciaBAR().insertProcessoUsuarios(processousuarios);
+			processousuariosResponse = getAdvocaciaBAR().fetchProcessoUsuariosById(request);
+			Assert.assertEquals(processousuarios.getId(), processousuariosResponse.getId());
+			getAdvocaciaBAR().deleteProcessoUsuariosById(processousuarios);
+			processousuariosResponse = getAdvocaciaBAR().fetchProcessoUsuariosById(request);
+			Assert.assertEquals(processousuariosResponse, null);
+		}
+
+		@Test
+		public void testFetchAllProcessoUsuarioss()
+		{
+		ProcessoUsuarios processousuarios = new ProcessoUsuarios();
+			List<ProcessoUsuarios> response = getAdvocaciaBAR().fetchAllProcessoUsuarioss(processousuarios).getResultsList();
+			Assert.assertNotNull(response);
+		}
+
+		@Test
+		public void testDeleteAllProcessoUsuarioss()
+		{
+			getAdvocaciaBAR().deleteAllProcessoUsuarioss();
+		ProcessoUsuarios processousuarios = new ProcessoUsuarios();
+			List<ProcessoUsuarios> response = getAdvocaciaBAR().fetchAllProcessoUsuarioss(new ProcessoUsuarios()).getResultsList();
+			Assert.assertEquals(response.size(), 0);
+		}
+
+		@Test
+		public void testUpdateProcessoUsuarios()
+		{
+			ProcessoUsuarios processousuarios = Objects.insertProcessoUsuarios(1000, TabelaEnum.PROCESSOUSUARIOS, PersistenceActionEnum.UPDATE);
+			FetchByIdRequest request = new FetchByIdRequest();
+			request.setFetchId(1000);
+			ProcessoUsuarios processousuariosResponse = getAdvocaciaBAR().fetchProcessoUsuariosById(request);
+			Assert.assertEquals(processousuariosResponse.getCreateUser(), "system");
+			getAdvocaciaBAR().updateProcessoUsuarios(processousuarios);
+			processousuariosResponse = getAdvocaciaBAR().fetchProcessoUsuariosById(request);
+			Assert.assertEquals(processousuariosResponse.getModifyUser(), "system");
+		}
+
+		@Test
+		public void testFetchProcessoUsuariossByRequest() throws Exception
+		{
+			// check for valid and precount
+			PagedInquiryRequest request = new PagedInquiryRequest();
+			request.setPreQueryCount(true);
+			request.setStartPage(0);
+			request.setPageSize(3);
+			InternalResultsResponse<ProcessoUsuarios> response = getAdvocaciaBAR().fetchProcessoUsuariossByRequest(request);
+			//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+			Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+			Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+			// check for valid and precount and start 2nd page
+			request.setPreQueryCount(true);
+			request.setStartPage(1);
+			request.setPageSize(3);
+			response = getAdvocaciaBAR().fetchProcessoUsuariossByRequest(request);
+			//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+			Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+			Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+
+			// check for valid and no precount
+			PagedInquiryRequest request2 = new PagedInquiryRequest();
+			request2.setPreQueryCount(false);
+			InternalResultsResponse<ProcessoUsuarios> response2 = getAdvocaciaBAR().fetchProcessoUsuariossByRequest(request2);
+			Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
+			Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
+			// this is because we did not choose to precount
+			Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
+
+			// check for zero rows
+			getAdvocaciaBAR().deleteAllProcessoUsuarioss();
+			PagedInquiryRequest request3 = new PagedInquiryRequest();
+			request3.setPreQueryCount(true);
+			InternalResultsResponse<ProcessoUsuarios> response3 = getAdvocaciaBAR().fetchProcessoUsuariossByRequest(request3);
+			Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
+
+		}
+
+	//===================================### PROCESSOCLIENTE ####======================================
+
+
+	@Test
+		public void testDeleteProcessoCliente()
+		{
+			ProcessoCliente processocliente = Objects.insertProcessoCliente(4, TabelaEnum.PROCESSOCLIENTE, PersistenceActionEnum.INSERT);
+			FetchByIdRequest request = new FetchByIdRequest();
+			request.setFetchId(4);
+			ProcessoCliente processoclienteResponse = getAdvocaciaBAR().fetchProcessoClienteById(request);
+			Assert.assertEquals(processoclienteResponse, null);
+			getAdvocaciaBAR().insertProcessoCliente(processocliente);
+			processoclienteResponse = getAdvocaciaBAR().fetchProcessoClienteById(request);
+			Assert.assertEquals(processocliente.getId(), processoclienteResponse.getId());
+			getAdvocaciaBAR().deleteProcessoClienteById(processocliente);
+			processoclienteResponse = getAdvocaciaBAR().fetchProcessoClienteById(request);
+			Assert.assertEquals(processoclienteResponse, null);
+		}
+
+		@Test
+		public void testFetchAllProcessoClientes()
+		{
+		ProcessoCliente processocliente = new ProcessoCliente();
+			List<ProcessoCliente> response = getAdvocaciaBAR().fetchAllProcessoClientes(processocliente).getResultsList();
+			Assert.assertNotNull(response);
+		}
+
+		@Test
+		public void testDeleteAllProcessoClientes()
+		{
+			getAdvocaciaBAR().deleteAllProcessoClientes();
+		ProcessoCliente processocliente = new ProcessoCliente();
+			List<ProcessoCliente> response = getAdvocaciaBAR().fetchAllProcessoClientes(new ProcessoCliente()).getResultsList();
+			Assert.assertEquals(response.size(), 0);
+		}
+
+		@Test
+		public void testUpdateProcessoCliente()
+		{
+			ProcessoCliente processocliente = Objects.insertProcessoCliente(1000, TabelaEnum.PROCESSOCLIENTE, PersistenceActionEnum.UPDATE);
+			FetchByIdRequest request = new FetchByIdRequest();
+			request.setFetchId(1000);
+			ProcessoCliente processoclienteResponse = getAdvocaciaBAR().fetchProcessoClienteById(request);
+			Assert.assertEquals(processoclienteResponse.getCreateUser(), "system");
+			getAdvocaciaBAR().updateProcessoCliente(processocliente);
+			processoclienteResponse = getAdvocaciaBAR().fetchProcessoClienteById(request);
+			Assert.assertEquals(processoclienteResponse.getModifyUser(), "system");
+		}
+
+		@Test
+		public void testFetchProcessoClientesByRequest() throws Exception
+		{
+			// check for valid and precount
+			PagedInquiryRequest request = new PagedInquiryRequest();
+			request.setPreQueryCount(true);
+			request.setStartPage(0);
+			request.setPageSize(3);
+			InternalResultsResponse<ProcessoCliente> response = getAdvocaciaBAR().fetchProcessoClientesByRequest(request);
+			//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+			Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+			Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+			// check for valid and precount and start 2nd page
+			request.setPreQueryCount(true);
+			request.setStartPage(1);
+			request.setPageSize(3);
+			response = getAdvocaciaBAR().fetchProcessoClientesByRequest(request);
+			//Assert.assertTrue(response.getResultsSetInfo().isMoreRowsAvailable());
+			Assert.assertTrue(response.getResultsSetInfo().getPageSize() == 3);
+			Assert.assertTrue(response.getResultsSetInfo().getTotalRowsAvailable() > 0);
+
+			// check for valid and no precount
+			PagedInquiryRequest request2 = new PagedInquiryRequest();
+			request2.setPreQueryCount(false);
+			InternalResultsResponse<ProcessoCliente> response2 = getAdvocaciaBAR().fetchProcessoClientesByRequest(request2);
+			Assert.assertFalse(response2.getResultsSetInfo().isMoreRowsAvailable());
+			Assert.assertTrue(response2.getResultsSetInfo().getPageSize() == 20);
+			// this is because we did not choose to precount
+			Assert.assertTrue(response2.getResultsSetInfo().getTotalRowsAvailable() == 0);
+
+			// check for zero rows
+			getAdvocaciaBAR().deleteAllProcessoClientes();
+			PagedInquiryRequest request3 = new PagedInquiryRequest();
+			request3.setPreQueryCount(true);
+			InternalResultsResponse<ProcessoCliente> response3 = getAdvocaciaBAR().fetchProcessoClientesByRequest(request3);
+			Assert.assertTrue(response3.getBusinessError() == BusinessErrorCategory.NoRowsFound);
+
+		}
+
 	@Before
 	public void setup()
 	{
@@ -774,6 +1132,14 @@ this.advocaciaBAR = advocaciaBAR;
 		executeSqlScript("conf/insertEnvolvidos.sql", false);
 		executeSqlScript("conf/insertParticipanteExterno.sql", false);
 		executeSqlScript("conf/insertProcesso.sql", false);
+
+		executeSqlScript("conf/insertClienteCompromisso.sql", false);
+		executeSqlScript("conf/insertArquivo.sql", false);
+		executeSqlScript("conf/insertProcessoUsuarios.sql", false);
+		executeSqlScript("conf/insertProcessoCliente.sql", false);
 	}
+
+
+
 
 }

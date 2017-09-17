@@ -397,7 +397,12 @@ public enum TabelaEnum implements IIntegerEnum, II18nEnum
 	ENVOLVIDOS(73, "sendsolv.base.model.risklevelenum.medium"),
 	PARTICIPANTE(73, "sendsolv.base.model.risklevelenum.medium"),
 	PARTICIPANTEEXTERNO(73, "sendsolv.base.model.risklevelenum.medium"),
+	CLIENTECOMPROMISSO(73, "sendsolv.base.model.risklevelenum.medium"),
+	ARQUIVO(73, "sendsolv.base.model.risklevelenum.medium"),
+	PROCESSOUSUARIOS(73, "sendsolv.base.model.risklevelenum.medium"),
+	PROCESSOCLIENTE(73, "sendsolv.base.model.risklevelenum.medium"),
 	CONTA(103, "sendsolv.base.model.risklevelenum.medium");
+
 
 	/** The code. */
 	private Integer code;

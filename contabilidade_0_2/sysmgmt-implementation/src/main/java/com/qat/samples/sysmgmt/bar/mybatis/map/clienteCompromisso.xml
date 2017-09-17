@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 
-<!-- create by system gera-java version 1.0.0 15/09/2017 12:43 : 37-->
+<!-- create by system gera-java version 1.0.0 15/09/2017 22:53 : 14-->
 
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="EnvolvidosMap">
+<mapper namespace="ClienteCompromissoMap">
  <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
  <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
 
@@ -15,10 +15,10 @@
       from a query, and the class properties.  A result map isnt
       necessary if the columns (or aliases) match to the properties
        exactly. -->
-  <resultMap id="EnvolvidosResult" type="Envolvidos">
+  <resultMap id="ClienteCompromissoResult" type="ClienteCompromisso">
     <result property="id" column="id"/>
-
-    <result property="bCliente" column="bCliente"/>
+    <result property="clienteId" column="clienteId"/>
+    <result property="compromissoId" column="compromissoId"/>
 <result property="parentId" column="parentId"/>
 <result property="tabelaEnumValue" column="tabelaEnumValue"/>
 <result property="emprId" column="emprId"/>
@@ -27,16 +27,11 @@
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
-<collection property="cliente" column="cliente" select="ClienteMap.fetchClienteById"/>
-    <collection property="tipoEnvolvido" column="tipoEnvolvido" select="DoisValorMap.fetchDoisValorById"/>
-    <collection property="envolvimento" column="envolvimento" select="DoisValorMap.fetchDoisValorById"/>
   </resultMap>
 
-  <sql id="allEnvolvidosColumns">
-cliente
-,tipoEnvolvido
-,envolvimento
-,bCliente
+  <sql id="allClienteCompromissoColumns">
+clienteId
+,compromissoId
 ,parentId
 ,tabelaEnumValue
 ,emprId
@@ -47,11 +42,9 @@ cliente
 ,modify_user
 
 </sql>
-<sql id="allEnvolvidosValues">
-#{cliente.id},
-#{tipoEnvolvido.id},
-#{envolvimento.id},
-#{bCliente},
+<sql id="allClienteCompromissoValues">
+#{clienteId},
+#{compromissoId},
      #{parentId},
      #{tabelaEnumValue},
      #{emprId},
@@ -63,28 +56,28 @@ cliente
   </sql>
 
 
- <select id="fetchAllEnvolvidoss" resultMap="EnvolvidosResult">
+ <select id="fetchAllClienteCompromissos" resultMap="ClienteCompromissoResult">
     SELECT id,
- <include refid="allEnvolvidosColumns" />
-   FROM envolvidos ORDER BY id ASC
+ <include refid="allClienteCompromissoColumns" />
+   FROM clientecompromisso ORDER BY id ASC
  </select>
 
- <select id="fetchEnvolvidosById" parameterType="Integer" resultMap="EnvolvidosResult">
+ <select id="fetchClienteCompromissoById" parameterType="Integer" resultMap="ClienteCompromissoResult">
     SELECT id,
- <include refid="allEnvolvidosColumns" />
-   FROM envolvidos WHERE id = #{fetchid}
+ <include refid="allClienteCompromissoColumns" />
+   FROM clientecompromisso WHERE id = #{fetchid}
  </select>
 
-  <select id="fetchEnvolvidosByParentId" parameterType="Integer" resultMap="EnvolvidosResult">
+  <select id="fetchClienteCompromissoByClienteId" parameterType="Integer" resultMap="ClienteCompromissoResult">
     SELECT id,
- <include refid="allEnvolvidosColumns" />
-   FROM envolvidos WHERE parentId = #{fetchid}
+ <include refid="allClienteCompromissoColumns" />
+   FROM clientecompromisso WHERE clienteId = #{fetchid}
  </select>
 
- <select id="fetchAllEnvolvidossRequest" parameterType="PagedInquiryRequest" resultMap="EnvolvidosResult">
+ <select id="fetchAllClienteCompromissosRequest" parameterType="PagedInquiryRequest" resultMap="ClienteCompromissoResult">
 
-     SELECT id,<include refid="allEnvolvidosColumns" />
-           FROM envolvidos
+     SELECT id,<include refid="allClienteCompromissoColumns" />
+           FROM clientecompromisso
            where 0 = 0
            <if test="permissaoTypeEnumValue == 1">
                and id IS NOT NULL
@@ -106,24 +99,22 @@ cliente
            ORDER BY id ASC
 </select>
 
-<select id="fetchEnvolvidosRowCount" resultType="Integer">
-     SELECT COUNT(*) AS RECORD_COUNT FROM envolvidos WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
+<select id="fetchClienteCompromissoRowCount" resultType="Integer">
+     SELECT COUNT(*) AS RECORD_COUNT FROM clientecompromisso WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
 
  </select>
 
- <insert id="insertEnvolvidos" parameterType="Envolvidos" useGeneratedKeys="true" keyProperty="id">
-     INSERT INTO envolvidos (
- <if test="id != null"><if test="id > 0">id,</if></if><include refid="allEnvolvidosColumns" />
+ <insert id="insertClienteCompromisso" parameterType="ClienteCompromisso" useGeneratedKeys="true" keyProperty="id">
+     INSERT INTO clientecompromisso (
+ <if test="id != null"><if test="id > 0">id,</if></if><include refid="allClienteCompromissoColumns" />
      )
-   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allEnvolvidosValues" /> )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="allClienteCompromissoValues" /> )
  </insert>
 
- <update id="updateEnvolvidos" parameterType="Envolvidos">
-   UPDATE envolvidos SET
-<if test="cliente!= null">cliente = #{cliente.id},</if>
-<if test="tipoEnvolvido!= null">tipoEnvolvido = #{tipoEnvolvido.id},</if>
-<if test="envolvimento!= null">envolvimento = #{envolvimento.id},</if>
-<if test="bCliente!= null">bCliente = #{bCliente},</if>
+ <update id="updateClienteCompromisso" parameterType="ClienteCompromisso">
+   UPDATE clientecompromisso SET
+<if test="clienteId!= null">clienteId = #{clienteId},</if>
+<if test="compromissoId!= null">compromissoId = #{compromissoId},</if>
 <if test="parentId!= null"> parentId=#{parentId},</if>
 <if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
 <if test="emprId!= null"> emprId=#{emprId},</if>
@@ -134,12 +125,12 @@ cliente
     id = #{id}
  </update>
 
-<delete id="deleteEnvolvidosById" parameterType="Envolvidos">
-  DELETE FROM envolvidos WHERE id = #{id}
+<delete id="deleteClienteCompromissoById" parameterType="ClienteCompromisso">
+  DELETE FROM clientecompromisso WHERE id = #{id}
  </delete>
 
- <delete id="deleteAllEnvolvidoss">
- DELETE FROM envolvidos
+ <delete id="deleteAllClienteCompromissos">
+ DELETE FROM clientecompromisso
   </delete>
 </mapper>
 
