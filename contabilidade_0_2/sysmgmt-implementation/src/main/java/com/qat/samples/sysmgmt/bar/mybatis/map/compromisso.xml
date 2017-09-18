@@ -33,7 +33,7 @@
 		<collection property="vinculado" column="vinculado"
 			select="DoisValorMap.fetchDoisValorById" />
 		<collection property="horaFinal" column="horaFinal"
-			select="DoisValorMap.fetchDoisValorById" />
+			select="DiasHorasMap.fetchDiasHorasMapByCompromissoId" />
 		<collection property="responsavel" column="responsavel"
 			select="ClienteMap.fetchClienteById" />
 		<collection property="quando" column="quando"

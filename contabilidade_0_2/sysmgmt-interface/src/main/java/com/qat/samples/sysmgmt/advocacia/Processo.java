@@ -30,6 +30,10 @@ public class Processo extends ModelCosmeDamiao {
 	/** The acao. */
 	private DoisValores acao;
 
+	private DoisValores natureza;
+
+	private String senha;
+
 	/** The assunto. */
 	private String assunto;
 
@@ -37,6 +41,8 @@ public class Processo extends ModelCosmeDamiao {
 
 	/** The status proc. */
 	private DoisValores statusProc;
+
+	private DoisValores grupoTrabalho;
 
 	/** The descricao proc. */
 	private String descricaoProc;
@@ -63,7 +69,7 @@ public class Processo extends ModelCosmeDamiao {
 	private List<ParticipanteExterno> envolvidosExterno;
 
 	/** The processo. */
-	private String processo;
+	private DoisValores processo;
 
 	/** The situacao. */
 	private DoisValores situacao;
@@ -88,6 +94,10 @@ public class Processo extends ModelCosmeDamiao {
 
 	/** The valor acao. */
 	private Float valorAcao;
+
+	private Float valorProvisionado;
+
+	private Integer segJustica;
 
 	/** The observacao proc. */
 	private String observacaoProc;
@@ -409,7 +419,7 @@ public class Processo extends ModelCosmeDamiao {
 	 *
 	 * @return the processo
 	 */
-	public String getProcesso() {
+	public DoisValores getProcesso() {
 		return processo;
 	}
 
@@ -419,7 +429,7 @@ public class Processo extends ModelCosmeDamiao {
 	 * @param processo
 	 *            the new processo
 	 */
-	public void setProcesso(String processo) {
+	public void setProcesso(DoisValores processo) {
 		this.processo = processo;
 	}
 

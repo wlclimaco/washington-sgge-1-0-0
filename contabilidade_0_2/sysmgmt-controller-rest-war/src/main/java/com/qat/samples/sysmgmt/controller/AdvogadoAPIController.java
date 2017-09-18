@@ -72,7 +72,7 @@ public class AdvogadoAPIController extends BaseController {
 	 *            the ret paged
 	 * @return the especialidade response
 	 */
-	@RequestMapping(value = "/refresh", method = RequestMethod.GET)
+	@RequestMapping(value = "/especialidade/refresh", method = RequestMethod.GET)
 	@ResponseBody
 	public EspecialidadeResponse refreshEspecialidades(@RequestParam("refreshInt") Integer refreshInt,
 			@RequestParam("retList") Boolean retList, @RequestParam("retPaged") Boolean retPaged) {
@@ -97,7 +97,7 @@ public class AdvogadoAPIController extends BaseController {
 	 *            the request
 	 * @return the especialidade response
 	 */
-	@RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
+	@RequestMapping(value = "/especialidade/fetchPage", method = RequestMethod.POST)
 	@ResponseBody
 	public EspecialidadeResponse fetchEspecialidadePaged(@RequestBody PagedInquiryRequest request) {
 		EspecialidadeResponse especialidadeResponse = new EspecialidadeResponse();
@@ -119,7 +119,7 @@ public class AdvogadoAPIController extends BaseController {
 	 *            the request
 	 * @return the especialidade response
 	 */
-	@RequestMapping(value = "/insert", method = RequestMethod.POST)
+	@RequestMapping(value = "/especialidade/insert", method = RequestMethod.POST)
 	@ResponseBody
 	public EspecialidadeResponse insertEspecialidade(@RequestBody EspecialidadeMaintenanceRequest request) {
 		EspecialidadeResponse especialidadeResponse = new EspecialidadeResponse();
@@ -140,7 +140,7 @@ public class AdvogadoAPIController extends BaseController {
 	 *            the request
 	 * @return the especialidade response
 	 */
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	@RequestMapping(value = "/especialidade/update", method = RequestMethod.POST)
 	@ResponseBody
 	public EspecialidadeResponse updateEspecialidade(@RequestBody EspecialidadeMaintenanceRequest request) {
 		EspecialidadeResponse especialidadeResponse = new EspecialidadeResponse();
@@ -161,7 +161,7 @@ public class AdvogadoAPIController extends BaseController {
 	 *            the request
 	 * @return the especialidade response
 	 */
-	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	@RequestMapping(value = "/especialidade/delete", method = RequestMethod.POST)
 	@ResponseBody
 	public EspecialidadeResponse deleteEspecialidade(@RequestBody EspecialidadeMaintenanceRequest request) {
 		EspecialidadeResponse especialidadeResponse = new EspecialidadeResponse();
@@ -190,7 +190,7 @@ public class AdvogadoAPIController extends BaseController {
 	 *            the ret paged
 	 * @return the compromisso response
 	 */
-	@RequestMapping(value = "/refresh", method = RequestMethod.GET)
+	@RequestMapping(value = "/compromisso/refresh", method = RequestMethod.GET)
 	@ResponseBody
 	public CompromissoResponse refreshCompromissos(@RequestParam("refreshInt") Integer refreshInt,
 			@RequestParam("retList") Boolean retList, @RequestParam("retPaged") Boolean retPaged) {
@@ -215,7 +215,7 @@ public class AdvogadoAPIController extends BaseController {
 	 *            the request
 	 * @return the compromisso response
 	 */
-	@RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
+	@RequestMapping(value = "/compromisso/fetchPage", method = RequestMethod.POST)
 	@ResponseBody
 	public CompromissoResponse fetchCompromissoPaged(@RequestBody PagedInquiryRequest request) {
 		CompromissoResponse compromissoResponse = new CompromissoResponse();
@@ -237,7 +237,7 @@ public class AdvogadoAPIController extends BaseController {
 	 *            the request
 	 * @return the compromisso response
 	 */
-	@RequestMapping(value = "/insert", method = RequestMethod.POST)
+	@RequestMapping(value = "/compromisso/insert", method = RequestMethod.POST)
 	@ResponseBody
 	public CompromissoResponse insertCompromisso(@RequestBody CompromissoMaintenanceRequest request) {
 		CompromissoResponse compromissoResponse = new CompromissoResponse();
@@ -258,7 +258,7 @@ public class AdvogadoAPIController extends BaseController {
 	 *            the request
 	 * @return the compromisso response
 	 */
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	@RequestMapping(value = "/compromisso/update", method = RequestMethod.POST)
 	@ResponseBody
 	public CompromissoResponse updateCompromisso(@RequestBody CompromissoMaintenanceRequest request) {
 		CompromissoResponse compromissoResponse = new CompromissoResponse();
@@ -279,7 +279,7 @@ public class AdvogadoAPIController extends BaseController {
 	 *            the request
 	 * @return the compromisso response
 	 */
-	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	@RequestMapping(value = "/compromisso/delete", method = RequestMethod.POST)
 	@ResponseBody
 	public CompromissoResponse deleteCompromisso(@RequestBody CompromissoMaintenanceRequest request) {
 		CompromissoResponse compromissoResponse = new CompromissoResponse();
@@ -308,7 +308,7 @@ public class AdvogadoAPIController extends BaseController {
 	 *            the ret paged
 	 * @return the processo response
 	 */
-	@RequestMapping(value = "/refresh", method = RequestMethod.GET)
+	@RequestMapping(value = "/processo/refresh", method = RequestMethod.GET)
 	@ResponseBody
 	public ProcessoResponse refreshProcessos(@RequestParam("refreshInt") Integer refreshInt,
 			@RequestParam("retList") Boolean retList, @RequestParam("retPaged") Boolean retPaged) {
@@ -333,7 +333,7 @@ public class AdvogadoAPIController extends BaseController {
 	 *            the request
 	 * @return the processo response
 	 */
-	@RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
+	@RequestMapping(value = "/processo/fetchPage", method = RequestMethod.POST)
 	@ResponseBody
 	public ProcessoResponse fetchProcessoPaged(@RequestBody ProcessoInquiryRequest request) {
 		ProcessoResponse processoResponse = new ProcessoResponse();
@@ -354,7 +354,7 @@ public class AdvogadoAPIController extends BaseController {
 	 *            the request
 	 * @return the processo response
 	 */
-	@RequestMapping(value = "/insert", method = RequestMethod.POST)
+	@RequestMapping(value = "/processo/insert", method = RequestMethod.POST)
 	@ResponseBody
 	public ProcessoResponse insertProcesso(@RequestBody ProcessoMaintenanceRequest request) {
 		ProcessoResponse processoResponse = new ProcessoResponse();
@@ -375,7 +375,7 @@ public class AdvogadoAPIController extends BaseController {
 	 *            the request
 	 * @return the processo response
 	 */
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	@RequestMapping(value = "/processo/update", method = RequestMethod.POST)
 	@ResponseBody
 	public ProcessoResponse updateProcesso(@RequestBody ProcessoMaintenanceRequest request) {
 		ProcessoResponse processoResponse = new ProcessoResponse();
@@ -396,7 +396,7 @@ public class AdvogadoAPIController extends BaseController {
 	 *            the request
 	 * @return the processo response
 	 */
-	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	@RequestMapping(value = "/processo/delete", method = RequestMethod.POST)
 	@ResponseBody
 	public ProcessoResponse deleteProcesso(@RequestBody ProcessoMaintenanceRequest request) {
 		ProcessoResponse processoResponse = new ProcessoResponse();
@@ -425,7 +425,7 @@ public class AdvogadoAPIController extends BaseController {
 	 *            the ret paged
 	 * @return the arquivo response
 	 */
-	@RequestMapping(value = "/refresh", method = RequestMethod.GET)
+	@RequestMapping(value = "/arquivo/refresh", method = RequestMethod.GET)
 	@ResponseBody
 	public ArquivoResponse refreshArquivos(@RequestParam("refreshInt") Integer refreshInt,
 			@RequestParam("retList") Boolean retList, @RequestParam("retPaged") Boolean retPaged) {
@@ -450,7 +450,7 @@ public class AdvogadoAPIController extends BaseController {
 	 *            the request
 	 * @return the arquivo response
 	 */
-	@RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
+	@RequestMapping(value = "/arquivo/fetchPage", method = RequestMethod.POST)
 	@ResponseBody
 	public ArquivoResponse fetchArquivoPaged(@RequestBody ArquivoInquiryRequest request) {
 		ArquivoResponse arquivoResponse = new ArquivoResponse();
@@ -471,7 +471,7 @@ public class AdvogadoAPIController extends BaseController {
 	 *            the request
 	 * @return the arquivo response
 	 */
-	@RequestMapping(value = "/insert", method = RequestMethod.POST)
+	@RequestMapping(value = "/arquivo/insert", method = RequestMethod.POST)
 	@ResponseBody
 	public ArquivoResponse insertArquivo(@RequestBody ArquivoMaintenanceRequest request) {
 		ArquivoResponse arquivoResponse = new ArquivoResponse();
@@ -492,7 +492,7 @@ public class AdvogadoAPIController extends BaseController {
 	 *            the request
 	 * @return the arquivo response
 	 */
-	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	@RequestMapping(value = "/arquivo/update", method = RequestMethod.POST)
 	@ResponseBody
 	public ArquivoResponse updateArquivo(@RequestBody ArquivoMaintenanceRequest request) {
 		ArquivoResponse arquivoResponse = new ArquivoResponse();
@@ -513,7 +513,7 @@ public class AdvogadoAPIController extends BaseController {
 	 *            the request
 	 * @return the arquivo response
 	 */
-	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	@RequestMapping(value = "/arquivo/delete", method = RequestMethod.POST)
 	@ResponseBody
 	public ArquivoResponse deleteArquivo(@RequestBody ArquivoMaintenanceRequest request) {
 		ArquivoResponse arquivoResponse = new ArquivoResponse();
@@ -539,7 +539,7 @@ public class AdvogadoAPIController extends BaseController {
 	 *            the request
 	 * @return the processocliente response
 	 */
-	@RequestMapping(value = "/fetchPage", method = RequestMethod.POST)
+	@RequestMapping(value = "/processoCliente/fetchPage", method = RequestMethod.POST)
 	@ResponseBody
 	public ProcessoClientesResponse fetchProcessoClientePaged(@RequestBody PagedInquiryRequest request) {
 		ProcessoClientesResponse processoclienteResponse = new ProcessoClientesResponse();

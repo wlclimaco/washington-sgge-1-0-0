@@ -510,9 +510,9 @@ this.advocaciaBAR = advocaciaBAR;
 @Test
 	public void testDeleteEnvolvidos()
 	{
-		Envolvidos envolvidos = Objects.insertEnvolvidos(4, TabelaEnum.ENVOLVIDOS, PersistenceActionEnum.INSERT);
+		Envolvidos envolvidos = Objects.insertEnvolvidos(4000, TabelaEnum.ENVOLVIDOS, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(4);
+		request.setFetchId(4000);
 		Envolvidos envolvidosResponse = getAdvocaciaBAR().fetchEnvolvidosById(request);
 		Assert.assertEquals(envolvidosResponse, null);
 		getAdvocaciaBAR().insertEnvolvidos(envolvidos);
@@ -723,10 +723,10 @@ this.advocaciaBAR = advocaciaBAR;
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(1000);
 		Processo processoResponse = getAdvocaciaBAR().fetchProcessoById(request);
-		Assert.assertEquals(processoResponse.getProcesso(), "processo_0");
+		Assert.assertEquals(processoResponse.getAssunto(), "assunto_0");
 		getAdvocaciaBAR().updateProcesso(processo);
 		processoResponse = getAdvocaciaBAR().fetchProcessoById(request);
-		Assert.assertEquals(processoResponse.getProcesso(), "NATIVE INSERT UPDATE");
+		Assert.assertEquals(processoResponse.getAssunto(), "NATIVE INSERT UPDATE");
 	}
 
 	@Test

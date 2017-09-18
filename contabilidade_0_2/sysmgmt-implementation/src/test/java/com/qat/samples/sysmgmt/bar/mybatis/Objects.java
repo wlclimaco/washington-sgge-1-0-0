@@ -5695,7 +5695,7 @@ public class Objects {
 			processo.setAssunto("NATIVE INSERT UPDATE");
 			processo.setStatusProc(Objects.insertDoisValor(id, tabela, action));
 			processo.setDescricaoProc("NATIVE INSERT UPDATE");
-			processo.setProcesso("NATIVE INSERT UPDATE");
+			processo.setProcesso(Objects.insertDoisValor(id, tabela, action));
 			processo.setSituacao(Objects.insertDoisValor(id, tabela, action));
 			processo.setInstancia(Objects.insertDoisValor(id, tabela, action));
 			processo.setOrgao("NATIVE INSERT UPDATE");

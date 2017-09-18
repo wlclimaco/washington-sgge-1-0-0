@@ -86,6 +86,12 @@ diasSemanas
    FROM diashoras WHERE id = #{fetchid}
  </select>
 
+ <select id="fetchDiasHorasMapByCompromissoId" parameterType="Integer" resultMap="DiasHorasResult">
+    SELECT id,
+ <include refid="allDiasHorasColumns" />
+   FROM diashoras WHERE parentId = #{fetchid}
+ </select>
+
  <select id="fetchAllDiasHorassRequest" parameterType="PagedInquiryRequest" resultMap="DiasHorasResult">
 
      SELECT id,<include refid="allDiasHorasColumns" />
