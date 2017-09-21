@@ -45,6 +45,7 @@
 	<script type='text/javascript' src="../B-InsertUpdDel.js"/></script>
 	<script type='text/javascript' src="../B-Table.js"/></script>
 	<script type='text/javascript' src="../Controller.js"/></script>
+	<script type='text/javascript' src="../Controller-JS.js"/></script>
 	<script type='text/javascript' src="../ControllerTest.js"/></script>
 	<script type='text/javascript' src="../Criteria.js"/></script>
 	<script type='text/javascript' src="../Domain.js"/></script>
@@ -66,7 +67,11 @@
 	<script type='text/javascript' src="../json.js"/></script>
 	<script type='text/javascript' src="../jUnitFront.js"/></script>
    
-    <script type='text/javascript'>
+	<script type='text/javascript'>
+	
+	String.prototype.toProperCase = function () {
+    return this.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+};
       var maxDepth = 3;
       var loadChildren = function(node, level) {
 	 console.log(node)
@@ -210,7 +215,7 @@
 							<h3 class="panel-title">
 								Banco Dados
 							</h3>
-						</div>
+						</div> 
 						<div class="panel-body">
 							<div class="checkbox">				 
 								<label>
@@ -224,6 +229,9 @@
 								</label>
 								<label>
 									<input id="b-update" type="checkbox" /> Update
+								</label>
+								<label>
+									<input id="b-create-dois-valor" type="checkbox" /> Dois Valor
 								</label>							
 							</div> 
 						</div>
@@ -864,6 +872,16 @@ $('#checkeds').append(imputs);
 							$("div#tabs").addTab(oProjet[i].classes[x].classe,b_Table(oProjet[i].classes[x].classe,oProjet[i].classes[x].model));
 						}
 					}				
+				}	
+				if($('#b-create-dois-valor').prop('checked')){
+					if($('#text-b-create').prop('checked')){
+						var sqlJ = "";
+						
+						sqlJ = sqlJ + b_DoisValors(oProjet[i].interfaces,oProjet[i].doisValor);
+								
+							
+						$("div#tabs").addTab("Data",sqlJ);
+					}			
 				}	
 				if($('#b-insert').prop('checked')){
 			

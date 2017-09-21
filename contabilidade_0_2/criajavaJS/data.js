@@ -1,6 +1,123 @@
 
+// ====================================================== Dois Valores ===============================================
+function DVProcesso() {
+    var a = [];
+    a.push({field: {
+        id:    "103",name: "Processo",doisValorType: [{
+            id : "142",tipo :"STATUS", descricao:"STATUS",doisValor :[
+                {value :"4",nome:"Arquivado", descricao:"Arquivado"},
+                {value :"1",nome:"Ativo", descricao:"Ativo"},
+                {value :"5",nome:"Em grau de recurso", descricao:"Em grau de recurso"},
+                {value :"3",nome:"Encerrado", descricao:"Encerrado"},
+                {value :"2",nome:"Suspenso", descricao:"Suspenso"}
+            ]},
+            {id : "143",tipo :"TIPO ENVOLVIMENTO", descricao:"TIPO ENVOLVIMENTO",doisValor :[
+                {value :"PARTE_ATIVA",nome:"Parte Ativa", descricao:"Parte Ativa"},
+                {value :"PARTE_PASSIVA",nome:"Parte Passiva", descricao:"Parte Passiva"},
+                {value :"TERCEIRO",nome:"Terceiro", descricao:"Terceiro"},
+                {value :"ASSISTENTE",nome:"Assistente", descricao:"Assistente"},
+                {value :"FISCAL",nome:"Fiscal", descricao:"Fiscal"},
+                {value :"TESTEMUNHA",nome:"Testemunha", descricao:"Testemunha"},
+                {value :"VITIMA",nome:"Vítima", descricao:"Vítima"},
+                {value :"OUTROS",nome:"Outros", descricao:"Outros"},
+            ]},
+            {id : "144",tipo :"ENVOLVIMENTO", descricao:"ENVOLVIMENTO",doisValor :[
+                {value :'63', nome:'Acusador',descricao:'Acusador'},
+                {value :'2', nome:'Agravante',descricao:'Agravante'},
+                {value :'3', nome:'Apelante',descricao:'Apelante'},
+                {value :'1', nome:'Autor',descricao:'Autor'},
+                {value :'4', nome:'Embargante',descricao:'Embargante'},
+                {value :'5', nome:'Excipiente',descricao:'Excipiente'},
+                {value :'6', nome:'Exequente',descricao:'Exequente'},
+                {value :'7',nome: 'Impetrante',descricao:'Impetrante'},
+                {value :'8', nome:'Impugnante',descricao:'Impugnante'},
+                {value :'9',nome: 'Interpelante',descricao:'Interpelante'},
+                {value :'10',nome: 'Inventariante',descricao:'Inventariante'},
+                {value :'11',nome: 'Notificante',descricao:'Notificante'},
+                {value :'12',nome: 'Opoente',descricao:'Opoente'},
+                {value :'13',nome: 'Reclamante',descricao:'Reclamante'},
+                {value :'14',nome: 'Reconvinte',descricao:'Reconvinte'},
+                {value :'15',nome: 'Recorrente',descricao:'Recorrente'},
+                {value :'61',nome: 'Requerente',descricao:'Requerente'},
+                {value :'16',nome: 'Sujeito Ativo',descricao:'Sujeito Ativo'}
+            ]},
+            {id : "145",tipo :"SITUACAO", descricao:"SITUACAO",doisValor :[
+                {value :'2', nome:'Conselho Nacional de Justiça',descricao:'Conselho Nacional de Justiça'},
+                {value :'8', nome:'Justiça dos Estados e do Distrito Federal e Territórios',descricao:'Justiça dos Estados e do Distrito Federal e Territórios'},
+                {value :'5', nome:'Justiça do Trabalho',descricao:'Justiça do Trabalho'},
+                {value :'6', nome:'Justiça Eleitoral',descricao:'Justiça Eleitoral'},
+                {value :'4', nome:'Justiça Federal',descricao:'Justiça Federal'},
+                {value :'7', nome:'Justiça Militar da União',descricao:'Justiça Militar da União'},
+                {value :'9', nome:'Justiça Militar Estadual',descricao:'Justiça Militar Estadual'},
+                {value :'3', nome:'Superior Tribunal de Justiça',descricao:'Superior Tribunal de Justiça'},
+                {value :'1', nome:'Supremo Tribunal Federal',descricao:'Supremo Tribunal Federal'}
+            ]},
+            {id : "146",tipo :"INSTANCIA", descricao:"INSTANCIA",doisValor :[
+                {value :'PRIMEIRA_INSTANCIA',nome:'1ª Instância',descricao:'1ª Instância'},
+                {value :'SEGUNDA_INSTANCIA', nome:'2ª Instância',descricao:'2ª Instância'},
+                {value :'TERCEIRA_INSTANCIA',nome:'3ª Instância',descricao:'3ª Instância'},
+                {value :'QUARTA_INSTANCIA' , nome:'4ª Instância',descricao:'4ª Instância'}
+            ]},
+            {id : "147",tipo :"JUSTICA", descricao:"JUSTICA",doisValor :[
+                {value :'1', nome:'Supremo Tribunal Federal',descricao:'Supremo Tribunal Federal'},
+                {value :'3', nome:'Superior Tribunal de Justiça',descricao:'Superior Tribunal de Justiça'},
+                {value :'4', nome:'Justiça Federal',descricao:'Justiça Federal'},
+                {value :'5', nome:'Justiça do Trabalho',descricao:'Justiça do Trabalho'},
+                {value :'8', nome:'Justica dos Estados e do Distrito Federal e Territórios',descricao:'Justica dos Estados e do Distrito Federal e Territórios'}
+            ]},
+            {id : "148",tipo :"TRIBUNAL", descricao:"TRIBUNAL",doisValor :[
+                {value :'1',  nome:'Tribunal de Justiça do Acre', descricao:'Tribunal de Justiça do Acre'},
+                {value :'7',  nome:'Tribunal de Justiça de Alagoas', descricao:'Tribunal de Justiça de Alagoas'},
+                {value :'8',  nome:'Tribunal de Justiça do Amazonas', descricao:'Tribunal de Justiça do Amazonas'},
+                {value :'11', nome:'Tribunal de Justiça da Bahia', descricao:'Tribunal de Justiça da Bahia'},
+                {value :'16', nome:'Tribunal de Justiça do Ceará', descricao:'Tribunal de Justiça do Ceará'},
+                {value :'53', nome:'Tribunal de Justiça do Distrito Federal e dos Territórios - DF', descricao:'Tribunal de Justiça do Distrito Federal e dos Territórios - DF'},
+                {value :'19', nome:'Tribunal de Justiça do Espírito Santo', descricao:'Tribunal de Justiça do Espírito Santo'},
+                {value :'20', nome:'Tribunal de Justiça de Goiás', descricao:'Tribunal de Justiça de Goiás'},
+                {value :'22', nome:'Tribunal de Justiça do Maranhão', descricao:'Tribunal de Justiça do Maranhão'},
+                {value :'29', nome:'Tribunal de Justiça de Mato Grosso', descricao:'Tribunal de Justiça de Mato Grosso'},
+                {value :'26', nome:'Tribunal de Justiça de Mato Grosso do Sul', descricao:'Tribunal de Justiça de Mato Grosso do Sul'},
+                {value :'24', nome:'Tribunal de Justiça de Minas Gerais', descricao:'Tribunal de Justiça de Minas Gerais'},
+                {value :'34', nome:'Tribunal de Justiça do Paraná', descricao:'Tribunal de Justiça do Paraná'},
+                {value :'51', nome:'Tribunal de Justiça do Pará - PA', descricao:'Tribunal de Justiça do Pará - PA'},
+                {value :'33', nome:'Tribunal de Justiça do Piauí', descricao:'Tribunal de Justiça do Piauí'},
+                {value :'40', nome:'Tribunal de Justiça do Rio Grande do Norte', descricao:'Tribunal de Justiça do Rio Grande do Norte'},
+                {value :'43', nome:'Tribunal de Justiça de Rio Grande do Sul', descricao:'Tribunal de Justiça de Rio Grande do Sul'},
+                {value :'37', nome:'Tribunal de Justiça do Rio de Janeiro', descricao:'Tribunal de Justiça do Rio de Janeiro'},
+                {value :'42', nome:'Tribunal de Justiça de Rondônia', descricao:'Tribunal de Justiça de Rondônia'},
+                {value :'45', nome:'Tribunal de Justiça de Santa Catarina', descricao:'Tribunal de Justiça de Santa Catarina'},
+                {value :'4',  nome:'Tribunal de Justiça de São Paulo', descricao:'Tribunal de Justiça de São Paulo'}
+            ]},
+            {id : "149",tipo :"LOCALIDADE", descricao:"LOCALIDADE",doisValor :[
+                {value :'PRIMEIRA_INSTANCIA', nome:'1ª Instância',descricao:'1ª Instância'},
+                {value :'SEGUNDA_INSTANCIA', nome:'2ª Instância',descricao:'2ª Instância'},
+                {value :'TERCEIRA_INSTANCIA', nome:'3ª Instância',descricao:'3ª Instância'},
+                {value :'QUARTA_INSTANCIA', nome:'4ª Instância',descricao:'4ª Instância'}
+            ]},
+            {id : "150",tipo :"CAPITUR POR", descricao:"CAPITUR POR",doisValor :[
+                {value :'PRIMEIRA_INSTANCIA', nome:'1ª Instância',descricao:'1ª Instância'},
+                {value :'SEGUNDA_INSTANCIA', nome:'2ª Instância',descricao:'2ª Instância'},
+                {value :'TERCEIRA_INSTANCIA', nome:'3ª Instância',descricao:'3ª Instância'},
+                {value :'QUARTA_INSTANCIA', nome:'4ª Instância',descricao:'4ª Instância'}
+            ]},
+            {id : "151",tipo :"CAPTURA AUTOMATICA", descricao:"CAPTURA AUTOMATICA",doisValor :[
+                {value :'NAO_CAPTURAR', nome: 'Não capturar', descricao:'Não capturar'},
+                {value :'DIARIA', nome: 'Diária', descricao:'Diária'},
+                {value :'SEMANAL', nome: 'Semanal', descricao:'Semanal'},
+                {value :'MENSAL', nome: 'Mensal', descricao:'Mensal'}
+                
+                ]
+            }]},
+        }
+    );
 
 
+    return a;
+ };
+
+
+
+//===============================================================================================
 function NFNotaInfoItem() {
     var a = [];
     a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
@@ -17381,6 +17498,7 @@ dataModel = function() {
             classe: "ProcessoCliente",
             model: ProcessoClienteModel()
         }],
+        doisValor : {"nome" : "processo","data" : DVProcesso()},
         interfaces: "Advogado",
         local: "Advocacia"
     })

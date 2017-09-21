@@ -1,177 +1,207 @@
-b_InsertSemID = function (table,oField,total){
-	var text = "";
-    var a ="";
-	if((total > 0 )&&(total !== undefined)){
-		for(var x=0;x < total;x++){
-			for(i=0;i < oField.length;i++){
-				if(oField[i].field.xml == true){
-					if(oField[i].field.tipo !== undefined){
-						if((oField[i].field.tipo.indexOf('List') == -1)&&(oField[i].field.tipo.indexOf('id'))){
-							a = a + ' '+oField[i].field.campo+',';
-						}
-					}
-				}
+b_InsertSemID = function (table, oField, total) {
+  var text = ''
+  var a = ''
+  if ((total > 0) && (total !== undefined)) {
+    for (var x = 0;x < total;x++) {
+      for (i = 0;i < oField.length;i++) {
+        if (oField[i].field.xml == true) {
+          if (oField[i].field.tipo !== undefined) {
+            if ((oField[i].field.tipo.indexOf('List') == -1) && (oField[i].field.tipo.indexOf('id'))) {
+              a = a + ' ' + oField[i].field.campo + ','
+            }
+          }
+        }
+      }
+      // debugger
+      text = text + '\n'
+      text = text + 'INSERT INTO ' + table + '(' + a + 'create_user,create_date,modify_user,modify_date)values\n'
+      a = ''
+      b = new Date()
+      for (var i = 0;i < oField.length;i++) {
+        if (oField[i].field.xml == true) {
+          if (oField[i].field.tipo !== undefined) {
+            if ((oField[i].field.tipo.indexOf('List') == -1) && (oField[i].field.tipo.indexOf('id'))) {
+              a = a + ' ' + convertModules(oField[i].field.tipo, x, oField[i].field.campo) + ','
 
-			}
-			//debugger
-			text = text + "\n";
-			text = text + 'INSERT INTO '+table+'('+a+'create_user,create_date,modify_user,modify_date)values\n';
-			a ="";
-			b = new Date();
-			for(var i=0;i < oField.length;i++){
-				if(oField[i].field.xml == true){
-					if(oField[i].field.tipo !== undefined){
-						if((oField[i].field.tipo.indexOf('List') == -1)&&(oField[i].field.tipo.indexOf('id'))){
-							a = a + " "+convertModules(oField[i].field.tipo,x,oField[i].field.campo)+","
+            /*	if((oField[i].field.campo.toLowerCase().indexOf('data') > -1)||((oField[i].field.campo.toLowerCase().indexOf('date') > -1))){
 
-						/*	if((oField[i].field.campo.toLowerCase().indexOf('data') > -1)||((oField[i].field.campo.toLowerCase().indexOf('date') > -1))){
+            		a = a + " "+b.getTime()+","
+            	}else if((oField[i].field.tipo.toLowerCase() !== 'integer')&&(oField[i].field.tipo.toLowerCase() !== 'double')&&(oField[i].field.tipo.toLowerCase() !== 'long')&&(oField[i].field.tipo.toLowerCase() !== 'boolean')){
+            		a = a + " '"+oField[i].field.campo+"_"+i+"',"
+            	}else if(oField[i].field.tipo.toLowerCase() === 'boolean'){
+            		a = a + 'true,'
+            	}else{
+            		a = a + ' '+(x+10000)+','
+            	}*/
+            }
+          }
+        }
+      }
 
-								a = a + " "+b.getTime()+",";
-							}else if((oField[i].field.tipo.toLowerCase() !== 'integer')&&(oField[i].field.tipo.toLowerCase() !== 'double')&&(oField[i].field.tipo.toLowerCase() !== 'long')&&(oField[i].field.tipo.toLowerCase() !== 'boolean')){
-								a = a + " '"+oField[i].field.campo+"_"+i+"',";
-							}else if(oField[i].field.tipo.toLowerCase() === 'boolean'){
-								a = a + 'true,'
-							}else{
-								a = a + ' '+(x+10000)+',';
-							}*/
-						}
-					}
-				}
+      text = text + '(' + a + "'system'," + b.getTime() + ",'rod'," + b.getTime() + ');\n'
+      a = ''
+    }
+  }
+  // if(text[text.length-1] == ','){
+  //		text = (text.substr(0, text.length - 1))
+  //	}
+  return text
+}
 
-			}
+b_Insert = function (table, oField, total) {
+  var text = ''
+  var a = ''
+  if ((total > 0) && (total !== undefined)) {
+    for (var x = 0;x < total;x++) {
+      for (i = 0;i < oField.length;i++) {
+        if (oField[i].field.xml == true) {
+          if (oField[i].field.tipo !== undefined) {
+            if (oField[i].field.tipo.indexOf('List') == -1) {
+              a = a + ' ' + oField[i].field.campo + ','
+            }
+          }
+        }
+      }
+      // debugger
+      text = text + '\n'
+      text = text + 'INSERT INTO ' + table + '(' + a + 'parentId,tabelaEnumValue,emprId,processId,create_user,create_date,modify_user,modify_date)values\n'
+      a = ''
+      b = new Date()
+      for (var i = 0;i < oField.length;i++) {
+        if (oField[i].field.xml == true) {
+          if (oField[i].field.tipo !== undefined) {
+            if (oField[i].field.tipo.indexOf('List') == -1) {
+              // stipo,sCampo,list
+              // debugger
+              a = a + ' ' + convertModules(oField[i].field.tipo, x, oField[i].field.campo) + ','
 
-			text = text + "("+a+"'system',"+b.getTime()+",'rod',"+b.getTime()+");\n";
-			a ="";
-		}
+            /*	if((oField[i].field.campo.toLowerCase().indexOf('data') > -1)||((oField[i].field.campo.toLowerCase().indexOf('date') > -1))){
+
+            		a = a + " "+b.getTime()+","
+            	}else if((oField[i].field.tipo.toLowerCase() == 'integer')||(oField[i].field.tipo.toLowerCase() == 'double')(oField[i].field.tipo.toLowerCase() !== 'long')&&(oField[i].field.tipo.toLowerCase() !== 'boolean')){
+            		a = a + ' '+(x+10000)+','
+            	}else if(oField[i].field.tipo.toLowerCase() === 'boolean'){
+            		a = a + 'true,'
+            	}else{
+            		a = a + ' '+(x+10000)+','
+            	} */
+            }
+          }
+        }
+      }
+
+      text = text + '(' + a + "10000,1,1,1,'system'," + b.getTime() + ",'rod'," + b.getTime() + ');\n'
+      debugger
+      a = ''
+    }
+  }
+  // if(text[text.length-1] == ','){
+  //		text = (text.substr(0, text.length - 1))
+  //	}
+  return text
+}
+b_Table = function (table, oField) {
+  var text = ''
+  var a = ''
+  for (i = 0;i < oField.length;i++) {
+    if (oField[i].field.xml == true) {
+      if (oField[i].field.tipo !== undefined) {
+        if (oField[i].field.tipo.indexOf('List') == -1) {
+          if (oField[i].field.campo.toLowerCase() !== 'id') {
+            if (oField[i].field.requerid == true) {
+              if (oField[i].field.default != null)
+                a = a + oField[i].field.campo + ' ' + convertBanco(oField[i].field.tipo, 100) + ' NOT NULL  DEFAULT ' + oField[i].field.default + ',\n'
+              else
+                a = a + oField[i].field.campo + ' ' + convertBanco(oField[i].field.tipo, 100) + ' NOT NULL ,\n'
+            }else {
+              if (oField[i].field.default != null)
+                a = a + oField[i].field.campo + ' ' + convertBanco(oField[i].field.tipo, 100) + '  DEFAULT ' + oField[i].field.default + ',\n'
+              else
+                a = a + oField[i].field.campo + ' ' + convertBanco(oField[i].field.tipo, 100) + ' ,\n'
+            }
+          }
+        }
+      }
+    }
+  }
+
+  text = text + 'DROP SEQUENCE ' + table.toLowerCase() + '_id_seq;\n'
+  text = text + '\n'
+  text = text + 'CREATE SEQUENCE ' + table.toLowerCase() + '_id_seq\n'
+  text = text + 'INCREMENT 1\n'
+  text = text + 'MINVALUE 1\n'
+  text = text + 'MAXVALUE 9223372036854775807\n'
+  text = text + 'START 1\n'
+  text = text + 'CACHE 1;\n'
+  text = text + 'ALTER TABLE ' + table.toLowerCase() + '_id_seq\n'
+  text = text + 'OWNER TO qat;\n'
+  text = text + '\n'
+  text = text + '\n'
+  text = text + 'DROP TABLE  ' + table.toLowerCase() + ';\n'
+  text = text + '\n'
+  text = text + 'CREATE TABLE ' + table.toLowerCase() + '(\n'
+  text = text + "    id           integer NOT NULL DEFAULT nextval('" + table.toLowerCase() + "_id_seq'::regclass),\n"
+  text = text + ' ' + a + ' \n'
+  text = text + 'parentId     integer,\n'
+  text = text + 'tabelaEnumValue     integer,\n'
+  text = text + 'emprId     integer,\n'
+  text = text + 'processId  integer,\n'
+  text = text + 'create_date  bigint,\n'
+  text = text + 'create_user  character varying(50) NULL,\n'
+  text = text + 'modify_date  bigint,\n'
+  text = text + 'modify_user  character varying(50) NULL,\n'
+  text = text + 'CONSTRAINT ' + table.toLowerCase() + '_pkey PRIMARY KEY (id)\n'
+  text = text + ')\n'
+  text = text + 'WITH (\n'
+  text = text + 'OIDS=FALSE\n'
+  text = text + ');\n'
+  text = text + 'ALTER TABLE ' + table.toLowerCase() + '\n'
+  text = text + '  OWNER TO qat;\n'
+
+  return text
+}
+b_Delete = function (teste, bar, local) {}
+b_Select = function (teste, bar, local) {}
+
+b_DoisValors = function (table, oField) {
+  var userInsert = 'System'
+  da = new Date()
+  var text = ''
+  var a = ''
+  text = text + 'delete from pagina where id = ' + oField.data[0].field.id + ';\n'
+  text = text + '\n';
+  text = text + 'INSERT INTO pagina(id ,pagina,parentid, tabelaenumvalue, create_date, create_user) ;\n'
+  text = text + 'VALUES (' + oField.data[0].field.id + ",'" + oField.data[0].field.name + "', 0, 100, " + da.getTime() + ", '" + userInsert + "') ;\n"
+  text = text + '\n';
+  text = text + '\n';
+  text = text + 'delete from doisvalorType where pagina = ' + oField.data[0].field.id + ';\n'
+  text = text + '\n';
+  if (oField.data[0].field.doisValorType.length > 0) {
+    text = text + 'INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user) Values\n'
+    for (var x = 0;x < oField.data[0].field.doisValorType.length;x++) {
+      if (x != (oField.data[0].field.doisValorType.length - 1))
+        text = text + '(' + oField.data[0].field.doisValorType[x].id + ",'" + oField.data[0].field.doisValorType[x].tipo + "', '" + oField.data[0].field.doisValorType[x].descricao.toProperCase() + "',  " + da.getTime() + ", '" + userInsert + "'),\n"
+      else
+        text = text + '(' + oField.data[0].field.doisValorType[x].id + ",'" + oField.data[0].field.doisValorType[x].tipo + "', '" + oField.data[0].field.doisValorType[x].descricao.toProperCase() + "',  " + da.getTime() + ", '" + userInsert + "');\n"
 	}
-	//if(text[text.length-1] == ','){
-//		text = (text.substr(0, text.length - 1));
-//	}
-return text;
-}
+	text = text + '\n';
+	text = text + '\n';
+	text = text + 'delete from doisvalor where pagina = ' + oField.data[0].field.id + ';\n'
+	text = text + '\n';
+	text = text + '\n';
+	text = text + 'INSERT INTO doisvalor(value,nome, descricao, doisvalortype, pagina,create_date, create_user )VALUES\n'
+    for (var x = 0;x < oField.data[0].field.doisValorType.length;x++) {
+      for (y = 0; y < oField.data[0].field.doisValorType[x].doisValor.length;y++) {
+        if (oField.data[0].field.doisValorType[x].doisValor.length > 0) {
+          var te = oField.data[0].field.doisValorType[x].doisValor[y]
+          text = text + "('" + te.value + "', '" + te.nome.toProperCase() + "','" + te.descricao.toProperCase() + "'," + oField.data[0].field.doisValorType[x].id + ',' + oField.data[0].field.id + ', ' + da.getTime() + ", '" + userInsert + "'),\n"
+        }
+	  }
+	  text = text + '\n';
+    }
+  }
 
+ 
 
-b_Insert = function (table,oField,total){
-	var text = "";
-    var a ="";
-	if((total > 0 )&&(total !== undefined)){
-		for(var x=0;x < total;x++){
-			for(i=0;i < oField.length;i++){
-				if(oField[i].field.xml == true){
-					if(oField[i].field.tipo !== undefined){
-						if(oField[i].field.tipo.indexOf('List') == -1){
-							a = a + ' '+oField[i].field.campo+',';
-						}
-					}
-				}
-
-			}
-			//debugger
-			text = text + "\n";
-			text = text + 'INSERT INTO '+table+'('+a+'parentId,tabelaEnumValue,emprId,processId,create_user,create_date,modify_user,modify_date)values\n';
-			a ="";
-			b = new Date();
-			for(var i=0;i < oField.length;i++){
-				if(oField[i].field.xml == true){
-					if(oField[i].field.tipo !== undefined){
-						if(oField[i].field.tipo.indexOf('List') == -1){
-							//stipo,sCampo,list
-							//debugger
-							a = a + " "+convertModules(oField[i].field.tipo,x,oField[i].field.campo)+","
-
-						/*	if((oField[i].field.campo.toLowerCase().indexOf('data') > -1)||((oField[i].field.campo.toLowerCase().indexOf('date') > -1))){
-
-								a = a + " "+b.getTime()+",";
-							}else if((oField[i].field.tipo.toLowerCase() == 'integer')||(oField[i].field.tipo.toLowerCase() == 'double')(oField[i].field.tipo.toLowerCase() !== 'long')&&(oField[i].field.tipo.toLowerCase() !== 'boolean')){
-								a = a + ' '+(x+10000)+',';
-							}else if(oField[i].field.tipo.toLowerCase() === 'boolean'){
-								a = a + 'true,'
-							}else{
-								a = a + ' '+(x+10000)+',';
-							} */
-						}
-					}
-				}
-
-			}
-
-			text = text + "("+a+"10000,1,1,1,'system',"+b.getTime()+",'rod',"+b.getTime()+");\n";
-			debugger
-			a ="";
-		}
-	}
-	//if(text[text.length-1] == ','){
-//		text = (text.substr(0, text.length - 1));
-//	}
-return text;
-}
-b_Table = function (table,oField){
-
-
-	var text = "";
-var a = "";
-for(i=0;i < oField.length;i++){
-	if(oField[i].field.xml == true){
-		if(oField[i].field.tipo !== undefined){
-			if(oField[i].field.tipo.indexOf('List') == -1){
-				if(oField[i].field.campo.toLowerCase() !== 'id'){
-					if(oField[i].field.requerid == true){
-				
-						if(oField[i].field.default != null)
-							a = a + oField[i].field.campo+' '+convertBanco(oField[i].field.tipo,100)+' NOT NULL  DEFAULT '+oField[i].field.default+',\n'
-						else
-							a = a + oField[i].field.campo+' '+convertBanco(oField[i].field.tipo,100)+' NOT NULL ,\n'
-					}else{
-						if(oField[i].field.default != null)
-							a = a + oField[i].field.campo+' '+convertBanco(oField[i].field.tipo,100)+'  DEFAULT '+oField[i].field.default+',\n';
-						else
-							a = a + oField[i].field.campo+' '+convertBanco(oField[i].field.tipo,100)+' ,\n';
-					}
-				}
-			}
-		}
-	}
-}
-
-text = text + "DROP SEQUENCE "+table.toLowerCase()+"_id_seq;\n"
-text = text + "\n"
-text = text + "CREATE SEQUENCE "+table.toLowerCase()+"_id_seq\n"
-text = text + "INCREMENT 1\n"
-text = text + "MINVALUE 1\n"
-text = text + "MAXVALUE 9223372036854775807\n"
-text = text + "START 1\n"
-text = text + "CACHE 1;\n"
-text = text + "ALTER TABLE "+table.toLowerCase()+"_id_seq\n"
-text = text + "OWNER TO qat;\n"
-text = text + "\n"
-text = text + "\n"
-text = text + "DROP TABLE  "+table.toLowerCase()+";\n"
-text = text + "\n"
-text = text + "CREATE TABLE "+table.toLowerCase()+"(\n"
-text = text + "    id           integer NOT NULL DEFAULT nextval('"+table.toLowerCase()+"_id_seq'::regclass),\n"
-text = text + " "+a+" \n"
-text = text + "parentId     integer,\n"
-text = text + "tabelaEnumValue     integer,\n"
-text = text + "emprId     integer,\n"
-text = text + "processId  integer,\n"
-text = text + "create_date  bigint,\n"
-text = text + "create_user  character varying(50) NULL,\n"
-text = text + "modify_date  bigint,\n"
-text = text + "modify_user  character varying(50) NULL,\n"
-text = text + "CONSTRAINT "+table.toLowerCase()+"_pkey PRIMARY KEY (id)\n"
-text = text + ")\n"
-text = text + "WITH (\n"
-text = text + "OIDS=FALSE\n"
-text = text + ");\n"
-text = text + "ALTER TABLE "+table.toLowerCase()+"\n"
-text = text + "  OWNER TO qat;\n"
-
-return text;
-
-}
-b_Delete = function (teste,bar,local){
-
-}
-b_Select = function (teste,bar,local){
-
+  return text
 }

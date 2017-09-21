@@ -90,3 +90,14 @@ text = text + "\n";
 text = text + "}\n";
 return text;
 }
+
+b_DoisValor = function (table,oField){
+	debugger
+	var text = "";
+	var a = "";
+	text = text + "delete from pagina where id = "+oField+";\n"
+	text = text + "delete from doisvalorType where pagina = "+oField+";\n"
+	text = text + "delete from doisvalor where pagina = "+oField+";\n"
+
+	return text;
+}
