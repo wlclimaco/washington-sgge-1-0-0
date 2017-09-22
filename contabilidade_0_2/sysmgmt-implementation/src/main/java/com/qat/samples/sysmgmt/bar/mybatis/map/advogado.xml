@@ -65,8 +65,6 @@
 		</if>
 
 		ORDER BY id ASC
-		OFFSET ( #{startPage} * #{pageSize} )
-		LIMIT #{pageSize}
 	</select>
 
 	<select id="fetchAdvogadoRowCount" resultType="Integer">
