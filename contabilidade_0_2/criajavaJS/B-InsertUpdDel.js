@@ -170,19 +170,19 @@ b_DoisValors = function (table, oField) {
   var a = ''
   text = text + 'delete from pagina where id = ' + oField.data[0].field.id + ';\n'
   text = text + '\n';
-  text = text + 'INSERT INTO pagina(id ,pagina,parentid, tabelaenumvalue, create_date, create_user) ;\n'
+  text = text + 'INSERT INTO pagina(id ,pagina,parentid, tabelaenumvalue, create_date, create_user) \n'
   text = text + 'VALUES (' + oField.data[0].field.id + ",'" + oField.data[0].field.name + "', 0, 100, " + da.getTime() + ", '" + userInsert + "') ;\n"
   text = text + '\n';
   text = text + '\n';
   text = text + 'delete from doisvalorType where pagina = ' + oField.data[0].field.id + ';\n'
   text = text + '\n';
   if (oField.data[0].field.doisValorType.length > 0) {
-    text = text + 'INSERT INTO doisvalortype(id,tipo, descricao,  create_date, create_user) Values\n'
+    text = text + 'INSERT INTO doisvalortype(id,tipo, descricao, pagina, create_date, create_user) Values\n'
     for (var x = 0;x < oField.data[0].field.doisValorType.length;x++) {
       if (x != (oField.data[0].field.doisValorType.length - 1))
-        text = text + '(' + oField.data[0].field.doisValorType[x].id + ",'" + oField.data[0].field.doisValorType[x].tipo + "', '" + oField.data[0].field.doisValorType[x].descricao.toProperCase() + "',  " + da.getTime() + ", '" + userInsert + "'),\n"
+        text = text + '(' + oField.data[0].field.doisValorType[x].id + ",'" + oField.data[0].field.doisValorType[x].tipo + "', '" + oField.data[0].field.doisValorType[x].descricao.toProperCase() + "', " + oField.data[0].field.id + ", " + da.getTime() + ", '" + userInsert + "'),\n"
       else
-        text = text + '(' + oField.data[0].field.doisValorType[x].id + ",'" + oField.data[0].field.doisValorType[x].tipo + "', '" + oField.data[0].field.doisValorType[x].descricao.toProperCase() + "',  " + da.getTime() + ", '" + userInsert + "');\n"
+        text = text + '(' + oField.data[0].field.doisValorType[x].id + ",'" + oField.data[0].field.doisValorType[x].tipo + "', '" + oField.data[0].field.doisValorType[x].descricao.toProperCase() + "', " + oField.data[0].field.id + ", " + da.getTime() + ", '" + userInsert + "');\n"
 	}
 	text = text + '\n';
 	text = text + '\n';

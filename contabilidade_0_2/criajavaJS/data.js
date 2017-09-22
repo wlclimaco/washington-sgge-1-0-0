@@ -107,6 +107,25 @@ function DVProcesso() {
                 {value :'MENSAL', nome: 'Mensal', descricao:'Mensal'}
                 
                 ]
+            },{id : "152",tipo :"GRUPO TRABALHO", descricao:"GRUPO TRABALHO",doisValor :[
+                {value :'1', nome: 'Admintradores', descricao:'Admintradores'},
+                {value :'2', nome: 'Civel', descricao:'Civil'},
+                {value :'3', nome: 'Criminal', descricao:'Criminal'},
+                {value :'4', nome: 'Trabalhista', descricao:'Trabalhista'}
+                
+                ]
+            },{id : "153",tipo :"NATUREZA", descricao:"NATUREZA",doisValor :[
+
+                {value: '1', nome: 'Cível', descricao: 'Cível' },
+                {value :'2', nome: 'Eleitoral', descricao:'Eleitoral'},
+                {value :'3', nome: 'Militar', descricao:'Militar'},
+                {value :'4', nome: 'Penal', descricao:'Penal'},
+                {value :'5', nome: 'Previdenciária', descricao:'Previdenciária'},
+                {value :'6', nome: 'Societário', descricao:'Societário'},
+                {value :'7', nome: 'Trabalhista', descricao:'Trabalhista'},
+                {value :'8', nome: 'Tributária', descricao:'Tributária'}
+                
+                ]
             }]},
         }
     );
