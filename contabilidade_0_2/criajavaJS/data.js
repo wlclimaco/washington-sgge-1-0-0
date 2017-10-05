@@ -6876,6 +6876,28 @@ function ProcessModel() {
         });
         a.push({
             field: {
+                campo: "natureza",
+                tipo: "DoisValores",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
+                campo: "senha",
+                tipo: "String",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        a.push({
+            field: {
                 campo: "assunto",
                 tipo: "String",
                 requerid: false,
@@ -6889,6 +6911,18 @@ function ProcessModel() {
         a.push({
             field: {
                 campo: "statusProc",
+                tipo: "DoisValores",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+
+        a.push({
+            field: {
+                campo: "grupoTrabalho",
                 tipo: "DoisValores",
                 requerid: false,
                 primaryKey: false,
@@ -6948,7 +6982,7 @@ function ProcessModel() {
         a.push({
             field: {
                 campo: "orgao",
-                tipo: "String",
+                tipo: "DoisValores",
                 requerid: false,
                 primaryKey: false,
                 forenkey: false,
@@ -7007,8 +7041,8 @@ function ProcessModel() {
 
         a.push({
             field: {
-                campo: "porcValorAcao",
-                tipo: "String",
+                campo: "valorProvisionado",
+                tipo: "Float",
                 requerid: false,
                 primaryKey: false,
                 forenkey: false,
@@ -7175,6 +7209,18 @@ function ProcessModel() {
         
         a.push({
             field: {
+                campo: "processo",
+                tipo: "DoisValores",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+        
+        a.push({
+            field: {
                 campo: "fundamentacaoJuridica",
                 tipo: "String",
                 requerid: false,
@@ -7256,6 +7302,18 @@ function ProcessModel() {
                 xml: true
             }
         });
+
+        a.push({
+            field: {
+                campo: "clienteList",
+                tipo: "List<ProcessoCliente>",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
         
         a.push({
             field: {
@@ -7307,8 +7365,8 @@ function ProcessModel() {
         
         a.push({
             field: {
-                campo: "documentos",
-                tipo: "List<Documento>",
+                campo: "arquivos",
+                tipo: "List<Arquivo>",
                 requerid: false,
                 primaryKey: false,
                 forenkey: false,
