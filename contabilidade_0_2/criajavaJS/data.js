@@ -6910,6 +6910,18 @@ function ProcessModel() {
         
         a.push({
             field: {
+                campo: "tipoProcesso",
+                tipo: "DoisValores",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+
+        a.push({
+            field: {
                 campo: "statusProc",
                 tipo: "DoisValores",
                 requerid: false,
