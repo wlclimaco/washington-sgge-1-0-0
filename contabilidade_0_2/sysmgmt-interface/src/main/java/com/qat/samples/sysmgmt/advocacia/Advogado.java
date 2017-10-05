@@ -30,6 +30,9 @@ public class Advogado extends Pessoa {
 	/** The processos. */
 	private List<Processo> processos;
 
+	/** The processos. */
+	private String oab;
+
 	/**
 	 * Instantiates a new advogado.
 	 */

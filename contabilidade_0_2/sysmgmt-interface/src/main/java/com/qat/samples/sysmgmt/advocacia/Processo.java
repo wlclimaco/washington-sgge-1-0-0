@@ -51,7 +51,10 @@ public class Processo extends ModelCosmeDamiao {
 	private List<ContasReceber> tituloList;
 
 	/** The advogado list. */
-	private List<ProcessoCliente> advogadoList;
+	private List<ProcessoCliente> clienteList;
+
+	/** The advogado list. */
+	private List<Advogados> advogadoList;
 
 	/** The audiencia list. */
 	private List<Compromisso> audienciaList;
@@ -78,7 +81,7 @@ public class Processo extends ModelCosmeDamiao {
 	private DoisValores instancia;
 
 	/** The orgao. */
-	private String orgao;
+	private DoisValores orgao;
 
 	/** The npadraocnj. */
 	private String npadraocnj;
@@ -167,671 +170,349 @@ public class Processo extends ModelCosmeDamiao {
 		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * Gets the id.
-	 *
-	 * @return the id
-	 */
 	public Integer getId() {
 		return id;
 	}
 
-	/**
-	 * Sets the id.
-	 *
-	 * @param id
-	 *            the new id
-	 */
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	/**
-	 * Gets the data process.
-	 *
-	 * @return the data process
-	 */
 	public Long getDataProcess() {
 		return dataProcess;
 	}
 
-	/**
-	 * Sets the data process.
-	 *
-	 * @param dataProcess
-	 *            the new data process
-	 */
 	public void setDataProcess(Long dataProcess) {
 		this.dataProcess = dataProcess;
 	}
 
-	/**
-	 * Gets the valor.
-	 *
-	 * @return the valor
-	 */
-	public Double getValor() {
-		return valor;
-	}
-
-	/**
-	 * Sets the valor.
-	 *
-	 * @param valor
-	 *            the new valor
-	 */
-	public void setValor(Double valor) {
-		this.valor = valor;
-	}
-
-	/**
-	 * Gets the data fim.
-	 *
-	 * @return the data fim
-	 */
 	public Long getDataFim() {
 		return dataFim;
 	}
 
-	/**
-	 * Sets the data fim.
-	 *
-	 * @param dataFim
-	 *            the new data fim
-	 */
 	public void setDataFim(Long dataFim) {
 		this.dataFim = dataFim;
 	}
 
-	/**
-	 * Gets the acao.
-	 *
-	 * @return the acao
-	 */
+	public Double getValor() {
+		return valor;
+	}
+
+	public void setValor(Double valor) {
+		this.valor = valor;
+	}
+
 	public DoisValores getAcao() {
 		return acao;
 	}
 
-	/**
-	 * Sets the acao.
-	 *
-	 * @param acao
-	 *            the new acao
-	 */
 	public void setAcao(DoisValores acao) {
 		this.acao = acao;
 	}
 
-	/**
-	 * Gets the titulo list.
-	 *
-	 * @return the titulo list
-	 */
-	public List<ContasReceber> getTituloList() {
-		return tituloList;
+	public DoisValores getNatureza() {
+		return natureza;
 	}
 
-	/**
-	 * Sets the titulo list.
-	 *
-	 * @param tituloList
-	 *            the new titulo list
-	 */
-	public void setTituloList(List<ContasReceber> tituloList) {
-		this.tituloList = tituloList;
+	public void setNatureza(DoisValores natureza) {
+		this.natureza = natureza;
 	}
 
-	/**
-	 * Gets the advogado list.
-	 *
-	 * @return the advogado list
-	 */
-	public List<ProcessoCliente> getAdvogadoList() {
-		return advogadoList;
+	public String getSenha() {
+		return senha;
 	}
 
-	/**
-	 * Sets the advogado list.
-	 *
-	 * @param advogadoList
-	 *            the new advogado list
-	 */
-	public void setAdvogadoList(List<ProcessoCliente> advogadoList) {
-		this.advogadoList = advogadoList;
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
-	/**
-	 * Gets the audiencia list.
-	 *
-	 * @return the audiencia list
-	 */
-	public List<Compromisso> getAudienciaList() {
-		return audienciaList;
-	}
-
-	/**
-	 * Sets the audiencia list.
-	 *
-	 * @param audienciaList
-	 *            the new audiencia list
-	 */
-	public void setAudienciaList(List<Compromisso> audienciaList) {
-		this.audienciaList = audienciaList;
-	}
-
-	/**
-	 * Gets the processo status list.
-	 *
-	 * @return the processo status list
-	 */
-	public List<ProcessoStatus> getProcessoStatusList() {
-		return processoStatusList;
-	}
-
-	/**
-	 * Sets the processo status list.
-	 *
-	 * @param processoStatusList
-	 *            the new processo status list
-	 */
-	public void setProcessoStatusList(List<ProcessoStatus> processoStatusList) {
-		this.processoStatusList = processoStatusList;
-	}
-
-	/**
-	 * Gets the assunto.
-	 *
-	 * @return the assunto
-	 */
 	public String getAssunto() {
 		return assunto;
 	}
 
-	/**
-	 * Sets the assunto.
-	 *
-	 * @param assunto
-	 *            the new assunto
-	 */
 	public void setAssunto(String assunto) {
 		this.assunto = assunto;
 	}
 
-	/**
-	 * Gets the status proc.
-	 *
-	 * @return the status proc
-	 */
+	public String getPorcValorAcao() {
+		return porcValorAcao;
+	}
+
+	public void setPorcValorAcao(String porcValorAcao) {
+		this.porcValorAcao = porcValorAcao;
+	}
+
 	public DoisValores getStatusProc() {
 		return statusProc;
 	}
 
-	/**
-	 * Sets the status proc.
-	 *
-	 * @param statusProc
-	 *            the new status proc
-	 */
 	public void setStatusProc(DoisValores statusProc) {
 		this.statusProc = statusProc;
 	}
 
-	/**
-	 * Gets the descricao proc.
-	 *
-	 * @return the descricao proc
-	 */
+	public DoisValores getGrupoTrabalho() {
+		return grupoTrabalho;
+	}
+
+	public void setGrupoTrabalho(DoisValores grupoTrabalho) {
+		this.grupoTrabalho = grupoTrabalho;
+	}
+
 	public String getDescricaoProc() {
 		return descricaoProc;
 	}
 
-	/**
-	 * Sets the descricao proc.
-	 *
-	 * @param descricaoProc
-	 *            the new descricao proc
-	 */
 	public void setDescricaoProc(String descricaoProc) {
 		this.descricaoProc = descricaoProc;
 	}
 
-	/**
-	 * Gets the envolv list.
-	 *
-	 * @return the envolv list
-	 */
+	public List<ContasReceber> getTituloList() {
+		return tituloList;
+	}
+
+	public void setTituloList(List<ContasReceber> tituloList) {
+		this.tituloList = tituloList;
+	}
+
+	public List<ProcessoCliente> getClienteList() {
+		return clienteList;
+	}
+
+	public void setClienteList(List<ProcessoCliente> clienteList) {
+		this.clienteList = clienteList;
+	}
+
+	public List<Advogados> getAdvogadoList() {
+		return advogadoList;
+	}
+
+	public void setAdvogadoList(List<Advogados> advogadoList) {
+		this.advogadoList = advogadoList;
+	}
+
+	public List<Compromisso> getAudienciaList() {
+		return audienciaList;
+	}
+
+	public void setAudienciaList(List<Compromisso> audienciaList) {
+		this.audienciaList = audienciaList;
+	}
+
+	public List<ProcessoStatus> getProcessoStatusList() {
+		return processoStatusList;
+	}
+
+	public void setProcessoStatusList(List<ProcessoStatus> processoStatusList) {
+		this.processoStatusList = processoStatusList;
+	}
+
 	public List<Envolvidos> getEnvolvList() {
 		return envolvList;
 	}
 
-	/**
-	 * Sets the envolv list.
-	 *
-	 * @param envolvList
-	 *            the new envolv list
-	 */
 	public void setEnvolvList(List<Envolvidos> envolvList) {
 		this.envolvList = envolvList;
 	}
 
-	/**
-	 * Gets the processo.
-	 *
-	 * @return the processo
-	 */
-	public DoisValores getProcesso() {
-		return processo;
+	public List<Arquivo> getArquivos() {
+		return arquivos;
 	}
 
-	/**
-	 * Sets the processo.
-	 *
-	 * @param processo
-	 *            the new processo
-	 */
-	public void setProcesso(DoisValores processo) {
-		this.processo = processo;
+	public void setArquivos(List<Arquivo> arquivos) {
+		this.arquivos = arquivos;
 	}
 
-	/**
-	 * Gets the situacao.
-	 *
-	 * @return the situacao
-	 */
-	public DoisValores getSituacao() {
-		return situacao;
-	}
-
-	/**
-	 * Sets the situacao.
-	 *
-	 * @param situacao
-	 *            the new situacao
-	 */
-	public void setSituacao(DoisValores situacao) {
-		this.situacao = situacao;
-	}
-
-	/**
-	 * Gets the instancia.
-	 *
-	 * @return the instancia
-	 */
-	public DoisValores getInstancia() {
-		return instancia;
-	}
-
-	/**
-	 * Sets the instancia.
-	 *
-	 * @param instancia
-	 *            the new instancia
-	 */
-	public void setInstancia(DoisValores instancia) {
-		this.instancia = instancia;
-	}
-
-	/**
-	 * Gets the orgao.
-	 *
-	 * @return the orgao
-	 */
-	public String getOrgao() {
-		return orgao;
-	}
-
-	/**
-	 * Sets the orgao.
-	 *
-	 * @param orgao
-	 *            the new orgao
-	 */
-	public void setOrgao(String orgao) {
-		this.orgao = orgao;
-	}
-
-	/**
-	 * Gets the npadraocnj.
-	 *
-	 * @return the npadraocnj
-	 */
-	public String getNpadraocnj() {
-		return npadraocnj;
-	}
-
-	/**
-	 * Sets the npadraocnj.
-	 *
-	 * @param npadraocnj
-	 *            the new npadraocnj
-	 */
-	public void setNpadraocnj(String npadraocnj) {
-		this.npadraocnj = npadraocnj;
-	}
-
-	/**
-	 * Gets the npadrao.
-	 *
-	 * @return the npadrao
-	 */
-	public String getNpadrao() {
-		return npadrao;
-	}
-
-	/**
-	 * Sets the npadrao.
-	 *
-	 * @param npadrao
-	 *            the new npadrao
-	 */
-	public void setNpadrao(String npadrao) {
-		this.npadrao = npadrao;
-	}
-
-	/**
-	 * Gets the agendar cap.
-	 *
-	 * @return the agendar cap
-	 */
-	public DoisValores getAgendarCap() {
-		return agendarCap;
-	}
-
-	/**
-	 * Sets the agendar cap.
-	 *
-	 * @param agendarCap
-	 *            the new agendar cap
-	 */
-	public void setAgendarCap(DoisValores agendarCap) {
-		this.agendarCap = agendarCap;
-	}
-
-	/**
-	 * Gets the distribuido.
-	 *
-	 * @return the distribuido
-	 */
-	public String getDistribuido() {
-		return distribuido;
-	}
-
-	/**
-	 * Sets the distribuido.
-	 *
-	 * @param distribuido
-	 *            the new distribuido
-	 */
-	public void setDistribuido(String distribuido) {
-		this.distribuido = distribuido;
-	}
-
-	/**
-	 * Gets the valor acao.
-	 *
-	 * @return the valor acao
-	 */
-	public Float getValorAcao() {
-		return valorAcao;
-	}
-
-	/**
-	 * Sets the valor acao.
-	 *
-	 * @param valorAcao
-	 *            the new valor acao
-	 */
-	public void setValorAcao(Float valorAcao) {
-		this.valorAcao = valorAcao;
-	}
-
-	/**
-	 * Gets the observacao proc.
-	 *
-	 * @return the observacao proc
-	 */
-	public String getObservacaoProc() {
-		return observacaoProc;
-	}
-
-	/**
-	 * Sets the observacao proc.
-	 *
-	 * @param observacaoProc
-	 *            the new observacao proc
-	 */
-	public void setObservacaoProc(String observacaoProc) {
-		this.observacaoProc = observacaoProc;
-	}
-
-	/**
-	 * Gets the justica.
-	 *
-	 * @return the justica
-	 */
-	public DoisValores getJustica() {
-		return justica;
-	}
-
-	/**
-	 * Sets the justica.
-	 *
-	 * @param justica
-	 *            the new justica
-	 */
-	public void setJustica(DoisValores justica) {
-		this.justica = justica;
-	}
-
-	/**
-	 * Gets the tribunal.
-	 *
-	 * @return the tribunal
-	 */
-	public DoisValores getTribunal() {
-		return tribunal;
-	}
-
-	/**
-	 * Sets the tribunal.
-	 *
-	 * @param tribunal
-	 *            the new tribunal
-	 */
-	public void setTribunal(DoisValores tribunal) {
-		this.tribunal = tribunal;
-	}
-
-	/**
-	 * Gets the instancia 1.
-	 *
-	 * @return the instancia 1
-	 */
-	public DoisValores getInstancia1() {
-		return instancia1;
-	}
-
-	/**
-	 * Sets the instancia 1.
-	 *
-	 * @param instancia1
-	 *            the new instancia 1
-	 */
-	public void setInstancia1(DoisValores instancia1) {
-		this.instancia1 = instancia1;
-	}
-
-	/**
-	 * Gets the localidade.
-	 *
-	 * @return the localidade
-	 */
-	public DoisValores getLocalidade() {
-		return localidade;
-	}
-
-	/**
-	 * Sets the localidade.
-	 *
-	 * @param localidade
-	 *            the new localidade
-	 */
-	public void setLocalidade(DoisValores localidade) {
-		this.localidade = localidade;
-	}
-
-	/**
-	 * Gets the capturpor.
-	 *
-	 * @return the capturpor
-	 */
-	public DoisValores getCapturpor() {
-		return capturpor;
-	}
-
-	/**
-	 * Sets the capturpor.
-	 *
-	 * @param capturpor
-	 *            the new capturpor
-	 */
-	public void setCapturpor(DoisValores capturpor) {
-		this.capturpor = capturpor;
-	}
-
-	/**
-	 * Gets the numeroprocesso.
-	 *
-	 * @return the numeroprocesso
-	 */
-	public String getNumeroprocesso() {
-		return numeroprocesso;
-	}
-
-	/**
-	 * Sets the numeroprocesso.
-	 *
-	 * @param numeroprocesso
-	 *            the new numeroprocesso
-	 */
-	public void setNumeroprocesso(String numeroprocesso) {
-		this.numeroprocesso = numeroprocesso;
-	}
-
-	/**
-	 * Gets the capautomatica.
-	 *
-	 * @return the capautomatica
-	 */
-	public DoisValores getCapautomatica() {
-		return capautomatica;
-	}
-
-	/**
-	 * Sets the capautomatica.
-	 *
-	 * @param capautomatica
-	 *            the new capautomatica
-	 */
-	public void setCapautomatica(DoisValores capautomatica) {
-		this.capautomatica = capautomatica;
-	}
-
-	/**
-	 * Gets the pasta.
-	 *
-	 * @return the pasta
-	 */
-	public String getPasta() {
-		return pasta;
-	}
-
-	/**
-	 * Sets the pasta.
-	 *
-	 * @param pasta
-	 *            the new pasta
-	 */
-	public void setPasta(String pasta) {
-		this.pasta = pasta;
-	}
-
-	/**
-	 * Gets the envolvidos externo.
-	 *
-	 * @return the envolvidos externo
-	 */
 	public List<ParticipanteExterno> getEnvolvidosExterno() {
 		return envolvidosExterno;
 	}
 
-	/**
-	 * Sets the envolvidos externo.
-	 *
-	 * @param envolvidosExterno
-	 *            the new envolvidos externo
-	 */
 	public void setEnvolvidosExterno(List<ParticipanteExterno> envolvidosExterno) {
 		this.envolvidosExterno = envolvidosExterno;
 	}
 
-	/**
-	 * Gets the enviar email.
-	 *
-	 * @return the enviar email
-	 */
+	public DoisValores getProcesso() {
+		return processo;
+	}
+
+	public void setProcesso(DoisValores processo) {
+		this.processo = processo;
+	}
+
+	public DoisValores getSituacao() {
+		return situacao;
+	}
+
+	public void setSituacao(DoisValores situacao) {
+		this.situacao = situacao;
+	}
+
+	public DoisValores getInstancia() {
+		return instancia;
+	}
+
+	public void setInstancia(DoisValores instancia) {
+		this.instancia = instancia;
+	}
+
+	public DoisValores getOrgao() {
+		return orgao;
+	}
+
+	public void setOrgao(DoisValores orgao) {
+		this.orgao = orgao;
+	}
+
+	public String getNpadraocnj() {
+		return npadraocnj;
+	}
+
+	public void setNpadraocnj(String npadraocnj) {
+		this.npadraocnj = npadraocnj;
+	}
+
+	public String getNpadrao() {
+		return npadrao;
+	}
+
+	public void setNpadrao(String npadrao) {
+		this.npadrao = npadrao;
+	}
+
+	public DoisValores getAgendarCap() {
+		return agendarCap;
+	}
+
+	public void setAgendarCap(DoisValores agendarCap) {
+		this.agendarCap = agendarCap;
+	}
+
+	public String getDistribuido() {
+		return distribuido;
+	}
+
+	public void setDistribuido(String distribuido) {
+		this.distribuido = distribuido;
+	}
+
+	public Float getValorAcao() {
+		return valorAcao;
+	}
+
+	public void setValorAcao(Float valorAcao) {
+		this.valorAcao = valorAcao;
+	}
+
+	public Float getValorProvisionado() {
+		return valorProvisionado;
+	}
+
+	public void setValorProvisionado(Float valorProvisionado) {
+		this.valorProvisionado = valorProvisionado;
+	}
+
+	public Integer getSegJustica() {
+		return segJustica;
+	}
+
+	public void setSegJustica(Integer segJustica) {
+		this.segJustica = segJustica;
+	}
+
+	public String getObservacaoProc() {
+		return observacaoProc;
+	}
+
+	public void setObservacaoProc(String observacaoProc) {
+		this.observacaoProc = observacaoProc;
+	}
+
+	public DoisValores getJustica() {
+		return justica;
+	}
+
+	public void setJustica(DoisValores justica) {
+		this.justica = justica;
+	}
+
+	public DoisValores getTribunal() {
+		return tribunal;
+	}
+
+	public void setTribunal(DoisValores tribunal) {
+		this.tribunal = tribunal;
+	}
+
+	public DoisValores getInstancia1() {
+		return instancia1;
+	}
+
+	public void setInstancia1(DoisValores instancia1) {
+		this.instancia1 = instancia1;
+	}
+
+	public DoisValores getLocalidade() {
+		return localidade;
+	}
+
+	public void setLocalidade(DoisValores localidade) {
+		this.localidade = localidade;
+	}
+
+	public DoisValores getCapturpor() {
+		return capturpor;
+	}
+
+	public void setCapturpor(DoisValores capturpor) {
+		this.capturpor = capturpor;
+	}
+
+	public String getNumeroprocesso() {
+		return numeroprocesso;
+	}
+
+	public void setNumeroprocesso(String numeroprocesso) {
+		this.numeroprocesso = numeroprocesso;
+	}
+
+	public DoisValores getCapautomatica() {
+		return capautomatica;
+	}
+
+	public void setCapautomatica(DoisValores capautomatica) {
+		this.capautomatica = capautomatica;
+	}
+
+	public String getPasta() {
+		return pasta;
+	}
+
+	public void setPasta(String pasta) {
+		this.pasta = pasta;
+	}
+
 	public Integer getEnviarEmail() {
 		return enviarEmail;
 	}
 
-	/**
-	 * Sets the enviar email.
-	 *
-	 * @param enviarEmail
-	 *            the new enviar email
-	 */
 	public void setEnviarEmail(Integer enviarEmail) {
 		this.enviarEmail = enviarEmail;
 	}
 
-	/**
-	 * Gets the enviar mdg telefone.
-	 *
-	 * @return the enviar mdg telefone
-	 */
 	public Integer getEnviarMdgTelefone() {
 		return enviarMdgTelefone;
 	}
 
-	/**
-	 * Sets the enviar mdg telefone.
-	 *
-	 * @param enviarMdgTelefone
-	 *            the new enviar mdg telefone
-	 */
 	public void setEnviarMdgTelefone(Integer enviarMdgTelefone) {
 		this.enviarMdgTelefone = enviarMdgTelefone;
 	}
 
-	/**
-	 * Gets the quando.
-	 *
-	 * @return the quando
-	 */
 	public DoisValores getQuando() {
 		return quando;
 	}
 
-	/**
-	 * Sets the quando.
-	 *
-	 * @param quando
-	 *            the new quando
-	 */
 	public void setQuando(DoisValores quando) {
 		this.quando = quando;
 	}
-
 
 	public String getFundamentacaoJuridica() {
 		return fundamentacaoJuridica;
@@ -881,44 +562,32 @@ public class Processo extends ModelCosmeDamiao {
 		this.usuariosRestricaoProc = usuariosRestricaoProc;
 	}
 
-	public String getPorcValorAcao() {
-		return porcValorAcao;
-	}
-
-	public void setPorcValorAcao(String porcValorAcao) {
-		this.porcValorAcao = porcValorAcao;
-	}
-
-	public List<Arquivo> getArquivos() {
-		return arquivos;
-	}
-
-	public void setArquivos(List<Arquivo> arquivos) {
-		this.arquivos = arquivos;
-	}
-
 	@Override
 	public String toString() {
-		return "Processo [getId()=" + getId() + ", getDataProcess()=" + getDataProcess() + ", getValor()=" + getValor()
-				+ ", getDataFim()=" + getDataFim() + ", getAcao()=" + getAcao() + ", getTituloList()=" + getTituloList()
+		return "Processo [getId()=" + getId() + ", getDataProcess()=" + getDataProcess() + ", getDataFim()="
+				+ getDataFim() + ", getValor()=" + getValor() + ", getAcao()=" + getAcao() + ", getNatureza()="
+				+ getNatureza() + ", getSenha()=" + getSenha() + ", getAssunto()=" + getAssunto()
+				+ ", getPorcValorAcao()=" + getPorcValorAcao() + ", getStatusProc()=" + getStatusProc()
+				+ ", getGrupoTrabalho()=" + getGrupoTrabalho() + ", getDescricaoProc()=" + getDescricaoProc()
+				+ ", getTituloList()=" + getTituloList() + ", getClienteList()=" + getClienteList()
 				+ ", getAdvogadoList()=" + getAdvogadoList() + ", getAudienciaList()=" + getAudienciaList()
-				+ ", getProcessoStatusList()=" + getProcessoStatusList() + ", getAssunto()=" + getAssunto()
-				+ ", getStatusProc()=" + getStatusProc() + ", getDescricaoProc()=" + getDescricaoProc()
-				+ ", getEnvolvList()=" + getEnvolvList() + ", getProcesso()=" + getProcesso() + ", getSituacao()="
-				+ getSituacao() + ", getInstancia()=" + getInstancia() + ", getOrgao()=" + getOrgao()
-				+ ", getNpadraocnj()=" + getNpadraocnj() + ", getNpadrao()=" + getNpadrao() + ", getAgendarCap()="
-				+ getAgendarCap() + ", getDistribuido()=" + getDistribuido() + ", getValorAcao()=" + getValorAcao()
-				+ ", getObservacaoProc()=" + getObservacaoProc() + ", getJustica()=" + getJustica() + ", getTribunal()="
-				+ getTribunal() + ", getInstancia1()=" + getInstancia1() + ", getLocalidade()=" + getLocalidade()
-				+ ", getCapturpor()=" + getCapturpor() + ", getNumeroprocesso()=" + getNumeroprocesso()
-				+ ", getCapautomatica()=" + getCapautomatica() + ", getPasta()=" + getPasta() + ", getArquivos()="
-				+ getArquivos() + ", getEnvolvidosExterno()=" + getEnvolvidosExterno() + ", getEnviarEmail()="
-				+ getEnviarEmail() + ", getEnviarMdgTelefone()=" + getEnviarMdgTelefone() + ", getQuando()="
-				+ getQuando() + ", getFundamentacaoJuridica()=" + getFundamentacaoJuridica() + ", getFatos()="
-				+ getFatos() + ", getPretensoesCliente()=" + getPretensoesCliente() + ", getEstrategia()="
-				+ getEstrategia() + ", getRetringirProcesso()=" + getRetringirProcesso()
-				+ ", getUsuariosRestricaoProc()=" + getUsuariosRestricaoProc() + ", getPorcValorAcao()="
-				+ getPorcValorAcao() + ", toString()=" + super.toString() + "]";
+				+ ", getProcessoStatusList()=" + getProcessoStatusList() + ", getEnvolvList()=" + getEnvolvList()
+				+ ", getArquivos()=" + getArquivos() + ", getEnvolvidosExterno()=" + getEnvolvidosExterno()
+				+ ", getProcesso()=" + getProcesso() + ", getSituacao()=" + getSituacao() + ", getInstancia()="
+				+ getInstancia() + ", getOrgao()=" + getOrgao() + ", getNpadraocnj()=" + getNpadraocnj()
+				+ ", getNpadrao()=" + getNpadrao() + ", getAgendarCap()=" + getAgendarCap() + ", getDistribuido()="
+				+ getDistribuido() + ", getValorAcao()=" + getValorAcao() + ", getValorProvisionado()="
+				+ getValorProvisionado() + ", getSegJustica()=" + getSegJustica() + ", getObservacaoProc()="
+				+ getObservacaoProc() + ", getJustica()=" + getJustica() + ", getTribunal()=" + getTribunal()
+				+ ", getInstancia1()=" + getInstancia1() + ", getLocalidade()=" + getLocalidade() + ", getCapturpor()="
+				+ getCapturpor() + ", getNumeroprocesso()=" + getNumeroprocesso() + ", getCapautomatica()="
+				+ getCapautomatica() + ", getPasta()=" + getPasta() + ", getEnviarEmail()=" + getEnviarEmail()
+				+ ", getEnviarMdgTelefone()=" + getEnviarMdgTelefone() + ", getQuando()=" + getQuando()
+				+ ", getFundamentacaoJuridica()=" + getFundamentacaoJuridica() + ", getFatos()=" + getFatos()
+				+ ", getPretensoesCliente()=" + getPretensoesCliente() + ", getEstrategia()=" + getEstrategia()
+				+ ", getRetringirProcesso()=" + getRetringirProcesso() + ", getUsuariosRestricaoProc()="
+				+ getUsuariosRestricaoProc() + ", toString()=" + super.toString() + "]";
 	}
+
 
 }

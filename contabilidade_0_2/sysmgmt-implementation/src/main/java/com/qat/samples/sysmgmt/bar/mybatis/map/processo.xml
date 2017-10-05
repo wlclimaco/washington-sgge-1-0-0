@@ -67,6 +67,11 @@
 			select="DoisValorMap.fetchDoisValorById" />
 		<collection property="capautomatica" column="capautomatica"
 			select="DoisValorMap.fetchDoisValorById" />
+		<collection property="natureza" column="natureza"
+			select="DoisValorMap.fetchDoisValorById" />
+
+		<collection property="grupoTrabalho" column="grupoTrabalho"
+			select="DoisValorMap.fetchDoisValorById" />
 
 		<collection property="tituloList" column="id"
 			select="ContasReceberMap.fetchContasReceberByParentId" />
@@ -94,12 +99,15 @@
   </resultMap>
 
   <sql id="allProcessoColumns">
-dataProcess
+,dataProcess
 ,dataFim
 ,valor
 ,acao
+,natureza
+,senha
 ,assunto
 ,statusProc
+,grupoTrabalho
 ,descricaoProc
 ,processo
 ,situacao
@@ -109,7 +117,7 @@ dataProcess
 ,npadrao
 ,agendarCap
 ,distribuido
-,porcValorAcao
+,valorProvisionado
 ,valorAcao
 ,observacaoProc
 ,justica
@@ -123,6 +131,7 @@ dataProcess
 ,enviarEmail
 ,enviarMdgTelefone
 ,quando
+,processo
 ,fundamentacaoJuridica
 ,fatos
 ,pretensoesCliente
@@ -143,18 +152,21 @@ dataProcess
 #{dataFim},
 #{valor},
 #{acao.id},
+#{natureza.id},
+#{senha},
 #{assunto},
 #{statusProc.id},
+#{grupoTrabalho.id},
 #{descricaoProc},
-#{processo.id},
+#{processo},
 #{situacao.id},
 #{instancia.id},
-#{orgao},
+#{orgao.id},
 #{npadraocnj},
 #{npadrao},
 #{agendarCap.id},
 #{distribuido},
-#{porcValorAcao},
+#{valorProvisionado},
 #{valorAcao},
 #{observacaoProc},
 #{justica.id},
@@ -168,6 +180,7 @@ dataProcess
 #{enviarEmail},
 #{enviarMdgTelefone},
 #{quando.id},
+#{processo.id},
 #{fundamentacaoJuridica},
 #{fatos},
 #{pretensoesCliente},
@@ -239,17 +252,21 @@ dataProcess
 <if test="dataFim!= null">dataFim = #{dataFim},</if>
 <if test="valor!= null">valor = #{valor},</if>
 <if test="acao!= null">acao = #{acao.id},</if>
+<if test="natureza!= null">natureza = #{natureza.id},</if>
+<if test="senha!= null">senha = #{senha},</if>
 <if test="assunto!= null">assunto = #{assunto},</if>
 <if test="statusProc!= null">statusProc = #{statusProc.id},</if>
+<if test="grupoTrabalho!= null">grupoTrabalho = #{grupoTrabalho.id},</if>
 <if test="descricaoProc!= null">descricaoProc = #{descricaoProc},</if>
-<if test="processo!= null">processo = #{processo.id},</if>
+<if test="processo!= null">processo = #{processo},</if>
 <if test="situacao!= null">situacao = #{situacao.id},</if>
 <if test="instancia!= null">instancia = #{instancia.id},</if>
-<if test="orgao!= null">orgao = #{orgao},</if>
+<if test="orgao!= null">orgao = #{orgao.id},</if>
 <if test="npadraocnj!= null">npadraocnj = #{npadraocnj},</if>
 <if test="npadrao!= null">npadrao = #{npadrao},</if>
 <if test="agendarCap!= null">agendarCap = #{agendarCap.id},</if>
 <if test="distribuido!= null">distribuido = #{distribuido},</if>
+<if test="valorProvisionado!= null">valorProvisionado = #{valorProvisionado},</if>
 <if test="valorAcao!= null">valorAcao = #{valorAcao},</if>
 <if test="observacaoProc!= null">observacaoProc = #{observacaoProc},</if>
 <if test="justica!= null">justica = #{justica.id},</if>
@@ -263,6 +280,7 @@ dataProcess
 <if test="enviarEmail!= null">enviarEmail = #{enviarEmail},</if>
 <if test="enviarMdgTelefone!= null">enviarMdgTelefone = #{enviarMdgTelefone},</if>
 <if test="quando!= null">quando = #{quando.id},</if>
+<if test="processo!= null">processo = #{processo.id},</if>
 <if test="fundamentacaoJuridica!= null">fundamentacaoJuridica = #{fundamentacaoJuridica},</if>
 <if test="fatos!= null">fatos = #{fatos},</if>
 <if test="pretensoesCliente!= null">pretensoesCliente = #{pretensoesCliente},</if>
