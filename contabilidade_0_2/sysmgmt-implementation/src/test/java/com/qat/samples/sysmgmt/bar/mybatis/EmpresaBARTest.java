@@ -398,7 +398,7 @@ public IEmpresaBAR getEmpresaBAR()
 		FetchByIdRequest request = new FetchByIdRequest();
 		request.setFetchId(10110);
 		Usuario usuarioResponse = getEmpresaBAR().fetchUsuarioById(request);
-		Assert.assertEquals(usuarioResponse.getEmail(), "username_4");
+		Assert.assertEquals(usuarioResponse.getEmail(), "username_2__4");
 		getEmpresaBAR().updateUsuario(usuario);
 		usuarioResponse = getEmpresaBAR().fetchUsuarioById(request);
 		Assert.assertEquals(usuarioResponse.getEmail(), "econtabilsistemas@gmail.com");

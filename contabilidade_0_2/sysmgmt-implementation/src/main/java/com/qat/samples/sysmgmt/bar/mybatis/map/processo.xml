@@ -22,7 +22,6 @@
     <result property="valor" column="valor"/>
     <result property="assunto" column="assunto"/>
     <result property="descricaoProc" column="descricaoProc"/>
-    <result property="orgao" column="orgao"/>
     <result property="npadraocnj" column="npadraocnj"/>
     <result property="npadrao" column="npadrao"/>
     <result property="distribuido" column="distribuido"/>
@@ -70,6 +69,9 @@
 		<collection property="natureza" column="natureza"
 			select="DoisValorMap.fetchDoisValorById" />
 
+			<collection property="orgao" column="orgao"
+			select="DoisValorMap.fetchDoisValorById" />
+
 		<collection property="grupoTrabalho" column="grupoTrabalho"
 			select="DoisValorMap.fetchDoisValorById" />
 
@@ -99,7 +101,7 @@
   </resultMap>
 
   <sql id="allProcessoColumns">
-,dataProcess
+dataProcess
 ,dataFim
 ,valor
 ,acao
@@ -131,7 +133,6 @@
 ,enviarEmail
 ,enviarMdgTelefone
 ,quando
-,processo
 ,fundamentacaoJuridica
 ,fatos
 ,pretensoesCliente
@@ -180,7 +181,6 @@
 #{enviarEmail},
 #{enviarMdgTelefone},
 #{quando.id},
-#{processo.id},
 #{fundamentacaoJuridica},
 #{fatos},
 #{pretensoesCliente},
@@ -280,7 +280,6 @@
 <if test="enviarEmail!= null">enviarEmail = #{enviarEmail},</if>
 <if test="enviarMdgTelefone!= null">enviarMdgTelefone = #{enviarMdgTelefone},</if>
 <if test="quando!= null">quando = #{quando.id},</if>
-<if test="processo!= null">processo = #{processo.id},</if>
 <if test="fundamentacaoJuridica!= null">fundamentacaoJuridica = #{fundamentacaoJuridica},</if>
 <if test="fatos!= null">fatos = #{fatos},</if>
 <if test="pretensoesCliente!= null">pretensoesCliente = #{pretensoesCliente},</if>

@@ -1925,11 +1925,11 @@ public class AdvocaciaBARImpl extends SqlSessionDaoSupport implements IAdvocacia
 					processo.getId(), null, null, TabelaEnum.PROCESSO, getFinanceiroBAR(), getStatusBAR(),
 					getHistoricoBAR(), processo.getId(), processo.getCreateUser(), historicoId, historicoId);
 		}
-		if (!ValidationUtil.isNullOrEmpty(processo.getAdvogadoList())) {
-			count += ProcessoClienteBARD.maintainProcessoClienteAssociations(processo.getAdvogadoList(), response,
-					processo.getId(), null, null, TabelaEnum.PROCESSO, getAdvocaciaBAR(), getStatusBAR(),
-					getHistoricoBAR(), processo.getId(), processo.getCreateUser(), historicoId, historicoId);
-		}
+//		if (!ValidationUtil.isNullOrEmpty(processo.getClienteList())) {
+//			count += ProcessoClienteBARD.maintainProcessoClienteAssociations(processo.getAdvogadoList(), response,
+//					processo.getId(), null, null, TabelaEnum.PROCESSO, getAdvocaciaBAR(), getStatusBAR(),
+//					getHistoricoBAR(), processo.getId(), processo.getCreateUser(), historicoId, historicoId);
+//		}
 		if (!ValidationUtil.isNullOrEmpty(processo.getAudienciaList())) {
 			count += CompromissoBARD.maintainCompromissoAssociations(processo.getAudienciaList(), response,
 					processo.getId(), null, null, TabelaEnum.PROCESSO, getAdvocaciaBAR(), getStatusBAR(),

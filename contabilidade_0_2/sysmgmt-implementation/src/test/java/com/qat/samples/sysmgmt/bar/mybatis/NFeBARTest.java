@@ -90,15 +90,15 @@ public INFeBAR getNFeBAR()
 @Test
 	public void testDeleteNFNota()
 	{
-		NFNota nfnota = Objects.insertNFNota(40003, TabelaEnum.NFNOTA, PersistenceActionEnum.INSERT);
+		NFNota nfnota = Objects.insertNFNota(40004, TabelaEnum.NFNOTA, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(40003);
+		request.setFetchId(40004);
 		NFNota nfnotaResponse = getNFeBAR().fetchNFNotaById(request);
 		Assert.assertEquals(nfnotaResponse, null);
 		getNFeBAR().insertNFNota(nfnota);
 		nfnotaResponse = getNFeBAR().fetchNFNotaById(request);
 		Assert.assertEquals(nfnota.getId(), nfnotaResponse.getId());
-		nfnota = Objects.insertNFNota(40002, TabelaEnum.NFNOTA, PersistenceActionEnum.DELETE);
+		nfnota = Objects.insertNFNota(40004, TabelaEnum.NFNOTA, PersistenceActionEnum.DELETE);
 		getNFeBAR().deleteNFNotaById(nfnota);
 		nfnotaResponse = getNFeBAR().fetchNFNotaById(request);
 	//	Assert.assertEquals(nfnotaResponse, null);
@@ -179,15 +179,15 @@ public INFeBAR getNFeBAR()
 @Test
 	public void testDeleteNFNotaInfo()
 	{
-		NFNotaInfo nfnotainfo = Objects.insertNFNotaInfo(4000011, TabelaEnum.NFNOTAINFO, PersistenceActionEnum.INSERT);
+		NFNotaInfo nfnotainfo = Objects.insertNFNotaInfo(4000012, TabelaEnum.NFNOTAINFO, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(4000011);
+		request.setFetchId(4000012);
 		NFNotaInfo nfnotainfoResponse = getNFeBAR().fetchNFNotaInfoById(request);
 		Assert.assertEquals(nfnotainfoResponse, null);
 		getNFeBAR().insertNFNotaInfo(nfnotainfo);
 		nfnotainfoResponse = getNFeBAR().fetchNFNotaInfoById(request);
 		Assert.assertEquals(nfnotainfo.getId(), nfnotainfoResponse.getId());
-		nfnotainfo = Objects.insertNFNotaInfo(4000011, TabelaEnum.NFNOTAINFO, PersistenceActionEnum.DELETE);
+		nfnotainfo = Objects.insertNFNotaInfo(4000012, TabelaEnum.NFNOTAINFO, PersistenceActionEnum.DELETE);
 		getNFeBAR().deleteNFNotaInfoById(nfnotainfo);
 		nfnotainfoResponse = getNFeBAR().fetchNFNotaInfoById(request);
 		Assert.assertEquals(nfnotainfoResponse, null);

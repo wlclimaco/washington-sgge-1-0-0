@@ -5695,10 +5695,10 @@ public class Objects {
 			processo.setAssunto("NATIVE INSERT UPDATE");
 			processo.setStatusProc(Objects.insertDoisValor(id, tabela, action));
 			processo.setDescricaoProc("NATIVE INSERT UPDATE");
-			processo.setProcesso(Objects.insertDoisValor(id, tabela, action));
+			processo.setProcesso("2222");
 			processo.setSituacao(Objects.insertDoisValor(id, tabela, action));
 			processo.setInstancia(Objects.insertDoisValor(id, tabela, action));
-			processo.setOrgao("NATIVE INSERT UPDATE");
+			processo.setOrgao(Objects.insertDoisValor(id, tabela, action));
 			processo.setNpadraocnj("NATIVE INSERT UPDATE");
 			processo.setNpadrao("NATIVE INSERT UPDATE");
 			processo.setAgendarCap(Objects.insertDoisValor(id, tabela, action));

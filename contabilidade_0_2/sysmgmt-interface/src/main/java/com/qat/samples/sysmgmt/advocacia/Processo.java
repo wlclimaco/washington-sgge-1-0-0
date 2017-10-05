@@ -72,7 +72,7 @@ public class Processo extends ModelCosmeDamiao {
 	private List<ParticipanteExterno> envolvidosExterno;
 
 	/** The processo. */
-	private DoisValores processo;
+	private String processo;
 
 	/** The situacao. */
 	private DoisValores situacao;
@@ -330,11 +330,11 @@ public class Processo extends ModelCosmeDamiao {
 		this.envolvidosExterno = envolvidosExterno;
 	}
 
-	public DoisValores getProcesso() {
+	public String getProcesso() {
 		return processo;
 	}
 
-	public void setProcesso(DoisValores processo) {
+	public void setProcesso(String processo) {
 		this.processo = processo;
 	}
 
