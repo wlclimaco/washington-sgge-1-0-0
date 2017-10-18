@@ -36,6 +36,7 @@
     <result property="pretensoesCliente" column="pretensoesCliente"/>
     <result property="estrategia" column="estrategia"/>
     <result property="retringirProcesso" column="retringirProcesso"/>
+    <result property="monitorar" column="monitorar"/>
 <result property="parentId" column="parentId"/>
 <result property="tabelaEnumValue" column="tabelaEnumValue"/>
 <result property="emprId" column="emprId"/>
@@ -132,6 +133,7 @@ dataProcess
 ,pasta
 ,enviarEmail
 ,enviarMdgTelefone
+,monitorar
 ,quando
 ,fundamentacaoJuridica
 ,fatos
@@ -180,6 +182,7 @@ dataProcess
 #{pasta},
 #{enviarEmail},
 #{enviarMdgTelefone},
+#{monitorar},
 #{quando.id},
 #{fundamentacaoJuridica},
 #{fatos},

@@ -135,6 +135,8 @@ public class Processo extends ModelCosmeDamiao {
 	/** The enviar mdg telefone. */
 	private Integer enviarMdgTelefone;
 
+	private Integer monitorar;
+
 	/** The quando. */
 	private DoisValores quando;
 
@@ -562,6 +564,14 @@ public class Processo extends ModelCosmeDamiao {
 		this.usuariosRestricaoProc = usuariosRestricaoProc;
 	}
 
+	public Integer getMonitorar() {
+		return monitorar;
+	}
+
+	public void setMonitorar(Integer monitorar) {
+		this.monitorar = monitorar;
+	}
+
 	@Override
 	public String toString() {
 		return "Processo [getId()=" + getId() + ", getDataProcess()=" + getDataProcess() + ", getDataFim()="
@@ -586,7 +596,8 @@ public class Processo extends ModelCosmeDamiao {
 				+ ", getFundamentacaoJuridica()=" + getFundamentacaoJuridica() + ", getFatos()=" + getFatos()
 				+ ", getPretensoesCliente()=" + getPretensoesCliente() + ", getEstrategia()=" + getEstrategia()
 				+ ", getRetringirProcesso()=" + getRetringirProcesso() + ", getUsuariosRestricaoProc()="
-				+ getUsuariosRestricaoProc() + ", toString()=" + super.toString() + "]";
+				+ getUsuariosRestricaoProc() + ", getMonitorar()=" + getMonitorar() + ", toString()=" + super.toString()
+				+ "]";
 	}
 
 
