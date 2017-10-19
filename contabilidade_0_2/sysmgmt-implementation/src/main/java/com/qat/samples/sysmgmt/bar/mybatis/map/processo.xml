@@ -33,10 +33,12 @@
     <result property="enviarMdgTelefone" column="enviarMdgTelefone"/>
     <result property="fundamentacaoJuridica" column="fundamentacaoJuridica"/>
     <result property="fatos" column="fatos"/>
+    <result property="agendarCap" column="agendarCap"/>
     <result property="pretensoesCliente" column="pretensoesCliente"/>
     <result property="estrategia" column="estrategia"/>
     <result property="retringirProcesso" column="retringirProcesso"/>
     <result property="monitorar" column="monitorar"/>
+    <result property="capautomatica" column="capautomatica"/>
 <result property="parentId" column="parentId"/>
 <result property="tabelaEnumValue" column="tabelaEnumValue"/>
 <result property="emprId" column="emprId"/>
@@ -45,8 +47,7 @@
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
-<collection property="processo" column="processo"
-			select="DoisValorMap.fetchDoisValorById" />
+<result property="processo" column="processo"/>
 <collection property="quando" column="quando"
 			select="DoisValorMap.fetchDoisValorById" />
 		<collection property="justica" column="justica"
@@ -64,8 +65,6 @@
 		<collection property="situacao" column="situacao"
 			select="DoisValorMap.fetchDoisValorById" />
 		<collection property="instancia" column="instancia"
-			select="DoisValorMap.fetchDoisValorById" />
-		<collection property="capautomatica" column="capautomatica"
 			select="DoisValorMap.fetchDoisValorById" />
 		<collection property="natureza" column="natureza"
 			select="DoisValorMap.fetchDoisValorById" />
@@ -167,7 +166,7 @@ dataProcess
 #{orgao.id},
 #{npadraocnj},
 #{npadrao},
-#{agendarCap.id},
+#{agendarCap},
 #{distribuido},
 #{valorProvisionado},
 #{valorAcao},
@@ -178,7 +177,7 @@ dataProcess
 #{localidade.id},
 #{capturpor.id},
 #{numeroprocesso},
-#{capautomatica.id},
+#{capautomatica},
 #{pasta},
 #{enviarEmail},
 #{enviarMdgTelefone},
@@ -267,7 +266,7 @@ dataProcess
 <if test="orgao!= null">orgao = #{orgao.id},</if>
 <if test="npadraocnj!= null">npadraocnj = #{npadraocnj},</if>
 <if test="npadrao!= null">npadrao = #{npadrao},</if>
-<if test="agendarCap!= null">agendarCap = #{agendarCap.id},</if>
+<if test="agendarCap!= null">agendarCap = #{agendarCap},</if>
 <if test="distribuido!= null">distribuido = #{distribuido},</if>
 <if test="valorProvisionado!= null">valorProvisionado = #{valorProvisionado},</if>
 <if test="valorAcao!= null">valorAcao = #{valorAcao},</if>
@@ -278,7 +277,7 @@ dataProcess
 <if test="localidade!= null">localidade = #{localidade.id},</if>
 <if test="capturpor!= null">capturpor = #{capturpor.id},</if>
 <if test="numeroprocesso!= null">numeroprocesso = #{numeroprocesso},</if>
-<if test="capautomatica!= null">capautomatica = #{capautomatica.id},</if>
+<if test="capautomatica!= null">capautomatica = #{capautomatica},</if>
 <if test="pasta!= null">pasta = #{pasta},</if>
 <if test="enviarEmail!= null">enviarEmail = #{enviarEmail},</if>
 <if test="enviarMdgTelefone!= null">enviarMdgTelefone = #{enviarMdgTelefone},</if>

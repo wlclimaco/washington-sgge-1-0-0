@@ -5701,7 +5701,7 @@ public class Objects {
 			processo.setOrgao(Objects.insertDoisValor(id, tabela, action));
 			processo.setNpadraocnj("NATIVE INSERT UPDATE");
 			processo.setNpadrao("NATIVE INSERT UPDATE");
-			processo.setAgendarCap(Objects.insertDoisValor(id, tabela, action));
+			processo.setAgendarCap(0);
 			processo.setDistribuido("NATIVE INSERT UPDATE");
 		//	processo.setPo("NATIVE INSERT UPDATE");
 			processo.setValorAcao(new Float(1.99));
@@ -5712,7 +5712,7 @@ public class Objects {
 			processo.setLocalidade(Objects.insertDoisValor(id, tabela, action));
 			processo.setCapturpor(Objects.insertDoisValor(id, tabela, action));
 			processo.setNumeroprocesso("NATIVE INSERT UPDATE");
-			processo.setCapautomatica(Objects.insertDoisValor(id, tabela, action));
+			processo.setCapautomatica(1);
 			processo.setPasta("NATIVE INSERT UPDATE");
 			processo.setEnviarEmail(100);
 			processo.setEnviarMdgTelefone(100);

@@ -90,7 +90,7 @@ public class Processo extends ModelCosmeDamiao {
 	private String npadrao;
 
 	/** The agendar cap. */
-	private DoisValores agendarCap;
+	private Integer agendarCap;
 
 	/** The distribuido. */
 	private String distribuido;
@@ -124,7 +124,7 @@ public class Processo extends ModelCosmeDamiao {
 	private String numeroprocesso;
 
 	/** The capautomatica. */
-	private DoisValores capautomatica;
+	private Integer capautomatica;
 
 	/** The pasta. */
 	private String pasta;
@@ -380,11 +380,11 @@ public class Processo extends ModelCosmeDamiao {
 		this.npadrao = npadrao;
 	}
 
-	public DoisValores getAgendarCap() {
+	public Integer getAgendarCap() {
 		return agendarCap;
 	}
 
-	public void setAgendarCap(DoisValores agendarCap) {
+	public void setAgendarCap(Integer agendarCap) {
 		this.agendarCap = agendarCap;
 	}
 
@@ -476,11 +476,11 @@ public class Processo extends ModelCosmeDamiao {
 		this.numeroprocesso = numeroprocesso;
 	}
 
-	public DoisValores getCapautomatica() {
+	public Integer getCapautomatica() {
 		return capautomatica;
 	}
 
-	public void setCapautomatica(DoisValores capautomatica) {
+	public void setCapautomatica(Integer capautomatica) {
 		this.capautomatica = capautomatica;
 	}
 

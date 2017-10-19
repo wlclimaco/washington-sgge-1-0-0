@@ -686,9 +686,9 @@ this.advocaciaBAR = advocaciaBAR;
 @Test
 	public void testDeleteProcesso()
 	{
-		Processo processo = Objects.insertProcesso(1, TabelaEnum.PROCESSO, PersistenceActionEnum.INSERT);
+		Processo processo = Objects.insertProcesso(10010, TabelaEnum.PROCESSO, PersistenceActionEnum.INSERT);
 		FetchByIdRequest request = new FetchByIdRequest();
-		request.setFetchId(1);
+		request.setFetchId(10010);
 		Processo processoResponse = getAdvocaciaBAR().fetchProcessoById(request);
 		Assert.assertEquals(processoResponse, null);
 		getAdvocaciaBAR().insertProcesso(processo);
