@@ -4,9 +4,11 @@ import java.util.Date;
 import java.util.List;
 
 import com.qat.samples.sysmgmt.clinica.model.Especialidade;
+import com.qat.samples.sysmgmt.estado.model.Estado;
 import com.qat.samples.sysmgmt.pessoa.model.Pessoa;
 import com.qat.samples.sysmgmt.util.model.Compromisso;
 import com.qat.samples.sysmgmt.util.model.DiasHoras;
+import com.qat.samples.sysmgmt.util.model.DoisValores;
 
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.).
@@ -32,6 +34,16 @@ public class Advogado extends Pessoa {
 
 	/** The processos. */
 	private String oab;
+
+	private Estado estado;
+
+	private DoisValores tipoOab;
+
+	private Long mediaAtendimento;
+
+	private Integer maxAtendimento;
+
+	private Integer maxEncaixe;
 
 	/**
 	 * Instantiates a new advogado.
@@ -156,14 +168,62 @@ public class Advogado extends Pessoa {
 		this.processos = processos;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.pessoa.model.Pessoa#toString()
-	 */
+	public String getOab() {
+		return oab;
+	}
+
+	public void setOab(String oab) {
+		this.oab = oab;
+	}
+
+	public Estado getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Estado estado) {
+		this.estado = estado;
+	}
+
+	public DoisValores getTipoOab() {
+		return tipoOab;
+	}
+
+	public void setTipoOab(DoisValores tipoOab) {
+		this.tipoOab = tipoOab;
+	}
+
+	public Long getMediaAtendimento() {
+		return mediaAtendimento;
+	}
+
+	public void setMediaAtendimento(Long mediaAtendimento) {
+		this.mediaAtendimento = mediaAtendimento;
+	}
+
+	public Integer getMaxAtendimento() {
+		return maxAtendimento;
+	}
+
+	public void setMaxAtendimento(Integer maxAtendimento) {
+		this.maxAtendimento = maxAtendimento;
+	}
+
+	public Integer getMaxEncaixe() {
+		return maxEncaixe;
+	}
+
+	public void setMaxEncaixe(Integer maxEncaixe) {
+		this.maxEncaixe = maxEncaixe;
+	}
+
 	@Override
 	public String toString() {
 		return "Advogado [getHorasTrabalhos()=" + getHorasTrabalhos() + ", getTempoAtendimento()="
 				+ getTempoAtendimento() + ", getEspecialidades()=" + getEspecialidades() + ", getCompromissos()="
-				+ getCompromissos() + ", getProcessos()=" + getProcessos() + ", toString()=" + super.toString() + "]";
+				+ getCompromissos() + ", getProcessos()=" + getProcessos() + ", getOab()=" + getOab() + ", getEstado()="
+				+ getEstado() + ", getTipoOab()=" + getTipoOab() + ", getMediaAtendimento()=" + getMediaAtendimento()
+				+ ", getMaxAtendimento()=" + getMaxAtendimento() + ", getMaxEncaixe()=" + getMaxEncaixe()
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 }
