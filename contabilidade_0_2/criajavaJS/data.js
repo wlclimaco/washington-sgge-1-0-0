@@ -7194,6 +7194,18 @@ function ProcessModel() {
                 xml: true
             }
         });
+
+        a.push({
+            field: {
+                campo: "monitorar",
+                tipo: "Integer",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
         
         a.push({
             field: {
@@ -7483,14 +7495,139 @@ function ProcessoUsuariosModel() {
             return a;
     }
 
+function DiasHorasModel() {
+    
+        a = [];
+        a.push({
+            field: {
+                campo: "id",
+                tipo: "Integer",
+                requerid: true,
+                primaryKey: true,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+            a.push({
+                field: {
+                    campo: "horaInicio",
+                    tipo: "Long",
+                    requerid: false,
+                    primaryKey: false,
+                    forenkey: false,
+                    model: true,
+                    xml: true
+                }
+            });
+    
+            a.push({
+                field: {
+                    campo: "horaFinal",
+                    tipo: "Long",
+                    requerid: false,
+                    primaryKey: false,
+                    forenkey: false,
+                    model: true,
+                    xml: true
+                }
+            });
+
+            a.push({
+                field: {
+                    campo: "diasSemanas",
+                    tipo: "List<DoisValores>",
+                    requerid: false,
+                    primaryKey: false,
+                    forenkey: false,
+                    model: true,
+                    xml: true
+                }
+            });
+            return a;
+    }
+
 //================ public class Advogado extends Pessoa
     function AdvogadoModel() {
         a = [];
         a = PessoaModel();
+
         a.push({
             field: {
                 campo: "tempoAtendimento",
                 tipo: "Long",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+
+        a.push({
+            field: {
+                campo: "oab",
+                tipo: "String",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+
+        a.push({
+            field: {
+                campo: "mediaAtendimento",
+                tipo: "Long",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+
+        a.push({
+            field: {
+                campo: "maxAtendimento",
+                tipo: "Integer",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+
+        a.push({
+            field: {
+                campo: "maxEncaixe",
+                tipo: "Integer",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+
+        a.push({
+            field: {
+                campo: "estado",
+                tipo: "Estado",
+                requerid: false,
+                primaryKey: false,
+                forenkey: false,
+                model: true,
+                xml: true
+            }
+        });
+
+        a.push({
+            field: {
+                campo: "tipoOab",
+                tipo: "DoisValor",
                 requerid: false,
                 primaryKey: false,
                 forenkey: false,
@@ -16976,6 +17113,8 @@ function AdvocaciaModel() {
 
     var a = [];
     a = EntidadeModel();
+
+
     return a;
 }
 
@@ -17586,9 +17725,12 @@ dataModel = function() {
         }, {
             classe: "ProcessoCliente",
             model: ProcessoClienteModel()
+        }, {
+            classe: "DiasHoras",
+            model: DiasHorasModel()
         }],
         doisValor : {"nome" : "processo","data" : DVProcesso()},
-        interfaces: "Advogado",
+        interfaces: "Advogado", 
         local: "Advocacia"
     })
     oProjet.push({
