@@ -103,6 +103,18 @@ private static final String NAMESPACE_ADVOGADO = "AdvogadoMap.";
 	/** The Constant STMT_FETCH_ADVOGADO_ALL_REQUEST. */
 	private static final String STMT_FETCH_ADVOGADO_ALL_REQUEST = NAMESPACE_ADVOGADO + "fetchAllAdvogadosRequest";
 
+	/** The Constant STMT_INSERT_ADVOGADO. */
+	private static final String STMT_INSERT_ADVOGADO = NAMESPACE_ADVOGADO + "insertAdvogado";
+
+	/** The Constant STMT_UPDATE_ADVOGADO. */
+	private static final String STMT_UPDATE_ADVOGADO = NAMESPACE_ADVOGADO + "updateAdvogado";
+
+	/** The Constant STMT_DELETE_ADVOGADO. */
+	private static final String STMT_DELETE_ADVOGADO = NAMESPACE_ADVOGADO + "deleteAdvogadoById";
+
+		/** The Constant STMT_DELETE_ADVOGADO_ALL. */
+		private static final String STMT_DELETE_ADVOGADO_ALL = NAMESPACE_ADVOGADO + "deleteAllAdvogados";
+
 ///===================================### CLIENTE ####======================================
 /** The Constant NAMESPACE. */
 private static final String NAMESPACE_CLIENTE = "ClienteMap.";
@@ -342,7 +354,7 @@ private static final String NAMESPACE_FUNCIONARIO = "FuncionarioMap.";
 public InternalResponse insertAdvogado(Advogado advogado)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_PESSOA, advogado, response);
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_ADVOGADO, advogado, response);
 	return response;
 }
 
@@ -354,7 +366,7 @@ public InternalResponse insertAdvogado(Advogado advogado)
 public InternalResponse updateAdvogado(Advogado advogado)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_PESSOA, advogado, response);
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_ADVOGADO, advogado, response);
 	return response;
 }
 
@@ -366,7 +378,7 @@ public InternalResponse updateAdvogado(Advogado advogado)
 public InternalResponse deleteAdvogadoById(Advogado advogado)
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PESSOA, advogado, response);
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_ADVOGADO, advogado, response);
 	return response;
 }
 
@@ -378,7 +390,7 @@ public InternalResponse deleteAdvogadoById(Advogado advogado)
 public InternalResponse deleteAllAdvogados()
 {
 	InternalResponse response = new InternalResponse();
-	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_PESSOA_ALL, response);
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_ADVOGADO_ALL, response);
 	return response;
 }
 

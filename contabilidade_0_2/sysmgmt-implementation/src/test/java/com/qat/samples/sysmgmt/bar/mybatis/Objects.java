@@ -242,7 +242,7 @@ public class Objects {
 		Advogado advogado = new Advogado();
 		Date a = new Date();
 		advogado.setId(id);
-		advogado.setNome("nome_1 - " + action.toString());
+		advogado.setNome("nome_1 - insert");
 		advogado.setNomePai("nomePai_2 - " + action.toString());
 		advogado.setNomeMae("nomeMae_3 - " + action.toString());
 		advogado.setNomeConjugue("nomeConjugue_4 - " + action.toString());
@@ -5545,14 +5545,11 @@ public class Objects {
 			DiasHoras diashoras = new DiasHoras();
 			Date a = new Date();
 			diashoras.setId(id);
-			diashoras.setDiasSemanas(Objects.insertDoisValor(id, tabela, action));
+			diashoras.setDiasSemanas(new ArrayList<>());
+			diashoras.getDiasSemanas().add(Objects.insertDoisValor(id, tabela, action));
 			diashoras.setHoraInicio(a.getTime());
 			diashoras.setHoraFinal(a.getTime());
-			diashoras.setDiario(100);
-			diashoras.setSemanal(100);
-			diashoras.setQuinzenal(100);
-			diashoras.setMensal(100);
-			diashoras.setAnual(100);
+
 			diashoras.setParentId(id);
 			diashoras.setEmprId(1);
 			diashoras.setModifyDateUTC(a.getTime());

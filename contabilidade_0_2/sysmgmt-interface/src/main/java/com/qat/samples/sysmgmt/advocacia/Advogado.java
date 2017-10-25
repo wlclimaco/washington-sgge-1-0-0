@@ -35,15 +35,23 @@ public class Advogado extends Pessoa {
 	/** The processos. */
 	private String oab;
 
+	/** The estado. */
 	private Estado estado;
 
+	/** The tipo oab. */
 	private DoisValores tipoOab;
 
+	/** The media atendimento. */
 	private Long mediaAtendimento;
 
+	/** The max atendimento. */
 	private Integer maxAtendimento;
 
+	/** The max encaixe. */
 	private Integer maxEncaixe;
+
+	/** The grupo trabalho. */
+	private List<GrupoTrabalho> grupoTrabalho;
 
 	/**
 	 * Instantiates a new advogado.
@@ -168,54 +176,135 @@ public class Advogado extends Pessoa {
 		this.processos = processos;
 	}
 
+	/**
+	 * Gets the oab.
+	 *
+	 * @return the oab
+	 */
 	public String getOab() {
 		return oab;
 	}
 
+	/**
+	 * Sets the oab.
+	 *
+	 * @param oab the new oab
+	 */
 	public void setOab(String oab) {
 		this.oab = oab;
 	}
 
+	/**
+	 * Gets the estado.
+	 *
+	 * @return the estado
+	 */
 	public Estado getEstado() {
 		return estado;
 	}
 
+	/**
+	 * Sets the estado.
+	 *
+	 * @param estado the new estado
+	 */
 	public void setEstado(Estado estado) {
 		this.estado = estado;
 	}
 
+	/**
+	 * Gets the tipo oab.
+	 *
+	 * @return the tipo oab
+	 */
 	public DoisValores getTipoOab() {
 		return tipoOab;
 	}
 
+	/**
+	 * Sets the tipo oab.
+	 *
+	 * @param tipoOab the new tipo oab
+	 */
 	public void setTipoOab(DoisValores tipoOab) {
 		this.tipoOab = tipoOab;
 	}
 
+	/**
+	 * Gets the media atendimento.
+	 *
+	 * @return the media atendimento
+	 */
 	public Long getMediaAtendimento() {
 		return mediaAtendimento;
 	}
 
+	/**
+	 * Sets the media atendimento.
+	 *
+	 * @param mediaAtendimento the new media atendimento
+	 */
 	public void setMediaAtendimento(Long mediaAtendimento) {
 		this.mediaAtendimento = mediaAtendimento;
 	}
 
+	/**
+	 * Gets the max atendimento.
+	 *
+	 * @return the max atendimento
+	 */
 	public Integer getMaxAtendimento() {
 		return maxAtendimento;
 	}
 
+	/**
+	 * Sets the max atendimento.
+	 *
+	 * @param maxAtendimento the new max atendimento
+	 */
 	public void setMaxAtendimento(Integer maxAtendimento) {
 		this.maxAtendimento = maxAtendimento;
 	}
 
+	/**
+	 * Gets the max encaixe.
+	 *
+	 * @return the max encaixe
+	 */
 	public Integer getMaxEncaixe() {
 		return maxEncaixe;
 	}
 
+	/**
+	 * Sets the max encaixe.
+	 *
+	 * @param maxEncaixe the new max encaixe
+	 */
 	public void setMaxEncaixe(Integer maxEncaixe) {
 		this.maxEncaixe = maxEncaixe;
 	}
 
+	/**
+	 * Gets the grupo trabalho.
+	 *
+	 * @return the grupo trabalho
+	 */
+	public List<GrupoTrabalho> getGrupoTrabalho() {
+		return grupoTrabalho;
+	}
+
+	/**
+	 * Sets the grupo trabalho.
+	 *
+	 * @param grupoTrabalho the new grupo trabalho
+	 */
+	public void setGrupoTrabalho(List<GrupoTrabalho> grupoTrabalho) {
+		this.grupoTrabalho = grupoTrabalho;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.qat.samples.sysmgmt.pessoa.model.Pessoa#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Advogado [getHorasTrabalhos()=" + getHorasTrabalhos() + ", getTempoAtendimento()="
@@ -223,7 +312,7 @@ public class Advogado extends Pessoa {
 				+ getCompromissos() + ", getProcessos()=" + getProcessos() + ", getOab()=" + getOab() + ", getEstado()="
 				+ getEstado() + ", getTipoOab()=" + getTipoOab() + ", getMediaAtendimento()=" + getMediaAtendimento()
 				+ ", getMaxAtendimento()=" + getMaxAtendimento() + ", getMaxEncaixe()=" + getMaxEncaixe()
-				+ ", toString()=" + super.toString() + "]";
+				+ ", getGrupoTrabalho()=" + getGrupoTrabalho() + ", toString()=" + super.toString() + "]";
 	}
 
 }

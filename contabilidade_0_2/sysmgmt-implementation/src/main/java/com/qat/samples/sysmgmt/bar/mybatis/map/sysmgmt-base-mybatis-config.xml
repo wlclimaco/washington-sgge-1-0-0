@@ -381,6 +381,7 @@
         <typeAlias alias="Contador" type="com.qat.samples.sysmgmt.pessoa.model.Contador" />
 
         <typeAlias alias="Pessoa" type="com.qat.samples.sysmgmt.pessoa.model.Pessoa" />
+        <typeAlias alias="Advogado" type="com.qat.samples.sysmgmt.advocacia.Advogado" />
 
         <typeAlias alias="Transportador" type="com.qat.samples.sysmgmt.pessoa.model.Transportador" />
         <typeAlias alias="TransportadorInquiryRequest" type="com.qat.samples.sysmgmt.pessoa.model.request.TransportadorInquiryRequest" />

@@ -1,93 +1,204 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 
-<!-- create by system gera-java version 1.0.0 03/05/2016 14:9 : 7 -->
+<!-- create by system gera-java version 1.0.0 25/10/2017 11:13 : 14-->
 
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="AdvogadoMap">
-	<cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
-	<cache type="org.mybatis.caches.ehcache.EhcacheCache" />
+ <cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>
+ <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
 
-	<!-- Result maps describe the mapping between the columns returned from
-		a query, and the class properties. A result map isnt necessary if the columns
-		(or aliases) match to the properties exactly. <resultMap id="advogadoResult"
-		type="Advogado" extends=PessoaMap.PessoaResult"> -->
-	<resultMap id="advogadoResult" type="Advogado" extends="PessoaMap.PessoaResult">
-	</resultMap>
+  <!-- Result maps describe the mapping between the columns returned
+      from a query, and the class properties.  A result map isnt
+      necessary if the columns (or aliases) match to the properties
+       exactly. -->
+  <resultMap id="advogadoResult" type="advogado">
+    <result property="id" column="id"/>
+    <result property="nome" column="nome"/>
+    <result property="nomePai" column="nomePai"/>
+    <result property="nomeMae" column="nomeMae"/>
+    <result property="nomeConjugue" column="nomeConjugue"/>
+    <result property="estadoCivil" column="estadoCivil"/>
+    <result property="datanasc" column="datanasc"/>
+    <result property="tipoPessoa" column="tipoPessoa"/>
+    <result property="foto" column="foto"/>
+    <result property="sexo" column="sexo"/>
+    <result property="tempoAtendimento" column="tempoAtendimento"/>
+    <result property="oab" column="oab"/>
+    <result property="mediaAtendimento" column="mediaAtendimento"/>
+    <result property="maxAtendimento" column="maxAtendimento"/>
+    <result property="maxEncaixe" column="maxEncaixe"/>
+<result property="parentId" column="parentId"/>
+<result property="tabelaEnumValue" column="tabelaEnumValue"/>
+<result property="emprId" column="emprId"/>
+<result property="processId" column="processId"/>
+<result property="createUser" column="create_user"/>
+<result property="createDateUTC" column="create_date"/>
+<result property="modifyUser" column="modify_user"/>
+<result property="modifyDateUTC" column="modify_date"/>
+    <collection property="estado" column="estado" select="RegimeMap.fetchRegimeById"/>
+    <collection property="tipoOab" column="tipoOab" select="RegimeMap.fetchRegimeById"/>
+<collection property="horasTrabalhos" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<collection property="especialidades" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<collection property="compromissos" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<collection property="processos" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<collection property="enderecos" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<collection property="documentos" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<collection property="emails" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<collection property="telefones" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<collection property="bancos" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<collection property="formaPagamentoList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<collection property="condPagList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<collection property="contatoList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<collection property="pessoaTipo" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<collection property="regime" column="regime" select="RegimeMap.fetchRegimeById"/>
+  </resultMap>
 
-	<sql id="allAdvogadoColumns">
-		id,
-		<include refid="PessoaMap.allPessoaColumns" />
-	</sql>
-	<sql id="allAdvogadoValues">
-		<include refid="PessoaMap.allPessoaValues" />
-	</sql>
+  <sql id="alladvogadoColumns">
+nome
+,regime
+,nomePai
+,nomeMae
+,nomeConjugue
+,estadoCivil
+,datanasc
+,tipoPessoa
+,foto
+,sexo
+,tempoAtendimento
+,oab
+,mediaAtendimento
+,maxAtendimento
+,maxEncaixe
+,estado
+,tipoOab
+,parentId
+,tabelaEnumValue
+,emprId
+,processId
+,create_date
+,create_user
+,modify_date
+,modify_user
 
-	<select id="fetchAllAdvogados" resultMap="advogadoResult">
-		SELECT
-		<include refid="allAdvogadoColumns" />
-		FROM pessoa where pessoaTypeEnum = 9 ORDER BY id ASC
-	</select>
+</sql>
+<sql id="alladvogadoValues">
+#{nome},
+#{regime.id},
+#{nomePai},
+#{nomeMae},
+#{nomeConjugue},
+#{estadoCivil},
+#{datanasc},
+#{tipoPessoa},
+#{foto},
+#{sexo},
+#{tempoAtendimento.id},
+#{oab},
+#{mediaAtendimento.id},
+#{maxAtendimento},
+#{maxEncaixe},
+#{estado.id},
+#{tipoOab.id},
+     #{parentId},
+     #{tabelaEnumValue},
+     #{emprId},
+     #{processId},
+     #{createDateUTC},
+     #{createUser},
+     #{modifyDateUTC},
+     #{modifyUser}
+  </sql>
 
-	<select id="fetchAdvogadoById" parameterType="Integer"
-		resultMap="advogadoResult">
-		SELECT
-		<include refid="allAdvogadoColumns" />
-		FROM pessoa WHERE id = #{fetchid}
-	</select>
 
-	<select id="fetchAllAdvogadosRequest" parameterType="AdvogadoInquiryRequest"
-		resultMap="advogadoResult">
+ <select id="fetchAllAdvogados" resultMap="advogadoResult">
+    SELECT id,
+ <include refid="alladvogadoColumns" />
+   FROM advogado ORDER BY id ASC
+ </select>
 
-		SELECT
-		<include refid="allAdvogadoColumns" />
-		FROM pessoa where pessoaTypeEnum = 9
+ <select id="fetchAdvogadoById" parameterType="Integer" resultMap="advogadoResult">
+    SELECT id,
+ <include refid="alladvogadoColumns" />
+   FROM advogado WHERE id = #{fetchid}
+ </select>
 
-		<if test="permissaoTypeEnumValue == 1">
-			and id IS NOT NULL
-		</if>
-		<if test="permissaoTypeEnumValue != 1">
-			<if test="emprId == null">
-				<if test="emprIds != null">
-					and emprId in
+ <select id="fetchAllAdvogadosRequest" parameterType="PagedInquiryRequest" resultMap="advogadoResult">
 
-					<foreach item="item" index="index" collection="emprIds"
-						open="(" separator="," close=")">
-						#{item}
-					</foreach>
+     SELECT id,<include refid="alladvogadoColumns" />
+           FROM advogado
+           where 0 = 0
+           <if test="permissaoTypeEnumValue == 1">
+               and id IS NOT NULL
+            </if>
+           <if test="permissaoTypeEnumValue != 1">
+               <if test="emprId == null">
+                   <if test="emprIds != null">
+                       and emprId in
 
-				</if>
-			</if>
-			<if test="emprId != null"> and emprId = #{emprId}</if>
-		</if>
+                     <foreach item="item" index="index" collection="emprIds"
+                          open="(" separator="," close=")">
+                         #{item}
+                     </foreach>
 
-		ORDER BY id ASC
-	</select>
+                 </if>
+             </if>
+               <if test="emprId != null"> and emprId = #{emprId}</if>
+           </if>
+           ORDER BY id ASC
+</select>
 
-	<select id="fetchAdvogadoRowCount" resultType="Integer">
-		SELECT COUNT(*) AS
-		RECORD_COUNT FROM pessoa WHERE id IS NOT NULL and pessoaTypeEnum = 9
-		<if test="permissaoTypeEnumValue == 1">
-			and id IS NOT NULL
-		</if>
-		<if test="permissaoTypeEnumValue != 1">
-			<if test="emprId == null">
-				<if test="emprIds != null"> and emprId in
+<select id="fetchAdvogadoRowCount" resultType="Integer">
+     SELECT COUNT(*) AS RECORD_COUNT FROM advogado WHERE id IS NOT NULL <if test="emprId != null"> and emprId = emprId</if>
 
-				<foreach item="item" index="index" collection="emprIds"
-		             open="(" separator="," close=")">
-		        #{item}
-		    	</foreach>
+ </select>
 
-				</if>
-			</if>
-			<if test="emprId != null"> and emprId = #{emprId}</if>
-		</if>
+ <insert id="insertAdvogado" parameterType="advogado" useGeneratedKeys="true" keyProperty="id">
+     INSERT INTO advogado (
+ <if test="id != null"><if test="id > 0">id,</if></if><include refid="alladvogadoColumns" />
+     )
+   VALUES (<if test="id != null"><if test="id > 0">#{id},</if></if><include refid="alladvogadoValues" /> )
+ </insert>
 
-	</select>
+ <update id="updateAdvogado" parameterType="advogado">
+   UPDATE advogado SET
+<if test="nome!= null">nome = #{nome},</if>
+<if test="regime!= null">regime = #{regime.id},</if>
+<if test="nomePai!= null">nomePai = #{nomePai},</if>
+<if test="nomeMae!= null">nomeMae = #{nomeMae},</if>
+<if test="nomeConjugue!= null">nomeConjugue = #{nomeConjugue},</if>
+<if test="estadoCivil!= null">estadoCivil = #{estadoCivil},</if>
+<if test="datanasc!= null">datanasc = #{datanasc},</if>
+<if test="tipoPessoa!= null">tipoPessoa = #{tipoPessoa},</if>
+<if test="foto!= null">foto = #{foto},</if>
+<if test="sexo!= null">sexo = #{sexo},</if>
+<if test="tempoAtendimento!= null">tempoAtendimento = #{tempoAtendimento.id},</if>
+<if test="oab!= null">oab = #{oab},</if>
+<if test="mediaAtendimento!= null">mediaAtendimento = #{mediaAtendimento.id},</if>
+<if test="maxAtendimento!= null">maxAtendimento = #{maxAtendimento},</if>
+<if test="maxEncaixe!= null">maxEncaixe = #{maxEncaixe},</if>
+<if test="estado!= null">estado = #{estado.id},</if>
+<if test="tipoOab!= null">tipoOab = #{tipoOab.id},</if>
+<if test="parentId!= null"> parentId=#{parentId},</if>
+<if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
+<if test="emprId!= null"> emprId=#{emprId},</if>
+<if test="processId!= null"> processId=#{processId},</if>
+<if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+<if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+   WHERE
+    id = #{id}
+ </update>
+
+<delete id="deleteAdvogadoById" parameterType="advogado">
+  DELETE FROM advogado WHERE id = #{id}
+ </delete>
+
+ <delete id="deleteAllAdvogados">
+ DELETE FROM advogado
+  </delete>
 </mapper>
 
 

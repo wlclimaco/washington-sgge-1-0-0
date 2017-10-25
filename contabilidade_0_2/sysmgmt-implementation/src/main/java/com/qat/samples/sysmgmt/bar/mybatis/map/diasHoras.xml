@@ -19,11 +19,6 @@
     <result property="id" column="id"/>
     <result property="horaInicio" column="horaInicio"/>
     <result property="horaFinal" column="horaFinal"/>
-    <result property="diario" column="diario"/>
-    <result property="semanal" column="semanal"/>
-    <result property="quinzenal" column="quinzenal"/>
-    <result property="mensal" column="mensal"/>
-    <result property="anual" column="anual"/>
 <result property="parentId" column="parentId"/>
 <result property="tabelaEnumValue" column="tabelaEnumValue"/>
 <result property="emprId" column="emprId"/>
@@ -36,14 +31,8 @@
   </resultMap>
 
   <sql id="allDiasHorasColumns">
-diasSemanas
-,horaInicio
+horaInicio
 ,horaFinal
-,diario
-,semanal
-,quinzenal
-,mensal
-,anual
 ,parentId
 ,tabelaEnumValue
 ,emprId
@@ -55,14 +44,9 @@ diasSemanas
 
 </sql>
 <sql id="allDiasHorasValues">
-#{diasSemanas.id},
 #{horaInicio},
 #{horaFinal},
-#{diario},
-#{semanal},
-#{quinzenal},
-#{mensal},
-#{anual},
+
      #{parentId},
      #{tabelaEnumValue},
      #{emprId},
@@ -131,14 +115,8 @@ diasSemanas
 
  <update id="updateDiasHoras" parameterType="DiasHoras">
    UPDATE diashoras SET
-<if test="diasSemanas!= null">diasSemanas = #{diasSemanas.id},</if>
 <if test="horaInicio!= null">horaInicio = #{horaInicio},</if>
 <if test="horaFinal!= null">horaFinal = #{horaFinal},</if>
-<if test="diario!= null">diario = #{diario},</if>
-<if test="semanal!= null">semanal = #{semanal},</if>
-<if test="quinzenal!= null">quinzenal = #{quinzenal},</if>
-<if test="mensal!= null">mensal = #{mensal},</if>
-<if test="anual!= null">anual = #{anual},</if>
 <if test="parentId!= null"> parentId=#{parentId},</if>
 <if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
 <if test="emprId!= null"> emprId=#{emprId},</if>
