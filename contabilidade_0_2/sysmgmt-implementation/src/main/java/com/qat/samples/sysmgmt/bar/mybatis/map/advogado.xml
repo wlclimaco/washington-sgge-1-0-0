@@ -38,7 +38,7 @@
 <result property="createUser" column="create_user"/>
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
-<result property="modifyDateUTC" column="modify_date"/>
+<!-- <result property="modifyDateUTC" column="modify_date"/>
     <collection property="estado" column="estado" select="RegimeMap.fetchRegimeById"/>
     <collection property="tipoOab" column="tipoOab" select="RegimeMap.fetchRegimeById"/>
 <collection property="horasTrabalhos" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
@@ -54,7 +54,7 @@
 <collection property="condPagList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
 <collection property="contatoList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
 <collection property="pessoaTipo" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
-<collection property="regime" column="regime" select="RegimeMap.fetchRegimeById"/>
+<collection property="regime" column="regime" select="RegimeMap.fetchRegimeById"/>-->
   </resultMap>
 
   <sql id="alladvogadoColumns">
@@ -96,9 +96,9 @@ nome
 #{tipoPessoa},
 #{foto},
 #{sexo},
-#{tempoAtendimento.id},
+#{tempoAtendimento},
 #{oab},
-#{mediaAtendimento.id},
+#{mediaAtendimento},
 #{maxAtendimento},
 #{maxEncaixe},
 #{estado.id},
@@ -175,9 +175,9 @@ nome
 <if test="tipoPessoa!= null">tipoPessoa = #{tipoPessoa},</if>
 <if test="foto!= null">foto = #{foto},</if>
 <if test="sexo!= null">sexo = #{sexo},</if>
-<if test="tempoAtendimento!= null">tempoAtendimento = #{tempoAtendimento.id},</if>
+<if test="tempoAtendimento!= null">tempoAtendimento = #{tempoAtendimento},</if>
 <if test="oab!= null">oab = #{oab},</if>
-<if test="mediaAtendimento!= null">mediaAtendimento = #{mediaAtendimento.id},</if>
+<if test="mediaAtendimento!= null">mediaAtendimento = #{mediaAtendimento},</if>
 <if test="maxAtendimento!= null">maxAtendimento = #{maxAtendimento},</if>
 <if test="maxEncaixe!= null">maxEncaixe = #{maxEncaixe},</if>
 <if test="estado!= null">estado = #{estado.id},</if>
