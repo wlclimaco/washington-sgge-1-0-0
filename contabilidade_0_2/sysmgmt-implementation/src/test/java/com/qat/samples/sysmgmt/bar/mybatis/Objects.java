@@ -460,10 +460,8 @@ public class Objects {
 		medico.setProcessId(1);
 		medico.setModelAction(action);
 		//=============
-		List<EspecialidadePessoa> especialidade = new ArrayList<EspecialidadePessoa>();
-		especialidade.add(new EspecialidadePessoa("Ortopedia", id, action));
-		especialidade.add(new EspecialidadePessoa("Traumatologia", id, action));
-		medico.setEspecialidadeList(especialidade);
+		medico.setEspecialidadeList(new ArrayList<>());
+		medico.getEspecialidadeList().add(insertDoisValoresParent(id, tabela, action));
 		//============
 		List<DoisValores> dois = new ArrayList<DoisValores>();
 		dois.add(new DoisValores(1));
@@ -5856,7 +5854,6 @@ public class Objects {
 	{
 		DoisValoresParent clientecompromisso = new DoisValoresParent();
 		Date a = new Date();
-		clientecompromisso.setId(id);
 		clientecompromisso.setDoisvalor(insertDoisValor(id, tabela, action));
 		clientecompromisso.setParentId(id);
 		clientecompromisso.setEmprId(1);

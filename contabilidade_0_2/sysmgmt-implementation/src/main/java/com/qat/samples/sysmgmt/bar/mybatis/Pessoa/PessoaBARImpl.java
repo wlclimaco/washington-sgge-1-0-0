@@ -1015,9 +1015,9 @@ public InternalResponse insertMedico(Medico medico)
 	if (!ValidationUtil.isNullOrEmpty(medico.getEspecialidadeList()))
 	{
 		a +=
-				EspecialidadeBARD.maintainEspecialidadeAssociations(medico.getEspecialidadeList(), response, medico.getId(), null,
+				DoisValoresParentBARD.maintainDoisValoresParentAssociations(medico.getEspecialidadeList(), response, medico.getId(), null,
 						null,
-						TabelaEnum.MEDICO, clinicaBAR, statusBAR, historicoBAR, medico.getId(),
+						TabelaEnum.MEDICO, getDoisValorBAR(), getStatusBAR(), getHistoricoBAR(), medico.getId(),
 						medico.getCreateUser(), historicoId, historicoId);
 	}
 
@@ -1067,9 +1067,9 @@ public InternalResponse updateMedico(Medico medico)
 	if (!ValidationUtil.isNullOrEmpty(medico.getEspecialidadeList()))
 	{
 		a +=
-				EspecialidadeBARD.maintainEspecialidadeAssociations(medico.getEspecialidadeList(), response, medico.getId(), null,
+				DoisValoresParentBARD.maintainDoisValoresParentAssociations(medico.getEspecialidadeList(), response, medico.getId(), null,
 						null,
-						TabelaEnum.MEDICO, clinicaBAR, statusBAR, historicoBAR, medico.getId(),
+						TabelaEnum.MEDICO, getDoisValorBAR(), getStatusBAR(), getHistoricoBAR(), medico.getId(),
 						medico.getCreateUser(), historicoId, historicoId);
 	}
 

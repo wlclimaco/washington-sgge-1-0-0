@@ -55,6 +55,26 @@ public class DoisValorBARImpl extends SqlSessionDaoSupport implements IDoisValor
 
 	// ===================================### DOISVALOR
 	// ####======================================
+
+	/// ===================================### DOISVALOR
+		/// ####======================================
+		/** The Constant NAMESPACE. */
+		private static final String NAMESPACE_DOISVALOR_PARENT = "DoisValorParentMap.";
+
+		/** The Constant STMT_INSERT_DOISVALOR. */
+		private static final String STMT_INSERT_DOISVALOR_PARENT = NAMESPACE_DOISVALOR_PARENT + "insertDoisValorParent";
+
+		/** The Constant STMT_UPDATE_DOISVALOR. */
+		private static final String STMT_UPDATE_DOISVALOR_PARENT = NAMESPACE_DOISVALOR_PARENT + "updateDoisValorParent";
+
+		/** The Constant STMT_DELETE_DOISVALOR. */
+		private static final String STMT_DELETE_DOISVALOR_PARENT = NAMESPACE_DOISVALOR_PARENT + "deleteDoisValorParentById";
+
+		/** The Constant STMT_DELETE_DOISVALOR_ALL. */
+		private static final String STMT_DELETE_DOISVALOR_PARENT_ALL = NAMESPACE_DOISVALOR_PARENT + "deleteAllDoisValorParents";
+
+		/** The Constant STMT_FETCH_DOISVALOR. */
+		private static final String STMT_FETCH_DOISVALOR_PARENT = NAMESPACE_DOISVALOR_PARENT + "fetchDoisValorParentById";
 	/**
 	 * /* (non-Javadoc)
 	 *
@@ -198,7 +218,7 @@ public class DoisValorBARImpl extends SqlSessionDaoSupport implements IDoisValor
 	@Override
 	public InternalResponse insertDoisValoresParent(DoisValoresParent doisvalor) {
 		InternalResponse response = new InternalResponse();
-		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_DOISVALOR, doisvalor, response);
+		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_DOISVALOR_PARENT, doisvalor, response);
 		return response;
 	}
 
@@ -212,7 +232,7 @@ public class DoisValorBARImpl extends SqlSessionDaoSupport implements IDoisValor
 	@Override
 	public InternalResponse updateDoisValoresParent(DoisValoresParent doisvalor) {
 		InternalResponse response = new InternalResponse();
-		MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_DOISVALOR, doisvalor, response);
+		MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_DOISVALOR_PARENT, doisvalor, response);
 		return response;
 	}
 
@@ -226,7 +246,7 @@ public class DoisValorBARImpl extends SqlSessionDaoSupport implements IDoisValor
 	@Override
 	public InternalResponse deleteDoisValoresParentById(DoisValoresParent doisvalor) {
 		InternalResponse response = new InternalResponse();
-		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_DOISVALOR, doisvalor, response);
+		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_DOISVALOR_PARENT, doisvalor, response);
 		return response;
 	}
 
@@ -239,7 +259,7 @@ public class DoisValorBARImpl extends SqlSessionDaoSupport implements IDoisValor
 	@Override
 	public InternalResponse deleteAllDoisValoresParents() {
 		InternalResponse response = new InternalResponse();
-		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_DOISVALOR_ALL, response);
+		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_DOISVALOR_PARENT_ALL, response);
 		return response;
 	}
 
@@ -252,7 +272,7 @@ public class DoisValorBARImpl extends SqlSessionDaoSupport implements IDoisValor
 	 */
 	@Override
 	public DoisValoresParent fetchDoisValoresParentById(FetchByIdRequest request) {
-		return (DoisValoresParent) MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_DOISVALOR,
+		return (DoisValoresParent) MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_DOISVALOR_PARENT,
 				request.getFetchId());
 
 	}

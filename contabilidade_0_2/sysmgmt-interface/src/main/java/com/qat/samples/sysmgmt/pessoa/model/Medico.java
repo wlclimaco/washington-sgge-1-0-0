@@ -4,8 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 import com.qat.samples.sysmgmt.clinica.model.Consulta;
-import com.qat.samples.sysmgmt.clinica.model.EspecialidadePessoa;
 import com.qat.samples.sysmgmt.dp.model.HorarioFunc;
+import com.qat.samples.sysmgmt.util.model.DoisValoresParent;
 
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.). This represents an account for a transfer
@@ -14,7 +14,7 @@ import com.qat.samples.sysmgmt.dp.model.HorarioFunc;
 @SuppressWarnings("serial")
 public class Medico extends Pessoa
 {
-	private List<EspecialidadePessoa> especialidadeList;
+	private List<DoisValoresParent> especialidadeList;
 	private List<Consulta> consultaList;
 	private List<HorarioFunc> horarioList;
 
@@ -40,12 +40,12 @@ public class Medico extends Pessoa
 		setModifyUser("system");
 	}
 
-	public List<EspecialidadePessoa> getEspecialidadeList()
+	public List<DoisValoresParent> getEspecialidadeList()
 	{
 		return especialidadeList;
 	}
 
-	public void setEspecialidadeList(List<EspecialidadePessoa> especialidadeList)
+	public void setEspecialidadeList(List<DoisValoresParent> especialidadeList)
 	{
 		this.especialidadeList = especialidadeList;
 	}
