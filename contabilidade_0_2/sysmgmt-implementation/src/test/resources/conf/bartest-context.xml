@@ -125,6 +125,9 @@
 		<property name="notesBAR" ref="notesBARTarget" />
 		<property name="historicoBAR" ref="historicoBARTarget" />
 		<property name="pessoaBAR" ref="pessoaBARTarget" />
+		<property name="advocaciaBAR" ref="advocaciaBARTarget" />
+		<property name="doisValorBAR" ref="doisValorBARTarget" />
+		<property name="clinicaBAR" ref="clinicaBARTarget" />
 	</bean>
 
 

@@ -198,6 +198,8 @@ public enum TabelaEnum implements IIntegerEnum, II18nEnum
 	CAIXA(72, "sendsolv.base.model.risklevelenum.medium"),
 	PRODUTOPARENT(72, "sendsolv.base.model.risklevelenum.medium"),
 
+	ADVOGADO(74, "sendsolv.base.model.risklevelenum.medium"),
+
 	MARCAPRODUTO(73, "sendsolv.base.model.risklevelenum.medium"),
 
 	GRUPO(74, "sendsolv.base.model.risklevelenum.medium"),

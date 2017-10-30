@@ -193,6 +193,7 @@
 
         <!-- Util-->
         <typeAlias alias="DoisValor" type="com.qat.samples.sysmgmt.util.model.DoisValores" />
+        <typeAlias alias="DoisValoresParent" type="com.qat.samples.sysmgmt.util.model.DoisValoresParent" />
         <typeAlias alias="DoisValorType" type="com.qat.samples.sysmgmt.util.model.DoisValorType" />
         <typeAlias alias="DoisValorInquiryRequest" type="com.qat.samples.sysmgmt.util.model.request.DoisValoresInquiryRequest" />
 
@@ -538,6 +539,7 @@
 
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/consulta.xml" />
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/especialidade.xml" />
+        <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/especialidadePessoa.xml" />
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/exame.xml" />
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/medico.xml" />
         <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/paciente.xml" />
@@ -726,6 +728,7 @@
 <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/arquivo.xml" />
 <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/processoUsuarios.xml" />
 <mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/processoCliente.xml" />
+<mapper resource="com/qat/samples/sysmgmt/bar/mybatis/map/doisValorParent.xml" />
     </mappers>
 
 </configuration>

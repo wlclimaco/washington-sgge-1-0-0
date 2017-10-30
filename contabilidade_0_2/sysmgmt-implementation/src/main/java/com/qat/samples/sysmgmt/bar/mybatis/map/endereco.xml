@@ -88,6 +88,13 @@ parentId
    FROM endereco WHERE id = #{fetchid}
  </select>
 
+  <select id="fetchEnderecoByAdvogado" parameterType="Integer" resultMap="EnderecoResult">
+    SELECT id,
+	<include refid="allEnderecoColumns" />
+   FROM endereco WHERE parentId = #{parentId} and tabelaEnumValue = 74
+ </select>
+
+
   <select id="fetchEnderecoByPessoa" parameterType="Integer" resultMap="EnderecoResult">
     SELECT id,
 	<include refid="allEnderecoColumns" />

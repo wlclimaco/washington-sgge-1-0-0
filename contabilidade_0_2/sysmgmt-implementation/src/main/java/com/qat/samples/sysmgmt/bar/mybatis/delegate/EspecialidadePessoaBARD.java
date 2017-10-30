@@ -6,11 +6,12 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.validation.ValidationUtil;
-import com.qat.samples.sysmgmt.bar.Endereco.IEnderecoBAR;
+import com.qat.samples.sysmgmt.bar.Clinica.IClinicaBAR;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
+import com.qat.samples.sysmgmt.clinica.model.Especialidade;
+import com.qat.samples.sysmgmt.clinica.model.EspecialidadePessoa;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
-import com.qat.samples.sysmgmt.util.model.Endereco;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.TypeEnum;
 
@@ -18,8 +19,11 @@ import com.qat.samples.sysmgmt.util.model.TypeEnum;
  * Delegate class for the SysMgmt DACs. Note this is a final class with ONLY static methods so everything must be
  * passed into the methods. Nothing injected.
  */
-public final class EnderecoBARD extends SqlSessionDaoSupport
+public final class EspecialidadePessoaBARD extends SqlSessionDaoSupport
 {
+
+	/** The Constant ZERO. */
+	private static final Integer ZERO = 0;
 
 	/**
 	 * Fetch objects by request.
@@ -31,49 +35,46 @@ public final class EnderecoBARD extends SqlSessionDaoSupport
 	 * @param response the response
 	 */
 	@SuppressWarnings("unchecked")
-	public static Integer maintainEnderecoAssociations(List<Endereco> enderecoList,
+	public static Integer maintainEspecialidadeAssociations(List<EspecialidadePessoa> list,
 			InternalResponse response, Integer parentId, TypeEnum type, AcaoEnum acaoType,
-			TabelaEnum tabelaEnum, IEnderecoBAR enderecoDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC,
+			TabelaEnum tabelaEnum, IClinicaBAR especialidadeDAC, IStatusBAR statusDAC, IHistoricoBAR historicoDAC,
 			Integer empId, String UserId, Integer processId, Integer historicoId)
 	{
 		Boolean count = false;
 		// First Maintain Empresa
-		if (ValidationUtil.isNullOrEmpty(enderecoList))
+		if (ValidationUtil.isNullOrEmpty(list))
 		{
 			return 0;
 		}
 		// For Each Contact...
-		for (Endereco endereco : enderecoList)
+		for (EspecialidadePessoa especialidade : list)
 		{
 			// Make sure we set the parent key
-			endereco.setParentId(parentId);
-			endereco.setTabelaEnum(tabelaEnum);
-			endereco.setProcessId(processId);
+			especialidade.setParentId(parentId);
+			especialidade.setTabelaEnum(tabelaEnum);
 
-			if (ValidationUtil.isNull(endereco.getModelAction()))
+			if (ValidationUtil.isNull(especialidade.getModelAction()))
 			{
 				continue;
 			}
-			switch (endereco.getModelAction())
+			switch (especialidade.getModelAction())
 			{
 				case INSERT:
-					count = enderecoDAC.insertEndereco(endereco).hasSystemError();
+					count = especialidadeDAC.insertEspecialidadePessoa(especialidade).hasSystemError();
+
 					break;
 				case UPDATE:
-					count = enderecoDAC.updateEndereco(endereco).hasSystemError();
+					count = especialidadeDAC.updateEspecialidadePessoa(especialidade).hasSystemError();
 
 					break;
 				case DELETE:
-					count = enderecoDAC.deleteEnderecoById(endereco).hasSystemError();
-					break;
-				default:
 
+					count = especialidadeDAC.deleteEspecialidadePessoaById(especialidade).hasSystemError();
+
+					break;
 			}
 		}
-		if(count){
-			return 1;
-		}else{
-			return 0;
-		}
+
+		return 1;
 	}
 }

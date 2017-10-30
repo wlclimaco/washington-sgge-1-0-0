@@ -70,6 +70,12 @@ tabelaEnumValue
    FROM documento WHERE parentid = #{fetchid}
  </select>
 
+  <select id="fetchDocumentoByAdvogadoId" parameterType="Integer" resultMap="DocumentoResult">
+    SELECT id,
+	<include refid="allDocumentoColumns" />
+   FROM documento WHERE parentid = #{fetchid} and tabelaenumvalue = 74
+ </select>
+
  <select id="fetchAllDocumentosRequest" parameterType="PagedInquiryRequest" resultMap="DocumentoResult">
 		SELECT id,<include refid="allDocumentoColumns" />
   		  FROM documento ORDER BY id , parentId ASC

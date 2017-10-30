@@ -3,6 +3,7 @@ package com.qat.samples.sysmgmt.bar.Util;
 import com.qat.framework.model.response.InternalResponse;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.samples.sysmgmt.util.model.DoisValores;
+import com.qat.samples.sysmgmt.util.model.DoisValoresParent;
 import com.qat.samples.sysmgmt.util.model.request.DoisValoresInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 
@@ -68,5 +69,48 @@ public interface IDoisValorBAR
 * @return the internal results response
 */
 	public InternalResultsResponse<DoisValores> fetchDoisValoressByRequest(DoisValoresInquiryRequest request);
+
+
+	/**
+	 * Fetch doisvalor by id.
+	 *
+	 * @param request the request
+* @return the internal results response
+*/
+	public DoisValoresParent fetchDoisValoresParentById(FetchByIdRequest request);
+
+	/**
+* Insert doisvalor.
+*
+* @param doisvalor the doisvalor
+*
+* @return the internal response
+*/
+	public InternalResponse insertDoisValoresParent(DoisValoresParent doisvalor);
+
+	/**
+* Update doisvalor.
+*
+* @param doisvalor the doisvalor
+*
+* @return the internal response
+*/
+	public InternalResponse updateDoisValoresParent(DoisValoresParent doisvalor);
+
+	/**
+* Delete doisvalor.
+*
+* @param doisvalor the doisvalor
+*
+* @return the internal response
+*/
+	public InternalResponse deleteDoisValoresParentById(DoisValoresParent doisvalor);
+
+	/**
+* Delete all doisvalors.
+*
+* @return the internal response
+*/
+	public InternalResponse deleteAllDoisValoresParents();
 
 }

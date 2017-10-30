@@ -4,11 +4,13 @@ import java.util.Date;
 import java.util.List;
 
 import com.qat.samples.sysmgmt.clinica.model.Especialidade;
+import com.qat.samples.sysmgmt.clinica.model.EspecialidadePessoa;
 import com.qat.samples.sysmgmt.estado.model.Estado;
 import com.qat.samples.sysmgmt.pessoa.model.Pessoa;
 import com.qat.samples.sysmgmt.util.model.Compromisso;
 import com.qat.samples.sysmgmt.util.model.DiasHoras;
 import com.qat.samples.sysmgmt.util.model.DoisValores;
+import com.qat.samples.sysmgmt.util.model.DoisValoresParent;
 
 /**
  * This class is a representation of an Account (i.e Checking, Savings, etc.).
@@ -24,7 +26,7 @@ public class Advogado extends Pessoa {
 	private Long tempoAtendimento;
 
 	/** The especialidades. */
-	private List<Especialidade> especialidades;
+	private List<DoisValoresParent> especialidades;
 
 	/** The compromissos. */
 	private List<Compromisso> compromissos;
@@ -51,7 +53,7 @@ public class Advogado extends Pessoa {
 	private Integer maxEncaixe;
 
 	/** The grupo trabalho. */
-	private List<GrupoTrabalho> grupoTrabalho;
+	private List<DoisValoresParent> grupoTrabalho;
 
 	/**
 	 * Instantiates a new advogado.
@@ -127,7 +129,7 @@ public class Advogado extends Pessoa {
 	 *
 	 * @return the especialidades
 	 */
-	public List<Especialidade> getEspecialidades() {
+	public List<DoisValoresParent> getEspecialidades() {
 		return especialidades;
 	}
 
@@ -136,7 +138,7 @@ public class Advogado extends Pessoa {
 	 *
 	 * @param especialidades the new especialidades
 	 */
-	public void setEspecialidades(List<Especialidade> especialidades) {
+	public void setEspecialidades(List<DoisValoresParent> especialidades) {
 		this.especialidades = especialidades;
 	}
 
@@ -289,7 +291,7 @@ public class Advogado extends Pessoa {
 	 *
 	 * @return the grupo trabalho
 	 */
-	public List<GrupoTrabalho> getGrupoTrabalho() {
+	public List<DoisValoresParent> getGrupoTrabalho() {
 		return grupoTrabalho;
 	}
 
@@ -298,7 +300,7 @@ public class Advogado extends Pessoa {
 	 *
 	 * @param grupoTrabalho the new grupo trabalho
 	 */
-	public void setGrupoTrabalho(List<GrupoTrabalho> grupoTrabalho) {
+	public void setGrupoTrabalho(List<DoisValoresParent> grupoTrabalho) {
 		this.grupoTrabalho = grupoTrabalho;
 	}
 

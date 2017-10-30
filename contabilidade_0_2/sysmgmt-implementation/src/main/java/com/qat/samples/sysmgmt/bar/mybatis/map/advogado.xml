@@ -38,23 +38,23 @@
 <result property="createUser" column="create_user"/>
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
-<!-- <result property="modifyDateUTC" column="modify_date"/>
-    <collection property="estado" column="estado" select="RegimeMap.fetchRegimeById"/>
-    <collection property="tipoOab" column="tipoOab" select="RegimeMap.fetchRegimeById"/>
-<collection property="horasTrabalhos" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
-<collection property="especialidades" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
-<collection property="compromissos" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
-<collection property="processos" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
-<collection property="enderecos" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
-<collection property="documentos" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
-<collection property="emails" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
-<collection property="telefones" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
-<collection property="bancos" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+ <result property="modifyDateUTC" column="modify_date"/>
+    <collection property="estado" column="estado" select="EstadoMap.fetchEstadoById"/>
+    <collection property="tipoOab" column="tipoOab" select="DoisValorMap.fetchDoisValorById"/>
+<collection property="horasTrabalhos" column="id" select="DiasHorasMap.fetchDiasHorasByParentId"/>
+<collection property="especialidades" column="id" select="DoisValorParentMap.fetchAllDoisValorEspecialidades"/>
+<collection property="grupoTrabalho" column="id" select="DoisValorParentMap.fetchAllDoisValorGrupoTrabalho"/>
+<collection property="enderecos" column="id" select="EnderecoMap.fetchEnderecoByAdvogado"/>
+<collection property="documentos" column="id" select="DocumentoMap.fetchDocumentoByAdvogadoId"/>
+<collection property="emails" column="id" select="EmailMap.fetchEmailByAdvogadoId"/>
+<collection property="telefones" column="id" select="TelefoneMap.fetchTelefoneByAdvogadoId"/>
+<!--  <collection property="bancos" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
 <collection property="formaPagamentoList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
 <collection property="condPagList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
 <collection property="contatoList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
 <collection property="pessoaTipo" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
-<collection property="regime" column="regime" select="RegimeMap.fetchRegimeById"/>-->
+<collection property="compromissos" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
+<collection property="processos" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>-->
   </resultMap>
 
   <sql id="alladvogadoColumns">

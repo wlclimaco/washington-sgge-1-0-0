@@ -70,6 +70,12 @@ tabelaEnumValue
    FROM email WHERE parentId = #{id} and tabelaEnumValue = 50
  </select>
 
+  <select id="fetchEmailByAdvogadoId" parameterType="Integer" resultMap="EmailResult">
+    SELECT id,
+	<include refid="allEmailColumns" />
+   FROM email WHERE parentId = #{id} and tabelaEnumValue = 74
+ </select>
+
   <select id="fetchEmailByPessoa" parameterType="Integer" resultMap="EmailResult">
     SELECT id,
 	<include refid="allEmailColumns" />

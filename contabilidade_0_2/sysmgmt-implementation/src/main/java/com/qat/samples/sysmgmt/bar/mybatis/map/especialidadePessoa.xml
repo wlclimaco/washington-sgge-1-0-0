@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!-- create by system gera-java version 1.0.0 27/07/2016 12:33 : 57-->
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="EspecialidadePessoaMap">
+    <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache" />
+
+    <!-- Result maps describe the mapping between the columns returned
+      from a query, and the class properties.  A result map isnt
+      necessary if the columns (or aliases) match to the properties
+       exactly. -->
+    <resultMap id="EspecialidadePessoaResult" type="EspecialidadePessoa">
+        <result property="id" column="id" />
+        <result property="parentId" column="parentId" />
+        <result property="tabelaEnumValue" column="tabelaEnumValue" />
+        <result property="emprId" column="emprId" />
+        <result property="processId" column="processId" />
+        <result property="createUser" column="create_user" />
+        <result property="createDateUTC" column="create_date" />
+        <result property="modifyUser" column="modify_user" />
+        <result property="modifyDateUTC" column="modify_date" />
+        <collection property="especialidade" column="especialidade" select="EspecialidadeMap.fetchEspecialidadeById"/>
+    </resultMap>
+
+
+    <sql id="allDoisValorColumns">
+        especialidade,parentId ,tabelaEnumValue,pagina ,emprId ,processId ,create_date ,create_user ,modify_date ,modify_user
+
+    </sql>
+    <sql id="allDoisValorValues">
+        #{especialidade.id}, #{parentId}, #{tabelaEnumValue}, #{pagina.id}, #{emprId}, #{processId}, #{createDateUTC}, #{createUser}, #{modifyDateUTC}, #{modifyUser}
+    </sql>
+
+
+    <select id="fetchAllEspecialidadePessoas" resultMap="EspecialidadePessoaResult">
+    SELECT id,
+ <include refid="allDoisValorColumns" />
+   FROM EspecialidadePessoa ORDER BY id ASC
+ </select>
+
+    <select id="fetchEspecialidadePessoaById" parameterType="Integer" resultMap="EspecialidadePessoaResult">
+    SELECT id,
+ <include refid="allDoisValorColumns" />
+   FROM EspecialidadePessoa WHERE parentId = #{fetchid}
+ </select>
+
+    <insert id="insertEspecialidadePessoa" parameterType="EspecialidadePessoa" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO EspecialidadePessoa (
+        <if test="id != null">
+            <if test="id > 0">id,</if>
+        </if>
+        <include refid="allDoisValorColumns" /> ) VALUES (
+        <if test="id != null">
+            <if test="id > 0">#{id},</if>
+        </if>
+        <include refid="allDoisValorValues" /> )
+    </insert>
+
+    <update id="updateEspecialidadePessoa" parameterType="EspecialidadePessoa">
+        UPDATE EspecialidadePessoa SET
+        <if test="especialidade!= null">especialidade = #{especialidade.id},</if>
+        <if test="parentId!= null"> parentId=#{parentId},</if>
+        <if test="tabelaEnumValue!= null"> tabelaEnumValue=#{tabelaEnumValue},</if>
+        <if test="emprId!= null"> emprId=#{emprId},</if>
+        <if test="processId!= null"> processId=#{processId},</if>
+        <if test="modifyDateUTC!= null"> modify_date=#{modifyDateUTC},</if>
+        <if test="modifyUser!= null"> modify_user=#{modifyUser}</if>
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteEspecialidadePessoaById" parameterType="EspecialidadePessoa">
+        DELETE FROM EspecialidadePessoa WHERE id = #{id}
+    </delete>
+
+    <delete id="deleteAllEspecialidadePessoas">
+        DELETE FROM EspecialidadePessoa
+    </delete>
+</mapper>

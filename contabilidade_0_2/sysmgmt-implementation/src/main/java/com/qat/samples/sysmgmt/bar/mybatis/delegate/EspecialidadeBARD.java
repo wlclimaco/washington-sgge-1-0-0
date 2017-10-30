@@ -9,7 +9,6 @@ import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.bar.Clinica.IClinicaBAR;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
-import com.qat.samples.sysmgmt.clinica.model.Especialidade;
 import com.qat.samples.sysmgmt.clinica.model.EspecialidadePessoa;
 import com.qat.samples.sysmgmt.util.model.AcaoEnum;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
@@ -57,22 +56,22 @@ public final class EspecialidadeBARD extends SqlSessionDaoSupport
 			{
 				continue;
 			}
-//			switch (especialidade.getModelAction())
-//			{
-//				case INSERT:
-//					count = especialidadeDAC.insertEspecialidadePessoa(especialidade).hasSystemError();
-//
-//					break;
-//				case UPDATE:
-//					count = especialidadeDAC.updateEspecialidadePessoa(especialidade).hasSystemError();
-//
-//					break;
-//				case DELETE:
-//
-//					count = especialidadeDAC.deleteEspecialidadePessoaById(especialidade).hasSystemError();
-//
-//					break;
-//			}
+			switch (especialidade.getModelAction())
+			{
+				case INSERT:
+					count = especialidadeDAC.insertEspecialidadePessoa(especialidade).hasSystemError();
+
+					break;
+				case UPDATE:
+					count = especialidadeDAC.updateEspecialidadePessoa(especialidade).hasSystemError();
+
+					break;
+				case DELETE:
+
+					count = especialidadeDAC.deleteEspecialidadePessoaById(especialidade).hasSystemError();
+
+					break;
+			}
 		}
 
 		return 1;

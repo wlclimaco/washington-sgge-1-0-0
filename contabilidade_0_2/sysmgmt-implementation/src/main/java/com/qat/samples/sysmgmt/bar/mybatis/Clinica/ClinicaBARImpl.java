@@ -10,6 +10,9 @@ import com.qat.framework.model.response.InternalResponse.BusinessErrorCategory;
 import com.qat.framework.model.response.InternalResultsResponse;
 import com.qat.framework.util.MyBatisBARHelper;
 import com.qat.samples.sysmgmt.bar.Clinica.IClinicaBAR;
+import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
+import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.InsertHistBARD;
 import com.qat.samples.sysmgmt.clinica.model.Consulta;
 import com.qat.samples.sysmgmt.clinica.model.Especialidade;
 import com.qat.samples.sysmgmt.clinica.model.EspecialidadePessoa;
@@ -18,8 +21,11 @@ import com.qat.samples.sysmgmt.clinica.model.request.ConsultaInquiryRequest;
 import com.qat.samples.sysmgmt.clinica.model.request.ExameInquiryRequest;
 import com.qat.samples.sysmgmt.clinica.model.request.MedicoInquiryRequest;
 import com.qat.samples.sysmgmt.clinica.model.request.PacienteInquiryRequest;
+import com.qat.samples.sysmgmt.pessoa.model.Cliente;
 import com.qat.samples.sysmgmt.pessoa.model.Medico;
 import com.qat.samples.sysmgmt.pessoa.model.Paciente;
+import com.qat.samples.sysmgmt.util.model.AcaoEnum;
+import com.qat.samples.sysmgmt.util.model.TabelaEnum;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
 
@@ -147,6 +153,58 @@ private static final String STMT_DELETE_EXAME = NAMESPACE_EXAME + "deleteExameBy
 	private static final String STMT_FETCH_EXAME_ALL_REQUEST = NAMESPACE_EXAME + "fetchAllExamesByRequest";
 
 //===================================### MEDICO ####======================================
+
+	///===================================### Especialidade ####======================================
+	/** The Constant NAMESPACE. */
+	private static final String NAMESPACE_ESPECIALIDADE = "EspecialidadeMap.";
+
+	/** The Constant STMT_INSERT_MEDICO. */
+	private static final String STMT_INSERT_ESPECIALIDADE = NAMESPACE_ESPECIALIDADE + "insertEspecialidade";
+
+	/** The Constant STMT_UPDATE_MEDICO. */
+	private static final String STMT_UPDATE_ESPECIALIDADE = NAMESPACE_ESPECIALIDADE + "updateEspecialidade";
+
+	/** The Constant STMT_DELETE_MEDICO. */
+	private static final String STMT_DELETE_ESPECIALIDADE = NAMESPACE_ESPECIALIDADE + "deleteEspecialidadeById";
+
+	/** The Constant STMT_FETCH_MEDICO. */
+	private static final String STMT_FETCH_ESPECIALIDADE = NAMESPACE_ESPECIALIDADE + "fetchEspecialidadeById";
+
+	///===================================### Especialidade Pessoa ####======================================
+		/** The Constant NAMESPACE. */
+		private static final String NAMESPACE_ESPECIALIDADE_PESSOA = "EspecialidadePessoaMap.";
+
+		/** The Constant STMT_INSERT_MEDICO. */
+		private static final String STMT_INSERT_ESPECIALIDADE_PESSOA = NAMESPACE_ESPECIALIDADE_PESSOA + "insertEspecialidadePessoa";
+
+		/** The Constant STMT_UPDATE_MEDICO. */
+		private static final String STMT_UPDATE_ESPECIALIDADE_PESSOA = NAMESPACE_ESPECIALIDADE_PESSOA + "updateEspecialidadePessoa";
+
+		/** The Constant STMT_DELETE_MEDICO. */
+		private static final String STMT_DELETE_ESPECIALIDADE_PESSOA = NAMESPACE_ESPECIALIDADE_PESSOA + "deleteEspecialidadePessoaById";
+
+		/** The Constant STMT_FETCH_MEDICO. */
+		private static final String STMT_FETCH_ESPECIALIDADE_PESSOA = NAMESPACE_ESPECIALIDADE_PESSOA + "fetchEspecialidadePessoaById";
+
+	IStatusBAR statusBAR;
+	IHistoricoBAR historicoBAR;
+
+	public IStatusBAR getStatusBAR() {
+		return statusBAR;
+	}
+
+	public void setStatusBAR(IStatusBAR statusBAR) {
+		this.statusBAR = statusBAR;
+	}
+
+	public IHistoricoBAR getHistoricoBAR() {
+		return historicoBAR;
+	}
+
+	public void setHistoricoBAR(IHistoricoBAR historicoBAR) {
+		this.historicoBAR = historicoBAR;
+	}
+
 	/**
 /*
  * (non-Javadoc)
@@ -682,26 +740,59 @@ public static void fetchExamesByRequest(SqlSession sqlSession, ExameInquiryReque
 
 @Override
 public InternalResultsResponse<Especialidade> fetchEspecialidadeById(FetchByIdRequest request) {
-	// TODO Auto-generated method stub
-	return null;
+	InternalResultsResponse<Especialidade> response = new InternalResultsResponse<Especialidade>();
+	response.addResult((Especialidade)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_ESPECIALIDADE,
+			request.getFetchId()));
+	return response;
 }
 
 @Override
 public InternalResponse insertEspecialidade(Especialidade especialidade) {
-	// TODO Auto-generated method stub
-	return null;
+	InternalResponse response = new InternalResponse();
+
+	Integer historicoId = InsertHistBARD.maintainInsertHistorico(TabelaEnum.ESPECIALIDADE, getHistoricoBAR(), response);
+	Integer count = 0;
+	especialidade.setProcessId(historicoId);
+
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_ESPECIALIDADE, especialidade, response);
+
+	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.ESPECIALIDADE, AcaoEnum.INSERT, historicoId,
+			getHistoricoBAR(), response, especialidade.getId(),especialidade.getUserId());
+
+	return response;
 }
 
 @Override
 public InternalResponse updateEspecialidade(Especialidade especialidade) {
-	// TODO Auto-generated method stub
-	return null;
+	InternalResponse response = new InternalResponse();
+
+	Integer historicoId = InsertHistBARD.maintainInsertHistorico(TabelaEnum.ESPECIALIDADE, getHistoricoBAR(), response);
+
+	especialidade.setProcessId(historicoId);
+
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_ESPECIALIDADE, especialidade, response);
+
+	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.ESPECIALIDADE, AcaoEnum.UPDATE, historicoId,
+			getHistoricoBAR(), response, especialidade.getId(),especialidade.getUserId());
+
+	return response;
 }
 
 @Override
 public InternalResponse deleteEspecialidadeById(Especialidade especialidade) {
-	// TODO Auto-generated method stub
-	return null;
+	InternalResponse response = new InternalResponse();
+
+	Integer historicoId = InsertHistBARD.maintainInsertHistorico(TabelaEnum.ESPECIALIDADE, getHistoricoBAR(), response);
+
+	especialidade.setProcessId(historicoId);
+
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_ESPECIALIDADE, especialidade, response);
+
+	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.ESPECIALIDADE, AcaoEnum.DELETE, historicoId,
+			getHistoricoBAR(), response, especialidade.getId(),especialidade.getUserId());
+
+	return response;
+
 }
 
 @Override
@@ -724,26 +815,59 @@ public InternalResultsResponse<Especialidade> fetchEspecialidadesByRequest(Paged
 
 @Override
 public InternalResultsResponse<EspecialidadePessoa> fetchEspecialidadePessoaById(FetchByIdRequest request) {
-	// TODO Auto-generated method stub
-	return null;
+	InternalResultsResponse<EspecialidadePessoa> response = new InternalResultsResponse<EspecialidadePessoa>();
+	response.addResult((EspecialidadePessoa)MyBatisBARHelper.doQueryForObject(getSqlSession(), STMT_FETCH_ESPECIALIDADE_PESSOA,
+			request.getFetchId()));
+	return response;
 }
 
 @Override
 public InternalResponse insertEspecialidadePessoa(EspecialidadePessoa especialidade) {
-	// TODO Auto-generated method stub
-	return null;
+	InternalResponse response = new InternalResponse();
+
+	Integer historicoId = InsertHistBARD.maintainInsertHistorico(TabelaEnum.ADVOGADO, getHistoricoBAR(), response);
+	Integer count = 0;
+	especialidade.setProcessId(historicoId);
+
+	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_ESPECIALIDADE_PESSOA, especialidade, response);
+
+	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.ADVOGADO, AcaoEnum.INSERT, historicoId,
+			getHistoricoBAR(), response, especialidade.getId(),especialidade.getUserId());
+
+	return response;
 }
 
 @Override
 public InternalResponse updateEspecialidadePessoa(EspecialidadePessoa especialidade) {
-	// TODO Auto-generated method stub
-	return null;
+	InternalResponse response = new InternalResponse();
+
+	Integer historicoId = InsertHistBARD.maintainInsertHistorico(TabelaEnum.ESPECIALIDADE, getHistoricoBAR(), response);
+
+	especialidade.setProcessId(historicoId);
+
+	MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_ESPECIALIDADE_PESSOA, especialidade, response);
+
+	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.CLIENTE, AcaoEnum.UPDATE, historicoId,
+			getHistoricoBAR(), response, especialidade.getId(),especialidade.getUserId());
+
+	return response;
 }
 
 @Override
 public InternalResponse deleteEspecialidadePessoaById(EspecialidadePessoa especialidade) {
-	// TODO Auto-generated method stub
-	return null;
+	InternalResponse response = new InternalResponse();
+
+	Integer historicoId = InsertHistBARD.maintainInsertHistorico(TabelaEnum.CLIENTE, getHistoricoBAR(), response);
+
+	especialidade.setProcessId(historicoId);
+
+	MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_ESPECIALIDADE_PESSOA, especialidade, response);
+
+	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.CLIENTE, AcaoEnum.DELETE, historicoId,
+			getHistoricoBAR(), response, especialidade.getId(),especialidade.getUserId());
+
+
+	return response;
 }
 
 @Override

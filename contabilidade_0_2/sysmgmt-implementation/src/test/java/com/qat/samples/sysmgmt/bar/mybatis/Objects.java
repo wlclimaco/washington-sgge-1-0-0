@@ -10,6 +10,7 @@ import com.qat.samples.sysmgmt.advocacia.Advogado;
 import com.qat.samples.sysmgmt.advocacia.Advogados;
 import com.qat.samples.sysmgmt.advocacia.Audiencia;
 import com.qat.samples.sysmgmt.advocacia.Envolvidos;
+import com.qat.samples.sysmgmt.advocacia.GrupoTrabalho;
 import com.qat.samples.sysmgmt.advocacia.Processo;
 import com.qat.samples.sysmgmt.advocacia.ProcessoCliente;
 import com.qat.samples.sysmgmt.advocacia.ProcessoStatus;
@@ -223,6 +224,7 @@ import com.qat.samples.sysmgmt.util.model.DiasHoras;
 import com.qat.samples.sysmgmt.util.model.Documento;
 import com.qat.samples.sysmgmt.util.model.DoisValorType;
 import com.qat.samples.sysmgmt.util.model.DoisValores;
+import com.qat.samples.sysmgmt.util.model.DoisValoresParent;
 import com.qat.samples.sysmgmt.util.model.Email;
 import com.qat.samples.sysmgmt.util.model.Endereco;
 import com.qat.samples.sysmgmt.util.model.Note;
@@ -268,6 +270,14 @@ public class Objects {
 		advogado.getCondPagList().add(insertCondPagPessoa(id, TabelaEnum.ADVOCACIA, action));
 		advogado.setContatoList(new ArrayList<Contato>());
 		advogado.getContatoList().add(insertContato(id, TabelaEnum.ADVOCACIA, action));
+		advogado.setEspecialidades(new ArrayList<>());
+		advogado.getEspecialidades().add(insertDoisValoresParent(id, tabela, action));
+
+		advogado.setHorasTrabalhos(new ArrayList<>());
+		advogado.getHorasTrabalhos().add(insertDiasHoras(id, tabela, action));
+
+		advogado.setGrupoTrabalho(new ArrayList<>());
+		advogado.getGrupoTrabalho().add(insertDoisValoresParent(id, tabela, action));
 		advogado.setTabelaEnum(tabela);
 		advogado.setParentId(id);
 		advogado.setEmprId(EMPID);
@@ -5581,6 +5591,23 @@ public class Objects {
 			return especialidade;
 		}
 
+	public static EspecialidadePessoa insertEspecialidadePessoa(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		EspecialidadePessoa especialidade = new EspecialidadePessoa();
+		Date a = new Date();
+		especialidade.setEspecialidade(insertEspecialidade(id, tabela, action));
+		especialidade.setParentId(id);
+		especialidade.setEmprId(1);
+		especialidade.setModifyDateUTC(a.getTime());
+		especialidade.setCreateDateUTC(a.getTime());
+		especialidade.setCreateUser("system");
+		especialidade.setModifyUser("system");
+		especialidade.setProcessId(1);
+		especialidade.setModelAction(action);
+
+		return especialidade;
+	}
+
 
 	public static Compromisso insertCompromisso(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
 		{
@@ -5806,5 +5833,41 @@ public class Objects {
 		return clientecompromisso;
 	}
 
+
+	public static GrupoTrabalho insertGrupoTrabalho(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		GrupoTrabalho clientecompromisso = new GrupoTrabalho();
+		Date a = new Date();
+		clientecompromisso.setId(id);
+		clientecompromisso.setDoisValorId(10);
+		clientecompromisso.setParentId(id);
+		clientecompromisso.setEmprId(1);
+		clientecompromisso.setModifyDateUTC(a.getTime());
+		clientecompromisso.setCreateDateUTC(a.getTime());
+		clientecompromisso.setCreateUser("system");
+		clientecompromisso.setModifyUser("system");
+		clientecompromisso.setProcessId(1);
+		clientecompromisso.setModelAction(action);
+
+		return clientecompromisso;
+	}
+
+	public static DoisValoresParent insertDoisValoresParent(Integer id,TabelaEnum tabela,PersistenceActionEnum action)
+	{
+		DoisValoresParent clientecompromisso = new DoisValoresParent();
+		Date a = new Date();
+		clientecompromisso.setId(id);
+		clientecompromisso.setDoisvalor(insertDoisValor(id, tabela, action));
+		clientecompromisso.setParentId(id);
+		clientecompromisso.setEmprId(1);
+		clientecompromisso.setModifyDateUTC(a.getTime());
+		clientecompromisso.setCreateDateUTC(a.getTime());
+		clientecompromisso.setCreateUser("system");
+		clientecompromisso.setModifyUser("system");
+		clientecompromisso.setProcessId(1);
+		clientecompromisso.setModelAction(action);
+
+		return clientecompromisso;
+	}
 
 }

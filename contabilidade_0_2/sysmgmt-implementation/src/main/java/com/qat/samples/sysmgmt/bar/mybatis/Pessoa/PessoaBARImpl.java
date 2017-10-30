@@ -16,6 +16,7 @@ import com.qat.framework.util.MyBatisBARHelper;
 import com.qat.framework.validation.ValidationUtil;
 import com.qat.samples.sysmgmt.advocacia.Advogado;
 import com.qat.samples.sysmgmt.advocacia.request.AdvogadoInquiryRequest;
+import com.qat.samples.sysmgmt.bar.Advogado.IAdvocaciaBAR;
 import com.qat.samples.sysmgmt.bar.Clinica.IClinicaBAR;
 import com.qat.samples.sysmgmt.bar.Documentos.IDocumentoBAR;
 import com.qat.samples.sysmgmt.bar.Dp.IDpBAR;
@@ -26,8 +27,11 @@ import com.qat.samples.sysmgmt.bar.Notes.INotesBAR;
 import com.qat.samples.sysmgmt.bar.Pessoa.IPessoaBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
 import com.qat.samples.sysmgmt.bar.Telefone.ITelefoneBAR;
+import com.qat.samples.sysmgmt.bar.Util.IDoisValorBAR;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.ConsultaBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.DiasHorasBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.DocumentosBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.DoisValoresParentBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.EmailBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.EnderecoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.EspecialidadeBARD;
@@ -245,6 +249,9 @@ private static final String NAMESPACE_FUNCIONARIO = "FuncionarioMap.";
 
 //===================================### ADVOGADO ####======================================
 
+	IAdvocaciaBAR advocaciaBAR;
+	IDoisValorBAR doisValorBAR;
+
 	IEnderecoBAR enderecoBAR;
 
 	IStatusBAR statusBAR;
@@ -345,6 +352,22 @@ private static final String NAMESPACE_FUNCIONARIO = "FuncionarioMap.";
 		this.dpBAR = dpBAR;
 	}
 
+	public IAdvocaciaBAR getAdvocaciaBAR() {
+		return advocaciaBAR;
+	}
+
+	public void setAdvocaciaBAR(IAdvocaciaBAR advocaciaBAR) {
+		this.advocaciaBAR = advocaciaBAR;
+	}
+
+	public IDoisValorBAR getDoisValorBAR() {
+		return doisValorBAR;
+	}
+
+	public void setDoisValorBAR(IDoisValorBAR doisValorBAR) {
+		this.doisValorBAR = doisValorBAR;
+	}
+
 	/**
 /*
  * (non-Javadoc)
@@ -353,8 +376,47 @@ private static final String NAMESPACE_FUNCIONARIO = "FuncionarioMap.";
 @Override
 public InternalResponse insertAdvogado(Advogado advogado)
 {
+
 	InternalResponse response = new InternalResponse();
+
+	Integer historicoId = InsertHistBARD.maintainInsertHistorico(TabelaEnum.ADVOGADO, getHistoricoBAR(), response);
+	Integer count = 0;
+	advogado.setProcessId(historicoId);
+
 	MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_ADVOGADO, advogado, response);
+
+	Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.ADVOGADO, AcaoEnum.INSERT, historicoId,
+			getHistoricoBAR(), response, advogado.getId(),advogado.getUserId());
+
+	insertPessoa(advogado, response, TabelaEnum.ADVOGADO, historicoId);
+
+	if (!ValidationUtil.isNullOrEmpty(advogado.getHorasTrabalhos()))
+	{
+		count +=
+				DiasHorasBARD.maintainDiasHorasAssociations(advogado.getHorasTrabalhos(), response, advogado.getId(), null,
+						null,
+						TabelaEnum.ADVOGADO, getAdvocaciaBAR(), getStatusBAR(), getHistoricoBAR(), advogado.getId(),
+						advogado.getCreateUser(), historicoId, historicoId);
+	}
+
+	if (!ValidationUtil.isNullOrEmpty(advogado.getEspecialidades()))
+	{
+		count +=
+				DoisValoresParentBARD.maintainDoisValoresParentAssociations(advogado.getEspecialidades(), response, advogado.getId(), null,
+						null,
+						TabelaEnum.ADVOGADO, getDoisValorBAR(), getStatusBAR(), getHistoricoBAR(), advogado.getId(),
+						advogado.getCreateUser(), historicoId, historicoId);
+	}
+
+	if (!ValidationUtil.isNullOrEmpty(advogado.getGrupoTrabalho()))
+	{
+		count +=
+				DoisValoresParentBARD.maintainDoisValoresParentAssociations(advogado.getGrupoTrabalho(), response, advogado.getId(), null,
+						null,
+						TabelaEnum.ADVOGADO, getDoisValorBAR(), getStatusBAR(), getHistoricoBAR(), advogado.getId(),
+						advogado.getCreateUser(), historicoId, historicoId);
+	}
+
 	return response;
 }
 
