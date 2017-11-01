@@ -46,14 +46,14 @@
  <select id="fetchAllDoisValorEspecialidades" resultMap="DoisValoresParentResult">
     SELECT id,
  <include refid="allDoisValorColumns" />
-   FROM doisvalorParent where parentId = #{id} ORDER BY id ASC
+   FROM doisvalorParent where parentId = #{id} and tabelaEnumValue = 86 ORDER BY id ASC
  </select>
 
 
  <select id="fetchAllDoisValorGrupoTrabalho" resultMap="DoisValoresParentResult">
     SELECT id,
  <include refid="allDoisValorColumns" />
-   FROM doisvalorParent where parentId = #{id} ORDER BY id ASC
+   FROM doisvalorParent where parentId = #{id} and tabelaEnumValue = 85 ORDER BY id ASC
  </select>
 
 

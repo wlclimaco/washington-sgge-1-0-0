@@ -404,7 +404,7 @@ public InternalResponse insertAdvogado(Advogado advogado)
 		count +=
 				DoisValoresParentBARD.maintainDoisValoresParentAssociations(advogado.getEspecialidades(), response, advogado.getId(), null,
 						null,
-						TabelaEnum.ADVOGADO, getDoisValorBAR(), getStatusBAR(), getHistoricoBAR(), advogado.getId(),
+						TabelaEnum.ESPECIALIDADE, getDoisValorBAR(), getStatusBAR(), getHistoricoBAR(), advogado.getId(),
 						advogado.getCreateUser(), historicoId, historicoId);
 	}
 
@@ -413,7 +413,7 @@ public InternalResponse insertAdvogado(Advogado advogado)
 		count +=
 				DoisValoresParentBARD.maintainDoisValoresParentAssociations(advogado.getGrupoTrabalho(), response, advogado.getId(), null,
 						null,
-						TabelaEnum.ADVOGADO, getDoisValorBAR(), getStatusBAR(), getHistoricoBAR(), advogado.getId(),
+						TabelaEnum.GRUPOTRABALHO, getDoisValorBAR(), getStatusBAR(), getHistoricoBAR(), advogado.getId(),
 						advogado.getCreateUser(), historicoId, historicoId);
 	}
 

@@ -223,6 +223,8 @@ public enum TabelaEnum implements IIntegerEnum, II18nEnum
 
 	BOLETO(83, "sendsolv.base.model.risklevelenum.medium"),
 
+	GRUPOTRABALHO(85, "sendsolv.base.model.risklevelenum.medium"),
+
 	CONFIGALERTAS(73, "sendsolv.base.model.risklevelenum.medium"),
 
 	CONFIGCARNE(73, "sendsolv.base.model.risklevelenum.medium"),
@@ -393,7 +395,7 @@ public enum TabelaEnum implements IIntegerEnum, II18nEnum
 	NFNOTAINFOITEMPRODUTOCOMBUSTIVEL(73, "sendsolv.base.model.risklevelenum.medium"),
 	PROCESSOSTATUS(73, "sendsolv.base.model.risklevelenum.medium"),
 	DIASHORAS(73, "sendsolv.base.model.risklevelenum.medium"),
-	ESPECIALIDADE(73, "sendsolv.base.model.risklevelenum.medium"),
+	ESPECIALIDADE(86, "sendsolv.base.model.risklevelenum.medium"),
 	COMPROMISSO(73, "sendsolv.base.model.risklevelenum.medium"),
 	ADVOGADOS(73, "sendsolv.base.model.risklevelenum.medium"),
 	ENVOLVIDOS(73, "sendsolv.base.model.risklevelenum.medium"),
