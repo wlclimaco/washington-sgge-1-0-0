@@ -18,6 +18,8 @@
   <resultMap id="advogadoResult" type="advogado">
     <result property="id" column="id"/>
     <result property="nome" column="nome"/>
+    <result property="codigo" column="codigo"/>
+    <result property="razao" column="razao"/>
     <result property="nomePai" column="nomePai"/>
     <result property="nomeMae" column="nomeMae"/>
     <result property="nomeConjugue" column="nomeConjugue"/>
@@ -48,6 +50,8 @@
 <collection property="documentos" column="id" select="DocumentoMap.fetchDocumentoByAdvogadoId"/>
 <collection property="emails" column="id" select="EmailMap.fetchEmailByAdvogadoId"/>
 <collection property="telefones" column="id" select="TelefoneMap.fetchTelefoneByAdvogadoId"/>
+<collection property="statusList" column="id" select="StatusMap.fetchAllStatusByAdvogado"/>
+<collection property="notes" column="id" select="NoteMap.fetchNoteByAdvogado"/>
 <!--  <collection property="bancos" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
 <collection property="formaPagamentoList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
 <collection property="condPagList" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>
@@ -59,6 +63,8 @@
 
   <sql id="alladvogadoColumns">
 nome
+,codigo
+,razao
 ,regime
 ,nomePai
 ,nomeMae
@@ -87,6 +93,8 @@ nome
 </sql>
 <sql id="alladvogadoValues">
 #{nome},
+#{codigo},
+#{razao},
 #{regime.id},
 #{nomePai},
 #{nomeMae},
@@ -126,7 +134,7 @@ nome
    FROM advogado WHERE id = #{fetchid}
  </select>
 
- <select id="fetchAllAdvogadosRequest" parameterType="PagedInquiryRequest" resultMap="advogadoResult">
+ <select id="fetchAllAdvogadosRequest" parameterType="AdvogadoInquiryRequest" resultMap="advogadoResult">
 
      SELECT id,<include refid="alladvogadoColumns" />
            FROM advogado
@@ -148,6 +156,9 @@ nome
              </if>
                <if test="emprId != null"> and emprId = #{emprId}</if>
            </if>
+           <if test="id != null"><if test="id > 0">
+           		 and id = #{id}
+           </if></if>
            ORDER BY id ASC
 </select>
 
@@ -166,6 +177,8 @@ nome
  <update id="updateAdvogado" parameterType="advogado">
    UPDATE advogado SET
 <if test="nome!= null">nome = #{nome},</if>
+<if test="codigo!= null">codigo = #{codigo},</if>
+<if test="razao!= null">razao = #{razao},</if>
 <if test="regime!= null">regime = #{regime.id},</if>
 <if test="nomePai!= null">nomePai = #{nomePai},</if>
 <if test="nomeMae!= null">nomeMae = #{nomeMae},</if>

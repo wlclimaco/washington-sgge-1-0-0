@@ -66,6 +66,13 @@
    FROM status WHERE id = #{fetchid}
  </select>
 
+<select id="fetchAllStatusByAdvogado" parameterType="Integer" resultMap="StatusResult">
+    SELECT id,
+	<include refid="allStatusColumns" />
+   FROM status WHERE parentId = #{fetchid} and tabelaEnumValue = 74
+ </select>
+
+
   <select id="fetchAllStatusByEmpresa" parameterType="Integer" resultMap="StatusResult">
     SELECT id,
 	<include refid="allStatusColumns" />

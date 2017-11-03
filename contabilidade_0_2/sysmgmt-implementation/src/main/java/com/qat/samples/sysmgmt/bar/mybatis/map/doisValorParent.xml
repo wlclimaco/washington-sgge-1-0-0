@@ -55,6 +55,13 @@
  <include refid="allDoisValorColumns" />
    FROM doisvalorParent where parentId = #{id} and tabelaEnumValue = 85 ORDER BY id ASC
  </select>
+ 
+ <select id="fetchAllDoisValorDiasSemana" resultMap="DoisValoresParentResult">
+    SELECT id,
+ <include refid="allDoisValorColumns" />
+   FROM doisvalorParent where parentId = #{id} and tabelaEnumValue = 85 ORDER BY id ASC
+ </select>
+ 
 
 
     <select id="fetchDoisValorParentById" parameterType="Integer" resultMap="DoisValoresParentResult">

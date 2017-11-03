@@ -27,15 +27,16 @@ import com.qat.samples.sysmgmt.bar.Financeiro.IFinanceiroBAR;
 import com.qat.samples.sysmgmt.bar.Historico.IHistoricoBAR;
 import com.qat.samples.sysmgmt.bar.Status.IStatusBAR;
 import com.qat.samples.sysmgmt.bar.Telefone.ITelefoneBAR;
+import com.qat.samples.sysmgmt.bar.Util.IDoisValorBAR;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.ArquivoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.ClienteCompromissoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.CompromissoBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.ContasReceberBARD;
+import com.qat.samples.sysmgmt.bar.mybatis.delegate.DoisValoresParentBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.EmailBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.EnvolvidosBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.InsertHistBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.ParticipanteExternoBARD;
-import com.qat.samples.sysmgmt.bar.mybatis.delegate.ProcessoClienteBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.ProcessoStatusBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.ProcessoUsuariosBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.StatusBARD;
@@ -46,9 +47,12 @@ import com.qat.samples.sysmgmt.util.model.CdStatusTypeEnum;
 import com.qat.samples.sysmgmt.util.model.ClienteCompromisso;
 import com.qat.samples.sysmgmt.util.model.Compromisso;
 import com.qat.samples.sysmgmt.util.model.DiasHoras;
+import com.qat.samples.sysmgmt.util.model.DoisValorType;
+import com.qat.samples.sysmgmt.util.model.DoisValores;
 import com.qat.samples.sysmgmt.util.model.ParticipanteExterno;
 import com.qat.samples.sysmgmt.util.model.Status;
 import com.qat.samples.sysmgmt.util.model.TabelaEnum;
+import com.qat.samples.sysmgmt.util.model.request.DoisValoresInquiryRequest;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
 
@@ -440,6 +444,8 @@ public class AdvocaciaBARImpl extends SqlSessionDaoSupport implements IAdvocacia
 
 	/** The telefone BAR. */
 	ITelefoneBAR telefoneBAR;
+	
+	IDoisValorBAR doisValorBAR;
 
 	/**
 	 * Gets the status BAR.
@@ -551,6 +557,14 @@ public class AdvocaciaBARImpl extends SqlSessionDaoSupport implements IAdvocacia
 	 */
 	public void setTelefoneBAR(ITelefoneBAR telefoneBAR) {
 		this.telefoneBAR = telefoneBAR;
+	}
+
+	public IDoisValorBAR getDoisValorBAR() {
+		return doisValorBAR;
+	}
+
+	public void setDoisValorBAR(IDoisValorBAR doisValorBAR) {
+		this.doisValorBAR = doisValorBAR;
 	}
 
 	// ===================================### PROCESSOSTATUS
@@ -747,10 +761,21 @@ public class AdvocaciaBARImpl extends SqlSessionDaoSupport implements IAdvocacia
 		InternalResponse response = new InternalResponse();
 		Integer count = 0;
 		Boolean count1 = false;
+		
+		Integer historicoId = InsertHistBARD.maintainInsertHistorico(TabelaEnum.ADVOGADO, getHistoricoBAR(), response);
 
 		diashoras.setProcessId(diashoras.getTransactionId());
 
 		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_DIASHORAS, diashoras, response);
+		
+		if (!ValidationUtil.isNullOrEmpty(diashoras.getDiasSemanas()))
+		{
+			count +=
+					DoisValoresParentBARD.maintainDoisValoresParentAssociations(diashoras.getDiasSemanas(), response, diashoras.getId(), null,
+							null,
+							TabelaEnum.DIASSEMANA, getDoisValorBAR(), getStatusBAR(), getHistoricoBAR(), diashoras.getId(),
+							diashoras.getCreateUser(), historicoId, historicoId);
+		}
 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.DIASHORAS, AcaoEnum.INSERT,
 				diashoras.getTransactionId(), getHistoricoBAR(), response, diashoras.getId(), diashoras.getUserId());
@@ -925,23 +950,19 @@ public class AdvocaciaBARImpl extends SqlSessionDaoSupport implements IAdvocacia
 		Boolean count1 = false;
 
 		especialidade.setProcessId(especialidade.getTransactionId());
-
-		MyBatisBARHelper.doInsert(getSqlSession(), STMT_INSERT_ESPECIALIDADE, especialidade, response);
+		DoisValores doisValores = new DoisValores();
+		DoisValorType doisValorType = new DoisValorType();
+		doisValorType.setId(156);
+		doisValores.setNome(especialidade.getNome());
+		doisValores.setDescricao(especialidade.getNome().toUpperCase());
+		doisValores.setValue(especialidade.getNome().trim().toUpperCase());
+		doisValores.setDoisValorType(doisValorType);
+		MyBatisBARHelper.doInsert(getSqlSession(), "DoisValorMap.insertDoisValor", doisValores, response);
 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.ESPECIALIDADE, AcaoEnum.INSERT,
 				especialidade.getTransactionId(), getHistoricoBAR(), response, especialidade.getId(),
 				especialidade.getUserId());
 
-		if (especialidade.getId() != 0 && especialidade.getId() != null) {
-			Status status = new Status();
-			status.setStatus(CdStatusTypeEnum.ATIVO);
-			List<Status> statusList = new ArrayList<Status>();
-			statusList.add(status);
-			count1 = StatusBARD.maintainStatusAssociations(statusList, response, especialidade.getId(), null,
-					AcaoEnum.INSERT, especialidade.getCreateUser(), especialidade.getId(), TabelaEnum.ESPECIALIDADE,
-					statusBAR, historicoBAR, especialidade.getTransactionId(), especialidade.getTransactionId());
-
-		}
 
 		return response;
 	}
@@ -956,8 +977,17 @@ public class AdvocaciaBARImpl extends SqlSessionDaoSupport implements IAdvocacia
 	@Override
 	public InternalResponse updateEspecialidade(Especialidade especialidade) {
 		InternalResponse response = new InternalResponse();
+
 		especialidade.setProcessId(especialidade.getTransactionId());
-		MyBatisBARHelper.doUpdate(getSqlSession(), STMT_UPDATE_ESPECIALIDADE, especialidade, response);
+		DoisValores doisValores = new DoisValores();
+		DoisValorType doisValorType = new DoisValorType();
+		doisValorType.setId(156);
+		doisValores.setNome(especialidade.getNome());
+		doisValores.setDescricao(especialidade.getNome().toUpperCase());
+		doisValores.setValue(especialidade.getNome().trim().toUpperCase());
+		doisValores.setDoisValorType(doisValorType);
+
+		MyBatisBARHelper.doUpdate(getSqlSession(), "DoisValorMap.updateDoisValor", doisValores, response);
 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.ESPECIALIDADE, AcaoEnum.UPDATE,
 				especialidade.getTransactionId(), getHistoricoBAR(), response, especialidade.getId(),
@@ -977,7 +1007,15 @@ public class AdvocaciaBARImpl extends SqlSessionDaoSupport implements IAdvocacia
 	public InternalResponse deleteEspecialidadeById(Especialidade especialidade) {
 		InternalResponse response = new InternalResponse();
 		especialidade.setProcessId(especialidade.getTransactionId());
-		MyBatisBARHelper.doRemove(getSqlSession(), STMT_DELETE_ESPECIALIDADE, especialidade, response);
+		DoisValores doisValores = new DoisValores();
+		DoisValorType doisValorType = new DoisValorType();
+		doisValorType.setId(156);
+		doisValores.setNome(especialidade.getNome());
+		doisValores.setDescricao(especialidade.getNome().toUpperCase());
+		doisValores.setValue(especialidade.getNome().trim().toUpperCase());
+		doisValores.setDoisValorType(doisValorType);
+
+		MyBatisBARHelper.doRemove(getSqlSession(), "DoisValorMap.deleteDoisValorById", doisValores, response);
 
 		Integer a = InsertHistBARD.maintainInsertHistoricoItens(TabelaEnum.ESPECIALIDADE, AcaoEnum.DELETE,
 				especialidade.getTransactionId(), getHistoricoBAR(), response, especialidade.getId(),
@@ -1035,10 +1073,16 @@ public class AdvocaciaBARImpl extends SqlSessionDaoSupport implements IAdvocacia
 	 * PagedInquiryRequest)
 	 */
 	@Override
-	public InternalResultsResponse<Especialidade> fetchEspecialidadesByRequest(PagedInquiryRequest request) {
-		InternalResultsResponse<Especialidade> response = new InternalResultsResponse<Especialidade>();
-		fetchEspecialidadesByRequest(getSqlSession(), request, STMT_FETCH_ESPECIALIDADE_COUNT,
-				STMT_FETCH_ESPECIALIDADE_ALL_REQUEST, response);
+	public InternalResultsResponse<DoisValores> fetchEspecialidadesByRequest(PagedInquiryRequest request) {
+		
+		DoisValoresInquiryRequest request2s = new DoisValoresInquiryRequest();
+		request2s.setEmprId(request.getEmprId());
+		request2s.setEmprIds(request.getEmprIds());
+		request2s.setDoisValorType(156);
+		
+		InternalResultsResponse<DoisValores> response = new InternalResultsResponse<DoisValores>();
+		fetchEspecialidadesByRequest(getSqlSession(), request2s, "DoisValorMap.fetchDoisValorRowCount",
+				"DoisValorMap.fetchAllDoisValorsRequest", response);
 		return response;
 	}
 
@@ -1059,7 +1103,7 @@ public class AdvocaciaBARImpl extends SqlSessionDaoSupport implements IAdvocacia
 	 * @param response
 	 *            the response
 	 */
-	public static void fetchEspecialidadesByRequest(SqlSession sqlSession, PagedInquiryRequest request,
+	public static void fetchEspecialidadesByRequest(SqlSession sqlSession, DoisValoresInquiryRequest request,
 			String countStatement, String fetchPagedStatement, InternalResultsResponse<?> response) {
 
 		// If the user requested the total rows/record count

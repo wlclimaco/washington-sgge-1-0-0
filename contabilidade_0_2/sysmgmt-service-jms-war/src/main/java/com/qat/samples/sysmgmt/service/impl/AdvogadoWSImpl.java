@@ -58,506 +58,611 @@ public class AdvogadoWSImpl implements IAdvogadoWS
 	{
 		this.advogadoBAC = advogadoBAC;
 	}
-
-
-//===================================### ADVOGADO ####======================================
-
-	/**
-	 * Delegates call to {@link IAdvogadoBAC}
-	 *
-	 * @param request a AdvogadoRequest
-	 * @return AdvogadoResponse
-	 */
 	@Override
-	public AdvogadoResponse insertAdvogado(AdvogadoMaintenanceRequest request)
-	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		AdvogadoResponse response = new AdvogadoResponse();
-		try
-		{
-			InternalResultsResponse<Advogado> internalResponse = getAdvogadoBAC().insertAdvogado(request);
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
+	public AdvogadoResponse insertAdvogado(AdvogadoMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public AdvogadoResponse updateAdvogado(AdvogadoMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public AdvogadoResponse deleteAdvogado(AdvogadoMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public AdvogadoResponse fetchAdvogadoById(FetchByIdRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public AdvogadoResponse fetchAdvogadosByRequest(AdvogadoInquiryRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public AdvogadoResponse refreshAdvogados(RefreshRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public AdvogadoResponse fetchAllAdvogados(FetchAllRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public AudienciaResponse insertAudiencia(AudienciaMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public AudienciaResponse updateAudiencia(AudienciaMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public AudienciaResponse deleteAudiencia(AudienciaMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public AudienciaResponse fetchAudienciaById(FetchByIdRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public AudienciaResponse fetchAudienciasByRequest(AudienciaInquiryRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public AudienciaResponse refreshAudiencias(RefreshRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public AudienciaResponse fetchAllAudiencias(FetchAllRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public ProcessoResponse insertProcesso(ProcessoMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public ProcessoResponse updateProcesso(ProcessoMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public ProcessoResponse deleteProcesso(ProcessoMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public ProcessoResponse fetchProcessoById(FetchByIdRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public ProcessoResponse fetchProcessosByRequest(ProcessoInquiryRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public ProcessoResponse refreshProcessos(RefreshRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public ProcessoResponse fetchAllProcessos(FetchAllRequest request) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	/**
-	 * Delegates call to {@link IAdvogadoBAC}
-	 *
-	 * @param request a AdvogadoRequest
-	 * @return AdvogadoResponse
-	 */
-	@Override
-	public AdvogadoResponse updateAdvogado(AdvogadoMaintenanceRequest request)
-	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		AdvogadoResponse response = new AdvogadoResponse();
-		try
-		{
-			InternalResultsResponse<Advogado> internalResponse = getAdvogadoBAC().updateAdvogado(request);
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
-
-	/**
-	 * Delegates call to {@link IAdvogadoBAC}
-	 *
-	 * @param request a AdvogadoRequest
-	 * @return AdvogadoResponse
-	 */
-	@Override
-	public AdvogadoResponse deleteAdvogado(AdvogadoMaintenanceRequest request)
-	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		AdvogadoResponse response = new AdvogadoResponse();
-		try
-		{
-			InternalResultsResponse<Advogado> internalResponse = getAdvogadoBAC().deleteAdvogado(request);
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
-
-	/**
-	 * Delegates call to {@link IAdvogadoBAC}
-	 *
-	 * @param request a AdvogadoRequest
-	 * @return AdvogadoResponse
-	 */
-	@Override
-	public AdvogadoResponse fetchAdvogadoById(FetchByIdRequest request)
-	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		AdvogadoResponse response = new AdvogadoResponse();
-		try
-		{
-			InternalResultsResponse<Advogado> internalResponse = getAdvogadoBAC().fetchAdvogadoById(request);
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
-
-	/**
-	 * Delegates call to {@link IAdvogadoBAC}
-	 *
-	 * @param request a AdvogadoRequest
-	 * @return AdvogadoResponse
-	 */
-	@Override
-	public AdvogadoResponse fetchAdvogadosByRequest(AdvogadoInquiryRequest request)
-	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		AdvogadoResponse response = new AdvogadoResponse();
-		try
-		{
-			InternalResultsResponse<Advogado> internalResponse = getAdvogadoBAC().fetchAdvogadosByRequest(request);
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
-	/**
-	 * Delegates call to {@link IAdvogadoBAC}
-	 *
-	 * @param request a AdvogadoRequest
-	 * @return AdvogadoResponse
-	 */
-	@Override
-	public AdvogadoResponse refreshAdvogados(RefreshRequest request)
-	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		AdvogadoResponse response = new AdvogadoResponse();
-		try
-		{
-			InternalResultsResponse<Advogado> internalResponse = getAdvogadoBAC().refreshAdvogados(request);
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
-	/**
-	 * Delegates call to {@link IAdvogadoBAC}
-	 *
-	 * @param request a AdvogadoRequest
-	 * @return AdvogadoResponse
-	 */
-	@Override
-	public AdvogadoResponse fetchAllAdvogados(FetchAllRequest request)
-	{
-		AdvogadoResponse response = new AdvogadoResponse();
-		try
-		{
-			InternalResultsResponse<Advogado> internalResponse = getAdvogadoBAC().fetchAllAdvogados(new Advogado());
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
-
-//===================================### AUDIENCIA ####======================================
-
-	/**
-	 * Delegates call to {@link IAudienciaBAC}
-	 *
-	 * @param request a AudienciaRequest
-	 * @return AudienciaResponse
-	 */
-	@Override
-	public AudienciaResponse insertAudiencia(AudienciaMaintenanceRequest request)
-	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		AudienciaResponse response = new AudienciaResponse();
-		try
-		{
-			InternalResultsResponse<Audiencia> internalResponse = getAdvogadoBAC().insertAudiencia(request);
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
-
-	/**
-	 * Delegates call to {@link IAudienciaBAC}
-	 *
-	 * @param request a AudienciaRequest
-	 * @return AudienciaResponse
-	 */
-	@Override
-	public AudienciaResponse updateAudiencia(AudienciaMaintenanceRequest request)
-	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		AudienciaResponse response = new AudienciaResponse();
-		try
-		{
-			InternalResultsResponse<Audiencia> internalResponse = getAdvogadoBAC().updateAudiencia(request);
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
-
-	/**
-	 * Delegates call to {@link IAudienciaBAC}
-	 *
-	 * @param request a AudienciaRequest
-	 * @return AudienciaResponse
-	 */
-	@Override
-	public AudienciaResponse deleteAudiencia(AudienciaMaintenanceRequest request)
-	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		AudienciaResponse response = new AudienciaResponse();
-		try
-		{
-			InternalResultsResponse<Audiencia> internalResponse = getAdvogadoBAC().deleteAudiencia(request);
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
-
-	/**
-	 * Delegates call to {@link IAudienciaBAC}
-	 *
-	 * @param request a AudienciaRequest
-	 * @return AudienciaResponse
-	 */
-	@Override
-	public AudienciaResponse fetchAudienciaById(FetchByIdRequest request)
-	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		AudienciaResponse response = new AudienciaResponse();
-		try
-		{
-			InternalResultsResponse<Audiencia> internalResponse = getAdvogadoBAC().fetchAudienciaById(request);
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
-
-	/**
-	 * Delegates call to {@link IAudienciaBAC}
-	 *
-	 * @param request a AudienciaRequest
-	 * @return AudienciaResponse
-	 */
-	@Override
-	public AudienciaResponse fetchAudienciasByRequest(AudienciaInquiryRequest request)
-	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		AudienciaResponse response = new AudienciaResponse();
-		try
-		{
-			InternalResultsResponse<Audiencia> internalResponse = getAdvogadoBAC().fetchAudienciasByRequest(request);
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
-	/**
-	 * Delegates call to {@link IAudienciaBAC}
-	 *
-	 * @param request a AudienciaRequest
-	 * @return AudienciaResponse
-	 */
-	@Override
-	public AudienciaResponse refreshAudiencias(RefreshRequest request)
-	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		AudienciaResponse response = new AudienciaResponse();
-		try
-		{
-			InternalResultsResponse<Audiencia> internalResponse = getAdvogadoBAC().refreshAudiencias(request);
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
-	/**
-	 * Delegates call to {@link IAudienciaBAC}
-	 *
-	 * @param request a AudienciaRequest
-	 * @return AudienciaResponse
-	 */
-	@Override
-	public AudienciaResponse fetchAllAudiencias(FetchAllRequest request)
-	{
-		AudienciaResponse response = new AudienciaResponse();
-		try
-		{
-			InternalResultsResponse<Audiencia> internalResponse = getAdvogadoBAC().fetchAllAudiencias(new Audiencia());
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
-
-//===================================### PROCESSO ####======================================
-
-	/**
-	 * Delegates call to {@link IProcessoBAC}
-	 *
-	 * @param request a ProcessoRequest
-	 * @return ProcessoResponse
-	 */
-	@Override
-	public ProcessoResponse insertProcesso(ProcessoMaintenanceRequest request)
-	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		ProcessoResponse response = new ProcessoResponse();
-		try
-		{
-			InternalResultsResponse<Processo> internalResponse = getAdvogadoBAC().insertProcesso(request);
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
-
-	/**
-	 * Delegates call to {@link IProcessoBAC}
-	 *
-	 * @param request a ProcessoRequest
-	 * @return ProcessoResponse
-	 */
-	@Override
-	public ProcessoResponse updateProcesso(ProcessoMaintenanceRequest request)
-	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		ProcessoResponse response = new ProcessoResponse();
-		try
-		{
-			InternalResultsResponse<Processo> internalResponse = getAdvogadoBAC().updateProcesso(request);
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
-
-	/**
-	 * Delegates call to {@link IProcessoBAC}
-	 *
-	 * @param request a ProcessoRequest
-	 * @return ProcessoResponse
-	 */
-	@Override
-	public ProcessoResponse deleteProcesso(ProcessoMaintenanceRequest request)
-	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		ProcessoResponse response = new ProcessoResponse();
-		try
-		{
-			InternalResultsResponse<Processo> internalResponse = getAdvogadoBAC().deleteProcesso(request);
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
-
-	/**
-	 * Delegates call to {@link IProcessoBAC}
-	 *
-	 * @param request a ProcessoRequest
-	 * @return ProcessoResponse
-	 */
-	@Override
-	public ProcessoResponse fetchProcessoById(FetchByIdRequest request)
-	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		ProcessoResponse response = new ProcessoResponse();
-		try
-		{
-			InternalResultsResponse<Processo> internalResponse = getAdvogadoBAC().fetchProcessoById(request);
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
-
-	/**
-	 * Delegates call to {@link IProcessoBAC}
-	 *
-	 * @param request a ProcessoRequest
-	 * @return ProcessoResponse
-	 */
-	@Override
-	public ProcessoResponse fetchProcessosByRequest(ProcessoInquiryRequest request)
-	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		ProcessoResponse response = new ProcessoResponse();
-		try
-		{
-			InternalResultsResponse<Processo> internalResponse = getAdvogadoBAC().fetchProcessosByRequest(request);
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
-	/**
-	 * Delegates call to {@link IProcessoBAC}
-	 *
-	 * @param request a ProcessoRequest
-	 * @return ProcessoResponse
-	 */
-	@Override
-	public ProcessoResponse refreshProcessos(RefreshRequest request)
-	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		ProcessoResponse response = new ProcessoResponse();
-		try
-		{
-			InternalResultsResponse<Processo> internalResponse = getAdvogadoBAC().refreshProcessos(request);
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
-	/**
-	 * Delegates call to {@link IProcessoBAC}
-	 *
-	 * @param request a ProcessoRequest
-	 * @return ProcessoResponse
-	 */
-	@Override
-	public ProcessoResponse fetchAllProcessos(FetchAllRequest request)
-	{
-		ProcessoResponse response = new ProcessoResponse();
-		try
-		{
-			InternalResultsResponse<Processo> internalResponse = getAdvogadoBAC().fetchAllProcessos(new Processo());
-			ResponseHandler
-					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
-		}
-		return response;
-	}
+//
+////===================================### ADVOGADO ####======================================
+//
+//	/**
+//	 * Delegates call to {@link IAdvogadoBAC}
+//	 *
+//	 * @param request a AdvogadoRequest
+//	 * @return AdvogadoResponse
+//	 */
+//	@Override
+//	public AdvogadoResponse insertAdvogado(AdvogadoMaintenanceRequest request)
+//	{
+//		// This method is demo code only. Do not view this as a QAT Global Standard.
+//		AdvogadoResponse response = new AdvogadoResponse();
+//		try
+//		{
+//			InternalResultsResponse<Advogado> internalResponse = getAdvogadoBAC().insertAdvogado(request);
+//			ResponseHandler
+//					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+//		}
+//		return response;
+//	}
+//
+//	/**
+//	 * Delegates call to {@link IAdvogadoBAC}
+//	 *
+//	 * @param request a AdvogadoRequest
+//	 * @return AdvogadoResponse
+//	 */
+//	@Override
+//	public AdvogadoResponse updateAdvogado(AdvogadoMaintenanceRequest request)
+//	{
+//		// This method is demo code only. Do not view this as a QAT Global Standard.
+//		AdvogadoResponse response = new AdvogadoResponse();
+//		try
+//		{
+//			InternalResultsResponse<Advogado> internalResponse = getAdvogadoBAC().updateAdvogado(request);
+//			ResponseHandler
+//					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+//		}
+//		return response;
+//	}
+//
+//	/**
+//	 * Delegates call to {@link IAdvogadoBAC}
+//	 *
+//	 * @param request a AdvogadoRequest
+//	 * @return AdvogadoResponse
+//	 */
+//	@Override
+//	public AdvogadoResponse deleteAdvogado(AdvogadoMaintenanceRequest request)
+//	{
+//		// This method is demo code only. Do not view this as a QAT Global Standard.
+//		AdvogadoResponse response = new AdvogadoResponse();
+//		try
+//		{
+//			InternalResultsResponse<Advogado> internalResponse = getAdvogadoBAC().deleteAdvogado(request);
+//			ResponseHandler
+//					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+//		}
+//		return response;
+//	}
+//
+//	/**
+//	 * Delegates call to {@link IAdvogadoBAC}
+//	 *
+//	 * @param request a AdvogadoRequest
+//	 * @return AdvogadoResponse
+//	 */
+//	@Override
+//	public AdvogadoResponse fetchAdvogadoById(FetchByIdRequest request)
+//	{
+//		// This method is demo code only. Do not view this as a QAT Global Standard.
+//		AdvogadoResponse response = new AdvogadoResponse();
+//		try
+//		{
+//			InternalResultsResponse<Advogado> internalResponse = getAdvogadoBAC().fetchAdvogadoById(request);
+//			ResponseHandler
+//					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+//		}
+//		return response;
+//	}
+//
+//	/**
+//	 * Delegates call to {@link IAdvogadoBAC}
+//	 *
+//	 * @param request a AdvogadoRequest
+//	 * @return AdvogadoResponse
+//	 */
+//	@Override
+//	public AdvogadoResponse fetchAdvogadosByRequest(AdvogadoInquiryRequest request)
+//	{
+//		// This method is demo code only. Do not view this as a QAT Global Standard.
+//		AdvogadoResponse response = new AdvogadoResponse();
+//		try
+//		{
+//			InternalResultsResponse<Advogado> internalResponse = getAdvogadoBAC().fetchAdvogadosByRequest(request);
+//			ResponseHandler
+//					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+//		}
+//		return response;
+//	}
+//	/**
+//	 * Delegates call to {@link IAdvogadoBAC}
+//	 *
+//	 * @param request a AdvogadoRequest
+//	 * @return AdvogadoResponse
+//	 */
+//	@Override
+//	public AdvogadoResponse refreshAdvogados(RefreshRequest request)
+//	{
+//		// This method is demo code only. Do not view this as a QAT Global Standard.
+//		AdvogadoResponse response = new AdvogadoResponse();
+//		try
+//		{
+//			InternalResultsResponse<Advogado> internalResponse = getAdvogadoBAC().refreshAdvogados(request);
+//			ResponseHandler
+//					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+//		}
+//		return response;
+//	}
+//	/**
+//	 * Delegates call to {@link IAdvogadoBAC}
+//	 *
+//	 * @param request a AdvogadoRequest
+//	 * @return AdvogadoResponse
+//	 */
+//	@Override
+//	public AdvogadoResponse fetchAllAdvogados(FetchAllRequest request)
+//	{
+//		AdvogadoResponse response = new AdvogadoResponse();
+//		try
+//		{
+//			InternalResultsResponse<Advogado> internalResponse = getAdvogadoBAC().fetchAllAdvogados(new Advogado());
+//			ResponseHandler
+//					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+//		}
+//		return response;
+//	}
+//
+////===================================### AUDIENCIA ####======================================
+//
+//	/**
+//	 * Delegates call to {@link IAudienciaBAC}
+//	 *
+//	 * @param request a AudienciaRequest
+//	 * @return AudienciaResponse
+//	 */
+//	@Override
+//	public AudienciaResponse insertAudiencia(AudienciaMaintenanceRequest request)
+//	{
+//		// This method is demo code only. Do not view this as a QAT Global Standard.
+//		AudienciaResponse response = new AudienciaResponse();
+//		try
+//		{
+//			InternalResultsResponse<Audiencia> internalResponse = getAdvogadoBAC().insertAudiencia(request);
+//			ResponseHandler
+//					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+//		}
+//		return response;
+//	}
+//
+//	/**
+//	 * Delegates call to {@link IAudienciaBAC}
+//	 *
+//	 * @param request a AudienciaRequest
+//	 * @return AudienciaResponse
+//	 */
+//	@Override
+//	public AudienciaResponse updateAudiencia(AudienciaMaintenanceRequest request)
+//	{
+//		// This method is demo code only. Do not view this as a QAT Global Standard.
+//		AudienciaResponse response = new AudienciaResponse();
+//		try
+//		{
+//			InternalResultsResponse<Audiencia> internalResponse = getAdvogadoBAC().updateAudiencia(request);
+//			ResponseHandler
+//					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+//		}
+//		return response;
+//	}
+//
+//	/**
+//	 * Delegates call to {@link IAudienciaBAC}
+//	 *
+//	 * @param request a AudienciaRequest
+//	 * @return AudienciaResponse
+//	 */
+//	@Override
+//	public AudienciaResponse deleteAudiencia(AudienciaMaintenanceRequest request)
+//	{
+//		// This method is demo code only. Do not view this as a QAT Global Standard.
+//		AudienciaResponse response = new AudienciaResponse();
+//		try
+//		{
+//			InternalResultsResponse<Audiencia> internalResponse = getAdvogadoBAC().deleteAudiencia(request);
+//			ResponseHandler
+//					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+//		}
+//		return response;
+//	}
+//
+//	/**
+//	 * Delegates call to {@link IAudienciaBAC}
+//	 *
+//	 * @param request a AudienciaRequest
+//	 * @return AudienciaResponse
+//	 */
+//	@Override
+//	public AudienciaResponse fetchAudienciaById(FetchByIdRequest request)
+//	{
+//		// This method is demo code only. Do not view this as a QAT Global Standard.
+//		AudienciaResponse response = new AudienciaResponse();
+//		try
+//		{
+//			InternalResultsResponse<Audiencia> internalResponse = getAdvogadoBAC().fetchAudienciaById(request);
+//			ResponseHandler
+//					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+//		}
+//		return response;
+//	}
+//
+//	/**
+//	 * Delegates call to {@link IAudienciaBAC}
+//	 *
+//	 * @param request a AudienciaRequest
+//	 * @return AudienciaResponse
+//	 */
+//	@Override
+//	public AudienciaResponse fetchAudienciasByRequest(AudienciaInquiryRequest request)
+//	{
+//		// This method is demo code only. Do not view this as a QAT Global Standard.
+//		AudienciaResponse response = new AudienciaResponse();
+//		try
+//		{
+//			InternalResultsResponse<Audiencia> internalResponse = getAdvogadoBAC().fetchAudienciasByRequest(request);
+//			ResponseHandler
+//					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+//		}
+//		return response;
+//	}
+//	/**
+//	 * Delegates call to {@link IAudienciaBAC}
+//	 *
+//	 * @param request a AudienciaRequest
+//	 * @return AudienciaResponse
+//	 */
+//	@Override
+//	public AudienciaResponse refreshAudiencias(RefreshRequest request)
+//	{
+//		// This method is demo code only. Do not view this as a QAT Global Standard.
+//		AudienciaResponse response = new AudienciaResponse();
+//		try
+//		{
+//			InternalResultsResponse<Audiencia> internalResponse = getAdvogadoBAC().refreshAudiencias(request);
+//			ResponseHandler
+//					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+//		}
+//		return response;
+//	}
+//	/**
+//	 * Delegates call to {@link IAudienciaBAC}
+//	 *
+//	 * @param request a AudienciaRequest
+//	 * @return AudienciaResponse
+//	 */
+//	@Override
+//	public AudienciaResponse fetchAllAudiencias(FetchAllRequest request)
+//	{
+//		AudienciaResponse response = new AudienciaResponse();
+//		try
+//		{
+//			InternalResultsResponse<Audiencia> internalResponse = getAdvogadoBAC().fetchAllAudiencias(new Audiencia());
+//			ResponseHandler
+//					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+//		}
+//		return response;
+//	}
+//
+////===================================### PROCESSO ####======================================
+//
+//	/**
+//	 * Delegates call to {@link IProcessoBAC}
+//	 *
+//	 * @param request a ProcessoRequest
+//	 * @return ProcessoResponse
+//	 */
+//	@Override
+//	public ProcessoResponse insertProcesso(ProcessoMaintenanceRequest request)
+//	{
+//		// This method is demo code only. Do not view this as a QAT Global Standard.
+//		ProcessoResponse response = new ProcessoResponse();
+//		try
+//		{
+//			InternalResultsResponse<Processo> internalResponse = getAdvogadoBAC().insertProcesso(request);
+//			ResponseHandler
+//					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+//		}
+//		return response;
+//	}
+//
+//	/**
+//	 * Delegates call to {@link IProcessoBAC}
+//	 *
+//	 * @param request a ProcessoRequest
+//	 * @return ProcessoResponse
+//	 */
+//	@Override
+//	public ProcessoResponse updateProcesso(ProcessoMaintenanceRequest request)
+//	{
+//		// This method is demo code only. Do not view this as a QAT Global Standard.
+//		ProcessoResponse response = new ProcessoResponse();
+//		try
+//		{
+//			InternalResultsResponse<Processo> internalResponse = getAdvogadoBAC().updateProcesso(request);
+//			ResponseHandler
+//					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+//		}
+//		return response;
+//	}
+//
+//	/**
+//	 * Delegates call to {@link IProcessoBAC}
+//	 *
+//	 * @param request a ProcessoRequest
+//	 * @return ProcessoResponse
+//	 */
+//	@Override
+//	public ProcessoResponse deleteProcesso(ProcessoMaintenanceRequest request)
+//	{
+//		// This method is demo code only. Do not view this as a QAT Global Standard.
+//		ProcessoResponse response = new ProcessoResponse();
+//		try
+//		{
+//			InternalResultsResponse<Processo> internalResponse = getAdvogadoBAC().deleteProcesso(request);
+//			ResponseHandler
+//					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+//		}
+//		return response;
+//	}
+//
+//	/**
+//	 * Delegates call to {@link IProcessoBAC}
+//	 *
+//	 * @param request a ProcessoRequest
+//	 * @return ProcessoResponse
+//	 */
+//	@Override
+//	public ProcessoResponse fetchProcessoById(FetchByIdRequest request)
+//	{
+//		// This method is demo code only. Do not view this as a QAT Global Standard.
+//		ProcessoResponse response = new ProcessoResponse();
+//		try
+//		{
+//			InternalResultsResponse<Processo> internalResponse = getAdvogadoBAC().fetchProcessoById(request);
+//			ResponseHandler
+//					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+//		}
+//		return response;
+//	}
+//
+//	/**
+//	 * Delegates call to {@link IProcessoBAC}
+//	 *
+//	 * @param request a ProcessoRequest
+//	 * @return ProcessoResponse
+//	 */
+//	@Override
+//	public ProcessoResponse fetchProcessosByRequest(ProcessoInquiryRequest request)
+//	{
+//		// This method is demo code only. Do not view this as a QAT Global Standard.
+//		ProcessoResponse response = new ProcessoResponse();
+//		try
+//		{
+//			InternalResultsResponse<Processo> internalResponse = getAdvogadoBAC().fetchProcessosByRequest(request);
+//			ResponseHandler
+//					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+//		}
+//		return response;
+//	}
+//	/**
+//	 * Delegates call to {@link IProcessoBAC}
+//	 *
+//	 * @param request a ProcessoRequest
+//	 * @return ProcessoResponse
+//	 */
+//	@Override
+//	public ProcessoResponse refreshProcessos(RefreshRequest request)
+//	{
+//		// This method is demo code only. Do not view this as a QAT Global Standard.
+//		ProcessoResponse response = new ProcessoResponse();
+//		try
+//		{
+//			InternalResultsResponse<Processo> internalResponse = getAdvogadoBAC().refreshProcessos(request);
+//			ResponseHandler
+//					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+//		}
+//		return response;
+//	}
+//	/**
+//	 * Delegates call to {@link IProcessoBAC}
+//	 *
+//	 * @param request a ProcessoRequest
+//	 * @return ProcessoResponse
+//	 */
+//	@Override
+//	public ProcessoResponse fetchAllProcessos(FetchAllRequest request)
+//	{
+//		ProcessoResponse response = new ProcessoResponse();
+//		try
+//		{
+//			InternalResultsResponse<Processo> internalResponse = getAdvogadoBAC().fetchAllProcessos(new Processo());
+//			ResponseHandler
+//					.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME});
+//		}
+//		return response;
+//	}
 }

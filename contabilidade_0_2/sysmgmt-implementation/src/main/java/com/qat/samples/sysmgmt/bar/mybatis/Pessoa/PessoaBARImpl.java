@@ -34,7 +34,6 @@ import com.qat.samples.sysmgmt.bar.mybatis.delegate.DocumentosBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.DoisValoresParentBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.EmailBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.EnderecoBARD;
-import com.qat.samples.sysmgmt.bar.mybatis.delegate.EspecialidadeBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.HorarioFuncBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.InsertHistBARD;
 import com.qat.samples.sysmgmt.bar.mybatis.delegate.NotesBARD;
@@ -1823,7 +1822,7 @@ public static void fetchFuncionariosByRequest(SqlSession sqlSession, Funcionario
 		if (count > 0)
 		{
 			Status status = new Status();
-			status.setStatus(CdStatusTypeEnum.ANALISANDO);
+			status.setStatus(CdStatusTypeEnum.ATIVO);
 			List<Status> statusList = new ArrayList<Status>();
 			statusList.add(status);
 			count = Boolean.hashCode(

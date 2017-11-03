@@ -5554,7 +5554,7 @@ public class Objects {
 			Date a = new Date();
 			diashoras.setId(id);
 			diashoras.setDiasSemanas(new ArrayList<>());
-			diashoras.getDiasSemanas().add(Objects.insertDoisValor(id, tabela, action));
+			diashoras.getDiasSemanas().add(Objects.insertDoisValoresParent(id, tabela, action));
 			diashoras.setHoraInicio(a.getTime());
 			diashoras.setHoraFinal(a.getTime());
 

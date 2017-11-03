@@ -14,6 +14,7 @@ import com.qat.samples.sysmgmt.clinica.model.Especialidade;
 import com.qat.samples.sysmgmt.util.model.ClienteCompromisso;
 import com.qat.samples.sysmgmt.util.model.Compromisso;
 import com.qat.samples.sysmgmt.util.model.DiasHoras;
+import com.qat.samples.sysmgmt.util.model.DoisValores;
 import com.qat.samples.sysmgmt.util.model.ParticipanteExterno;
 import com.qat.samples.sysmgmt.util.model.request.FetchByIdRequest;
 import com.qat.samples.sysmgmt.util.model.request.PagedInquiryRequest;
@@ -193,7 +194,7 @@ public interface IAdvocaciaBAR
 * @param request the request
 * @return the internal results response
 */
-	public InternalResultsResponse<Especialidade> fetchEspecialidadesByRequest(PagedInquiryRequest request);
+	public InternalResultsResponse<DoisValores> fetchEspecialidadesByRequest(PagedInquiryRequest request);
 
 	/**
 	 * Fetch compromisso by id.

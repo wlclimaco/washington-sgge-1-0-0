@@ -94,6 +94,10 @@
 
     <select id="fetchDoisValorRowCount" resultType="Integer" parameterType="DoisValorInquiryRequest">
      SELECT COUNT(*) AS RECORD_COUNT FROM doisvalor WHERE id IS NOT NULL <if test="paginaId != null"> and pagina = #{paginaId}</if>
+           <if test="doisValorType != null"> and doisvalortype = #{doisValorType}</if>
+           <if test="descricao != null"> and descricao = #{descricao}</if>
+           <if test="nome != null"> and nome = #{nome}</if>
+           <if test="value != null"> and value = #{value}</if>
 
  </select>
 

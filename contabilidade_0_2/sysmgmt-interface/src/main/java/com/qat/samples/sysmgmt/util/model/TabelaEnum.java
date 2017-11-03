@@ -405,7 +405,8 @@ public enum TabelaEnum implements IIntegerEnum, II18nEnum
 	ARQUIVO(73, "sendsolv.base.model.risklevelenum.medium"),
 	PROCESSOUSUARIOS(73, "sendsolv.base.model.risklevelenum.medium"),
 	PROCESSOCLIENTE(73, "sendsolv.base.model.risklevelenum.medium"),
-	CONTA(103, "sendsolv.base.model.risklevelenum.medium");
+	CONTA(103, "sendsolv.base.model.risklevelenum.medium"),
+	DIASSEMANA(104, "sendsolv.base.model.risklevelenum.medium");
 
 
 	/** The code. */

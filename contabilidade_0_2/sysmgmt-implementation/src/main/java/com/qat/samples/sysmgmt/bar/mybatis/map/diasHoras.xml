@@ -27,7 +27,8 @@
 <result property="createDateUTC" column="create_date"/>
 <result property="modifyUser" column="modify_user"/>
 <result property="modifyDateUTC" column="modify_date"/>
-<collection property="diasSemanas" column="diasSemanas" select="RegimeMap.fetchRegimeById"/>
+<collection property="diasSemanas" column="diasSemanas" select="DoisValorParentMap.fetchAllDoisValorDiasSemana"/>
+
   </resultMap>
 
   <sql id="allDiasHorasColumns">

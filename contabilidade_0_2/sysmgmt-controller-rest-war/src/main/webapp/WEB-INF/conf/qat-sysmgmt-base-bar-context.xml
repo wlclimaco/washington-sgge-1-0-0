@@ -51,11 +51,12 @@
 		<property name="nfnotaInfoItemBAR" ref="nfnotainfoitemBARTarget" />
 	</bean>
 
-			<bean id="advocaciaBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Advogado.AdvocaciaBARImpl">
+	<bean id="advocaciaBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Advogado.AdvocaciaBARImpl">
 		<property name="sqlSessionFactory" ref="sysMgmt-sqlSessionFactory" />
 				<property name="statusBAR" ref="statusBARTarget" />
 		<property name="historicoBAR" ref="historicoBARTarget" />
 		<property name="advocaciaBAR" ref="advocaciaBARTarget" />
+		<property name="doisValorBAR" ref="doisValorBARTarget" />
 	</bean>
 
 	<bean id="nfeBARTarget" class="com.qat.samples.sysmgmt.bar.mybatis.Nfe.NFeBARImpl">

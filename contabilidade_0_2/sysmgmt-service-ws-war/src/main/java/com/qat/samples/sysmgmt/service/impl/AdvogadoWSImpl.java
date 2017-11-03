@@ -70,433 +70,559 @@ public class AdvogadoWSImpl implements com.qat.samples.sysmgmt.service.IAdvogado
 		return advogadoBAC;
 	}
 
-
-//===================================### ADVOGADO ####======================================
 	@Override
-	public AdvogadoResponse insertAdvogado(AdvogadoMaintenanceRequest request)
-	{
-		AdvogadoResponse response = new AdvogadoResponse();
-
-		try
-		{
-			InternalResultsResponse<Advogado> internalResponse = getAdvogadoBAC().insertAdvogado(request);
-			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
-					request.getRequestContext());
-		}
-
-		return response;
+	public AdvogadoResponse insertAdvogado(AdvogadoMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public AdvogadoResponse updateAdvogado(AdvogadoMaintenanceRequest request)
-	{
-		AdvogadoResponse response = new AdvogadoResponse();
-
-		try
-		{
-			InternalResultsResponse<Advogado> internalResponse = getAdvogadoBAC().updateAdvogado(request);
-			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
-					request.getRequestContext());
-		}
-
-		return response;
+	public AdvogadoResponse updateAdvogado(AdvogadoMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public AdvogadoResponse deleteAdvogado(AdvogadoMaintenanceRequest request)
-	{
-		AdvogadoResponse response = new AdvogadoResponse();
-
-		try
-		{
-			InternalResultsResponse<Advogado> internalResponse = getAdvogadoBAC().deleteAdvogado(request);
-			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
-					request.getRequestContext());
-		}
-
-		return response;
+	public AdvogadoResponse deleteAdvogado(AdvogadoMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public AdvogadoResponse refreshAdvogados(RefreshRequest request)
-	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		AdvogadoResponse response = new AdvogadoResponse();
-
-		try
-		{
-			InternalResultsResponse<Advogado> internalResponse = getAdvogadoBAC().refreshAdvogados(request);
-			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
-					request.getRequestContext());
-		}
-
-		return response;
+	public AdvogadoResponse refreshAdvogados(RefreshRequest request) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public AdvogadoResponse fetchAllAdvogados(FetchAllRequest request)
-	{
-		AdvogadoResponse response = new AdvogadoResponse();
-
-		try
-		{
-			InternalResultsResponse<Advogado> internalResponse = getAdvogadoBAC().fetchAllAdvogados(new Advogado());
-			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
-					request.getRequestContext());
-		}
-
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.dapi.impl.IAdvogadoWS#fetchAdvogadoById(com.qat.samples.sysmgmt.model.request.
-	 * FetchByIdRequest)
-	 */
-	@Override
-	public AdvogadoResponse fetchAdvogadoById(FetchByIdRequest request)
-	{
-		AdvogadoResponse response = new AdvogadoResponse();
-
-		try
-		{
-			InternalResultsResponse<Advogado> internalResponse = new InternalResultsResponse<Advogado>();
-
-			internalResponse = getAdvogadoBAC().fetchAdvogadoById(request);
-			// Handle the processing for all previous methods regardless of them failing or succeeding.
-			ResponseHandler.handleOperationStatusAndMessages(response, internalResponse, true);
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
-					request.getRequestContext());
-		}
-
-		return response;
+	public AdvogadoResponse fetchAllAdvogados(FetchAllRequest request) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public AdvogadoResponse fetchAdvogadosByRequest(AdvogadoInquiryRequest request)
-	{
-		AdvogadoResponse response = new AdvogadoResponse();
-
-		try
-		{
-			InternalResultsResponse<Advogado> internalResponse = getAdvogadoBAC().fetchAdvogadosByRequest(request);
-			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
-					request.getRequestContext());
-		}
-
-		return response;
-	}
-
-//===================================### AUDIENCIA ####======================================
-	@Override
-	public AudienciaResponse insertAudiencia(AudienciaMaintenanceRequest request)
-	{
-		AudienciaResponse response = new AudienciaResponse();
-
-		try
-		{
-			InternalResultsResponse<Audiencia> internalResponse = getAdvogadoBAC().insertAudiencia(request);
-			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
-					request.getRequestContext());
-		}
-
-		return response;
+	public AdvogadoResponse fetchAdvogadoById(FetchByIdRequest request) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public AudienciaResponse updateAudiencia(AudienciaMaintenanceRequest request)
-	{
-		AudienciaResponse response = new AudienciaResponse();
-
-		try
-		{
-			InternalResultsResponse<Audiencia> internalResponse = getAdvogadoBAC().updateAudiencia(request);
-			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
-					request.getRequestContext());
-		}
-
-		return response;
+	public AdvogadoResponse fetchAdvogadosByRequest(AdvogadoInquiryRequest request) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public AudienciaResponse deleteAudiencia(AudienciaMaintenanceRequest request)
-	{
-		AudienciaResponse response = new AudienciaResponse();
-
-		try
-		{
-			InternalResultsResponse<Audiencia> internalResponse = getAdvogadoBAC().deleteAudiencia(request);
-			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
-					request.getRequestContext());
-		}
-
-		return response;
+	public AudienciaResponse insertAudiencia(AudienciaMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public AudienciaResponse refreshAudiencias(RefreshRequest request)
-	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		AudienciaResponse response = new AudienciaResponse();
-
-		try
-		{
-			InternalResultsResponse<Audiencia> internalResponse = getAdvogadoBAC().refreshAudiencias(request);
-			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
-					request.getRequestContext());
-		}
-
-		return response;
+	public AudienciaResponse updateAudiencia(AudienciaMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public AudienciaResponse fetchAllAudiencias(FetchAllRequest request)
-	{
-		AudienciaResponse response = new AudienciaResponse();
-
-		try
-		{
-			InternalResultsResponse<Audiencia> internalResponse = getAdvogadoBAC().fetchAllAudiencias(new Audiencia());
-			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
-					request.getRequestContext());
-		}
-
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.dapi.impl.IAudienciaWS#fetchAudienciaById(com.qat.samples.sysmgmt.model.request.
-	 * FetchByIdRequest)
-	 */
-	@Override
-	public AudienciaResponse fetchAudienciaById(FetchByIdRequest request)
-	{
-		AudienciaResponse response = new AudienciaResponse();
-
-		try
-		{
-			InternalResultsResponse<Audiencia> internalResponse = new InternalResultsResponse<Audiencia>();
-
-			internalResponse = getAdvogadoBAC().fetchAudienciaById(request);
-			// Handle the processing for all previous methods regardless of them failing or succeeding.
-			ResponseHandler.handleOperationStatusAndMessages(response, internalResponse, true);
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
-					request.getRequestContext());
-		}
-
-		return response;
+	public AudienciaResponse deleteAudiencia(AudienciaMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public AudienciaResponse fetchAudienciasByRequest(AudienciaInquiryRequest request)
-	{
-		AudienciaResponse response = new AudienciaResponse();
-
-		try
-		{
-			InternalResultsResponse<Audiencia> internalResponse = getAdvogadoBAC().fetchAudienciasByRequest(request);
-			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
-					request.getRequestContext());
-		}
-
-		return response;
-	}
-
-//===================================### PROCESSO ####======================================
-	@Override
-	public ProcessoResponse insertProcesso(ProcessoMaintenanceRequest request)
-	{
-		ProcessoResponse response = new ProcessoResponse();
-
-		try
-		{
-			InternalResultsResponse<Processo> internalResponse = getAdvogadoBAC().insertProcesso(request);
-			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
-					request.getRequestContext());
-		}
-
-		return response;
+	public AudienciaResponse refreshAudiencias(RefreshRequest request) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public ProcessoResponse updateProcesso(ProcessoMaintenanceRequest request)
-	{
-		ProcessoResponse response = new ProcessoResponse();
-
-		try
-		{
-			InternalResultsResponse<Processo> internalResponse = getAdvogadoBAC().updateProcesso(request);
-			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
-					request.getRequestContext());
-		}
-
-		return response;
+	public AudienciaResponse fetchAllAudiencias(FetchAllRequest request) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public ProcessoResponse deleteProcesso(ProcessoMaintenanceRequest request)
-	{
-		ProcessoResponse response = new ProcessoResponse();
-
-		try
-		{
-			InternalResultsResponse<Processo> internalResponse = getAdvogadoBAC().deleteProcesso(request);
-			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
-					request.getRequestContext());
-		}
-
-		return response;
+	public AudienciaResponse fetchAudienciaById(FetchByIdRequest request) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public ProcessoResponse refreshProcessos(RefreshRequest request)
-	{
-		// This method is demo code only. Do not view this as a QAT Global Standard.
-		ProcessoResponse response = new ProcessoResponse();
-
-		try
-		{
-			InternalResultsResponse<Processo> internalResponse = getAdvogadoBAC().refreshProcessos(request);
-			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
-					request.getRequestContext());
-		}
-
-		return response;
+	public AudienciaResponse fetchAudienciasByRequest(AudienciaInquiryRequest request) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public ProcessoResponse fetchAllProcessos(FetchAllRequest request)
-	{
-		ProcessoResponse response = new ProcessoResponse();
-
-		try
-		{
-			InternalResultsResponse<Processo> internalResponse = getAdvogadoBAC().fetchAllProcessos(new Processo());
-			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
-					request.getRequestContext());
-		}
-
-		return response;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.qat.samples.sysmgmt.dapi.impl.IProcessoWS#fetchProcessoById(com.qat.samples.sysmgmt.model.request.
-	 * FetchByIdRequest)
-	 */
-	@Override
-	public ProcessoResponse fetchProcessoById(FetchByIdRequest request)
-	{
-		ProcessoResponse response = new ProcessoResponse();
-
-		try
-		{
-			InternalResultsResponse<Processo> internalResponse = new InternalResultsResponse<Processo>();
-
-			internalResponse = getAdvogadoBAC().fetchProcessoById(request);
-			// Handle the processing for all previous methods regardless of them failing or succeeding.
-			ResponseHandler.handleOperationStatusAndMessages(response, internalResponse, true);
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
-					request.getRequestContext());
-		}
-
-		return response;
+	public ProcessoResponse insertProcesso(ProcessoMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	public ProcessoResponse fetchProcessosByRequest(ProcessoInquiryRequest request)
-	{
-		ProcessoResponse response = new ProcessoResponse();
-
-		try
-		{
-			InternalResultsResponse<Processo> internalResponse = getAdvogadoBAC().fetchProcessosByRequest(request);
-			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
-		}
-		catch (Exception ex)
-		{
-			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
-					request.getRequestContext());
-		}
-
-		return response;
+	public ProcessoResponse updateProcesso(ProcessoMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
 	}
+
+	@Override
+	public ProcessoResponse deleteProcesso(ProcessoMaintenanceRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ProcessoResponse refreshProcessos(RefreshRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ProcessoResponse fetchAllProcessos(FetchAllRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ProcessoResponse fetchProcessoById(FetchByIdRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ProcessoResponse fetchProcessosByRequest(ProcessoInquiryRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+////===================================### ADVOGADO ####======================================
+//	@Override
+//	public AdvogadoResponse insertAdvogado(AdvogadoMaintenanceRequest request)
+//	{
+//		AdvogadoResponse response = new AdvogadoResponse();
+//
+//		try
+//		{
+//			InternalResultsResponse<Advogado> internalResponse = getAdvogadoBAC().insertAdvogado(request);
+//			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+//					request.getRequestContext());
+//		}
+//
+//		return response;
+//	}
+//
+//	@Override
+//	public AdvogadoResponse updateAdvogado(AdvogadoMaintenanceRequest request)
+//	{
+//		AdvogadoResponse response = new AdvogadoResponse();
+//
+//		try
+//		{
+//			InternalResultsResponse<Advogado> internalResponse = getAdvogadoBAC().updateAdvogado(request);
+//			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+//					request.getRequestContext());
+//		}
+//
+//		return response;
+//	}
+//
+//	@Override
+//	public AdvogadoResponse deleteAdvogado(AdvogadoMaintenanceRequest request)
+//	{
+//		AdvogadoResponse response = new AdvogadoResponse();
+//
+//		try
+//		{
+//			InternalResultsResponse<Advogado> internalResponse = getAdvogadoBAC().deleteAdvogado(request);
+//			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+//					request.getRequestContext());
+//		}
+//
+//		return response;
+//	}
+//
+//	@Override
+//	public AdvogadoResponse refreshAdvogados(RefreshRequest request)
+//	{
+//		// This method is demo code only. Do not view this as a QAT Global Standard.
+//		AdvogadoResponse response = new AdvogadoResponse();
+//
+//		try
+//		{
+//			InternalResultsResponse<Advogado> internalResponse = getAdvogadoBAC().refreshAdvogados(request);
+//			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+//					request.getRequestContext());
+//		}
+//
+//		return response;
+//	}
+//
+//	@Override
+//	public AdvogadoResponse fetchAllAdvogados(FetchAllRequest request)
+//	{
+//		AdvogadoResponse response = new AdvogadoResponse();
+//
+//		try
+//		{
+//			InternalResultsResponse<Advogado> internalResponse = getAdvogadoBAC().fetchAllAdvogados(new Advogado());
+//			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+//					request.getRequestContext());
+//		}
+//
+//		return response;
+//	}
+//
+//	/*
+//	 * (non-Javadoc)
+//	 * @see com.qat.samples.sysmgmt.dapi.impl.IAdvogadoWS#fetchAdvogadoById(com.qat.samples.sysmgmt.model.request.
+//	 * FetchByIdRequest)
+//	 */
+//	@Override
+//	public AdvogadoResponse fetchAdvogadoById(FetchByIdRequest request)
+//	{
+//		AdvogadoResponse response = new AdvogadoResponse();
+//
+//		try
+//		{
+//			InternalResultsResponse<Advogado> internalResponse = new InternalResultsResponse<Advogado>();
+//
+//			internalResponse = getAdvogadoBAC().fetchAdvogadoById(request);
+//			// Handle the processing for all previous methods regardless of them failing or succeeding.
+//			ResponseHandler.handleOperationStatusAndMessages(response, internalResponse, true);
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+//					request.getRequestContext());
+//		}
+//
+//		return response;
+//	}
+//
+//	@Override
+//	public AdvogadoResponse fetchAdvogadosByRequest(AdvogadoInquiryRequest request)
+//	{
+//		AdvogadoResponse response = new AdvogadoResponse();
+//
+//		try
+//		{
+//			InternalResultsResponse<Advogado> internalResponse = getAdvogadoBAC().fetchAdvogadosByRequest(request);
+//			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+//					request.getRequestContext());
+//		}
+//
+//		return response;
+//	}
+//
+////===================================### AUDIENCIA ####======================================
+//	@Override
+//	public AudienciaResponse insertAudiencia(AudienciaMaintenanceRequest request)
+//	{
+//		AudienciaResponse response = new AudienciaResponse();
+//
+//		try
+//		{
+//			InternalResultsResponse<Audiencia> internalResponse = getAdvogadoBAC().insertAudiencia(request);
+//			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+//					request.getRequestContext());
+//		}
+//
+//		return response;
+//	}
+//
+//	@Override
+//	public AudienciaResponse updateAudiencia(AudienciaMaintenanceRequest request)
+//	{
+//		AudienciaResponse response = new AudienciaResponse();
+//
+//		try
+//		{
+//			InternalResultsResponse<Audiencia> internalResponse = getAdvogadoBAC().updateAudiencia(request);
+//			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+//					request.getRequestContext());
+//		}
+//
+//		return response;
+//	}
+//
+//	@Override
+//	public AudienciaResponse deleteAudiencia(AudienciaMaintenanceRequest request)
+//	{
+//		AudienciaResponse response = new AudienciaResponse();
+//
+//		try
+//		{
+//			InternalResultsResponse<Audiencia> internalResponse = getAdvogadoBAC().deleteAudiencia(request);
+//			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+//					request.getRequestContext());
+//		}
+//
+//		return response;
+//	}
+//
+//	@Override
+//	public AudienciaResponse refreshAudiencias(RefreshRequest request)
+//	{
+//		// This method is demo code only. Do not view this as a QAT Global Standard.
+//		AudienciaResponse response = new AudienciaResponse();
+//
+//		try
+//		{
+//			InternalResultsResponse<Audiencia> internalResponse = getAdvogadoBAC().refreshAudiencias(request);
+//			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+//					request.getRequestContext());
+//		}
+//
+//		return response;
+//	}
+//
+//	@Override
+//	public AudienciaResponse fetchAllAudiencias(FetchAllRequest request)
+//	{
+//		AudienciaResponse response = new AudienciaResponse();
+//
+//		try
+//		{
+//			InternalResultsResponse<Audiencia> internalResponse = getAdvogadoBAC().fetchAllAudiencias(new Audiencia());
+//			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+//					request.getRequestContext());
+//		}
+//
+//		return response;
+//	}
+//
+//	/*
+//	 * (non-Javadoc)
+//	 * @see com.qat.samples.sysmgmt.dapi.impl.IAudienciaWS#fetchAudienciaById(com.qat.samples.sysmgmt.model.request.
+//	 * FetchByIdRequest)
+//	 */
+//	@Override
+//	public AudienciaResponse fetchAudienciaById(FetchByIdRequest request)
+//	{
+//		AudienciaResponse response = new AudienciaResponse();
+//
+//		try
+//		{
+//			InternalResultsResponse<Audiencia> internalResponse = new InternalResultsResponse<Audiencia>();
+//
+//			internalResponse = getAdvogadoBAC().fetchAudienciaById(request);
+//			// Handle the processing for all previous methods regardless of them failing or succeeding.
+//			ResponseHandler.handleOperationStatusAndMessages(response, internalResponse, true);
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+//					request.getRequestContext());
+//		}
+//
+//		return response;
+//	}
+//
+//	@Override
+//	public AudienciaResponse fetchAudienciasByRequest(AudienciaInquiryRequest request)
+//	{
+//		AudienciaResponse response = new AudienciaResponse();
+//
+//		try
+//		{
+//			InternalResultsResponse<Audiencia> internalResponse = getAdvogadoBAC().fetchAudienciasByRequest(request);
+//			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+//					request.getRequestContext());
+//		}
+//
+//		return response;
+//	}
+//
+////===================================### PROCESSO ####======================================
+//	@Override
+//	public ProcessoResponse insertProcesso(ProcessoMaintenanceRequest request)
+//	{
+//		ProcessoResponse response = new ProcessoResponse();
+//
+//		try
+//		{
+//			InternalResultsResponse<Processo> internalResponse = getAdvogadoBAC().insertProcesso(request);
+//			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+//					request.getRequestContext());
+//		}
+//
+//		return response;
+//	}
+//
+//	@Override
+//	public ProcessoResponse updateProcesso(ProcessoMaintenanceRequest request)
+//	{
+//		ProcessoResponse response = new ProcessoResponse();
+//
+//		try
+//		{
+//			InternalResultsResponse<Processo> internalResponse = getAdvogadoBAC().updateProcesso(request);
+//			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+//					request.getRequestContext());
+//		}
+//
+//		return response;
+//	}
+//
+//	@Override
+//	public ProcessoResponse deleteProcesso(ProcessoMaintenanceRequest request)
+//	{
+//		ProcessoResponse response = new ProcessoResponse();
+//
+//		try
+//		{
+//			InternalResultsResponse<Processo> internalResponse = getAdvogadoBAC().deleteProcesso(request);
+//			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+//					request.getRequestContext());
+//		}
+//
+//		return response;
+//	}
+//
+//	@Override
+//	public ProcessoResponse refreshProcessos(RefreshRequest request)
+//	{
+//		// This method is demo code only. Do not view this as a QAT Global Standard.
+//		ProcessoResponse response = new ProcessoResponse();
+//
+//		try
+//		{
+//			InternalResultsResponse<Processo> internalResponse = getAdvogadoBAC().refreshProcessos(request);
+//			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+//					request.getRequestContext());
+//		}
+//
+//		return response;
+//	}
+//
+//	@Override
+//	public ProcessoResponse fetchAllProcessos(FetchAllRequest request)
+//	{
+//		ProcessoResponse response = new ProcessoResponse();
+//
+//		try
+//		{
+//			InternalResultsResponse<Processo> internalResponse = getAdvogadoBAC().fetchAllProcessos(new Processo());
+//			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+//					request.getRequestContext());
+//		}
+//
+//		return response;
+//	}
+//
+//	/*
+//	 * (non-Javadoc)
+//	 * @see com.qat.samples.sysmgmt.dapi.impl.IProcessoWS#fetchProcessoById(com.qat.samples.sysmgmt.model.request.
+//	 * FetchByIdRequest)
+//	 */
+//	@Override
+//	public ProcessoResponse fetchProcessoById(FetchByIdRequest request)
+//	{
+//		ProcessoResponse response = new ProcessoResponse();
+//
+//		try
+//		{
+//			InternalResultsResponse<Processo> internalResponse = new InternalResultsResponse<Processo>();
+//
+//			internalResponse = getAdvogadoBAC().fetchProcessoById(request);
+//			// Handle the processing for all previous methods regardless of them failing or succeeding.
+//			ResponseHandler.handleOperationStatusAndMessages(response, internalResponse, true);
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+//					request.getRequestContext());
+//		}
+//
+//		return response;
+//	}
+//
+//	@Override
+//	public ProcessoResponse fetchProcessosByRequest(ProcessoInquiryRequest request)
+//	{
+//		ProcessoResponse response = new ProcessoResponse();
+//
+//		try
+//		{
+//			InternalResultsResponse<Processo> internalResponse = getAdvogadoBAC().fetchProcessosByRequest(request);
+//			ResponseHandler.populateResponse(response, internalResponse, DEFAULT_ERROR_MSG, request.getRequestContext());
+//		}
+//		catch (Exception ex)
+//		{
+//			ResponseHandler.handleException(LOG, response, ex, DEFAULT_EXCEPTION_MSG, new Object[] {CLASS_NAME},
+//					request.getRequestContext());
+//		}
+//
+//		return response;
+//	}
 }

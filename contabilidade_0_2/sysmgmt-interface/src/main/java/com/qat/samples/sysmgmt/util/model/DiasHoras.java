@@ -19,7 +19,7 @@ public class DiasHoras extends ModelCosmeDamiao {
 	private Long horaFinal;
 
 	/** The dias semanas. */
-	private List<DoisValores> diasSemanas;
+	private List<DoisValoresParent> diasSemanas;
 
 	/**
 	 * Default constructor.
@@ -64,11 +64,11 @@ public class DiasHoras extends ModelCosmeDamiao {
 		this.horaFinal = horaFinal;
 	}
 
-	public List<DoisValores> getDiasSemanas() {
+	public List<DoisValoresParent> getDiasSemanas() {
 		return diasSemanas;
 	}
 
-	public void setDiasSemanas(List<DoisValores> diasSemanas) {
+	public void setDiasSemanas(List<DoisValoresParent> diasSemanas) {
 		this.diasSemanas = diasSemanas;
 	}
 

@@ -13,3 +13,6 @@ INSERT INTO DoisValor( id, nome, descricao, doisValorType,parentId,tabelaEnumVal
 
 INSERT INTO DoisValor( id, nome, descricao, doisValorType,parentId,tabelaEnumValue,emprId,processId,create_user,create_date,modify_user,modify_date)values
 ( 100004, 'nome_1', 'descricao_2', 10004,1,1,1,1,'system',1469713027496,'rod',1469713027496);
+
+
+

@@ -366,11 +366,11 @@ public InternalResultsResponse<Especialidade> fetchEspecialidadeById(FetchByIdRe
  * @see com.qat.samples.sysmgmt.bac.IEspecialidadeBAC#fetchEspecialidadesByRequest(com.qat.samples.sysmgmt.model.request.
  * PagedInquiryRequest)
  */
-@Override
-public InternalResultsResponse<Especialidade> fetchEspecialidadesByRequest(PagedInquiryRequest request)
-{
-	return getAdvocaciaBAR().fetchEspecialidadesByRequest(request);
-}
+//@Override
+//public InternalResultsResponse<Especialidade> fetchEspecialidadesByRequest(PagedInquiryRequest request)
+//{
+//	return getAdvocaciaBAR().fetchEspecialidadesByRequest(request);
+//}
 
 
 	/**
@@ -1484,6 +1484,12 @@ private InternalResultsResponse<Processo> processProcesso(ValidationContextIndic
 		}
 	@Override
 	public InternalResultsResponse<ProcessoCliente> fetchProcessoClientesByRequest(PagedInquiryRequest request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public InternalResultsResponse<Especialidade> fetchEspecialidadesByRequest(PagedInquiryRequest request) {
 		// TODO Auto-generated method stub
 		return null;
 	}

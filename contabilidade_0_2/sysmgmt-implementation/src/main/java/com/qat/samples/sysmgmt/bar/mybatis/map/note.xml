@@ -70,6 +70,13 @@ parentId
    FROM notes WHERE parentId = #{fetchid} and tabelaEnumValue = 17 order by id DESC
  </select>
 
+ <select id="fetchNoteByAdvogado" parameterType="Integer" resultMap="NoteResult">
+    SELECT id,
+	<include refid="allNoteColumns" />
+   FROM notes WHERE parentId = #{fetchid} and tabelaEnumValue = 74 order by id DESC
+ </select>
+
+
  <select id="fetchAllNotesRequest" parameterType="PagedInquiryRequest" resultMap="NoteResult">
 
 		SELECT id,<include refid="allNoteColumns" />
