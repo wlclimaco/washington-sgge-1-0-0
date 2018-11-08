@@ -1,153 +1,212 @@
-
 // ====================================================== Dois Valores ===============================================
 function DVProcesso() {
     var a = [];
-    a.push({field: {
-        id:    "103",name: "Processo",doisValorType: [{
-            id : "142",tipo :"STATUS", descricao:"STATUS",doisValor :[
-                {value :"4",nome:"Arquivado", descricao:"Arquivado"},
-                {value :"1",nome:"Ativo", descricao:"Ativo"},
-                {value :"5",nome:"Em grau de recurso", descricao:"Em grau de recurso"},
-                {value :"3",nome:"Encerrado", descricao:"Encerrado"},
-                {value :"2",nome:"Suspenso", descricao:"Suspenso"}
-            ]},
-            {id : "143",tipo :"TIPO ENVOLVIMENTO", descricao:"TIPO ENVOLVIMENTO",doisValor :[
-                {value :"PARTE_ATIVA",nome:"Parte Ativa", descricao:"Parte Ativa"},
-                {value :"PARTE_PASSIVA",nome:"Parte Passiva", descricao:"Parte Passiva"},
-                {value :"TERCEIRO",nome:"Terceiro", descricao:"Terceiro"},
-                {value :"ASSISTENTE",nome:"Assistente", descricao:"Assistente"},
-                {value :"FISCAL",nome:"Fiscal", descricao:"Fiscal"},
-                {value :"TESTEMUNHA",nome:"Testemunha", descricao:"Testemunha"},
-                {value :"VITIMA",nome:"Vítima", descricao:"Vítima"},
-                {value :"OUTROS",nome:"Outros", descricao:"Outros"},
-            ]},
-            {id : "144",tipo :"ENVOLVIMENTO", descricao:"ENVOLVIMENTO",doisValor :[
-                {value :'63', nome:'Acusador',descricao:'Acusador'},
-                {value :'2', nome:'Agravante',descricao:'Agravante'},
-                {value :'3', nome:'Apelante',descricao:'Apelante'},
-                {value :'1', nome:'Autor',descricao:'Autor'},
-                {value :'4', nome:'Embargante',descricao:'Embargante'},
-                {value :'5', nome:'Excipiente',descricao:'Excipiente'},
-                {value :'6', nome:'Exequente',descricao:'Exequente'},
-                {value :'7',nome: 'Impetrante',descricao:'Impetrante'},
-                {value :'8', nome:'Impugnante',descricao:'Impugnante'},
-                {value :'9',nome: 'Interpelante',descricao:'Interpelante'},
-                {value :'10',nome: 'Inventariante',descricao:'Inventariante'},
-                {value :'11',nome: 'Notificante',descricao:'Notificante'},
-                {value :'12',nome: 'Opoente',descricao:'Opoente'},
-                {value :'13',nome: 'Reclamante',descricao:'Reclamante'},
-                {value :'14',nome: 'Reconvinte',descricao:'Reconvinte'},
-                {value :'15',nome: 'Recorrente',descricao:'Recorrente'},
-                {value :'61',nome: 'Requerente',descricao:'Requerente'},
-                {value :'16',nome: 'Sujeito Ativo',descricao:'Sujeito Ativo'}
-            ]},
-            {id : "145",tipo :"SITUACAO", descricao:"SITUACAO",doisValor :[
-                {value :'2', nome:'Conselho Nacional de Justiça',descricao:'Conselho Nacional de Justiça'},
-                {value :'8', nome:'Justiça dos Estados e do Distrito Federal e Territórios',descricao:'Justiça dos Estados e do Distrito Federal e Territórios'},
-                {value :'5', nome:'Justiça do Trabalho',descricao:'Justiça do Trabalho'},
-                {value :'6', nome:'Justiça Eleitoral',descricao:'Justiça Eleitoral'},
-                {value :'4', nome:'Justiça Federal',descricao:'Justiça Federal'},
-                {value :'7', nome:'Justiça Militar da União',descricao:'Justiça Militar da União'},
-                {value :'9', nome:'Justiça Militar Estadual',descricao:'Justiça Militar Estadual'},
-                {value :'3', nome:'Superior Tribunal de Justiça',descricao:'Superior Tribunal de Justiça'},
-                {value :'1', nome:'Supremo Tribunal Federal',descricao:'Supremo Tribunal Federal'}
-            ]},
-            {id : "146",tipo :"INSTANCIA", descricao:"INSTANCIA",doisValor :[
-                {value :'PRIMEIRA_INSTANCIA',nome:'1ª Instância',descricao:'1ª Instância'},
-                {value :'SEGUNDA_INSTANCIA', nome:'2ª Instância',descricao:'2ª Instância'},
-                {value :'TERCEIRA_INSTANCIA',nome:'3ª Instância',descricao:'3ª Instância'},
-                {value :'QUARTA_INSTANCIA' , nome:'4ª Instância',descricao:'4ª Instância'}
-            ]},
-            {id : "147",tipo :"JUSTICA", descricao:"JUSTICA",doisValor :[
-                {value :'1', nome:'Supremo Tribunal Federal',descricao:'Supremo Tribunal Federal'},
-                {value :'3', nome:'Superior Tribunal de Justiça',descricao:'Superior Tribunal de Justiça'},
-                {value :'4', nome:'Justiça Federal',descricao:'Justiça Federal'},
-                {value :'5', nome:'Justiça do Trabalho',descricao:'Justiça do Trabalho'},
-                {value :'8', nome:'Justica dos Estados e do Distrito Federal e Territórios',descricao:'Justica dos Estados e do Distrito Federal e Territórios'}
-            ]},
-            {id : "148",tipo :"TRIBUNAL", descricao:"TRIBUNAL",doisValor :[
-                {value :'1',  nome:'Tribunal de Justiça do Acre', descricao:'Tribunal de Justiça do Acre'},
-                {value :'7',  nome:'Tribunal de Justiça de Alagoas', descricao:'Tribunal de Justiça de Alagoas'},
-                {value :'8',  nome:'Tribunal de Justiça do Amazonas', descricao:'Tribunal de Justiça do Amazonas'},
-                {value :'11', nome:'Tribunal de Justiça da Bahia', descricao:'Tribunal de Justiça da Bahia'},
-                {value :'16', nome:'Tribunal de Justiça do Ceará', descricao:'Tribunal de Justiça do Ceará'},
-                {value :'53', nome:'Tribunal de Justiça do Distrito Federal e dos Territórios - DF', descricao:'Tribunal de Justiça do Distrito Federal e dos Territórios - DF'},
-                {value :'19', nome:'Tribunal de Justiça do Espírito Santo', descricao:'Tribunal de Justiça do Espírito Santo'},
-                {value :'20', nome:'Tribunal de Justiça de Goiás', descricao:'Tribunal de Justiça de Goiás'},
-                {value :'22', nome:'Tribunal de Justiça do Maranhão', descricao:'Tribunal de Justiça do Maranhão'},
-                {value :'29', nome:'Tribunal de Justiça de Mato Grosso', descricao:'Tribunal de Justiça de Mato Grosso'},
-                {value :'26', nome:'Tribunal de Justiça de Mato Grosso do Sul', descricao:'Tribunal de Justiça de Mato Grosso do Sul'},
-                {value :'24', nome:'Tribunal de Justiça de Minas Gerais', descricao:'Tribunal de Justiça de Minas Gerais'},
-                {value :'34', nome:'Tribunal de Justiça do Paraná', descricao:'Tribunal de Justiça do Paraná'},
-                {value :'51', nome:'Tribunal de Justiça do Pará - PA', descricao:'Tribunal de Justiça do Pará - PA'},
-                {value :'33', nome:'Tribunal de Justiça do Piauí', descricao:'Tribunal de Justiça do Piauí'},
-                {value :'40', nome:'Tribunal de Justiça do Rio Grande do Norte', descricao:'Tribunal de Justiça do Rio Grande do Norte'},
-                {value :'43', nome:'Tribunal de Justiça de Rio Grande do Sul', descricao:'Tribunal de Justiça de Rio Grande do Sul'},
-                {value :'37', nome:'Tribunal de Justiça do Rio de Janeiro', descricao:'Tribunal de Justiça do Rio de Janeiro'},
-                {value :'42', nome:'Tribunal de Justiça de Rondônia', descricao:'Tribunal de Justiça de Rondônia'},
-                {value :'45', nome:'Tribunal de Justiça de Santa Catarina', descricao:'Tribunal de Justiça de Santa Catarina'},
-                {value :'4',  nome:'Tribunal de Justiça de São Paulo', descricao:'Tribunal de Justiça de São Paulo'}
-            ]},
-            {id : "149",tipo :"LOCALIDADE", descricao:"LOCALIDADE",doisValor :[
-                {value :'PRIMEIRA_INSTANCIA', nome:'1ª Instância',descricao:'1ª Instância'},
-                {value :'SEGUNDA_INSTANCIA', nome:'2ª Instância',descricao:'2ª Instância'},
-                {value :'TERCEIRA_INSTANCIA', nome:'3ª Instância',descricao:'3ª Instância'},
-                {value :'QUARTA_INSTANCIA', nome:'4ª Instância',descricao:'4ª Instância'}
-            ]},
-            {id : "150",tipo :"CAPITUR POR", descricao:"CAPITUR POR",doisValor :[
-                {value :'PRIMEIRA_INSTANCIA', nome:'1ª Instância',descricao:'1ª Instância'},
-                {value :'SEGUNDA_INSTANCIA', nome:'2ª Instância',descricao:'2ª Instância'},
-                {value :'TERCEIRA_INSTANCIA', nome:'3ª Instância',descricao:'3ª Instância'},
-                {value :'QUARTA_INSTANCIA', nome:'4ª Instância',descricao:'4ª Instância'}
-            ]},
-            {id : "151",tipo :"CAPTURA AUTOMATICA", descricao:"CAPTURA AUTOMATICA",doisValor :[
-                {value :'NAO_CAPTURAR', nome: 'Não capturar', descricao:'Não capturar'},
-                {value :'DIARIA', nome: 'Diária', descricao:'Diária'},
-                {value :'SEMANAL', nome: 'Semanal', descricao:'Semanal'},
-                {value :'MENSAL', nome: 'Mensal', descricao:'Mensal'}
-                
-                ]
-            },{id : "152",tipo :"GRUPO TRABALHO", descricao:"GRUPO TRABALHO",doisValor :[
-                {value :'1', nome: 'Admintradores', descricao:'Admintradores'},
-                {value :'2', nome: 'Civel', descricao:'Civil'},
-                {value :'3', nome: 'Criminal', descricao:'Criminal'},
-                {value :'4', nome: 'Trabalhista', descricao:'Trabalhista'}
-                
-                ]
-            },{id : "153",tipo :"NATUREZA", descricao:"NATUREZA",doisValor :[
+    a.push({
+        field: {
+            id: "103",
+            name: "Processo",
+            doisValorType: [{
+                    id: "142",
+                    tipo: "STATUS",
+                    descricao: "STATUS",
+                    doisValor: [
+                        { value: "4", nome: "Arquivado", descricao: "Arquivado" },
+                        { value: "1", nome: "Ativo", descricao: "Ativo" },
+                        { value: "5", nome: "Em grau de recurso", descricao: "Em grau de recurso" },
+                        { value: "3", nome: "Encerrado", descricao: "Encerrado" },
+                        { value: "2", nome: "Suspenso", descricao: "Suspenso" }
+                    ]
+                },
+                {
+                    id: "143",
+                    tipo: "TIPO ENVOLVIMENTO",
+                    descricao: "TIPO ENVOLVIMENTO",
+                    doisValor: [
+                        { value: "PARTE_ATIVA", nome: "Parte Ativa", descricao: "Parte Ativa" },
+                        { value: "PARTE_PASSIVA", nome: "Parte Passiva", descricao: "Parte Passiva" },
+                        { value: "TERCEIRO", nome: "Terceiro", descricao: "Terceiro" },
+                        { value: "ASSISTENTE", nome: "Assistente", descricao: "Assistente" },
+                        { value: "FISCAL", nome: "Fiscal", descricao: "Fiscal" },
+                        { value: "TESTEMUNHA", nome: "Testemunha", descricao: "Testemunha" },
+                        { value: "VITIMA", nome: "Vítima", descricao: "Vítima" },
+                        { value: "OUTROS", nome: "Outros", descricao: "Outros" },
+                    ]
+                },
+                {
+                    id: "144",
+                    tipo: "ENVOLVIMENTO",
+                    descricao: "ENVOLVIMENTO",
+                    doisValor: [
+                        { value: '63', nome: 'Acusador', descricao: 'Acusador' },
+                        { value: '2', nome: 'Agravante', descricao: 'Agravante' },
+                        { value: '3', nome: 'Apelante', descricao: 'Apelante' },
+                        { value: '1', nome: 'Autor', descricao: 'Autor' },
+                        { value: '4', nome: 'Embargante', descricao: 'Embargante' },
+                        { value: '5', nome: 'Excipiente', descricao: 'Excipiente' },
+                        { value: '6', nome: 'Exequente', descricao: 'Exequente' },
+                        { value: '7', nome: 'Impetrante', descricao: 'Impetrante' },
+                        { value: '8', nome: 'Impugnante', descricao: 'Impugnante' },
+                        { value: '9', nome: 'Interpelante', descricao: 'Interpelante' },
+                        { value: '10', nome: 'Inventariante', descricao: 'Inventariante' },
+                        { value: '11', nome: 'Notificante', descricao: 'Notificante' },
+                        { value: '12', nome: 'Opoente', descricao: 'Opoente' },
+                        { value: '13', nome: 'Reclamante', descricao: 'Reclamante' },
+                        { value: '14', nome: 'Reconvinte', descricao: 'Reconvinte' },
+                        { value: '15', nome: 'Recorrente', descricao: 'Recorrente' },
+                        { value: '61', nome: 'Requerente', descricao: 'Requerente' },
+                        { value: '16', nome: 'Sujeito Ativo', descricao: 'Sujeito Ativo' }
+                    ]
+                },
+                {
+                    id: "145",
+                    tipo: "SITUACAO",
+                    descricao: "SITUACAO",
+                    doisValor: [
+                        { value: '2', nome: 'Conselho Nacional de Justiça', descricao: 'Conselho Nacional de Justiça' },
+                        { value: '8', nome: 'Justiça dos Estados e do Distrito Federal e Territórios', descricao: 'Justiça dos Estados e do Distrito Federal e Territórios' },
+                        { value: '5', nome: 'Justiça do Trabalho', descricao: 'Justiça do Trabalho' },
+                        { value: '6', nome: 'Justiça Eleitoral', descricao: 'Justiça Eleitoral' },
+                        { value: '4', nome: 'Justiça Federal', descricao: 'Justiça Federal' },
+                        { value: '7', nome: 'Justiça Militar da União', descricao: 'Justiça Militar da União' },
+                        { value: '9', nome: 'Justiça Militar Estadual', descricao: 'Justiça Militar Estadual' },
+                        { value: '3', nome: 'Superior Tribunal de Justiça', descricao: 'Superior Tribunal de Justiça' },
+                        { value: '1', nome: 'Supremo Tribunal Federal', descricao: 'Supremo Tribunal Federal' }
+                    ]
+                },
+                {
+                    id: "146",
+                    tipo: "INSTANCIA",
+                    descricao: "INSTANCIA",
+                    doisValor: [
+                        { value: 'PRIMEIRA_INSTANCIA', nome: '1ª Instância', descricao: '1ª Instância' },
+                        { value: 'SEGUNDA_INSTANCIA', nome: '2ª Instância', descricao: '2ª Instância' },
+                        { value: 'TERCEIRA_INSTANCIA', nome: '3ª Instância', descricao: '3ª Instância' },
+                        { value: 'QUARTA_INSTANCIA', nome: '4ª Instância', descricao: '4ª Instância' }
+                    ]
+                },
+                {
+                    id: "147",
+                    tipo: "JUSTICA",
+                    descricao: "JUSTICA",
+                    doisValor: [
+                        { value: '1', nome: 'Supremo Tribunal Federal', descricao: 'Supremo Tribunal Federal' },
+                        { value: '3', nome: 'Superior Tribunal de Justiça', descricao: 'Superior Tribunal de Justiça' },
+                        { value: '4', nome: 'Justiça Federal', descricao: 'Justiça Federal' },
+                        { value: '5', nome: 'Justiça do Trabalho', descricao: 'Justiça do Trabalho' },
+                        { value: '8', nome: 'Justica dos Estados e do Distrito Federal e Territórios', descricao: 'Justica dos Estados e do Distrito Federal e Territórios' }
+                    ]
+                },
+                {
+                    id: "148",
+                    tipo: "TRIBUNAL",
+                    descricao: "TRIBUNAL",
+                    doisValor: [
+                        { value: '1', nome: 'Tribunal de Justiça do Acre', descricao: 'Tribunal de Justiça do Acre' },
+                        { value: '7', nome: 'Tribunal de Justiça de Alagoas', descricao: 'Tribunal de Justiça de Alagoas' },
+                        { value: '8', nome: 'Tribunal de Justiça do Amazonas', descricao: 'Tribunal de Justiça do Amazonas' },
+                        { value: '11', nome: 'Tribunal de Justiça da Bahia', descricao: 'Tribunal de Justiça da Bahia' },
+                        { value: '16', nome: 'Tribunal de Justiça do Ceará', descricao: 'Tribunal de Justiça do Ceará' },
+                        { value: '53', nome: 'Tribunal de Justiça do Distrito Federal e dos Territórios - DF', descricao: 'Tribunal de Justiça do Distrito Federal e dos Territórios - DF' },
+                        { value: '19', nome: 'Tribunal de Justiça do Espírito Santo', descricao: 'Tribunal de Justiça do Espírito Santo' },
+                        { value: '20', nome: 'Tribunal de Justiça de Goiás', descricao: 'Tribunal de Justiça de Goiás' },
+                        { value: '22', nome: 'Tribunal de Justiça do Maranhão', descricao: 'Tribunal de Justiça do Maranhão' },
+                        { value: '29', nome: 'Tribunal de Justiça de Mato Grosso', descricao: 'Tribunal de Justiça de Mato Grosso' },
+                        { value: '26', nome: 'Tribunal de Justiça de Mato Grosso do Sul', descricao: 'Tribunal de Justiça de Mato Grosso do Sul' },
+                        { value: '24', nome: 'Tribunal de Justiça de Minas Gerais', descricao: 'Tribunal de Justiça de Minas Gerais' },
+                        { value: '34', nome: 'Tribunal de Justiça do Paraná', descricao: 'Tribunal de Justiça do Paraná' },
+                        { value: '51', nome: 'Tribunal de Justiça do Pará - PA', descricao: 'Tribunal de Justiça do Pará - PA' },
+                        { value: '33', nome: 'Tribunal de Justiça do Piauí', descricao: 'Tribunal de Justiça do Piauí' },
+                        { value: '40', nome: 'Tribunal de Justiça do Rio Grande do Norte', descricao: 'Tribunal de Justiça do Rio Grande do Norte' },
+                        { value: '43', nome: 'Tribunal de Justiça de Rio Grande do Sul', descricao: 'Tribunal de Justiça de Rio Grande do Sul' },
+                        { value: '37', nome: 'Tribunal de Justiça do Rio de Janeiro', descricao: 'Tribunal de Justiça do Rio de Janeiro' },
+                        { value: '42', nome: 'Tribunal de Justiça de Rondônia', descricao: 'Tribunal de Justiça de Rondônia' },
+                        { value: '45', nome: 'Tribunal de Justiça de Santa Catarina', descricao: 'Tribunal de Justiça de Santa Catarina' },
+                        { value: '4', nome: 'Tribunal de Justiça de São Paulo', descricao: 'Tribunal de Justiça de São Paulo' }
+                    ]
+                },
+                {
+                    id: "149",
+                    tipo: "LOCALIDADE",
+                    descricao: "LOCALIDADE",
+                    doisValor: [
+                        { value: 'PRIMEIRA_INSTANCIA', nome: '1ª Instância', descricao: '1ª Instância' },
+                        { value: 'SEGUNDA_INSTANCIA', nome: '2ª Instância', descricao: '2ª Instância' },
+                        { value: 'TERCEIRA_INSTANCIA', nome: '3ª Instância', descricao: '3ª Instância' },
+                        { value: 'QUARTA_INSTANCIA', nome: '4ª Instância', descricao: '4ª Instância' }
+                    ]
+                },
+                {
+                    id: "150",
+                    tipo: "CAPITUR POR",
+                    descricao: "CAPITUR POR",
+                    doisValor: [
+                        { value: 'PRIMEIRA_INSTANCIA', nome: '1ª Instância', descricao: '1ª Instância' },
+                        { value: 'SEGUNDA_INSTANCIA', nome: '2ª Instância', descricao: '2ª Instância' },
+                        { value: 'TERCEIRA_INSTANCIA', nome: '3ª Instância', descricao: '3ª Instância' },
+                        { value: 'QUARTA_INSTANCIA', nome: '4ª Instância', descricao: '4ª Instância' }
+                    ]
+                },
+                {
+                    id: "151",
+                    tipo: "CAPTURA AUTOMATICA",
+                    descricao: "CAPTURA AUTOMATICA",
+                    doisValor: [
+                        { value: 'NAO_CAPTURAR', nome: 'Não capturar', descricao: 'Não capturar' },
+                        { value: 'DIARIA', nome: 'Diária', descricao: 'Diária' },
+                        { value: 'SEMANAL', nome: 'Semanal', descricao: 'Semanal' },
+                        { value: 'MENSAL', nome: 'Mensal', descricao: 'Mensal' }
 
-                {value: '1', nome: 'Cível', descricao: 'Cível' },
-                {value :'2', nome: 'Eleitoral', descricao:'Eleitoral'},
-                {value :'3', nome: 'Militar', descricao:'Militar'},
-                {value :'4', nome: 'Penal', descricao:'Penal'},
-                {value :'5', nome: 'Previdenciária', descricao:'Previdenciária'},
-                {value :'6', nome: 'Societário', descricao:'Societário'},
-                {value :'7', nome: 'Trabalhista', descricao:'Trabalhista'},
-                {value :'8', nome: 'Tributária', descricao:'Tributária'}
-                
-                ]
-            }]},
-        }
-    );
+                    ]
+                }, {
+                    id: "152",
+                    tipo: "GRUPO TRABALHO",
+                    descricao: "GRUPO TRABALHO",
+                    doisValor: [
+                        { value: '1', nome: 'Admintradores', descricao: 'Admintradores' },
+                        { value: '2', nome: 'Civel', descricao: 'Civil' },
+                        { value: '3', nome: 'Criminal', descricao: 'Criminal' },
+                        { value: '4', nome: 'Trabalhista', descricao: 'Trabalhista' }
+
+                    ]
+                }, {
+                    id: "153",
+                    tipo: "NATUREZA",
+                    descricao: "NATUREZA",
+                    doisValor: [
+
+                        { value: '1', nome: 'Cível', descricao: 'Cível' },
+                        { value: '2', nome: 'Eleitoral', descricao: 'Eleitoral' },
+                        { value: '3', nome: 'Militar', descricao: 'Militar' },
+                        { value: '4', nome: 'Penal', descricao: 'Penal' },
+                        { value: '5', nome: 'Previdenciária', descricao: 'Previdenciária' },
+                        { value: '6', nome: 'Societário', descricao: 'Societário' },
+                        { value: '7', nome: 'Trabalhista', descricao: 'Trabalhista' },
+                        { value: '8', nome: 'Tributária', descricao: 'Tributária' }
+
+                    ]
+                }
+            ]
+        },
+    });
 
 
     return a;
- };
+};
 
 
 
 //===============================================================================================
 function NFNotaInfoItem() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "numeroItem",tipo: "Integer",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "produto",tipo: "NFNotaInfoItemProduto",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "imposto",tipo: "NFNotaInfoItemImposto",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "impostoDevolvido",tipo: "NFImpostoDevolvido",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "informacoesAdicionais",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "numeroItem", tipo: "Integer", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "produto", tipo: "NFNotaInfoItemProduto", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "imposto", tipo: "NFNotaInfoItemImposto", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "impostoDevolvido", tipo: "NFImpostoDevolvido", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "informacoesAdicionais", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
 
     return a;
- };
+};
 
 
 
@@ -155,135 +214,135 @@ function NFNotaInfoItem() {
 
 function NFNotaInfoItemProduto() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "codigo",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "codigoDeBarras",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "descricao",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "ncm",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "nomeclaturaValorAduaneiroEstatistica",tipo: "List<String>",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "codigoEspecificadorSituacaoTributaria",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "extipi",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "cfop",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "unidadeComercial",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "quantidadeComercial",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorUnitario",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorTotalBruto",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "codigoDeBarrasTributavel",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "unidadeTributavel",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "quantidadeTributavel",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorUnitarioTributavel",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorFrete",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorSeguro",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorDesconto",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorOutrasDespesasAcessorias",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "compoeValorNota",tipo: "NFProdutoCompoeValorNota",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "declaracoesImportacao",tipo: "List<NFNotaInfoItemProdutoDeclaracaoImportacao>",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "detalhesExportacao",tipo: "List<NFNotaInfoItemDetalheExportacao>",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "numeroPedidoCliente",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "numeroPedidoItemCliente",tipo: "Integer",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "numeroControleFCI",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "veiculo",tipo: "NFNotaInfoItemProdutoVeiculo",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "medicamentos",tipo: "List<NFNotaInfoItemProdutoMedicamento>",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "armamentos",tipo: "List<NFNotaInfoItemProdutoArmamento>",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "combustivel",tipo: "NFNotaInfoItemProdutoCombustivel",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "numeroRECOPI",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "codigo", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "codigoDeBarras", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "descricao", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "ncm", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "nomeclaturaValorAduaneiroEstatistica", tipo: "List<String>", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "codigoEspecificadorSituacaoTributaria", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "extipi", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "cfop", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "unidadeComercial", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "quantidadeComercial", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorUnitario", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorTotalBruto", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "codigoDeBarrasTributavel", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "unidadeTributavel", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "quantidadeTributavel", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorUnitarioTributavel", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorFrete", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorSeguro", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorDesconto", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorOutrasDespesasAcessorias", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "compoeValorNota", tipo: "NFProdutoCompoeValorNota", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "declaracoesImportacao", tipo: "List<NFNotaInfoItemProdutoDeclaracaoImportacao>", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "detalhesExportacao", tipo: "List<NFNotaInfoItemDetalheExportacao>", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "numeroPedidoCliente", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "numeroPedidoItemCliente", tipo: "Integer", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "numeroControleFCI", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "veiculo", tipo: "NFNotaInfoItemProdutoVeiculo", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "medicamentos", tipo: "List<NFNotaInfoItemProdutoMedicamento>", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "armamentos", tipo: "List<NFNotaInfoItemProdutoArmamento>", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "combustivel", tipo: "NFNotaInfoItemProdutoCombustivel", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "numeroRECOPI", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
 
- 	return a;
- };
+    return a;
+};
 
 
 
 
 function NFNotaInfoItemProdutoDeclaracaoImportacao() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "numeroRegistro",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "dataRegistro",tipo: "Long",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "localDesembaraco",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "ufDesembaraco",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "dataDesembaraco",tipo: "Long",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "transporteInternacional",tipo: "NFViaTransporteInternacional",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorAFRMM",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "formaImportacaoIntermediacao",tipo: "NFFormaImportacaoIntermediacao",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "cnpj",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "ufTerceiro",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "codigoExportador",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "adicoes",tipo: "List<NFNotaInfoItemProdutoDeclaracaoImportacaoAdicao>",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "numeroRegistro", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "dataRegistro", tipo: "Long", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "localDesembaraco", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "ufDesembaraco", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "dataDesembaraco", tipo: "Long", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "transporteInternacional", tipo: "NFViaTransporteInternacional", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorAFRMM", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "formaImportacaoIntermediacao", tipo: "NFFormaImportacaoIntermediacao", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "cnpj", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "ufTerceiro", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "codigoExportador", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "adicoes", tipo: "List<NFNotaInfoItemProdutoDeclaracaoImportacaoAdicao>", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
 
     return a;
- };
+};
 
 function NFNotaInfoItemProdutoDeclaracaoImportacaoAdicao() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "numero",tipo: "Integer",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "sequencial",tipo: "Integer",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "codigoFabricante",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "desconto",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "numeroAtoConcessorioDrawback",tipo: "Long",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "numero", tipo: "Integer", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "sequencial", tipo: "Integer", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "codigoFabricante", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "desconto", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "numeroAtoConcessorioDrawback", tipo: "Long", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
 
-	return a;
- };
+    return a;
+};
 
 function NFNotaInfoItemDetalheExportacao() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "atoConcessorioDrawback",tipo: "Long",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "exportacaoIndireta",tipo: "NFNotaInfoItemExportacaoIndireta",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-	return a;
- };
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "atoConcessorioDrawback", tipo: "Long", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "exportacaoIndireta", tipo: "NFNotaInfoItemExportacaoIndireta", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    return a;
+};
 
 function NFNotaInfoItemExportacaoIndireta() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "numeroRegistroExportacao",tipo: "Long",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "chaveAcessoNFe",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "quantidadeItemEfetivamenteExportado",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "numeroRegistroExportacao", tipo: "Long", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "chaveAcessoNFe", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "quantidadeItemEfetivamenteExportado", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
 
-return a;
- };
+    return a;
+};
 
 function NFNotaInfoItemProdutoVeiculo() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "tipoOperacao",tipo: "NFNotaInfoItemProdutoVeiculoTipoOperacao",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "chassi",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "codigoCor",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "descricaoCor",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "potencia",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "cilindrada",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "pesoLiquido",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "pesoBruto",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "numeroSerie",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "tipoCombustivel",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "numeroMotor",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "capacidadeMaximaTracao",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "distanciaEntreEixos",tipo: "Integer",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "anoModeloFabricacao",tipo: "Integer",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "anoFabricacao",tipo: "Integer",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "tipoPintura",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "tipoVeiculo",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "especieVeiculo",tipo: "Integer",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "condicaoChassi",tipo: "NFNotaInfoItemProdutoVeiculoCondicaoChassi",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "condicao",tipo: "NFNotaInfoItemProdutoVeiculoCondicao",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "codigoMarcaModelo",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "corDENATRAN",tipo: "NFNotaInfoVeiculoCor",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "lotacao",tipo: "Integer",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "restricao",tipo: "NFNotaInfoItemProdutoVeiculoRestricao",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-return a;
- };
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "tipoOperacao", tipo: "NFNotaInfoItemProdutoVeiculoTipoOperacao", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "chassi", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "codigoCor", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "descricaoCor", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "potencia", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "cilindrada", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "pesoLiquido", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "pesoBruto", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "numeroSerie", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "tipoCombustivel", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "numeroMotor", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "capacidadeMaximaTracao", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "distanciaEntreEixos", tipo: "Integer", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "anoModeloFabricacao", tipo: "Integer", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "anoFabricacao", tipo: "Integer", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "tipoPintura", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "tipoVeiculo", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "especieVeiculo", tipo: "Integer", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "condicaoChassi", tipo: "NFNotaInfoItemProdutoVeiculoCondicaoChassi", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "condicao", tipo: "NFNotaInfoItemProdutoVeiculoCondicao", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "codigoMarcaModelo", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "corDENATRAN", tipo: "NFNotaInfoVeiculoCor", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "lotacao", tipo: "Integer", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "restricao", tipo: "NFNotaInfoItemProdutoVeiculoRestricao", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    return a;
+};
 
 function NFNotaInfoItemProdutoMedicamento() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "lote",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "quantidade",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "dataFabricacao",tipo: "Long",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "dataValidade",tipo: "Long",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "precoMaximoConsumidor",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "lote", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "quantidade", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "dataFabricacao", tipo: "Long", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "dataValidade", tipo: "Long", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "precoMaximoConsumidor", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
 
-	return a;
- };
+    return a;
+};
 
 
 
@@ -291,43 +350,43 @@ function NFNotaInfoItemProdutoMedicamento() {
 
 function NFNotaInfoItemProdutoArmamento() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "tipo",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "numeroSerieArma",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "numeroSerieCano",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "descricao",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "tipo", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "numeroSerieArma", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "numeroSerieCano", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "descricao", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
 
     return a;
- };
+};
 
 
 
 function NFNotaInfoItemProdutoCombustivel() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "codigoProdutoANP",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualGasNatural",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "codigoAutorizacaoCOFIF",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "quantidade",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "uf",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "cide",tipo: "NFNotaInfoItemProdutoCombustivelCIDE",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
- 	return a;
- };
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "codigoProdutoANP", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualGasNatural", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "codigoAutorizacaoCOFIF", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "quantidade", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "uf", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "cide", tipo: "NFNotaInfoItemProdutoCombustivelCIDE", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    return a;
+};
 
 function NFNotaInfoItemProdutoCombustivelCIDE() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "quantidadeBCCIDE",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorAliquota",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valor",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-	return a;
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "quantidadeBCCIDE", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorAliquota", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valor", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    return a;
 };
 
 function NFImpostoDevolvido() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualDevolucao",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "informacaoIPIDevolvido",tipo: "NFInformacaoImpostoDevolvido",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualDevolucao", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "informacaoIPIDevolvido", tipo: "NFInformacaoImpostoDevolvido", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
 
     return a;
 };
@@ -335,66 +394,66 @@ function NFImpostoDevolvido() {
 
 function NFInformacaoImpostoDevolvido() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorIPIDevolvido",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorIPIDevolvido", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
 
-	return a;
+    return a;
 };
 
 
 function NFNotaInfoItemImposto() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorTotalTributos",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "icms",tipo: "NFNotaInfoItemImpostoICMS",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "ipi",tipo: "NFNotaInfoItemImpostoIPI",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "impostoImportacao",tipo: "NFNotaInfoItemImpostoImportacao",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "issqn",tipo: "NFNotaInfoItemImpostoISSQN",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "pis",tipo: "NFNotaInfoItemImpostoPIS",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "pisst",tipo: "NFNotaInfoItemImpostoPISST",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "cofins",tipo: "NFNotaInfoItemImpostoCOFINS",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "cofinsst",tipo: "NFNotaInfoItemImpostoCOFINSST",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "icmsUfDestino",tipo: "NFNotaInfoItemImpostoICMSUFDestino",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorTotalTributos", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "icms", tipo: "NFNotaInfoItemImpostoICMS", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "ipi", tipo: "NFNotaInfoItemImpostoIPI", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "impostoImportacao", tipo: "NFNotaInfoItemImpostoImportacao", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "issqn", tipo: "NFNotaInfoItemImpostoISSQN", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "pis", tipo: "NFNotaInfoItemImpostoPIS", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "pisst", tipo: "NFNotaInfoItemImpostoPISST", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "cofins", tipo: "NFNotaInfoItemImpostoCOFINS", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "cofinsst", tipo: "NFNotaInfoItemImpostoCOFINSST", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "icmsUfDestino", tipo: "NFNotaInfoItemImpostoICMSUFDestino", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
 
-	return a;
+    return a;
 };
 
 function NFNotaInfoItemImpostoICMS() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "icms00",tipo: "NFNotaInfoItemImpostoICMS00",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "icms10",tipo: "NFNotaInfoItemImpostoICMS10",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "icms20",tipo: "NFNotaInfoItemImpostoICMS20",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "icms30",tipo: "NFNotaInfoItemImpostoICMS30",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "icms40",tipo: "NFNotaInfoItemImpostoICMS40",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "icms51",tipo: "NFNotaInfoItemImpostoICMS51",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "icms60",tipo: "NFNotaInfoItemImpostoICMS60",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "icms70",tipo: "NFNotaInfoItemImpostoICMS70",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "icms90",tipo: "NFNotaInfoItemImpostoICMS90",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "icmsPartilhado",tipo: "NFNotaInfoItemImpostoICMSPartilhado",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "icmsst",tipo: "NFNotaInfoItemImpostoICMSST",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "icmssn101",tipo: "NFNotaInfoItemImpostoICMSSN101",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "icmssn102",tipo: "NFNotaInfoItemImpostoICMSSN102",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "icmssn201",tipo: "NFNotaInfoItemImpostoICMSSN201",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "icmssn202",tipo: "NFNotaInfoItemImpostoICMSSN202",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "icmssn500",tipo: "NFNotaInfoItemImpostoICMSSN500",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "icmssn900",tipo: "NFNotaInfoItemImpostoICMSSN900",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "icms00", tipo: "NFNotaInfoItemImpostoICMS00", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "icms10", tipo: "NFNotaInfoItemImpostoICMS10", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "icms20", tipo: "NFNotaInfoItemImpostoICMS20", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "icms30", tipo: "NFNotaInfoItemImpostoICMS30", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "icms40", tipo: "NFNotaInfoItemImpostoICMS40", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "icms51", tipo: "NFNotaInfoItemImpostoICMS51", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "icms60", tipo: "NFNotaInfoItemImpostoICMS60", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "icms70", tipo: "NFNotaInfoItemImpostoICMS70", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "icms90", tipo: "NFNotaInfoItemImpostoICMS90", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "icmsPartilhado", tipo: "NFNotaInfoItemImpostoICMSPartilhado", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "icmsst", tipo: "NFNotaInfoItemImpostoICMSST", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "icmssn101", tipo: "NFNotaInfoItemImpostoICMSSN101", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "icmssn102", tipo: "NFNotaInfoItemImpostoICMSSN102", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "icmssn201", tipo: "NFNotaInfoItemImpostoICMSSN201", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "icmssn202", tipo: "NFNotaInfoItemImpostoICMSSN202", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "icmssn500", tipo: "NFNotaInfoItemImpostoICMSSN500", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "icmssn900", tipo: "NFNotaInfoItemImpostoICMSSN900", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
 
-	return a;
+    return a;
 };
 
 
 
 function NFNotaInfoItemImpostoICMS00() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "origem",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "situacaoTributaria",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "modalidadeBCICMS",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorBaseCalculo",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualAliquota",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorTributo",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-return a;
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "origem", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "situacaoTributaria", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "modalidadeBCICMS", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorBaseCalculo", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualAliquota", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorTributo", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    return a;
 };
 
 
@@ -403,196 +462,196 @@ return a;
 
 function NFNotaInfoItemImpostoICMS10() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "origem",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "situacaoTributaria",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "modalidadeBCICMS",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorBaseCalculo",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualAliquota",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorTributo",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "modalidadeBCICMSST",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualMargemValorICMSST",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualReducaoBCICMSST",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorBCICMSST",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualAliquotaImpostoICMSST",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorICMSST",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "origem", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "situacaoTributaria", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "modalidadeBCICMS", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorBaseCalculo", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualAliquota", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorTributo", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "modalidadeBCICMSST", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualMargemValorICMSST", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualReducaoBCICMSST", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorBCICMSST", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualAliquotaImpostoICMSST", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorICMSST", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
 
-	return a;
+    return a;
 };
 
 
 
 function NFNotaInfoItemImpostoICMS20() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "origem",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "situacaoTributaria",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "modalidadeBCICMS",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualReducaoBC",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorBCICMS",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualAliquota",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorTributo",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorICMSDesoneracao",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "desoneracao",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-return a;
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "origem", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "situacaoTributaria", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "modalidadeBCICMS", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualReducaoBC", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorBCICMS", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualAliquota", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorTributo", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorICMSDesoneracao", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "desoneracao", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    return a;
 };
 
 
 function NFNotaInfoItemImpostoICMS30() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "origem",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "situacaoTributaria",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "modalidadeBCICMSST",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualMargemValorAdicionadoICMSST",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualReducaoBCICMSST",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorBCICMSST",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualAliquotaImpostoICMSST",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorImpostoICMSST",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorICMSDesoneracao",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "desoneracao",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "origem", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "situacaoTributaria", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "modalidadeBCICMSST", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualMargemValorAdicionadoICMSST", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualReducaoBCICMSST", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorBCICMSST", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualAliquotaImpostoICMSST", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorImpostoICMSST", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorICMSDesoneracao", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "desoneracao", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
 
-return a;
+    return a;
 };
 
 
 function NFNotaInfoItemImpostoICMS40() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "origem",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "situacaoTributaria",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorICMSDesoneracao",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "motivoDesoneracaoICMS",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "origem", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "situacaoTributaria", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorICMSDesoneracao", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "motivoDesoneracaoICMS", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
 
-return a;
+    return a;
 };
 
 
 function NFNotaInfoItemImpostoICMS51() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "origem",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "situacaoTributaria",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "modalidadeBCICMS",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualReducaoBC",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorBCICMS",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualICMS",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorICMSOperacao",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualDiferimento",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorICMSDiferimento",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorICMS",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "origem", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "situacaoTributaria", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "modalidadeBCICMS", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualReducaoBC", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorBCICMS", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualICMS", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorICMSOperacao", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualDiferimento", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorICMSDiferimento", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorICMS", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
 
-return a;
+    return a;
 };
 
 
 
 function NFNotaInfoItemImpostoICMS60() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "origem",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "situacaoTributaria",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorBCICMSSTRetido",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorICMSSTRetido",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "origem", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "situacaoTributaria", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorBCICMSSTRetido", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorICMSSTRetido", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
 
-return a;
+    return a;
 };
 
 
 function NFNotaInfoItemImpostoICMS70() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "origem",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "situacaoTributaria",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "modalidadeBCICMS",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualReducaoBC",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorBC",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualAliquota",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorTributo",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "modalidadeBCICMSST",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualMargemValorAdicionadoICMSST",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualReducaoBCICMSST",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorBCST",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualAliquotaImpostoICMSST",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorICMSST",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorICMSDesoneracao",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "desoneracao",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "origem", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "situacaoTributaria", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "modalidadeBCICMS", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualReducaoBC", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorBC", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualAliquota", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorTributo", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "modalidadeBCICMSST", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualMargemValorAdicionadoICMSST", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualReducaoBCICMSST", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorBCST", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualAliquotaImpostoICMSST", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorICMSST", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorICMSDesoneracao", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "desoneracao", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
 
-return a;
+    return a;
 };
 
 
 function NFNotaInfoItemImpostoICMS90() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "origem",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "situacaoTributaria",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "modalidadeBCICMS",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorBC",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualReducaoBC",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualAliquota",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorTributo",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "modalidadeBCICMSST",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualMargemValorAdicionadoICMSST",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualReducaoBCICMSST",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorBCST",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualAliquotaImpostoICMSST",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorICMSST",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorICMSDesoneracao",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "desoneracao",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "origem", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "situacaoTributaria", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "modalidadeBCICMS", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorBC", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualReducaoBC", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualAliquota", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorTributo", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "modalidadeBCICMSST", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualMargemValorAdicionadoICMSST", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualReducaoBCICMSST", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorBCST", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualAliquotaImpostoICMSST", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorICMSST", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorICMSDesoneracao", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "desoneracao", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
 
 
-return a;
+    return a;
 };
 
 
 function NFNotaInfoItemImpostoICMSPartilhado() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "origem",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "situacaoTributaria",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "modalidadeBCICMS",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorBCICMS",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualReducaoBC",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualAliquotaImposto",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorICMS",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "modalidadeBCICMSST",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualMargemValorAdicionadoICMSST",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualReducaoBCICMSST",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorBCICMSST",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualAliquotaImpostoICMSST",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorICMSST",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualBCOperacaoPropria",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "ufICMSST",tipo: "Estado",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "origem", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "situacaoTributaria", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "modalidadeBCICMS", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorBCICMS", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualReducaoBC", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualAliquotaImposto", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorICMS", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "modalidadeBCICMSST", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualMargemValorAdicionadoICMSST", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualReducaoBCICMSST", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorBCICMSST", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualAliquotaImpostoICMSST", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorICMSST", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualBCOperacaoPropria", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "ufICMSST", tipo: "Estado", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
 
-return a;
+    return a;
 };
 
 
 function NFNotaInfoItemImpostoICMSST() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "origem",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "situacaoTributaria",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorBCICMSSTRetidoUFRemetente",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorICMSSTRetidoUFRemetente",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorBCICMSSTUFDestino",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorICMSSTUFDestino",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "origem", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "situacaoTributaria", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorBCICMSSTRetidoUFRemetente", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorICMSSTRetidoUFRemetente", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorBCICMSSTUFDestino", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorICMSSTUFDestino", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
 
-return a;
+    return a;
 };
 
 
 
 function NFNotaInfoItemImpostoICMSSN101() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "origem",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualAliquotaAplicavelCalculoCreditoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorCreditoICMSSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "origem", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "situacaoOperacaoSN", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualAliquotaAplicavelCalculoCreditoSN", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorCreditoICMSSN", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
 
-return a;
+    return a;
 };
 
 
@@ -600,83 +659,83 @@ return a;
 
 function NFNotaInfoItemImpostoICMSSN102() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "origem",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-return a;
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "origem", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "situacaoOperacaoSN", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    return a;
 };
 
 
 
 function NFNotaInfoItemImpostoICMSSN201() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "origem",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "modalidadeBCICMSST",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualMargemValorAdicionadoICMSST",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualReducaoBCICMSST",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorBCICMSST",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualAliquotaImpostoICMSST",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorICMSST",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualAliquotaAplicavelCalculoCreditoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorCreditoICMSSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "origem", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "situacaoOperacaoSN", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "modalidadeBCICMSST", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualMargemValorAdicionadoICMSST", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualReducaoBCICMSST", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorBCICMSST", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualAliquotaImpostoICMSST", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorICMSST", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualAliquotaAplicavelCalculoCreditoSN", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorCreditoICMSSN", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
 
 
-return a;
+    return a;
 };
 
 
 function NFNotaInfoItemImpostoICMSSN202() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "origem",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "modalidadeBCICMSST",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualMargemValorAdicionadoICMSST",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualReducaoBCICMSST",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorBCICMSST",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualAliquotaImpostoICMSST",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorICMSST",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "origem", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "situacaoOperacaoSN", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "modalidadeBCICMSST", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualMargemValorAdicionadoICMSST", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualReducaoBCICMSST", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorBCICMSST", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualAliquotaImpostoICMSST", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorICMSST", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
 
 
-return a;
+    return a;
 };
 
 
 function NFNotaInfoItemImpostoICMSSN500() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "origem",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorBCICMSSTRetido",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorICMSSTRetido",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "origem", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "situacaoOperacaoSN", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorBCICMSSTRetido", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorICMSSTRetido", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
 
 
-return a;
+    return a;
 };
 
 
 function NFNotaInfoItemImpostoICMSSN900() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "origem",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "situacaoOperacaoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "modalidadeBCICMS",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorBCICMS",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualReducaoBC",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualAliquotaImposto",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorICMS",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "modalidadeBCICMSST",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualMargemValorAdicionadoICMSST",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualReducaoBCICMSST",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorBCICMSST",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualAliquotaImpostoICMSST",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorICMSST",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualAliquotaAplicavelCalculoCreditoSN",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "origem", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "situacaoOperacaoSN", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "modalidadeBCICMS", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorBCICMS", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualReducaoBC", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualAliquotaImposto", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorICMS", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "modalidadeBCICMSST", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualMargemValorAdicionadoICMSST", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualReducaoBCICMSST", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorBCICMSST", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualAliquotaImpostoICMSST", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorICMSST", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualAliquotaAplicavelCalculoCreditoSN", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
 
 
-return a;
+    return a;
 };
 
 
@@ -684,31 +743,31 @@ return a;
 
 function NFNotaInfoItemImpostoIPI() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "classeEnquadramento",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "cnpjProdutor",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "codigoSelo",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "quantidadeSelo",tipo: "BigInteger",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "codigoEnquadramento",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "tributado",tipo: "NFNotaInfoItemImpostoIPITributado",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "naoTributado",tipo: "NFNotaInfoItemImpostoIPINaoTributado",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "classeEnquadramento", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "cnpjProdutor", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "codigoSelo", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "quantidadeSelo", tipo: "BigInteger", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "codigoEnquadramento", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "tributado", tipo: "NFNotaInfoItemImpostoIPITributado", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "naoTributado", tipo: "NFNotaInfoItemImpostoIPINaoTributado", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
 
 
-return a;
+    return a;
 };
 
 
 function NFNotaInfoItemImpostoIPITributado() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "situacaoTributaria",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorBaseCalculo",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualAliquota",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "quantidade",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorUnidadeTributavel",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorTributo",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "situacaoTributaria", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorBaseCalculo", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualAliquota", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "quantidade", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorUnidadeTributavel", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorTributo", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
 
-return a;
+    return a;
 };
 
 
@@ -716,228 +775,228 @@ return a;
 
 function NFNotaInfoItemImpostoIPINaoTributado() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "situacaoTributaria",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "situacaoTributaria", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
 
 
-return a;
+    return a;
 };
 
 
 function NFNotaInfoItemImpostoImportacao() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorBaseCalculo",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorDespesaAduaneira",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorImpostoImportacao",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorIOF",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorBaseCalculo", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorDespesaAduaneira", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorImpostoImportacao", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorIOF", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
 
 
-return a;
+    return a;
 };
 
 
 function NFNotaInfoItemImpostoISSQN() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorBaseCalculo",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorAliquota",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valor",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "codigoMunicipio",tipo: "Integer",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "itemListaServicos",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorDeducao",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorOutro",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorDescontoIncondicionado",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorDescontoCondicionado",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorRetencaoISS",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "indicadorExigibilidadeISS",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "codigoServico",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "codigoMunicipioIncidenciaImposto",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "codigoPais",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "numeroProcesso",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "indicadorIncentivoFiscal",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorBaseCalculo", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorAliquota", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valor", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "codigoMunicipio", tipo: "Integer", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "itemListaServicos", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorDeducao", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorOutro", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorDescontoIncondicionado", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorDescontoCondicionado", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorRetencaoISS", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "indicadorExigibilidadeISS", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "codigoServico", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "codigoMunicipioIncidenciaImposto", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "codigoPais", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "numeroProcesso", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "indicadorIncentivoFiscal", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
 
-return a;
+    return a;
 };
 
 function NFNotaInfoItemImpostoPIS() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "aliquota",tipo: "NFNotaInfoItemImpostoPISAliquota",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "quantidade",tipo: "NFNotaInfoItemImpostoPISQuantidade",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "naoTributado",tipo: "NFNotaInfoItemImpostoPISNaoTributado",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "outrasOperacoes",tipo: "NFNotaInfoItemImpostoPISOutrasOperacoes",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "aliquota", tipo: "NFNotaInfoItemImpostoPISAliquota", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "quantidade", tipo: "NFNotaInfoItemImpostoPISQuantidade", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "naoTributado", tipo: "NFNotaInfoItemImpostoPISNaoTributado", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "outrasOperacoes", tipo: "NFNotaInfoItemImpostoPISOutrasOperacoes", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
 
 
-return a;
+    return a;
 };
 
 function NFNotaInfoItemImpostoPISAliquota() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "situacaoTributaria",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorBaseCalculo",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualAliquota",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorTributo",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-return a;
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "situacaoTributaria", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorBaseCalculo", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualAliquota", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorTributo", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    return a;
 };
 
 function NFNotaInfoItemImpostoPISQuantidade() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "situacaoTributaria",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-	a.push({field: {campo: "quantidadeVendida",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorAliquota",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorTributo",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "situacaoTributaria", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "quantidadeVendida", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorAliquota", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorTributo", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
 
 
 
-return a;
+    return a;
 };
 
 
 function NFNotaInfoItemImpostoPISNaoTributado() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "situacaoTributaria",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "situacaoTributaria", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
 
 
 
-return a;
+    return a;
 };
 
 function NFNotaInfoItemImpostoPISOutrasOperacoes() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "situacaoTributaria",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorBaseCalculo",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualAliquota",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "quantidadeVendida",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorAliquota",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorTributo",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "situacaoTributaria", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorBaseCalculo", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualAliquota", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "quantidadeVendida", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorAliquota", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorTributo", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
 
 
-return a;
+    return a;
 };
 
 function NFNotaInfoItemImpostoPISST() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorBaseCalculo",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualAliquota",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "quantidadeVendida",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorAliquota",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorTributo",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorBaseCalculo", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualAliquota", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "quantidadeVendida", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorAliquota", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorTributo", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
 
 
-return a;
+    return a;
 };
 
 function NFNotaInfoItemImpostoCOFINS() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "aliquota",tipo: "NFNotaInfoItemImpostoCOFINSAliquota",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "quantidade",tipo: "NFNotaInfoItemImpostoCOFINSQuantidade",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "naoTributavel",tipo: "NFNotaInfoItemImpostoCOFINSNaoTributavel",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "outrasOperacoes",tipo: "NFNotaInfoItemImpostoCOFINSOutrasOperacoes",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "aliquota", tipo: "NFNotaInfoItemImpostoCOFINSAliquota", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "quantidade", tipo: "NFNotaInfoItemImpostoCOFINSQuantidade", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "naoTributavel", tipo: "NFNotaInfoItemImpostoCOFINSNaoTributavel", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "outrasOperacoes", tipo: "NFNotaInfoItemImpostoCOFINSOutrasOperacoes", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
 
 
-return a;
+    return a;
 };
 
 function NFNotaInfoItemImpostoCOFINSAliquota() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "situacaoTributaria",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorBaseCalulo",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualAliquota",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valor",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "situacaoTributaria", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorBaseCalulo", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualAliquota", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valor", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
 
 
-return a;
+    return a;
 };
 
 
 function NFNotaInfoItemImpostoCOFINSQuantidade() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "situacaoTributaria",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "quantidadeVendida",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorAliquota",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorTributo",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "situacaoTributaria", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "quantidadeVendida", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorAliquota", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorTributo", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
 
-return a;
+    return a;
 };
 
 
 function NFNotaInfoItemImpostoCOFINSNaoTributavel() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "situacaoTributaria",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "situacaoTributaria", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
 
-return a;
+    return a;
 };
 
 function NFNotaInfoItemImpostoCOFINSOutrasOperacoes() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "situacaoTributaria",tipo: "DoisValores",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorBaseCalculo",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualCOFINS",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "quantidadeVendida",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorAliquota",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorCOFINS",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-return a;
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "situacaoTributaria", tipo: "DoisValores", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorBaseCalculo", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualCOFINS", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "quantidadeVendida", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorAliquota", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorCOFINS", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    return a;
 };
 
 
 function NFNotaInfoItemImpostoCOFINSST() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorBaseCalculo",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualAliquota",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "quantidadeVendida",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorAliquotaCOFINS",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorCOFINS",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorBaseCalculo", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualAliquota", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "quantidadeVendida", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorAliquotaCOFINS", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorCOFINS", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
 
 
-return a;
+    return a;
 };
 
 
 function NFNotaInfoItemImpostoICMSUFDestino() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorBaseCalculoDestino",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualRelativoFundoCombatePobrezaDestino",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualAliquotaInternaDestino",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualInterestadual",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualProvisorioPartilha",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorRelativoFundoCombatePobrezaDestino",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorICMSInterestadualDestino",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorICMSInterestadualRemetente",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorBaseCalculoDestino", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualRelativoFundoCombatePobrezaDestino", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualAliquotaInternaDestino", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualInterestadual", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualProvisorioPartilha", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorRelativoFundoCombatePobrezaDestino", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorICMSInterestadualDestino", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorICMSInterestadualRemetente", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
 
-return a;
+    return a;
 };
 
 
 function NFImpostoDevolvido() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "percentualDevolucao",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "informacaoIPIDevolvido",tipo: "NFInformacaoImpostoDevolvido",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "percentualDevolucao", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "informacaoIPIDevolvido", tipo: "NFInformacaoImpostoDevolvido", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
 
-return a;
+    return a;
 };
 
 
 function NFInformacaoImpostoDevolvido() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    a.push({field: {campo: "valorIPIDevolvido",tipo: "String",requerid: false,primaryKey: false,forenkey: false,model: true,xml: true}});
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+    a.push({ field: { campo: "valorIPIDevolvido", tipo: "String", requerid: false, primaryKey: false, forenkey: false, model: true, xml: true } });
 
 
-return a;
+    return a;
 };
 
 
@@ -947,9 +1006,9 @@ return a;
 
 function NFNotaInfo() {
     var a = [];
-    a.push({field: {campo: "id",tipo: "Integer",requerid: true,primaryKey: true,forenkey: false,model: true,xml: true}});
-    
-	a.push({
+    a.push({ field: { campo: "id", tipo: "Integer", requerid: true, primaryKey: true, forenkey: false, model: true, xml: true } });
+
+    a.push({
         field: {
             campo: "identificador",
             tipo: "String",
@@ -960,7 +1019,7 @@ function NFNotaInfo() {
             xml: true
         }
     });
-	a.push({
+    a.push({
         field: {
             campo: "versao",
             tipo: "String",
@@ -972,7 +1031,7 @@ function NFNotaInfo() {
         }
     });
 
-	a.push({
+    a.push({
         field: {
             campo: "identificacao",
             tipo: "NFNotaInfoIdentificacao",
@@ -984,7 +1043,7 @@ function NFNotaInfo() {
         }
     });
 
-	a.push({
+    a.push({
         field: {
             campo: "emitente",
             tipo: "NFNotaInfoEmitente",
@@ -996,7 +1055,7 @@ function NFNotaInfo() {
         }
     });
 
-	a.push({
+    a.push({
         field: {
             campo: "avulsa",
             tipo: "NFNotaInfoAvulsa",
@@ -1008,7 +1067,7 @@ function NFNotaInfo() {
         }
     });
 
-	a.push({
+    a.push({
         field: {
             campo: "destinatario",
             tipo: "NFNotaInfoDestinatario",
@@ -1020,7 +1079,7 @@ function NFNotaInfo() {
         }
     });
 
-	a.push({
+    a.push({
         field: {
             campo: "retirada",
             tipo: "NFNotaInfoLocal",
@@ -1032,7 +1091,7 @@ function NFNotaInfo() {
         }
     });
 
-	a.push({
+    a.push({
         field: {
             campo: "entrega",
             tipo: "NFNotaInfoLocal",
@@ -1044,7 +1103,7 @@ function NFNotaInfo() {
         }
     });
 
-	a.push({
+    a.push({
         field: {
             campo: "pessoasAutorizadasDownloadNFe",
             tipo: "List<NFPessoaAutorizadaDownloadNFe>",
@@ -1056,7 +1115,7 @@ function NFNotaInfo() {
         }
     });
 
-	a.push({
+    a.push({
         field: {
             campo: "itens",
             tipo: "List<NotaFiscalItens>",
@@ -1068,7 +1127,7 @@ function NFNotaInfo() {
         }
     });
 
-	a.push({
+    a.push({
         field: {
             campo: "total",
             tipo: "NFNotaInfoTotal",
@@ -1080,7 +1139,7 @@ function NFNotaInfo() {
         }
     });
 
-	a.push({
+    a.push({
         field: {
             campo: "transporte",
             tipo: "NFNotaInfoTransporte",
@@ -1092,7 +1151,7 @@ function NFNotaInfo() {
         }
     });
 
-	a.push({
+    a.push({
         field: {
             campo: "cobranca",
             tipo: "NFNotaInfoCobranca",
@@ -1104,7 +1163,7 @@ function NFNotaInfo() {
         }
     });
 
-	a.push({
+    a.push({
         field: {
             campo: "pagamentos",
             tipo: "List<NFNotaInfoPagamento>",
@@ -1116,7 +1175,7 @@ function NFNotaInfo() {
         }
     });
 
-	a.push({
+    a.push({
         field: {
             campo: "informacoesAdicionais",
             tipo: "NFNotaInfoInformacoesAdicionais",
@@ -1128,7 +1187,7 @@ function NFNotaInfo() {
         }
     });
 
-	a.push({
+    a.push({
         field: {
             campo: "exportacao",
             tipo: "NFNotaInfoExportacao",
@@ -1140,7 +1199,7 @@ function NFNotaInfo() {
         }
     });
 
-	a.push({
+    a.push({
         field: {
             campo: "compra",
             tipo: "NFNotaInfoCompra",
@@ -1152,7 +1211,7 @@ function NFNotaInfo() {
         }
     });
 
-	a.push({
+    a.push({
         field: {
             campo: "cana",
             tipo: "NFNotaInfoCana",
@@ -1164,7 +1223,7 @@ function NFNotaInfo() {
         }
     });
 
-     return a;
+    return a;
 }
 
 
@@ -1181,8 +1240,8 @@ function NFNotaInfoIdentificacao() {
             xml: true
         }
     });
-    
-    
+
+
     a.push({
         field: {
             campo: "uf",
@@ -1437,7 +1496,7 @@ function NFNotaInfoIdentificacao() {
     });
 
 
-a.push({
+    a.push({
         field: {
             campo: "dataHoraContigencia",
             tipo: "Long",
@@ -1473,7 +1532,7 @@ a.push({
         }
     });
 
-       return a;
+    return a;
 }
 
 
@@ -1563,7 +1622,7 @@ function NFInfoModelo1Por1AReferenciada() {
         }
     });
 
-          return a;
+    return a;
 }
 
 
@@ -1642,7 +1701,7 @@ function NFInfoReferenciada() {
         }
     });
 
-           return a;
+    return a;
 }
 
 
@@ -1757,7 +1816,7 @@ function NFInfoProdutorRuralReferenciada() {
     });
 
 
- return a;
+    return a;
 }
 
 function NFInfoCupomFiscalReferenciado() {
@@ -1808,7 +1867,7 @@ function NFInfoCupomFiscalReferenciado() {
             xml: true
         }
     });
- return a;
+    return a;
 }
 
 function NFNotaInfoEmitente() {
@@ -1824,7 +1883,7 @@ function NFNotaInfoEmitente() {
             xml: true
         }
     });
-    
+
     a.push({
         field: {
             campo: "cnpj",
@@ -1945,7 +2004,7 @@ function NFNotaInfoEmitente() {
         }
     });
 
-     return a;
+    return a;
 }
 
 
@@ -1962,8 +2021,8 @@ function NFNotaInfoAvulsa() {
             xml: true
         }
     });
-    
-a.push({
+
+    a.push({
         field: {
             campo: "cnpj",
             tipo: "String",
@@ -1974,7 +2033,7 @@ a.push({
             xml: true
         }
     });
-a.push({
+    a.push({
         field: {
             campo: "orgaoEmitente",
             tipo: "String",
@@ -1986,7 +2045,7 @@ a.push({
         }
     });
 
-a.push({
+    a.push({
         field: {
             campo: "matriculaAgente",
             tipo: "String",
@@ -1998,7 +2057,7 @@ a.push({
         }
     });
 
-a.push({
+    a.push({
         field: {
             campo: "nomeAgente",
             tipo: "String",
@@ -2010,7 +2069,7 @@ a.push({
         }
     });
 
-a.push({
+    a.push({
         field: {
             campo: "fone",
             tipo: "String",
@@ -2022,7 +2081,7 @@ a.push({
         }
     });
 
-a.push({
+    a.push({
         field: {
             campo: "uf",
             tipo: "String",
@@ -2034,7 +2093,7 @@ a.push({
         }
     });
 
-a.push({
+    a.push({
         field: {
             campo: "numeroDocumentoArrecadacaoReceita",
             tipo: "String",
@@ -2046,7 +2105,7 @@ a.push({
         }
     });
 
-a.push({
+    a.push({
         field: {
             campo: "dataEmissaoDocumentoArrecadacao",
             tipo: "Long",
@@ -2058,7 +2117,7 @@ a.push({
         }
     });
 
-a.push({
+    a.push({
         field: {
             campo: "valorTotalConstanteDocumentoArrecadacaoReceita",
             tipo: "String",
@@ -2070,7 +2129,7 @@ a.push({
         }
     });
 
-a.push({
+    a.push({
         field: {
             campo: "reparticaoFiscalEmitente",
             tipo: "String",
@@ -2093,7 +2152,7 @@ a.push({
             xml: true
         }
     });
-      return a;
+    return a;
 }
 
 function NFNotaInfoDestinatario() {
@@ -2109,7 +2168,7 @@ function NFNotaInfoDestinatario() {
             xml: true
         }
     });
-	a.push({
+    a.push({
         field: {
             campo: "cnpj",
             tipo: "String",
@@ -2121,7 +2180,7 @@ function NFNotaInfoDestinatario() {
         }
     });
 
-	a.push({
+    a.push({
         field: {
             campo: "cpf",
             tipo: "String",
@@ -2133,7 +2192,7 @@ function NFNotaInfoDestinatario() {
         }
     });
 
-	a.push({
+    a.push({
         field: {
             campo: "idEstrangeiro",
             tipo: "String",
@@ -2145,7 +2204,7 @@ function NFNotaInfoDestinatario() {
         }
     });
 
-	a.push({
+    a.push({
         field: {
             campo: "razaoSocial",
             tipo: "String",
@@ -2157,7 +2216,7 @@ function NFNotaInfoDestinatario() {
         }
     });
 
-	a.push({
+    a.push({
         field: {
             campo: "endereco",
             tipo: "Endereco",
@@ -2169,7 +2228,7 @@ function NFNotaInfoDestinatario() {
         }
     });
 
-	a.push({
+    a.push({
         field: {
             campo: "indicadorIEDestinatario",
             tipo: "DoisValores",
@@ -2181,7 +2240,7 @@ function NFNotaInfoDestinatario() {
         }
     });
 
-	a.push({
+    a.push({
         field: {
             campo: "inscricaoEstadual",
             tipo: "String",
@@ -2193,7 +2252,7 @@ function NFNotaInfoDestinatario() {
         }
     });
 
-	a.push({
+    a.push({
         field: {
             campo: "inscricaoSuframa",
             tipo: "String",
@@ -2205,7 +2264,7 @@ function NFNotaInfoDestinatario() {
         }
     });
 
-	a.push({
+    a.push({
         field: {
             campo: "inscricaoMunicipal",
             tipo: "String",
@@ -2228,7 +2287,7 @@ function NFNotaInfoDestinatario() {
             xml: true
         }
     });
-       return a;
+    return a;
 }
 
 function NFNotaInfoLocal() {
@@ -2350,10 +2409,10 @@ function NFNotaInfoLocal() {
             xml: true
         }
     });
-       return a;
+    return a;
 }
 
-   function NFPessoaAutorizadaDownloadNFe() {
+function NFPessoaAutorizadaDownloadNFe() {
     var a = [];
     a.push({
         field: {
@@ -2388,305 +2447,10 @@ function NFNotaInfoLocal() {
             xml: true
         }
     });
-       return a;
+    return a;
 }
 
-    function NFNotaInfoTotal() {
-	    var a = [];
-    a.push({
-        field: {
-            campo: "id",
-            tipo: "Integer",
-            requerid: true,
-            primaryKey: true,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-	    a.push({
-	        field: {
-	            campo: "icmsTotal",
-	            tipo: "NFNotaInfoICMSTotal",
-	            requerid: false,
-	            primaryKey: false,
-	            forenkey: false,
-	            model: true,
-	            xml: true
-	        }
-	    });
-	     a.push({
-	        field: {
-	            campo: "issqnTotal",
-	            tipo: "NFNotaInfoISSQNTotal",
-	            requerid: false,
-	            primaryKey: false,
-	            forenkey: false,
-	            model: true,
-	            xml: true
-	        }
-	    });
-	      a.push({
-	        field: {
-	            campo: "retencoesTributos",
-	            tipo: "NFNotaInfoRetencoesTributos",
-	            requerid: false,
-	            primaryKey: false,
-	            forenkey: false,
-	            model: true,
-	            xml: true
-	        }
-	    });
-	       return a;
-	}
-
-    function NFNotaInfoICMSTotal() {
-	var a = [];
-    a.push({
-        field: {
-            campo: "id",
-            tipo: "Integer",
-            requerid: true,
-            primaryKey: true,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-    a.push({
-	        field: {
-	            campo: "baseCalculoICMS",
-	            tipo: "String",
-	            requerid: false,
-	            primaryKey: false,
-	            forenkey: false,
-	            model: true,
-	            xml: true
-	        }
-	    });
-
-    a.push({
-	        field: {
-	            campo: "valorTotalICMS",
-	            tipo: "String",
-	            requerid: false,
-	            primaryKey: false,
-	            forenkey: false,
-	            model: true,
-	            xml: true
-	        }
-	    });
-
-    a.push({
-	        field: {
-	            campo: "valorICMSDesonerado",
-	            tipo: "String",
-	            requerid: false,
-	            primaryKey: false,
-	            forenkey: false,
-	            model: true,
-	            xml: true
-	        }
-	    });
-
-    a.push({
-	        field: {
-	            campo: "valorICMSFundoCombatePobreza",
-	            tipo: "String",
-	            requerid: false,
-	            primaryKey: false,
-	            forenkey: false,
-	            model: true,
-	            xml: true
-	        }
-	    });
-    a.push({
-	        field: {
-	            campo: "valorICMSPartilhaDestinatario",
-	            tipo: "String",
-	            requerid: false,
-	            primaryKey: false,
-	            forenkey: false,
-	            model: true,
-	            xml: true
-	        }
-	    });
-    a.push({
-	        field: {
-	            campo: "valorICMSPartilhaRementente",
-	            tipo: "String",
-	            requerid: false,
-	            primaryKey: false,
-	            forenkey: false,
-	            model: true,
-	            xml: true
-	        }
-	    });
-    a.push({
-	        field: {
-	            campo: "baseCalculoICMSST",
-	            tipo: "String",
-	            requerid: false,
-	            primaryKey: false,
-	            forenkey: false,
-	            model: true,
-	            xml: true
-	        }
-	    });
-
-    a.push({
-	        field: {
-	            campo: "valorTotalICMSST",
-	            tipo: "String",
-	            requerid: false,
-	            primaryKey: false,
-	            forenkey: false,
-	            model: true,
-	            xml: true
-	        }
-	    });
-    a.push({
-	        field: {
-	            campo: "valorTotalDosProdutosServicos",
-	            tipo: "String",
-	            requerid: false,
-	            primaryKey: false,
-	            forenkey: false,
-	            model: true,
-	            xml: true
-	        }
-	    });
-    a.push({
-	        field: {
-	            campo: "valorTotalFrete",
-	            tipo: "String",
-	            requerid: false,
-	            primaryKey: false,
-	            forenkey: false,
-	            model: true,
-	            xml: true
-	        }
-	    });
-    a.push({
-	        field: {
-	            campo: "valorTotalSeguro",
-	            tipo: "String",
-	            requerid: false,
-	            primaryKey: false,
-	            forenkey: false,
-	            model: true,
-	            xml: true
-	        }
-	    });
-    a.push({
-	        field: {
-	            campo: "valorTotalDesconto",
-	            tipo: "String",
-	            requerid: false,
-	            primaryKey: false,
-	            forenkey: false,
-	            model: true,
-	            xml: true
-	        }
-	    });
-
-    a.push({
-	        field: {
-	            campo: "valorTotalII",
-	            tipo: "String",
-	            requerid: false,
-	            primaryKey: false,
-	            forenkey: false,
-	            model: true,
-	            xml: true
-	        }
-	    });
-
-    a.push({
-	        field: {
-	            campo: "valorTotalIPI",
-	            tipo: "String",
-	            requerid: false,
-	            primaryKey: false,
-	            forenkey: false,
-	            model: true,
-	            xml: true
-	        }
-	    });
-
-    a.push({
-	        field: {
-	            campo: "valorPIS",
-	            tipo: "String",
-	            requerid: false,
-	            primaryKey: false,
-	            forenkey: false,
-	            model: true,
-	            xml: true
-	        }
-	    });
-
-    a.push({
-	        field: {
-	            campo: "valorCOFINS",
-	            tipo: "String",
-	            requerid: false,
-	            primaryKey: false,
-	            forenkey: false,
-	            model: true,
-	            xml: true
-	        }
-	    });
-    a.push({
-	        field: {
-	            campo: "outrasDespesasAcessorias",
-	            tipo: "String",
-	            requerid: false,
-	            primaryKey: false,
-	            forenkey: false,
-	            model: true,
-	            xml: true
-	        }
-	    });
-    a.push({
-	        field: {
-	            campo: "iCMSOpInter",
-	            tipo: "ICMSOpInter",
-	            requerid: false,
-	            primaryKey: false,
-	            forenkey: false,
-	            model: true,
-	            xml: true
-	        }
-	    });
-
-    a.push({
-	        field: {
-	            campo: "valorTotalNFe",
-	            tipo: "String",
-	            requerid: false,
-	            primaryKey: false,
-	            forenkey: false,
-	            model: true,
-	            xml: true
-	        }
-	    });
-
-	    a.push({
-	        field: {
-	            campo: "valorTotalTributos",
-	            tipo: "String",
-	            requerid: false,
-	            primaryKey: false,
-	            forenkey: false,
-	            model: true,
-	            xml: true
-	        }
-	    });
-	       return a;
-	}
-
-    function NFNotaInfoISSQNTotal() {
+function NFNotaInfoTotal() {
     var a = [];
     a.push({
         field: {
@@ -2700,143 +2464,43 @@ function NFNotaInfoLocal() {
         }
     });
     a.push({
-	        field: {
-	            campo: "valorTotalServicosSobNaoIncidenciaNaoTributadosICMS",
-	            tipo: "String",
-	            requerid: false,
-	            primaryKey: false,
-	            forenkey: false,
-	            model: true,
-	            xml: true
-	        }
-	    });
+        field: {
+            campo: "icmsTotal",
+            tipo: "NFNotaInfoICMSTotal",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
     a.push({
-	        field: {
-	            campo: "baseCalculoISS",
-	            tipo: "String",
-	            requerid: false,
-	            primaryKey: false,
-	            forenkey: false,
-	            model: true,
-	            xml: true
-	        }
-	    });
+        field: {
+            campo: "issqnTotal",
+            tipo: "NFNotaInfoISSQNTotal",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
     a.push({
-	        field: {
-	            campo: "valorTotalISS",
-	            tipo: "String",
-	            requerid: false,
-	            primaryKey: false,
-	            forenkey: false,
-	            model: true,
-	            xml: true
-	        }
-	    });
-    a.push({
-	        field: {
-	            campo: "valorPISsobreServicos",
-	            tipo: "String",
-	            requerid: false,
-	            primaryKey: false,
-	            forenkey: false,
-	            model: true,
-	            xml: true
-	        }
-	    });
-    a.push({
-	        field: {
-	            campo: "valorCOFINSsobreServicos",
-	            tipo: "String",
-	            requerid: false,
-	            primaryKey: false,
-	            forenkey: false,
-	            model: true,
-	            xml: true
-	        }
-	    });
-    a.push({
-	        field: {
-	            campo: "dataPrestacaoServico",
-	            tipo: "Long",
-	            requerid: false,
-	            primaryKey: false,
-	            forenkey: false,
-	            model: true,
-	            xml: true
-	        }
-	    });
-    a.push({
-	        field: {
-	            campo: "valorDeducao",
-	            tipo: "String",
-	            requerid: false,
-	            primaryKey: false,
-	            forenkey: false,
-	            model: true,
-	            xml: true
-	        }
-	    });
-    a.push({
-	        field: {
-	            campo: "valorOutros",
-	            tipo: "String",
-	            requerid: false,
-	            primaryKey: false,
-	            forenkey: false,
-	            model: true,
-	            xml: true
-	        }
-	    });
-    a.push({
-	        field: {
-	            campo: "valorTotalDescontoIncondicionado",
-	            tipo: "String",
-	            requerid: false,
-	            primaryKey: false,
-	            forenkey: false,
-	            model: true,
-	            xml: true
-	        }
-	    });
-    a.push({
-	        field: {
-	            campo: "valorTotalDescontoCondicionado",
-	            tipo: "String",
-	            requerid: false,
-	            primaryKey: false,
-	            forenkey: false,
-	            model: true,
-	            xml: true
-	        }
-	    });
-    a.push({
-	        field: {
-	            campo: "valorTotalRetencaoISS",
-	            tipo: "String",
-	            requerid: false,
-	            primaryKey: false,
-	            forenkey: false,
-	            model: true,
-	            xml: true
-	        }
-	    });
+        field: {
+            campo: "retencoesTributos",
+            tipo: "NFNotaInfoRetencoesTributos",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    return a;
+}
 
-	    a.push({
-	        field: {
-	            campo: "tributacao",
-	            tipo: "DoisValores",
-	            requerid: false,
-	            primaryKey: false,
-	            forenkey: false,
-	            model: true,
-	            xml: true
-	        }
-	    });
-	       return a;
-	}
-
-    function NFNotaInfoRetencoesTributos() {
-var a = [];
+function NFNotaInfoICMSTotal() {
+    var a = [];
     a.push({
         field: {
             campo: "id",
@@ -2848,86 +2512,481 @@ var a = [];
             xml: true
         }
     });
- a.push({
-	        field: {
-	            campo: "valorRetidoPIS",
-	            tipo: "String",
-	            requerid: false,
-	            primaryKey: false,
-	            forenkey: false,
-	            model: true,
-	            xml: true
-	        }
-	    });
- a.push({
-	        field: {
-	            campo: "valorRetidoCOFINS",
-	            tipo: "String",
-	            requerid: false,
-	            primaryKey: false,
-	            forenkey: false,
-	            model: true,
-	            xml: true
-	        }
-	    });
- a.push({
-	        field: {
-	            campo: "valorRetidoCSLL",
-	            tipo: "String",
-	            requerid: false,
-	            primaryKey: false,
-	            forenkey: false,
-	            model: true,
-	            xml: true
-	        }
-	    });
- a.push({
-	        field: {
-	            campo: "baseCalculoIRRF",
-	            tipo: "String",
-	            requerid: false,
-	            primaryKey: false,
-	            forenkey: false,
-	            model: true,
-	            xml: true
-	        }
-	    });
- a.push({
-	        field: {
-	            campo: "valorRetidoIRRF",
-	            tipo: "String",
-	            requerid: false,
-	            primaryKey: false,
-	            forenkey: false,
-	            model: true,
-	            xml: true
-	        }
-	    });
- a.push({
-	        field: {
-	            campo: "baseCalculoRetencaoPrevidenciaSocial",
-	            tipo: "String",
-	            requerid: false,
-	            primaryKey: false,
-	            forenkey: false,
-	            model: true,
-	            xml: true
-	        }
-	    });
-	    
-	    a.push({
-	        field: {
-	            campo: "valorRetencaoPrevidenciaSocial",
-	            tipo: "String",
-	            requerid: false,
-	            primaryKey: false,
-	            forenkey: false,
-	            model: true,
-	            xml: true
-	        }
-	    });
-	       return a;
-	}
+    a.push({
+        field: {
+            campo: "baseCalculoICMS",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "valorTotalICMS",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "valorICMSDesonerado",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "valorICMSFundoCombatePobreza",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "valorICMSPartilhaDestinatario",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "valorICMSPartilhaRementente",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "baseCalculoICMSST",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "valorTotalICMSST",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "valorTotalDosProdutosServicos",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "valorTotalFrete",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "valorTotalSeguro",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "valorTotalDesconto",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "valorTotalII",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "valorTotalIPI",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "valorPIS",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "valorCOFINS",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "outrasDespesasAcessorias",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "iCMSOpInter",
+            tipo: "ICMSOpInter",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "valorTotalNFe",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "valorTotalTributos",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    return a;
+}
+
+function NFNotaInfoISSQNTotal() {
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "valorTotalServicosSobNaoIncidenciaNaoTributadosICMS",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "baseCalculoISS",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "valorTotalISS",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "valorPISsobreServicos",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "valorCOFINSsobreServicos",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "dataPrestacaoServico",
+            tipo: "Long",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "valorDeducao",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "valorOutros",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "valorTotalDescontoIncondicionado",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "valorTotalDescontoCondicionado",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "valorTotalRetencaoISS",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "tributacao",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    return a;
+}
+
+function NFNotaInfoRetencoesTributos() {
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "valorRetidoPIS",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "valorRetidoCOFINS",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "valorRetidoCSLL",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "baseCalculoIRRF",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "valorRetidoIRRF",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "baseCalculoRetencaoPrevidenciaSocial",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "valorRetencaoPrevidenciaSocial",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    return a;
+}
 
 
 
@@ -3024,11 +3083,11 @@ function NFNotaInfoTransporte() {
             xml: true
         }
     });
-       return a;
+    return a;
 }
 
 
-    function NFNotaInfoRetencaoICMSTransporte() {
+function NFNotaInfoRetencaoICMSTransporte() {
     var a = [];
     a.push({
         field: {
@@ -3108,7 +3167,7 @@ function NFNotaInfoTransporte() {
             xml: true
         }
     });
-       return a;
+    return a;
 }
 
 
@@ -3149,7 +3208,7 @@ function NFNotaInfoTransportador() {
         }
     });
 
-        a.push({
+    a.push({
         field: {
             campo: "razaoSocial",
             tipo: "String",
@@ -3208,10 +3267,10 @@ function NFNotaInfoTransportador() {
             xml: true
         }
     });
-       return a;
+    return a;
 }
 
-    function NFNotaInfoVeiculo() {
+function NFNotaInfoVeiculo() {
     var a = [];
     a.push({
         field: {
@@ -3259,7 +3318,7 @@ function NFNotaInfoTransportador() {
             xml: true
         }
     });
-       return a;
+    return a;
 }
 
 function NFNotaInfoReboque() {
@@ -3310,7 +3369,7 @@ function NFNotaInfoReboque() {
             xml: true
         }
     });
-       return a;
+    return a;
 }
 
 
@@ -3350,10 +3409,10 @@ function NFNotaInfoCobranca() {
             xml: true
         }
     });
-       return a;
+    return a;
 }
 
-    function NFNotaInfoDuplicata() {
+function NFNotaInfoDuplicata() {
     var a = [];
     a.push({
         field: {
@@ -3401,12 +3460,12 @@ function NFNotaInfoCobranca() {
             xml: true
         }
     });
-       return a;
+    return a;
 }
 
 
 
-    function NFNotaInfoFatura() {
+function NFNotaInfoFatura() {
     var a = [];
     a.push({
         field: {
@@ -3466,10 +3525,10 @@ function NFNotaInfoCobranca() {
             xml: true
         }
     });
-       return a;
+    return a;
 }
 
-    function NFNotaInfoCartao() {
+function NFNotaInfoCartao() {
     var a = [];
     a.push({
         field: {
@@ -3529,7 +3588,7 @@ function NFNotaInfoCobranca() {
             xml: true
         }
     });
-       return a;
+    return a;
 }
 
 function NFNotaInfoPagamento() {
@@ -3580,7 +3639,7 @@ function NFNotaInfoPagamento() {
             xml: true
         }
     });
-       return a;
+    return a;
 }
 
 function NFNotaInfoInformacoesAdicionais() {
@@ -3651,7 +3710,7 @@ function NFNotaInfoInformacoesAdicionais() {
             xml: true
         }
     });
-       return a;
+    return a;
 }
 
 function NFNotaInfoObservacao() {
@@ -3690,7 +3749,7 @@ function NFNotaInfoObservacao() {
             xml: true
         }
     });
-       return a;
+    return a;
 }
 
 function NFNotaInfoProcessoReferenciado() {
@@ -3729,11 +3788,11 @@ function NFNotaInfoProcessoReferenciado() {
             xml: true
         }
     });
-       return a;
+    return a;
 }
 
 
-    function NFNotaInfoExportacao() {
+function NFNotaInfoExportacao() {
     var a = [];
     a.push({
         field: {
@@ -3781,7 +3840,7 @@ function NFNotaInfoProcessoReferenciado() {
             xml: true
         }
     });
-       return a;
+    return a;
 }
 
 function NFNotaInfoCompra() {
@@ -3832,7 +3891,7 @@ function NFNotaInfoCompra() {
             xml: true
         }
     });
-       return a;
+    return a;
 }
 
 
@@ -3963,7 +4022,7 @@ function NFNotaInfoCana() {
             xml: true
         }
     });
-       return a;
+    return a;
 }
 
 
@@ -4004,7 +4063,7 @@ function NFNotaInfoCanaFornecimentoDiario() {
             xml: true
         }
     });
-       return a;
+    return a;
 }
 
 
@@ -4045,7 +4104,7 @@ function NFNotaInfoCanaDeducao() {
             xml: true
         }
     });
-       return a;
+    return a;
 }
 
 
@@ -4089,7 +4148,7 @@ function NFNota() {
             xml: true
         }
     });
-    
+
     a.push({
         field: {
             campo: "infoSuplementar",
@@ -4124,14 +4183,14 @@ function NFNota() {
             xml: true
         }
     });
-    
-       return a;
+
+    return a;
 }
 
 
-function NFNotaInfoSuplementar () {
+function NFNotaInfoSuplementar() {
 
- var a = [];
+    var a = [];
     a.push({
         field: {
             campo: "id",
@@ -4144,7 +4203,7 @@ function NFNotaInfoSuplementar () {
         }
     });
 
-a.push({
+    a.push({
         field: {
             campo: "qrCode",
             tipo: "String",
@@ -4155,7 +4214,7 @@ a.push({
             xml: true
         }
     });
-   return a;
+    return a;
 }
 
 
@@ -4202,7 +4261,7 @@ function user_rolesModel() {
     a.push({
         field: {
             campo: "username",
-            default : 0,
+            default: 0,
             tipo: "String",
             requerid: false,
             primaryKey: false,
@@ -4244,7 +4303,7 @@ function rolesModel() {
     a.push({
         field: {
             campo: "role",
-            default : 0,
+            default: 0,
             tipo: "String",
             requerid: false,
             primaryKey: false,
@@ -4257,7 +4316,7 @@ function rolesModel() {
     a.push({
         field: {
             campo: "status",
-            default : 0,
+            default: 0,
             tipo: "Integer",
             requerid: false,
             primaryKey: false,
@@ -4311,7 +4370,7 @@ function paginaModel() {
     a.push({
         field: {
             campo: "status",
-            default : 0,
+            default: 0,
             tipo: "Integer",
             requerid: false,
             primaryKey: false,
@@ -4324,7 +4383,7 @@ function paginaModel() {
     a.push({
         field: {
             campo: "menu",
-            default : 0,
+            default: 0,
             tipo: "Menu",
             requerid: false,
             primaryKey: false,
@@ -4379,7 +4438,7 @@ function menuModel() {
     a.push({
         field: {
             campo: "nome",
-            default : 0,
+            default: 0,
             tipo: "String",
             requerid: false,
             primaryKey: false,
@@ -4392,7 +4451,7 @@ function menuModel() {
     a.push({
         field: {
             campo: "label",
-            default : 0,
+            default: 0,
             tipo: "String",
             requerid: false,
             primaryKey: false,
@@ -4405,7 +4464,7 @@ function menuModel() {
     a.push({
         field: {
             campo: "status",
-            default : 0,
+            default: 0,
             tipo: "Integer",
             requerid: false,
             primaryKey: false,
@@ -4418,7 +4477,7 @@ function menuModel() {
     a.push({
         field: {
             campo: "nivel",
-            default : 0,
+            default: 0,
             tipo: "Integer",
             requerid: false,
             primaryKey: false,
@@ -4431,7 +4490,7 @@ function menuModel() {
     a.push({
         field: {
             campo: "permissao",
-            default : 0,
+            default: 0,
             tipo: "Role",
             requerid: false,
             primaryKey: false,
@@ -4474,7 +4533,7 @@ function helpModel() {
     a.push({
         field: {
             campo: "titulo",
-            default : 0,
+            default: 0,
             tipo: "String",
             requerid: false,
             primaryKey: false,
@@ -4487,7 +4546,7 @@ function helpModel() {
     a.push({
         field: {
             campo: "status",
-            default : 0,
+            default: 0,
             tipo: "Integer",
             requerid: false,
             primaryKey: false,
@@ -4514,7 +4573,7 @@ function helpModel() {
 //Boleto    
 function fieldModel() {
 
-    
+
 
     a = [];
     a.push({
@@ -4532,7 +4591,7 @@ function fieldModel() {
     a.push({
         field: {
             campo: "nome",
-            default : 0,
+            default: 0,
             tipo: "String",
             requerid: false,
             primaryKey: false,
@@ -4545,7 +4604,7 @@ function fieldModel() {
     a.push({
         field: {
             campo: "status",
-            default : 0,
+            default: 0,
             tipo: "Integer",
             requerid: false,
             primaryKey: false,
@@ -4570,7 +4629,7 @@ function fieldModel() {
     a.push({
         field: {
             campo: "tipo",
-            default : 0,
+            default: 0,
             tipo: "Integer",
             requerid: false,
             primaryKey: false,
@@ -4628,7 +4687,7 @@ function fieldModel() {
         }
     });
 
-     a.push({
+    a.push({
         field: {
             campo: "role",
             tipo: "List<Role>",
@@ -4639,7 +4698,7 @@ function fieldModel() {
             xml: true
         }
     });
-     a.push({
+    a.push({
         field: {
             campo: "campoBanco",
             tipo: "String",
@@ -4698,7 +4757,7 @@ function validacaoModel() {
     a.push({
         field: {
             campo: "tipo",
-            default : 0,
+            default: 0,
             tipo: "Integer",
             requerid: false,
             primaryKey: false,
@@ -4730,7 +4789,7 @@ function BoletoModel() {
     a.push({
         field: {
             campo: "ativarBolOnLine",
-            default : 0,
+            default: 0,
             tipo: "Integer",
             requerid: false,
             primaryKey: false,
@@ -4860,7 +4919,7 @@ function CarneModel() {
         field: {
             campo: "carneBotelo",
             tipo: "Integer",
-            default : 0,
+            default: 0,
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -4872,7 +4931,7 @@ function CarneModel() {
         field: {
             campo: "carneNormal",
             tipo: "Integer",
-            default : 0,
+            default: 0,
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -5045,7 +5104,7 @@ function EntradaModel() {
     a.push({
         field: {
             campo: "manterPrecoVendaProd",
-            default : 0,
+            default: 0,
             tipo: "Integer",
             requerid: false,
             primaryKey: false,
@@ -5185,7 +5244,7 @@ function AlertasModel() {
             requerid: false,
             primaryKey: false,
             forenkey: false,
-            default : 0,
+            default: 0,
             model: true,
             xml: true
         }
@@ -5197,7 +5256,7 @@ function AlertasModel() {
             requerid: false,
             primaryKey: false,
             forenkey: false,
-            default : 0,
+            default: 0,
             model: true,
             xml: true
         }
@@ -5209,7 +5268,7 @@ function AlertasModel() {
             requerid: false,
             primaryKey: false,
             forenkey: false,
-            default : 0,
+            default: 0,
             model: true,
             xml: true
         }
@@ -5220,7 +5279,7 @@ function AlertasModel() {
             tipo: "Integer",
             requerid: false,
             primaryKey: false,
-            default : 0,
+            default: 0,
             forenkey: false,
             model: true,
             xml: true
@@ -5232,7 +5291,7 @@ function AlertasModel() {
             tipo: "Integer",
             requerid: false,
             primaryKey: false,
-            default : 0,
+            default: 0,
             forenkey: false,
             model: true,
             xml: true
@@ -5244,7 +5303,7 @@ function AlertasModel() {
             tipo: "Integer",
             requerid: false,
             primaryKey: false,
-            default : 0,
+            default: 0,
             forenkey: false,
             model: true,
             xml: true
@@ -5276,7 +5335,7 @@ function ConfigBlueSoftModel() {
             requerid: false,
             primaryKey: false,
             forenkey: false,
-            default : 0,
+            default: 0,
             model: true,
             xml: true
         }
@@ -5417,14 +5476,14 @@ function GeralModel() {
             primaryKey: false,
             forenkey: false,
             model: true,
-            default : 0,
+            default: 0,
             xml: true
         }
     });
     return a;
 }
 
-    //ConfigBlueSoft
+//ConfigBlueSoft
 function ConfigOSModel() {
 
     a = [];
@@ -5447,7 +5506,7 @@ function ConfigOSModel() {
             requerid: false,
             primaryKey: false,
             forenkey: false,
-            default : 0,
+            default: 0,
             model: true,
             xml: true
         }
@@ -5460,7 +5519,7 @@ function ConfigOSModel() {
             requerid: false,
             primaryKey: false,
             forenkey: false,
-            default : 0,
+            default: 0,
             model: true,
             xml: true
         }
@@ -5473,7 +5532,7 @@ function ConfigOSModel() {
             requerid: false,
             primaryKey: false,
             forenkey: false,
-            default : 0,
+            default: 0,
             model: true,
             xml: true
         }
@@ -5486,7 +5545,7 @@ function ConfigOSModel() {
             requerid: false,
             primaryKey: false,
             forenkey: false,
-            default : 0,
+            default: 0,
             model: true,
             xml: true
         }
@@ -5499,7 +5558,7 @@ function ConfigOSModel() {
             requerid: false,
             primaryKey: false,
             forenkey: false,
-            default : 0,
+            default: 0,
             model: true,
             xml: true
         }
@@ -5516,7 +5575,7 @@ function ConfigOSModel() {
             xml: true
         }
     });
-    
+
     return a;
 }
 
@@ -5983,7 +6042,7 @@ function SMTPModel() {
             requerid: false,
             primaryKey: false,
             forenkey: false,
-            default:0,
+            default: 0,
             model: true,
             xml: true
         }
@@ -6413,7 +6472,7 @@ function ConfiguracaoModel() {
             xml: true
         }
     });
-    
+
     a.push({
         field: {
             campo: "confCabecalho",
@@ -6633,8 +6692,7 @@ function DoisValorModel() {
     return a;
 }
 
-function DoisValorTypeModel () 
-{
+function DoisValorTypeModel() {
     a = [];
     a.push({
         field: {
@@ -6685,6 +6743,7 @@ function DoisValorTypeModel ()
     });
     return a;
 }
+
 function InsertUtilModel() {
     a = [];
     a.push({
@@ -6829,587 +6888,587 @@ function ProcessModel() {
             xml: true
         }
     });
-        a.push({
-            field: {
-                campo: "dataProcess",
-                tipo: "Long",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "dataFim",
-                tipo: "Long",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        
-        a.push({
-            field: {
-                campo: "valor",
-                tipo: "Float",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "acao",
-                tipo: "DoisValores",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "natureza",
-                tipo: "DoisValores",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "senha",
-                tipo: "String",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "assunto",
-                tipo: "String",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        
-        a.push({
-            field: {
-                campo: "tipoProcesso",
-                tipo: "DoisValores",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
+    a.push({
+        field: {
+            campo: "dataProcess",
+            tipo: "Long",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "dataFim",
+            tipo: "Long",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
 
-        a.push({
-            field: {
-                campo: "statusProc",
-                tipo: "DoisValores",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
+    a.push({
+        field: {
+            campo: "valor",
+            tipo: "Float",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "acao",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "natureza",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "senha",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "assunto",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
 
-        a.push({
-            field: {
-                campo: "grupoTrabalho",
-                tipo: "DoisValores",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        
-        a.push({
-            field: {
-                campo: "descricaoProc",
-                tipo: "String",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        
-        a.push({
-            field: {
-                campo: "processo",
-                tipo: "String",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "situacao",
-                tipo: "DoisValores",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        
-        a.push({
-            field: {
-                campo: "instancia",
-                tipo: "DoisValores",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        
-        a.push({
-            field: {
-                campo: "orgao",
-                tipo: "DoisValores",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
+    a.push({
+        field: {
+            campo: "tipoProcesso",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
 
-        a.push({
-            field: {
-                campo: "npadraocnj",
-                tipo: "String",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        
-        a.push({
-            field: {
-                campo: "npadrao",
-                tipo: "String",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        
-        a.push({
-            field: {
-                campo: "agendarCap",
-                tipo: "DoisValores",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        
-        a.push({
-            field: {
-                campo: "distribuido",
-                tipo: "String",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
+    a.push({
+        field: {
+            campo: "statusProc",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
 
-        a.push({
-            field: {
-                campo: "valorProvisionado",
-                tipo: "Float",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        
-        a.push({
-            field: {
-                campo: "valorAcao",
-                tipo: "Float",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        
-        a.push({
-            field: {
-                campo: "observacaoProc",
-                tipo: "String",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        
-        a.push({
-            field: {
-                campo: "justica",
-                tipo: "DoisValores",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        
-        a.push({
-            field: {
-                campo: "tribunal",
-                tipo: "DoisValores",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        
-        a.push({
-            field: {
-                campo: "instancia1",
-                tipo: "DoisValores",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        
-        a.push({
-            field: {
-                campo: "localidade",
-                tipo: "DoisValores",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        
-        a.push({
-            field: {
-                campo: "capturpor",
-                tipo: "DoisValores",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        
-        a.push({
-            field: {
-                campo: "numeroprocesso",
-                tipo: "String",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        
-        a.push({
-            field: {
-                campo: "capautomatica",
-                tipo: "DoisValores",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        
-        a.push({
-            field: {
-                campo: "pasta",
-                tipo: "String",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        
-        a.push({
-            field: {
-                campo: "enviarEmail",
-                tipo: "Integer",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
+    a.push({
+        field: {
+            campo: "grupoTrabalho",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
 
-        a.push({
-            field: {
-                campo: "monitorar",
-                tipo: "Integer",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        
-        a.push({
-            field: {
-                campo: "enviarMdgTelefone",
-                tipo: "Integer",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        
-        a.push({
-            field: {
-                campo: "quando",
-                tipo: "DoisValores",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        
-        a.push({
-            field: {
-                campo: "processo",
-                tipo: "DoisValores",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        
-        a.push({
-            field: {
-                campo: "fundamentacaoJuridica",
-                tipo: "String",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        
-        a.push({
-            field: {
-                campo: "fatos",
-                tipo: "String",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        
-        a.push({
-            field: {
-                campo: "pretensoesCliente",
-                tipo: "String",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        
-        a.push({
-            field: {
-                campo: "estrategia",
-                tipo: "String",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        
-        a.push({
-            field: {
-                campo: "retringirProcesso",
-                tipo: "Integer",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        
-        a.push({
-            field: {
-                campo: "usuariosRestricaoProc",
-                tipo: "List<Usuario>",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        
-        a.push({
-            field: {
-                campo: "tituloList",
-                tipo: "List<ContasReceber>",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
+    a.push({
+        field: {
+            campo: "descricaoProc",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
 
-        a.push({
-            field: {
-                campo: "clienteList",
-                tipo: "List<ProcessoCliente>",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        
-        a.push({
-            field: {
-                campo: "advogadoList",
-                tipo: "List<Advogados>",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        
-        a.push({
-            field: {
-                campo: "audienciaList",
-                tipo: "List<Compromisso>",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        
-        a.push({
-            field: {
-                campo: "processoStatusList",
-                tipo: "List<ProcessoStatus>",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
+    a.push({
+        field: {
+            campo: "processo",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "situacao",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
 
-        a.push({
-            field: {
-                campo: "envolvList",
-                tipo: "List<Envolvidos>",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        
-        a.push({
-            field: {
-                campo: "arquivos",
-                tipo: "List<Arquivo>",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        
-        a.push({
-            field: {
-                campo: "envolvidosExterno",
-                tipo: "List<ParticipanteExterno>",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
+    a.push({
+        field: {
+            campo: "instancia",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "orgao",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "npadraocnj",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "npadrao",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "agendarCap",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "distribuido",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "valorProvisionado",
+            tipo: "Float",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "valorAcao",
+            tipo: "Float",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "observacaoProc",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "justica",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "tribunal",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "instancia1",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "localidade",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "capturpor",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "numeroprocesso",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "capautomatica",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "pasta",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "enviarEmail",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "monitorar",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "enviarMdgTelefone",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "quando",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "processo",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "fundamentacaoJuridica",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "fatos",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "pretensoesCliente",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "estrategia",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "retringirProcesso",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "usuariosRestricaoProc",
+            tipo: "List<Usuario>",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "tituloList",
+            tipo: "List<ContasReceber>",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "clienteList",
+            tipo: "List<ProcessoCliente>",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "advogadoList",
+            tipo: "List<Advogados>",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "audienciaList",
+            tipo: "List<Compromisso>",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "processoStatusList",
+            tipo: "List<ProcessoStatus>",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "envolvList",
+            tipo: "List<Envolvidos>",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "arquivos",
+            tipo: "List<Arquivo>",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "envolvidosExterno",
+            tipo: "List<ParticipanteExterno>",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
     return a;
 }
 
@@ -7428,265 +7487,265 @@ function AdvogadosModel() {
             xml: true
         }
     });
-        a.push({
-            field: {
-                campo: "advogado",
-                tipo: "Integer",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
+    a.push({
+        field: {
+            campo: "advogado",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
 
-        a.push({
-            field: {
-                campo: "advogadoPrincipal",
-                tipo: "Integer",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        return a;
+    a.push({
+        field: {
+            campo: "advogadoPrincipal",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    return a;
 }
 
 //================ Advogados
 function ProcessoUsuariosModel() {
-    
-        a = [];
-        a.push({
-            field: {
-                campo: "id",
-                tipo: "Integer",
-                requerid: true,
-                primaryKey: true,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-            a.push({
-                field: {
-                    campo: "usuarioId",
-                    tipo: "Usuario",
-                    requerid: false,
-                    primaryKey: false,
-                    forenkey: false,
-                    model: true,
-                    xml: true
-                }
-            });
-    
-            a.push({
-                field: {
-                    campo: "processo",
-                    tipo: "Integer",
-                    requerid: false,
-                    primaryKey: false,
-                    forenkey: false,
-                    model: true,
-                    xml: true
-                }
-            });
-            return a;
-    }
+
+    a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "usuarioId",
+            tipo: "Usuario",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "processo",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    return a;
+}
 
 function DiasHorasModel() {
-    
-        a = [];
-        a.push({
-            field: {
-                campo: "id",
-                tipo: "Integer",
-                requerid: true,
-                primaryKey: true,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-            a.push({
-                field: {
-                    campo: "horaInicio",
-                    tipo: "Long",
-                    requerid: false,
-                    primaryKey: false,
-                    forenkey: false,
-                    model: true,
-                    xml: true
-                }
-            });
-    
-            a.push({
-                field: {
-                    campo: "horaFinal",
-                    tipo: "Long",
-                    requerid: false,
-                    primaryKey: false,
-                    forenkey: false,
-                    model: true,
-                    xml: true
-                }
-            });
 
-            a.push({
-                field: {
-                    campo: "diasSemanas",
-                    tipo: "List<DoisValores>",
-                    requerid: false,
-                    primaryKey: false,
-                    forenkey: false,
-                    model: true,
-                    xml: true
-                }
-            });
-            return a;
-    }
+    a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "horaInicio",
+            tipo: "Long",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "horaFinal",
+            tipo: "Long",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "diasSemanas",
+            tipo: "List<DoisValores>",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    return a;
+}
 
 //================ public class Advogado extends Pessoa
-    function AdvogadoModel() {
-        a = [];
-        a = PessoaModel();
+function AdvogadoModel() {
+    a = [];
+    a = PessoaModel();
 
-        a.push({
-            field: {
-                campo: "tempoAtendimento",
-                tipo: "Long",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
+    a.push({
+        field: {
+            campo: "tempoAtendimento",
+            tipo: "Long",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
 
-        a.push({
-            field: {
-                campo: "oab",
-                tipo: "String",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
+    a.push({
+        field: {
+            campo: "oab",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
 
-        a.push({
-            field: {
-                campo: "mediaAtendimento",
-                tipo: "Long",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
+    a.push({
+        field: {
+            campo: "mediaAtendimento",
+            tipo: "Long",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
 
-        a.push({
-            field: {
-                campo: "maxAtendimento",
-                tipo: "Integer",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
+    a.push({
+        field: {
+            campo: "maxAtendimento",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
 
-        a.push({
-            field: {
-                campo: "maxEncaixe",
-                tipo: "Integer",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
+    a.push({
+        field: {
+            campo: "maxEncaixe",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
 
-        a.push({
-            field: {
-                campo: "estado",
-                tipo: "Estado",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
+    a.push({
+        field: {
+            campo: "estado",
+            tipo: "Estado",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
 
-        a.push({
-            field: {
-                campo: "tipoOab",
-                tipo: "DoisValor",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-  
-        a.push({
-            field: {
-                campo: "horasTrabalhos",
-                tipo: "List<DiasHoras>",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
+    a.push({
+        field: {
+            campo: "tipoOab",
+            tipo: "DoisValor",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
 
-        a.push({
-            field: {
-                campo: "especialidades",
-                tipo: "List<Especialidade>",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-    
-        a.push({
-            field: {
-                campo: "compromissos",
-                tipo: "List<Compromisso>",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-    
-        a.push({
-            field: {
-                campo: "processos",
-                tipo: "List<Processo>",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
+    a.push({
+        field: {
+            campo: "horasTrabalhos",
+            tipo: "List<DiasHoras>",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
 
-        return a;
-    
-    }
+    a.push({
+        field: {
+            campo: "especialidades",
+            tipo: "List<Especialidade>",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "compromissos",
+            tipo: "List<Compromisso>",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "processos",
+            tipo: "List<Processo>",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    return a;
+
+}
 //================ ServicoAndPlano
 function DiasHorasModel() {
     a = [];
@@ -7790,7 +7849,7 @@ function DiasHorasModel() {
         }
     });
     return a;
-}           
+}
 
 //================ ServicoAndPlano
 function EspecialidadeModel() {
@@ -8225,7 +8284,7 @@ function EntidadeModel() {
             xml: true
         }
     });
-    
+
     a.push({
         field: {
             campo: "statusEmpresa",
@@ -8403,7 +8462,7 @@ function EntidadeModel() {
             xml: true
         }
     });
-        a.push({
+    a.push({
         field: {
             campo: "dtAbertura",
             tipo: "Long",
@@ -9513,76 +9572,76 @@ function ConvenioModel() {
 
 //================ Convenio
 function ContratoConvenioModel() {
-    
-        var a = [];
-        a.push({
-            field: {
-                campo: "id",
-                tipo: "Integer",
-                requerid: true,
-                primaryKey: true,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "codigoOperadora",
-                tipo: "String",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "Contratado",
-                tipo: "String",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "contaRecebimento",
-                tipo: "Conta",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "loginWS",
-                tipo: "String",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "senhaWS",
-                tipo: "String",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        return a;
-    }
+
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "codigoOperadora",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "Contratado",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "contaRecebimento",
+            tipo: "Conta",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "loginWS",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "senhaWS",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    return a;
+}
 
 //================ Convenio
 function ClasseModel() {
@@ -9881,6 +9940,7 @@ function TelefoneModel() {
     });
     return a;
 }
+
 function NotaFiscalItensModel() {
 
     a.push({
@@ -10420,7 +10480,8 @@ function CidadeModel() {
             tipo: "Estado",
             requerid: false,
             primaryKey: false,
-            forenkey: false,
+            forenkey: true,
+            tipoLigacao: { tipo: "OneToOne", ligacao: "estado_id" },
             model: true,
             xml: true
         }
@@ -10795,6 +10856,7 @@ function EstadoModel() {
         field: {
             campo: "id",
             tipo: "Integer",
+            createSeq: true,
             requerid: true,
             primaryKey: true,
             forenkey: false,
@@ -10871,10 +10933,10 @@ function TarefaModel() {
 function EmpresaModel() {
 
     var a = [];
-   
-     a = EntidadeModel();
 
-      a.push({
+    a = EntidadeModel();
+
+    a.push({
         field: {
             campo: "planoList",
             tipo: "List<Plano>",
@@ -10886,7 +10948,7 @@ function EmpresaModel() {
         }
     });
 
-     a.push({
+    a.push({
         field: {
             campo: "qntFilial",
             tipo: "Integer",
@@ -10898,7 +10960,7 @@ function EmpresaModel() {
         }
     });
 
-     a.push({
+    a.push({
         field: {
             campo: "qntDeposito",
             tipo: "Integer",
@@ -10910,7 +10972,7 @@ function EmpresaModel() {
         }
     });
 
-     a.push({
+    a.push({
         field: {
             campo: "filialList",
             tipo: "List<Filial>",
@@ -10922,7 +10984,7 @@ function EmpresaModel() {
         }
     });
 
-     a.push({
+    a.push({
         field: {
             campo: "depositoList",
             tipo: "List<Deposito>",
@@ -10934,7 +10996,7 @@ function EmpresaModel() {
         }
     });
 
-     a.push({
+    a.push({
         field: {
             campo: "contaCorrenteList",
             tipo: "List<ContaCorrente>",
@@ -10946,7 +11008,7 @@ function EmpresaModel() {
         }
     });
 
-     a.push({
+    a.push({
         field: {
             campo: "tarefaList",
             tipo: "List<TarefaEnt>",
@@ -10958,7 +11020,7 @@ function EmpresaModel() {
         }
     });
 
-     a.push({
+    a.push({
         field: {
             campo: "parceiroId",
             tipo: "Integer",
@@ -10970,7 +11032,7 @@ function EmpresaModel() {
         }
     });
 
-     a.push({
+    a.push({
         field: {
             campo: "contabilidadeId",
             tipo: "Integer",
@@ -10982,7 +11044,7 @@ function EmpresaModel() {
         }
     });
 
-     a.push({
+    a.push({
         field: {
             campo: "permissaoTypeEnum",
             tipo: "Integer",
@@ -10999,725 +11061,727 @@ function EmpresaModel() {
 
 //================ Medico
 function EspecialidadeMedicoModel() {
-    
-        var a = [];
-        a.push({
-            field: {
-                campo: "id",
-                tipo: "Integer",
-                requerid: true,
-                primaryKey: true,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "especialidade",
-                tipo: "Especialidade",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
 
-        a.push({
-            field: {
-                campo: "conselho",
-                tipo: "DoisValores",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "especialidade",
+            tipo: "Especialidade",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
 
-        a.push({
-            field: {
-                campo: "registro",
-                tipo: "String",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
+    a.push({
+        field: {
+            campo: "conselho",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
 
-        a.push({
-            field: {
-                campo: "uf",
-                tipo: "Estado",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        return a;
-    }
+    a.push({
+        field: {
+            campo: "registro",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "uf",
+            tipo: "Estado",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    return a;
+}
 //================ Consulta
 
 //================ Medico
 function MedicoModel() {
-    
-        var a = [];
-        var a = PessoaModel();
-        a.push({
-            field: {
-                campo: "id",
-                tipo: "Integer",
-                requerid: true,
-                primaryKey: true,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "especialidadeMedica",
-                tipo: "EspecialidadeMedico",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "anamnesePadrao",
-                tipo: "DoisValores",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "evolucaoPadrao",
-                tipo: "DoisValores",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "grauParticipacaoPadrao",
-                tipo: "DoisValores",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "conveniosAceito",
-                tipo: "List<MedicoConvenio>",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
 
-        a.push({
-            field: {
-                campo: "msginforNaAgenda",
-                tipo: "String",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
+    var a = [];
+    var a = PessoaModel();
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "especialidadeMedica",
+            tipo: "EspecialidadeMedico",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "anamnesePadrao",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "evolucaoPadrao",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "grauParticipacaoPadrao",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "conveniosAceito",
+            tipo: "List<MedicoConvenio>",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
 
-        a.push({
-            field: {
-                campo: "horaDia",
-                tipo: "List<HoraDias>",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        return a;
-    }
+    a.push({
+        field: {
+            campo: "msginforNaAgenda",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "horaDia",
+            tipo: "List<HoraDias>",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    return a;
+}
 
 
-    //================ Consulta
+//================ Consulta
 
 
 function AnamneseModel() {
-    
-        var a = [];
-        a.push({
-            field: {
-                campo: "id",
-                tipo: "Integer",
-                requerid: true,
-                primaryKey: true,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "dataRelatorio",
-                tipo: "Long",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "queixaPrincipal",
-                tipo: "String",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "historiaDoencaAtual",
-                tipo: "String",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "medicamentoUso",
-                tipo: "String",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "etilismo",
-                tipo: "String",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "tabagismo",
-                tipo: "String",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "usoSubstanciaIlicitas",
-                tipo: "String",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "praticaAtividadesFisicas",
-                tipo: "String",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "dst",
-                tipo: "String",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "exameFisico",
-                tipo: "String",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "conduta",
-                tipo: "String",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "doencas",
-                tipo: "List<DoisValores>",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
 
-        a.push({
-            field: {
-                campo: "historicoFamiliar",
-                tipo: "List<DoisValores>",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        return a;
-    }
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "dataRelatorio",
+            tipo: "Long",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "queixaPrincipal",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "historiaDoencaAtual",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "medicamentoUso",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "etilismo",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "tabagismo",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "usoSubstanciaIlicitas",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "praticaAtividadesFisicas",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "dst",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "exameFisico",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "conduta",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "doencas",
+            tipo: "List<DoisValores>",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "historicoFamiliar",
+            tipo: "List<DoisValores>",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    return a;
+}
 
 //================ Consulta
 
 function EquipamentoModel() {
-    
-        var a = [];
-        a.push({
-            field: {
-                campo: "id",
-                tipo: "Integer",
-                requerid: true,
-                primaryKey: true,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "nomeEquipamento",
-                tipo: "String",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "proprietario",
-                tipo: "DoisValores",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "gradeHorarios",
-                tipo: "DiasHorarios",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        return a;
-    }
+
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "nomeEquipamento",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "proprietario",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "gradeHorarios",
+            tipo: "DiasHorarios",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    return a;
+}
 
 
-    //================ Consulta
+//================ Consulta
 
 function KitModel() {
-    
-        var a = [];
-        a.push({
-            field: {
-                campo: "id",
-                tipo: "Integer",
-                requerid: true,
-                primaryKey: true,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "nomeKit",
-                tipo: "String",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "tabela",
-                tipo: "DoisValores",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "produtos",
-                tipo: "List<ProdutoKit>",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        return a;
-    }
-    function ProdutoKitModel() {
-        
-            var a = [];
-            a.push({
-                field: {
-                    campo: "id",
-                    tipo: "Integer",
-                    requerid: true,
-                    primaryKey: true,
-                    forenkey: false,
-                    model: true,
-                    xml: true
-                }
-            });
-            a.push({
-                field: {
-                    campo: "quantidade",
-                    tipo: "Double",
-                    requerid: false,
-                    primaryKey: false,
-                    forenkey: false,
-                    model: true,
-                    xml: true
-                }
-            });
-            a.push({
-                field: {
-                    campo: "produto",
-                    tipo: "Produto",
-                    requerid: false,
-                    primaryKey: false,
-                    forenkey: false,
-                    model: true,
-                    xml: true
-                }
-            });
-            a.push({
-                field: {
-                    campo: "variavel",
-                    tipo: "Integer",
-                    requerid: false,
-                    primaryKey: false,
-                    forenkey: false,
-                    model: true,
-                    xml: true
-                }
-            });
-            return a;
+
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
         }
+    });
+    a.push({
+        field: {
+            campo: "nomeKit",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "tabela",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "produtos",
+            tipo: "List<ProdutoKit>",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    return a;
+}
+
+function ProdutoKitModel() {
+
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "quantidade",
+            tipo: "Double",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "produto",
+            tipo: "Produto",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "variavel",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    return a;
+}
+
 function ProcedimentoModel() {
-    
-        var a = [];
-        a.push({
-            field: {
-                campo: "id",
-                tipo: "Integer",
-                requerid: true,
-                primaryKey: true,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "nomeProcedimento",
-                tipo: "String",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "tipo",
-                tipo: "DoisValores",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "valor",
-                tipo: "Double",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "tempoMinutos",
-                tipo: "Integer",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "maxPacienteHorario",
-                tipo: "Integer",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "diasRetorno",
-                tipo: "Integer",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
 
-        a.push({
-            field: {
-                campo: "equipamentoPadrao",
-                tipo: "Equipamento",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "nomeProcedimento",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "tipo",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "valor",
+            tipo: "Double",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "tempoMinutos",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "maxPacienteHorario",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "diasRetorno",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
 
-        a.push({
-            field: {
-                campo: "grupo",
-                tipo: "GrupoProcedimento",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "sigla",
-                tipo: "String",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "codigo",
-                tipo: "String",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "obrigarRespTempo",
-                tipo: "Integer",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "SolicitarIndicClinica",
-                tipo: "Integer",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "limitarConvenios",
-                tipo: "Convenio",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "limitarLocais",
-                tipo: "String",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "avisosLembretesAgendar",
-                tipo: "String",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "enviarEmailSMS",
-                tipo: "DoisValores",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "textoEmail",
-                tipo: "DoisValores",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "textoSMS",
-                tipo: "DoisValores",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "kits",
-                tipo: "List<Kit>",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
-        a.push({
-            field: {
-                campo: "participantes",
-                tipo: "List<Participantes>",
-                requerid: false,
-                primaryKey: false,
-                forenkey: false,
-                model: true,
-                xml: true
-            }
-        });
+    a.push({
+        field: {
+            campo: "equipamentoPadrao",
+            tipo: "Equipamento",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
 
-        return a;
-    }
+    a.push({
+        field: {
+            campo: "grupo",
+            tipo: "GrupoProcedimento",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "sigla",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "codigo",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "obrigarRespTempo",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "SolicitarIndicClinica",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "limitarConvenios",
+            tipo: "Convenio",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "limitarLocais",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "avisosLembretesAgendar",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "enviarEmailSMS",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "textoEmail",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "textoSMS",
+            tipo: "DoisValores",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "kits",
+            tipo: "List<Kit>",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "participantes",
+            tipo: "List<Participantes>",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    return a;
+}
 //================ Consulta
 
 
@@ -12107,8 +12171,8 @@ function TransactionModel() {
 
 //================ Usuario
 function UsuarioModel() {
-//users( id, emprId, processId, username, password, pergunta, role, language, ultAcesso, tabelaEnumValue,create_user,create_date,modify_user,modify_date)values ( 10110, 1, 1, 'username_4', 'password_4', 'p
- //id,  username ,telefone ,emprId ,processId ,password ,pergunta ,language ,ultAcesso ,tabelaEnumValue ,create_date ,create_user ,modify_date ,modify_user   
+    //users( id, emprId, processId, username, password, pergunta, role, language, ultAcesso, tabelaEnumValue,create_user,create_date,modify_user,modify_date)values ( 10110, 1, 1, 'username_4', 'password_4', 'p
+    //id,  username ,telefone ,emprId ,processId ,password ,pergunta ,language ,ultAcesso ,tabelaEnumValue ,create_date ,create_user ,modify_date ,modify_user   
     var a = [];
     a.push({
         field: {
@@ -12191,7 +12255,7 @@ function UsuarioModel() {
         field: {
             campo: "email",
             tipo: "String",
-             requerid: false,
+            requerid: false,
             primaryKey: false,
             forenkey: false,
             model: true,
@@ -12202,7 +12266,7 @@ function UsuarioModel() {
         field: {
             campo: "senha",
             tipo: "String",
-             requerid: false,
+            requerid: false,
             primaryKey: false,
             forenkey: false,
             model: true,
@@ -12750,7 +12814,7 @@ function ContaModel() {
             xml: true
         }
     });
-     a.push({
+    a.push({
         field: {
             campo: "descricao",
             tipo: "String",
@@ -12762,7 +12826,7 @@ function ContaModel() {
         }
     });
 
-     a.push({
+    a.push({
         field: {
             campo: "numeroConta",
             tipo: "String",
@@ -12774,7 +12838,7 @@ function ContaModel() {
         }
     });
 
-     a.push({
+    a.push({
         field: {
             campo: "saldo",
             tipo: "Double",
@@ -12785,7 +12849,7 @@ function ContaModel() {
             xml: true
         }
     });
-     a.push({
+    a.push({
         field: {
             campo: "dataUltLanc",
             tipo: "Long",
@@ -12796,7 +12860,7 @@ function ContaModel() {
             xml: true
         }
     });
-     a.push({
+    a.push({
         field: {
             campo: "tipoConta",
             tipo: "DoisValores",
@@ -12819,7 +12883,7 @@ function ContaModel() {
         }
     });
 
-return a;
+    return a;
 }
 //================ ContaCorrente
 function ContaCorrenteModel() {
@@ -13245,7 +13309,7 @@ function ProdutoModel() {
             xml: true
         }
     });
-    
+
     a.push({
         field: {
             campo: "cEST",
@@ -13257,8 +13321,8 @@ function ProdutoModel() {
             xml: true
         }
     });
-    
-    
+
+
     a.push({
         field: {
             campo: "excTabIPI",
@@ -13318,7 +13382,7 @@ function ProdutoModel() {
     });
 
 
-a.push({
+    a.push({
         field: {
             campo: "marca",
             tipo: "Marca",
@@ -13409,7 +13473,7 @@ function ProdutoEmpresaModel() {
         }
     });
 
-     a.push({
+    a.push({
         field: {
             campo: "aplicacao",
             tipo: "String",
@@ -13421,7 +13485,7 @@ function ProdutoEmpresaModel() {
         }
     });
 
-     a.push({
+    a.push({
         field: {
             campo: "fracao",
             tipo: "String",
@@ -13433,7 +13497,7 @@ function ProdutoEmpresaModel() {
         }
     });
 
-     a.push({
+    a.push({
         field: {
             campo: "InfaddNFe",
             tipo: "String",
@@ -13445,7 +13509,7 @@ function ProdutoEmpresaModel() {
         }
     });
 
-     a.push({
+    a.push({
         field: {
             campo: "AnotInt",
             tipo: "String",
@@ -13514,7 +13578,7 @@ function ProdutoEmpresaModel() {
             xml: true
         }
     });
-    
+
     a.push({
         field: {
             campo: "margemlucro",
@@ -13549,7 +13613,7 @@ function ProdutoEmpresaModel() {
             xml: true
         }
     });
-        a.push({
+    a.push({
         field: {
             campo: "uniMed",
             tipo: "Integer",
@@ -13615,7 +13679,7 @@ function ProdutoEmpresaModel() {
             xml: true
         }
     });
-return a;
+    return a;
 
 }
 
@@ -13836,8 +13900,8 @@ function IPIModel() {
             model: true,
             xml: true
         }
-    });   
-return a;
+    });
+    return a;
 }
 
 //================ Categoria
@@ -14184,7 +14248,7 @@ function TributacaoModel() {
             xml: true
         }
     });
-   
+
     return a;
 }
 
@@ -14204,7 +14268,7 @@ function CategoriaModel() {
             xml: true
         }
     });
-    
+
     a.push({
         field: {
             campo: "categoria",
@@ -15563,7 +15627,7 @@ function EmailModel() {
 function TituloModel() {
 
 
-    
+
 
     var a = [];
     a.push({
@@ -15600,7 +15664,7 @@ function TituloModel() {
             xml: true
         }
     });
-     a.push({
+    a.push({
         field: {
             campo: "parcela",
             tipo: "Integer",
@@ -16279,7 +16343,7 @@ function NoteModel() {
 
 //================ Orcamento
 function SocioModel() {
-// id,    socioAdm ,cota ,porcentagem ,parentId ,tabelaEnumValue ,emprId ,processId ,create_date ,create_user ,modify_date ,modify_user ,pessoa ,dataProlabore ,valorProlabore 
+    // id,    socioAdm ,cota ,porcentagem ,parentId ,tabelaEnumValue ,emprId ,processId ,create_date ,create_user ,modify_date ,modify_user ,pessoa ,dataProlabore ,valorProlabore 
     var a = [];
     a.push({
         field: {
@@ -16882,7 +16946,7 @@ function ContatoModel() {
             campo: "lido",
             tipo: "Integer",
             requerid: false,
-            defauld : 0,
+            defauld: 0,
             primaryKey: false,
             forenkey: false,
             model: true,
@@ -16959,7 +17023,7 @@ function ContatoModel() {
         field: {
             campo: "motivoValue",
             tipo: "Integer",
-            defauld : 0,
+            defauld: 0,
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -17687,21 +17751,21 @@ dataModel = function() {
         local: "Pessoa"
     })
 
-    
+
     oProjet.push({
         classes: [{
             classe: "processoStatus",
             model: ProcessoStatusModel()
-        },{
+        }, {
             classe: "diasHoras",
             model: DiasHorasModel()
-        },{
+        }, {
             classe: "Especialidade",
             model: EspecialidadeModel()
-        },{
+        }, {
             classe: "Compromisso",
             model: CompromissoModel()
-        },{
+        }, {
             classe: "advogados",
             model: AdvogadosModel()
         }, {
@@ -17729,8 +17793,8 @@ dataModel = function() {
             classe: "DiasHoras",
             model: DiasHorasModel()
         }],
-        doisValor : {"nome" : "processo","data" : DVProcesso()},
-        interfaces: "Advogado", 
+        doisValor: { "nome": "processo", "data": DVProcesso() },
+        interfaces: "Advogado",
         local: "Advocacia"
     })
     oProjet.push({
@@ -17807,11 +17871,11 @@ dataModel = function() {
             classe: "Empresa",
             model: EmpresaModel(),
             dependencias: dependenciaEmpresa()
-        },{
+        }, {
             classe: "Entidade",
             model: EmpresaModel(),
             dependencias: dependenciaEmpresa()
-        },{
+        }, {
             classe: "Transaction",
             model: TransactionModel(),
         }, {
@@ -17826,31 +17890,13 @@ dataModel = function() {
             classe: "Usuario",
             model: UsuarioModel(),
             dependencias: dependenciaUsuario()
-        },{
+        }, {
             classe: "Users",
             model: UsuarioModel(),
             dependencias: dependenciaUsuario()
         }, {
             classe: "User_Roles",
             model: user_rolesModel()
-        }, {
-            classe: "Role",
-            model: rolesModel()
-        }, {
-            classe: "Pagina",
-            model: paginaModel()
-        }, {
-            classe: "Validacao",
-            model: validacaoModel()
-        }, {
-            classe: "Field",
-            model: fieldModel()
-        }, {
-            classe: "Ajuda",
-            model: helpModel()
-        }, {
-            classe: "Menu",
-            model: menuModel()
         }, {
             classe: "Advocacia",
             model: AdvocaciaModel(),
@@ -18173,7 +18219,7 @@ dataModel = function() {
             model: BancoModel()
         }, {
             classe: "ContaCorrente",
-            model: ContaCorrenteModel()//ContaModel
+            model: ContaCorrenteModel() //ContaModel
         }, {
             classe: "Caixa",
             model: CaixaModel()
@@ -18246,7 +18292,7 @@ dataModel = function() {
         }, {
             classe: "Cofins",
             model: COFINSModel()
-        },{
+        }, {
             classe: "ICMSOpInter",
             model: ICMSOpInterModel()
         }, { // ICMSOpInter
@@ -18314,7 +18360,7 @@ dataModel = function() {
         }, {
             classe: "PlanoByEmpresa",
             model: PlanoByEmpresaModel()
-        },{
+        }, {
             classe: "ServicoAndPlano",
             model: ServicoAndPlanoModel()
         }],
@@ -18324,30 +18370,29 @@ dataModel = function() {
 
     oProjet.push({
             classes: [{
-                classe: "NotaFiscal",
-                model: NotaFiscalModel()
-            },{
-                classe: "NotaFiscalSaida",
-                model: NotaFiscalModel()
-            },
-            {
-                classe: "NotaFiscalEntrada",
-                model: NotaFiscalModel()
-            }, {
-                classe: "Orcamento",
-                model: OrcamentoModel()
-            }, {
-                classe: "OrdemServico",
-                model: OrdemServicoModel()
-            }
-            , {
-                classe: "ConhecimentoTransporte",
-                model: ConhecimentoTransporteModel()
-            }
-            , {
-                classe: "NotaFiscalItens",
-                model: NotaFiscalItensModel()
-            }],
+                    classe: "NotaFiscal",
+                    model: NotaFiscalModel()
+                }, {
+                    classe: "NotaFiscalSaida",
+                    model: NotaFiscalModel()
+                },
+                {
+                    classe: "NotaFiscalEntrada",
+                    model: NotaFiscalModel()
+                }, {
+                    classe: "Orcamento",
+                    model: OrcamentoModel()
+                }, {
+                    classe: "OrdemServico",
+                    model: OrdemServicoModel()
+                }, {
+                    classe: "ConhecimentoTransporte",
+                    model: ConhecimentoTransporteModel()
+                }, {
+                    classe: "NotaFiscalItens",
+                    model: NotaFiscalItensModel()
+                }
+            ],
             interfaces: "Vendas",
             local: "Vendas"
         })
@@ -18542,7 +18587,7 @@ dataModel = function() {
         classes: [{
             classe: "DoisValor",
             model: DoisValorModel()
-        },{
+        }, {
             classe: "DoisValorType",
             model: DoisValorTypeModel()
         }],
@@ -18550,7 +18595,7 @@ dataModel = function() {
         local: "DoisValor"
     })
 
-     oProjet.push({
+    oProjet.push({
         classes: [{
             classe: "Configuracao",
             model: ConfiguracaoModel(),
@@ -18594,8 +18639,7 @@ dataModel = function() {
         }, {
             classe: "ConfBlueSoft",
             model: ConfigBlueSoftModel()
-        }
-        ],
+        }],
         interfaces: "Configuracao",
         local: "Configuracao"
     })
@@ -18620,14 +18664,32 @@ dataModel = function() {
 
     oProjet.push({
         classes: [{
-            classe: "Classes",
+            classe: "Tab",
             model: ClasseModel()
         }, {
-            classe: "Interface",
+            classe: "Instancia",
             model: InterfaceModel()
         }, {
             classe: "Field",
             model: FieldModel()
+        }, {
+            classe: "Role",
+            model: rolesModel()
+        }, {
+            classe: "Pagina",
+            model: paginaModel()
+        }, {
+            classe: "Validacao",
+            model: validacaoModel()
+        }, {
+            classe: "Field",
+            model: fieldModel()
+        }, {
+            classe: "Ajuda",
+            model: helpModel()
+        }, {
+            classe: "Menu",
+            model: menuModel()
         }],
         interfaces: "Dicionario",
         local: "Dicionario"
