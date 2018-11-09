@@ -4340,437 +4340,6 @@ function rolesModel() {
     return a;
 }
 
-//Boleto    
-function paginaModel() {
-    a = [];
-    a.push({
-        field: {
-            campo: "id",
-            tipo: "Integer",
-            requerid: true,
-            primaryKey: true,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-
-    a.push({
-        field: {
-            campo: "pagina",
-            tipo: "String",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-
-    a.push({
-        field: {
-            campo: "status",
-            default: 0,
-            tipo: "Integer",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-
-    a.push({
-        field: {
-            campo: "menu",
-            default: 0,
-            tipo: "Menu",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-
-    a.push({
-        field: {
-            campo: "help",
-            tipo: "Help",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-
-    a.push({
-        field: {
-            campo: "filds",
-            tipo: "Field",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-
-    return a;
-}
-
-//Boleto    
-function menuModel() {
-    a = [];
-    a.push({
-        field: {
-            campo: "id",
-            tipo: "Integer",
-            requerid: true,
-            primaryKey: true,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-
-    a.push({
-        field: {
-            campo: "nome",
-            default: 0,
-            tipo: "String",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-
-    a.push({
-        field: {
-            campo: "label",
-            default: 0,
-            tipo: "String",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-
-    a.push({
-        field: {
-            campo: "status",
-            default: 0,
-            tipo: "Integer",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-
-    a.push({
-        field: {
-            campo: "nivel",
-            default: 0,
-            tipo: "Integer",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-
-    a.push({
-        field: {
-            campo: "permissao",
-            default: 0,
-            tipo: "Role",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-
-
-    a.push({
-        field: {
-            campo: "help",
-            tipo: "Help",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-    return a;
-}
-
-//Boleto    
-function helpModel() {
-    a = [];
-    a.push({
-        field: {
-            campo: "id",
-            tipo: "Integer",
-            requerid: true,
-            primaryKey: true,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-
-    a.push({
-        field: {
-            campo: "titulo",
-            default: 0,
-            tipo: "String",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-
-    a.push({
-        field: {
-            campo: "status",
-            default: 0,
-            tipo: "Integer",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-
-    a.push({
-        field: {
-            campo: "texto",
-            tipo: "String",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-    return a;
-}
-
-//Boleto    
-function fieldModel() {
-
-
-
-    a = [];
-    a.push({
-        field: {
-            campo: "id",
-            tipo: "Integer",
-            requerid: true,
-            primaryKey: true,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-
-    a.push({
-        field: {
-            campo: "nome",
-            default: 0,
-            tipo: "String",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-
-    a.push({
-        field: {
-            campo: "status",
-            default: 0,
-            tipo: "Integer",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-
-    a.push({
-        field: {
-            campo: "obrigatorio",
-            tipo: "Integer",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-
-    a.push({
-        field: {
-            campo: "tipo",
-            default: 0,
-            tipo: "Integer",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-
-    a.push({
-        field: {
-            campo: "label",
-            tipo: "String",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-
-    a.push({
-        field: {
-            campo: "tootip",
-            tipo: "String",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-
-    a.push({
-        field: {
-            campo: "help",
-            tipo: "Help",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-
-    a.push({
-        field: {
-            campo: "validacao",
-            tipo: "List<Validacao>",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-
-    a.push({
-        field: {
-            campo: "role",
-            tipo: "List<Role>",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-    a.push({
-        field: {
-            campo: "campoBanco",
-            tipo: "String",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-
-    a.push({
-        field: {
-            campo: "tabelaBanco",
-            tipo: "String",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-
-
-
-
-    return a;
-}
-
-//Boleto    
-function validacaoModel() {
-    a = [];
-    a.push({
-        field: {
-            campo: "id",
-            tipo: "Integer",
-            requerid: true,
-            primaryKey: true,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-    a.push({
-        field: {
-            campo: "Error",
-            tipo: "String",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-
-    a.push({
-        field: {
-            campo: "tipo",
-            default: 0,
-            tipo: "Integer",
-            requerid: false,
-            primaryKey: false,
-            forenkey: false,
-            model: true,
-            xml: true
-        }
-    });
-
-    return a;
-}
-
-
 //Boleto	
 function BoletoModel() {
 
@@ -9672,6 +9241,725 @@ function ClasseModel() {
     return a;
 }
 
+
+//=================================
+
+function GroupMenuModel() {
+
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            createSeq: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "nome",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "pagina_id",
+            tipo: "List<CategoriaMenu>",
+            requerid: false,
+            tipoLigacao: { tipo: "OneToMany", ligacao: "groupMenu_id" },
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    return a;
+}
+
+
+//================ Convenio
+function CategoriaMenuModel() {
+
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            createSeq: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "nome",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "categoriaMenu_id",
+            tipo: "List<Menu>",
+            requerid: false,
+            tipoLigacao: { tipo: "OneToMany", ligacao: "categoriaMenu_id" },
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    return a;
+}
+
+
+//Boleto    
+function MenuModel() {
+    a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            createSeq: true,
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "nome",
+            default: 0,
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "label",
+            default: 0,
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "status",
+            default: 0,
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "nivel",
+            default: 0,
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "permissao",
+            default: 0,
+            tipo: "Role",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "help",
+            tipo: "Help",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "pagina_id",
+            tipo: "Pagina",
+            requerid: false,
+            tipoLigacao: { tipo: "OneToOne", ligacao: "pagina_id" },
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    return a;
+}
+
+//Boleto    
+//tipoLigacao: { tipo: "OneToMany", ligacao: "fiend_id" },
+function PaginaModel() {
+    a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            createSeq: true,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "pagina",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "status",
+            default: 0,
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "help",
+            tipo: "Help",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "tab_id",
+            tipo: "Tab",
+            requerid: false,
+            tipoLigacao: { tipo: "OneToMany", ligacao: "tab_id" },
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "help_id",
+            tipo: "Help",
+            requerid: false,
+            tipoLigacao: { tipo: "OneToOne", ligacao: "help_id" },
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    return a;
+}
+
+//Boleto    
+function HelpModel() {
+    a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            createSeq: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "titulo",
+            default: 0,
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "status",
+            default: 0,
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "texto",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    return a;
+}
+
+
+
+
+function TabModel() {
+
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            createSeq: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "nome",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "label",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "order",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "fields",
+            tipo: "List<Field>",
+            tipoLigacao: { tipo: "OneToMany", ligacao: "fiend_id" },
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    return a;
+}
+
+//================ Convenio
+
+// requerid: false,
+// primaryKey: false,
+// forenkey: true,
+// tipoLigacao: { tipo: "OneToOne", ligacao: "estado_id" },
+//================ Convenio
+function EntidadeModel() {
+
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            createSeq: true,
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "nome",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "descricao",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "fields",
+            tipo: "List<Field>",
+            tipoLigacao: { tipo: "OneToMany", ligacao: "fiend_id" },
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    return a;
+}
+//Boleto    
+function FieldModel() {
+
+    a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            createSeq: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "nome",
+            default: 0,
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "status",
+            default: 0,
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "obrigatorio",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "tipo",
+            default: 0,
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "label",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "tootip",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "ordem",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "help",
+            tipo: "Help",
+            tipoLigacao: { tipo: "OneToOne", ligacao: "help_id" },
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "validacao",
+            tipo: "List<Validacao>",
+            tipoLigacao: { tipo: "OneToMany", ligacao: "validacao_id" },
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "dominio",
+            tipo: "List<Dominio>",
+            tipoLigacao: { tipo: "OneToMany", ligacao: "dominio_id" },
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "role",
+            tipo: "List<Role>",
+            tipoLigacao: { tipo: "OneToMany", ligacao: "role_id" },
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    return a;
+}
+
+//Boleto    
+function ValidacaoModel() {
+    a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            primaryKey: true,
+            forenkey: false,
+            createSeq: true,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "Error",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "validacaoJS",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    a.push({
+        field: {
+            campo: "tipo",
+            default: 0,
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
+    return a;
+}
+
+function DominioModel() {
+
+    var a = [];
+    a.push({
+        field: {
+            campo: "id",
+            tipo: "Integer",
+            requerid: true,
+            createSeq: true,
+            primaryKey: true,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "nome",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "valor",
+            tipo: "String",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+    return a;
+}
+//tipoLigacao: { tipo: "OneToMany", ligacao: "fiend_id" },
 //================ Convenio
 function InterfaceModel() {
 
@@ -18664,32 +18952,35 @@ dataModel = function() {
 
     oProjet.push({
         classes: [{
-            classe: "Tab",
-            model: ClasseModel()
+            classe: "GroupMenu",
+            model: GroupMenuModel()
         }, {
-            classe: "Instancia",
-            model: InterfaceModel()
+            classe: "CategoriaMenu",
+            model: CategoriaMenuModel()
+        }, {
+            classe: "Menu",
+            model: MenuModel()
+        }, {
+            classe: "help",
+            model: HelpModel()
+        }, {
+            classe: "Pagina",
+            model: PaginaModel()
+        }, {
+            classe: "Tab",
+            model: TabModel()
+        }, {
+            classe: "Entidade",
+            model: EntidadeModel()
         }, {
             classe: "Field",
             model: FieldModel()
         }, {
-            classe: "Role",
-            model: rolesModel()
-        }, {
-            classe: "Pagina",
-            model: paginaModel()
-        }, {
             classe: "Validacao",
-            model: validacaoModel()
+            model: ValidacaoModel()
         }, {
-            classe: "Field",
-            model: fieldModel()
-        }, {
-            classe: "Ajuda",
-            model: helpModel()
-        }, {
-            classe: "Menu",
-            model: menuModel()
+            classe: "Dominio",
+            model: DominioModel()
         }],
         interfaces: "Dicionario",
         local: "Dicionario"

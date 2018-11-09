@@ -94,10 +94,12 @@ model = function(oField, name) {
                     if (oField[i].field.primaryKey) {
                         text = text + "    @Id\n";
                         text = text + '    @Column(name = "' + name.toUpperCase() + '_' + oField[i].field.campo.toUpperCase() + '")\n';
-                        if (oField[i].field.createSeq) {
-                            text = text + '    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "' + name.toLowerCase() + '_seq")\n';
-                            text = text + '    @SequenceGenerator(name = "' + name.toLowerCase() + '_seq", sequenceName = "' + name.toLowerCase() + '_seq", allocationSize = 1)\n';
-                        }
+                    } else {
+                        text = text + '    @Column(name = "' + oField[i].field.campo.toUpperCase() + '")\n';
+                    }
+                    if (oField[i].field.createSeq) {
+                        text = text + '    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "' + name.toLowerCase() + '_seq")\n';
+                        text = text + '    @SequenceGenerator(name = "' + name.toLowerCase() + '_seq", sequenceName = "' + name.toLowerCase() + '_seq", allocationSize = 1)\n';
                     }
                     if (oField[i].field.tipoLigacao && oField[i].field.tipoLigacao.tipo.toLowerCase() == "onetoone") {
                         text = text + '    @OneToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)\n'
@@ -105,9 +107,9 @@ model = function(oField, name) {
 
                     } else if (oField[i].field.tipoLigacao && oField[i].field.tipoLigacao.tipo.toLowerCase() == "onetomany") {
                         text = text + '    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)\n'
-                        text = text + '    @JoinColumn(name="chat_id", referencedColumnName="chat_id", nullable = false, insertable = true, updatable = true)\n'
+                        text = text + '    @JoinColumn(name="' + oField[i].field.tipoLigacao.ligacao + '", referencedColumnName="' + oField[i].field.tipoLigacao.ligacao + '", nullable = false, insertable = true, updatable = true)\n'
                         text = text + '    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})\n'
-
+                            //todo buxa
                     } else if (oField[i].field.tipoLigacao && oField[i].field.tipoLigacao.tipo.toLowerCase() == "manytomany") {
                         text = text + '    @ManyToMany(cascade = CascadeType.ALL)\n'
                         text = text + '    @JoinTable(name = "empresa_quadra", joinColumns = @JoinColumn(name="empresa_id"), inverseJoinColumns = @JoinColumn(name = "quadra_id"))\n'
@@ -115,11 +117,16 @@ model = function(oField, name) {
                     text = text + '    private ' + oField[i].field.tipo + ' ' + titleize2(oField[i].field.campo) + ';\n';
                     text = text + "\n";
                 } else {
-                    if (oField[i].field.tipoLigacao && oField[i].field.tipoLigacao.tipo.toLowerCase() == "manytomany") {
+                    if (oField[i].field.tipoLigacao && oField[i].field.tipoLigacao.tipo.toLowerCase() == "onetomany") {
+                        text = text + '    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)\n'
+                        text = text + '    @JoinColumn(name="chat_id", referencedColumnName="chat_id", nullable = false, insertable = true, updatable = true)\n'
+                        text = text + '    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})\n'
+
+                    } else {
                         text = text + '    @ManyToMany(cascade = CascadeType.ALL)\n'
                         text = text + '    @JoinTable(name = "empresa_quadra", joinColumns = @JoinColumn(name="empresa_id"), inverseJoinColumns = @JoinColumn(name = "quadra_id"))\n'
                     }
-                    text = text + '    private List<' + oField[i].field.tipo + '> ' + titleize2(oField[i].field.campo) + ';\n';
+                    text = text + '    private ' + oField[i].field.tipo + ' ' + titleize2(oField[i].field.campo) + ';\n';
                     text = text + "\n";
                 }
             }
@@ -170,7 +177,7 @@ model = function(oField, name) {
                     text = text + "     *\n";
                     text = text + "     * @return the " + oField[i].field.campo.toLowerCase() + "\n";
                     text = text + "     */\n";
-                    text = text + "    public List<" + titleize(oField[i].field.tipo) + "> get" + titleize(oField[i].field.campo) + "()\n";
+                    text = text + "    public " + titleize(oField[i].field.tipo) + " get" + titleize(oField[i].field.campo) + "()\n";
                     text = text + "    {\n";
                     text = text + "        return " + titleize2(oField[i].field.campo) + ";\n";
                     text = text + "    }\n";
@@ -180,7 +187,7 @@ model = function(oField, name) {
                     text = text + "     *\n";
                     text = text + "* @param id the " + oField[i].field.campo.toLowerCase() + " to set\n";
                     text = text + " */\n";
-                    text = text + "public void set" + titleize(oField[i].field.campo) + "(List<" + titleize(oField[i].field.tipo) + "> " + oField[i].field.campo.toLowerCase() + ")\n";
+                    text = text + "public void set" + titleize(oField[i].field.campo) + "(" + titleize(oField[i].field.tipo) + " " + oField[i].field.campo.toLowerCase() + ")\n";
                     text = text + "{\n";
                     text = text + "        this." + titleize2(oField[i].field.campo) + " = " + oField[i].field.campo.toLowerCase() + ";\n";
                     text = text + "    }\n";
