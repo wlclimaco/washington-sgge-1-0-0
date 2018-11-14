@@ -18961,7 +18961,7 @@ dataModel = function() {
             classe: "Menu",
             model: MenuModel()
         }, {
-            classe: "help",
+            classe: "Help",
             model: HelpModel()
         }, {
             classe: "Pagina",

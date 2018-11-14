@@ -25,8 +25,7 @@ implXML = function(oField, name) {
                 if (oField[i].field.tipo.indexOf('List') > -1) {
                     text = text + '<collection property="' + oField[i].field.campo + '" column="id" select="DocumentoMap.fetchDocumentoByEmpresa"/>\n';
                 } else {
-                    if ((oField[i].field.tipo.toLowerCase() == 'boolean') ||(oField[i].field.tipo.toLowerCase() == 'integer') || (oField[i].field.tipo.toLowerCase() == 'double')||(oField[i].field.tipo.toLowerCase() == 'string')||(oField[i].field.tipo.toLowerCase() == 'long')||(oField[i].field.tipo.toLowerCase() == 'float')) 
-                    {
+                    if ((oField[i].field.tipo.toLowerCase() == 'boolean') || (oField[i].field.tipo.toLowerCase() == 'integer') || (oField[i].field.tipo.toLowerCase() == 'double') || (oField[i].field.tipo.toLowerCase() == 'string') || (oField[i].field.tipo.toLowerCase() == 'long') || (oField[i].field.tipo.toLowerCase() == 'float')) {
                         text = text + '    <result property="' + oField[i].field.campo + '" column="' + oField[i].field.campo + '"/>\n';
                     } else {
                         text = text + '    <collection property="' + oField[i].field.campo + '" column="' + oField[i].field.campo + '" select="RegimeMap.fetchRegimeById"/>\n';
@@ -78,8 +77,7 @@ implXML = function(oField, name) {
         if (oField[i].field.xml == true) {
             if (oField[i].field.tipo !== undefined) {
                 if ((oField[i].field.tipo.indexOf('List') == -1) && (oField[i].field.campo !== 'id')) {
-                    if ((oField[i].field.tipo.toLowerCase() == 'boolean') ||(oField[i].field.tipo.toLowerCase() == 'integer') || (oField[i].field.tipo.toLowerCase() == 'double')||(oField[i].field.tipo.toLowerCase() == 'string')||(oField[i].field.tipo.toLowerCase() == 'data')||(oField[i].field.tipo.toLowerCase() == 'float')) 
-                    {
+                    if ((oField[i].field.tipo.toLowerCase() == 'boolean') || (oField[i].field.tipo.toLowerCase() == 'integer') || (oField[i].field.tipo.toLowerCase() == 'double') || (oField[i].field.tipo.toLowerCase() == 'string') || (oField[i].field.tipo.toLowerCase() == 'data') || (oField[i].field.tipo.toLowerCase() == 'float')) {
                         text = text + '#{' + oField[i].field.campo + '},\n';
                     } else {
                         text = text + '#{' + oField[i].field.campo + '.id},\n';
@@ -117,7 +115,7 @@ implXML = function(oField, name) {
     text = text + ' <select id="fetchAll' + name + 'sRequest" parameterType="PagedInquiryRequest" resultMap="' + name + 'Result">\n';
     text = text + '\n';
     text = text + '     SELECT id,<include refid="all' + name + 'Columns" />\n';
-    text = text + '           FROM ' + name.toLowerCase() +' \n';
+    text = text + '           FROM ' + name.toLowerCase() + ' \n';
     text = text + '           where 0 = 0\n';
     text = text + '           <if test="permissaoTypeEnumValue == 1">\n';
     text = text + '               and id IS NOT NULL\n';
@@ -158,8 +156,7 @@ implXML = function(oField, name) {
         if (oField[i].field.xml == true) {
             if (oField[i].field.tipo !== undefined) {
                 if ((oField[i].field.tipo.indexOf('List') == -1) && (oField[i].field.campo !== 'id')) {
-                    if ((oField[i].field.tipo.toLowerCase() == 'boolean') ||(oField[i].field.tipo.toLowerCase() == 'integer') || (oField[i].field.tipo.toLowerCase() == 'double')||(oField[i].field.tipo.toLowerCase() == 'string')||(oField[i].field.tipo.toLowerCase() == 'data')||(oField[i].field.tipo.toLowerCase() == 'float')) 
-                    {
+                    if ((oField[i].field.tipo.toLowerCase() == 'boolean') || (oField[i].field.tipo.toLowerCase() == 'integer') || (oField[i].field.tipo.toLowerCase() == 'double') || (oField[i].field.tipo.toLowerCase() == 'string') || (oField[i].field.tipo.toLowerCase() == 'data') || (oField[i].field.tipo.toLowerCase() == 'float')) {
                         text = text + '<if test="' + oField[i].field.campo + '!= null">' + oField[i].field.campo + ' = #{' + oField[i].field.campo + '},</if>\n';
                     } else {
                         text = text + '<if test="' + oField[i].field.campo + '!= null">' + oField[i].field.campo + ' = #{' + oField[i].field.campo + '.id},</if>\n';
@@ -190,5 +187,102 @@ implXML = function(oField, name) {
     text = text + '\n';
     text = text + "\n";
 
+    return text;
+}
+
+
+Repositorio = function(teste, bar, local) {
+
+    var text = '/** create by system gera-java version 1.0.0 ' + dataAtualFormatada() + '*/\n';
+    text = text + '\n';
+    text = text + '\n';
+    text = text + 'package com.nouhoun.springboot.jwt.integration.repository;\n';
+    text = text + '\n';
+    text = text + 'import org.springframework.data.jpa.repository.JpaRepository;\n';
+    text = text + 'import org.springframework.stereotype.Repository;\n';
+    text = text + '\n';
+    text = text + 'import com.nouhoun.springboot.jwt.integration.domain.' + bar + ';\n';
+    text = text + '\n';
+    text = text + '@Repository("' + bar + 'Repository")\n';
+    text = text + 'public interface ' + bar + 'Repository extends JpaRepository<' + bar + ', Long> {\n';
+    text = text + '\n';
+    text = text + '\n';
+    text = text + '\n';
+    text = text + '}\n';
+    return text;
+}
+
+Servico = function(teste, name, local) {
+
+    var text = '/** create by system gera-java version 1.0.0 ' + dataAtualFormatada() + '*/\n';
+    text = text + ' package com.nouhoun.springboot.jwt.integration.service;\n';
+    text = text + '\n';
+    text = text + 'import java.util.List;\n';
+    text = text + 'import com.nouhoun.springboot.jwt.integration.domain.security.PaginationFilter;\n';
+    text = text + '\n';
+    text = text + 'import com.nouhoun.springboot.jwt.integration.domain.' + name + ';\n';
+    text = text + '\n';
+    text = text + '\n';
+    text = text + '\n';
+    text = text + 'public interface ' + name + 'Service {\n';
+    text = text + '\n';
+    text = text + '\n';
+    text = text + 'public ' + name + ' find' + name + 'ById(Integer id);\n';
+    text = text + 'public ' + name + ' save' + name + '(' + name + ' ' + name.toLowerCase() + ');\n';
+    text = text + 'public ' + name + ' update' + name + '(' + name + ' ' + name.toLowerCase() + ');\n';
+    text = text + 'public List<' + name + '> find' + name + 'All(PaginationFilter filter);\n';
+    text = text + '\n';
+    text = text + '}\n';
+    return text;
+}
+
+ServicoImp = function(teste, name, local) {
+
+    var text = '/** create by system gera-java version 1.0.0 ' + dataAtualFormatada() + '*/\n';
+    text = text + '\n';
+    text = text + '\n';
+    text = text + 'package com.nouhoun.springboot.jwt.integration.service.impl;\n';
+    text = text + 'import com.nouhoun.springboot.jwt.integration.domain.security.PaginationFilter;\n';
+    text = text + '\n';
+    text = text + 'import java.util.Date;\n';
+    text = text + 'import java.util.List;\n';
+    text = text + '\n';
+    text = text + 'import javax.servlet.http.HttpServletRequest;\n';
+    text = text + '\n';
+    text = text + 'import org.springframework.beans.factory.annotation.Autowired;\n';
+    text = text + 'import org.springframework.stereotype.Service;\n';
+    text = text + '\n';
+    text = text + 'import com.nouhoun.springboot.jwt.integration.repository.' + name + 'Repository;\n';
+    text = text + 'import com.nouhoun.springboot.jwt.integration.domain.' + name + ';\n';
+    text = text + 'import com.nouhoun.springboot.jwt.integration.service.' + name + 'Service;\n';
+    text = text + '\n';
+    text = text + 'public class ' + name + 'ServiceImpl implements ' + name + 'Service {\n';
+    text = text + '\n';
+    text = text + '     @Autowired\n';
+    text = text + '     private ' + name + 'Repository ' + name.toLowerCase() + 'Repository;\n';
+    text = text + '\n';
+    text = text + '     @Override\n';
+    text = text + '     public ' + name + ' update' + name + '(' + name + ' ' + name.toLowerCase() + ') {\n';
+    text = text + '          return ' + name.toLowerCase() + 'Repository.save(' + name.toLowerCase() + ');\n';
+    text = text + '     }\n';
+    text = text + '     @Override\n';
+    text = text + '     public ' + name + ' save' + name + '(' + name + ' ' + name.toLowerCase() + ') {\n';
+    text = text + '         return ' + name.toLowerCase() + 'Repository.save(' + name.toLowerCase() + ');\n';
+    text = text + '     }\n';
+    text = text + '\n';
+    text = text + '\n';
+    text = text + '     @Override\n';
+    text = text + '     public ' + name + ' find' + name + 'ById(Integer id) {\n';
+    text = text + '         return ' + name.toLowerCase() + 'Repository.find' + name + 'ById(id);\n';
+    text = text + '     }\n';
+    text = text + '\n';
+    text = text + '      @Override\n';
+    text = text + '      public List < ' + name + ' > find' + name + 'All(PaginationFilter filter) {\n';
+    text = text + '          return (List <' + name + '> ) ' + name.toLowerCase() + 'Repository.find' + name + 'All(filter);\n';
+    text = text + '      }\n';
+    text = text + '\n';
+    text = text + '\n';
+    text = text + '\n';
+    text = text + '}\n';
     return text;
 }
