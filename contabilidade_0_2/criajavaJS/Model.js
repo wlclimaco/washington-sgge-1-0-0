@@ -57,7 +57,7 @@ function titleize2(text) {
 
 
 model = function(oField, name) {
-
+    debugger
     var text = '/** create by system gera-java version 1.0.0 ' + dataAtualFormatada() + '*/\n';
     text = text + "package com.nouhoun.springboot.jwt.integration.domain;\n";
     text = text + "\n";

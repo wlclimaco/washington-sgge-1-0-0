@@ -205,7 +205,7 @@
 									<input id="Repository" type="checkbox" /> Repository
 								</label>
                                                     <label>
-									<input id="XML" type="checkbox" /> Repository Impl
+									<input id="RepositorioImpl" type="checkbox" /> Repository Impl
 								</label>
 
                                                 </div>
@@ -953,12 +953,18 @@
                             }
                         }
 
+                        if ($('#RepositorioImpl').prop('checked')) {
+                            debugger
+                            for (var x = 0; x < oProjet[i].classes.length; x++) {
+                                $("div#tabs").addTab(oProjet[i].classes[x].classe, RepositorioImpl(oProjet[i].classes[x].model, oProjet[i].classes[x].classe));
+                            }
+                        }
+
                         if ($('#Servico').prop('checked')) {
                             for (var x = 0; x < oProjet[i].classes.length; x++) {
                                 $("div#tabs").addTab(oProjet[i].classes[x].classe, Servico(oProjet[i].classes[x].model, oProjet[i].classes[x].classe));
                             }
                         }
-
                         if ($('#ServicoImp').prop('checked')) {
                             for (var x = 0; x < oProjet[i].classes.length; x++) {
                                 $("div#tabs").addTab(oProjet[i].classes[x].classe, ServicoImp(oProjet[i].classes[x].model, oProjet[i].classes[x].classe));
@@ -979,7 +985,7 @@
                             $("div#tabs").addTab("Junit", tests);
                             $("div#tabs").addTab("Models", testss);
                         }
-                        if ($('#Model').prop('checked')) {
+                        if ($('#modelBoot').prop('checked')) {
 
                             for (var x = 0; x < oProjet[i].classes.length; x++) {
                                 $("div#tabs").addTab(oProjet[i].classes[x].classe, model(oProjet[i].classes[x].model, oProjet[i].classes[x].classe));
@@ -1030,7 +1036,7 @@
                         }
 
                         if ($('#Controller-java').prop('checked')) {
-                            $("div#tabs").addTab(oProjet[i].interfaces, Controller(oProjet[i].classes, oProjet[i].interfaces));
+                            $("div#tabs").addTab(oProjet[i].interfaces, ControllerSpringBoot(oProjet[i].classes, oProjet[i].interfaces));
                         }
                         if ($('#ViewTable1').prop('checked')) {
                             $("div#tabs").addTab(oProjet[i].interfaces, modelTable1(oProjet[i].classes, oProjet[i].interfaces));

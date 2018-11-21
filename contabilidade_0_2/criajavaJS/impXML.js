@@ -191,6 +191,44 @@ implXML = function(oField, name) {
 }
 
 
+RepositorioImpl = function(teste, bar, local) {
+    debugger
+    var text = '/** create by system gera-java version 1.0.0 ' + dataAtualFormatada() + '*/\n';
+    text = text + '\n';
+    text = text + '\n';
+    text = text + 'package com.nouhoun.springboot.jwt.integration.repository.impl.dicionario;\n';
+    text = text + '\n';
+    text = text + 'import java.util.Collection;\n';
+    text = text + 'import java.util.List;\n';
+    text = text + '\n';
+    text = text + 'import javax.annotation.PostConstruct;\n';
+    text = text + '\n';
+    text = text + 'import org.hibernate.criterion.Order;\n';
+    text = text + 'import org.slf4j.Logger;\n';
+    text = text + 'import org.slf4j.LoggerFactory;\n';
+    text = text + 'import org.springframework.stereotype.Repository;\n';
+    text = text + '\n';
+    text = text + 'import com.nouhoun.springboot.jwt.integration.data.BaseHibernateJPARepository;\n';
+    text = text + 'import com.nouhoun.springboot.jwt.integration.domain.Category;\n';
+    text = text + 'import com.nouhoun.springboot.jwt.integration.repository.CategoryRepository;\n';
+    text = text + '\n';
+    text = text + '/**\n';
+    text = text + ' * Created by Y.Kamesh on 8/2/2015.\n';
+    text = text + ' */\n';
+    text = text + '@Repository\n';
+    text = text + 'public class ' + bar + 'RepositoryImpl extends BaseHibernateJPARepository<' + bar + ', Long> implements ' + bar + 'Repository {\n';
+    text = text + '    private static Logger LOG = LoggerFactory.getLogger(' + bar + 'RepositoryImpl.class);\n';
+    text = text + '\n';
+    text = text + '    @PostConstruct\n';
+    text = text + '    public void setUp() {\n';
+    text = text + '        LOG.info("' + bar + 'Repository created..!");\n';
+    text = text + '    }\n';
+    text = text + '}\n';
+
+    return text;
+}
+
+
 Repositorio = function(teste, bar, local) {
 
     var text = '/** create by system gera-java version 1.0.0 ' + dataAtualFormatada() + '*/\n';
