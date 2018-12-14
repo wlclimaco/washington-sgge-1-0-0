@@ -122,9 +122,11 @@ model = function(oField, name) {
                         text = text + '    @JoinColumn(name="' + oField[i].field.tipoLigacao.ligacao + '", referencedColumnName="' + oField[i].field.tipoLigacao.ligacao + '", nullable = false, insertable = true, updatable = true)\n'
                         text = text + '    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})\n'
 
-                    } else {
+                    } else if (oField[i].field.tipoLigacao && oField[i].field.tipoLigacao.ligacao) {
                         text = text + '    @ManyToMany(cascade = CascadeType.ALL)\n'
-                        text = text + '    @JoinTable(name = "' + oField[i].field.tipoLigacao.ligacao + '", joinColumns = @JoinColumn(name="empresa_id"), inverseJoinColumns = @JoinColumn(name = "quadra_id"))\n'
+                        text = text + '    @JoinTable(name = "' + oField[i].field.tipoLigacao ? oField[i].field.tipoLigacao.ligacao : 'ERROR' + '", joinColumns = @JoinColumn(name="empresa_id"), inverseJoinColumns = @JoinColumn(name = "quadra_id"))\n'
+                    } else {
+                        text = text + '//ERROR ANALIZAR CODIGO\n';
                     }
                     text = text + '    private ' + oField[i].field.tipo + ' ' + titleize2(oField[i].field.campo) + ';\n';
                     text = text + "\n";

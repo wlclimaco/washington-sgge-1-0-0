@@ -15504,6 +15504,7 @@ function ServicoModel() {
             primaryKey: true,
             forenkey: false,
             model: true,
+            createSeq: true,
             xml: true
         }
     });
@@ -15533,6 +15534,7 @@ function ServicoModel() {
         field: {
             campo: "preco",
             tipo: "List<Preco>",
+            tipoLigacao: { tipo: "ManyToMany", ligacao: "preco_id" },
             List: PrecoModel(),
             requerid: false,
             primaryKey: false,
@@ -15556,6 +15558,18 @@ function PlanoBySiteModel() {
             primaryKey: true,
             forenkey: false,
             model: true,
+            xml: true,
+            createSeq: true
+        }
+    });
+    a.push({
+        field: {
+            campo: "plano_id",
+            tipo: "Integer",
+            requerid: false,
+            primaryKey: false,
+            forenkey: false,
+            model: true,
             xml: true
         }
     });
@@ -15563,6 +15577,7 @@ function PlanoBySiteModel() {
         field: {
             campo: "plano",
             tipo: "Plano",
+            tipoLigacao: { tipo: "OneToOne", ligacao: "plano_id" },
             List: "Plano",
             requerid: false,
             primaryKey: false,
@@ -15585,6 +15600,7 @@ function PlanoByServicoModel() {
             requerid: true,
             primaryKey: true,
             forenkey: false,
+            createSeq: true,
             model: true,
             xml: true
         }
@@ -15618,6 +15634,7 @@ function PlanoModel() {
             primaryKey: true,
             forenkey: false,
             model: true,
+            createSeq: true,
             xml: true
         }
     });
@@ -15692,6 +15709,7 @@ function PlanoModel() {
             campo: "precoList",
             tipo: "List<Preco>",
             List: "Preco",
+            tipoLigacao: { tipo: "OneToMany", ligacao: "plano_id" },
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -15704,6 +15722,7 @@ function PlanoModel() {
             campo: "servicoList",
             tipo: "List<PlanoByServico>",
             List: "PlanoByServico",
+            tipoLigacao: { tipo: "OneToMany", ligacao: "plano_id" },
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -16811,6 +16830,7 @@ function OrdemServicoModel() {
             requerid: true,
             primaryKey: true,
             forenkey: false,
+            createSeq: true,
             model: true,
             xml: true
         }
@@ -16875,6 +16895,7 @@ function OrdemServicoModel() {
             campo: "OrdemServicoItensList",
             tipo: "List<OrdemServicoItens>",
             List: OrdemServicoItensModel(),
+            tipoLigacao: { tipo: "OneToMany", ligacao: "ordemServico_id" },
             requerid: false,
             primaryKey: false,
             forenkey: false,
@@ -16899,6 +16920,7 @@ function OrdemServicoItensModel() {
             primaryKey: true,
             forenkey: false,
             model: true,
+            createSeq: true,
             xml: true
         }
     });
@@ -17226,6 +17248,7 @@ function ContatoModel() {
             primaryKey: true,
             forenkey: false,
             model: true,
+            createSeq: true,
             xml: true
         }
     });
@@ -17320,6 +17343,19 @@ function ContatoModel() {
         }
     });
 
+    a.push({
+        field: {
+            campo: "contatosList",
+            tipo: "List<ContatoItens>",
+            requerid: false,
+            tipoLigacao: { tipo: "OneToMany", ligacao: "contato_id" },
+            primaryKey: false,
+            forenkey: false,
+            model: true,
+            xml: true
+        }
+    });
+
     return a;
 }
 
@@ -17334,6 +17370,7 @@ function ContatoItensModel() {
             requerid: true,
             primaryKey: true,
             forenkey: false,
+            createSeq: true,
             model: true,
             xml: true
         }
@@ -18538,85 +18575,88 @@ dataModel = function() {
     })
 
     oProjet.push({
-        classes: [{
-            classe: "ProdutoEmpresa",
-            model: ProdutoEmpresaModel(),
-            dependencias: dependenciaProdutoParent()
-        }, {
-            classe: "Produto",
-            model: ProdutoModel(),
-            dependencias: dependenciaProduto()
-        }, {
-            classe: "Cfop",
-            model: CfopModel()
-        }, {
-            classe: "Marca",
-            model: MarcaModel(),
-            dependencias: dependenciaMarca()
-        }, {
-            classe: "MarcaProduto",
-            model: MarcaProdutoModel()
-        }, {
-            classe: "Grupo",
-            model: GrupoModel()
-        }, {
-            classe: "SubGrupo",
-            model: SubGrupoModel()
-        }, {
-            classe: "UniMed",
-            model: UniMedModel()
-        }, {
-            classe: "Tributacao",
-            model: TributacaoModel()
-        }, {
-            classe: "Icms",
-            model: ICMSModel()
-        }, {
-            classe: "Pis",
-            model: PISModel()
-        }, {
-            classe: "Ipi",
-            model: IPIModel()
-        }, {
-            classe: "Cofins",
-            model: COFINSModel()
-        }, {
-            classe: "ICMSOpInter",
-            model: ICMSOpInterModel()
-        }, { // ICMSOpInter
-            classe: "Custo",
-            model: CustoModel(),
-            dependencias: dependenciaCusto()
-        }, {
-            classe: "CustoItens",
-            model: CustoItensModel()
-        }, {
-            classe: "Estoque",
-            model: EstoqueModel()
-        }, {
-            classe: "Porcao",
-            model: PorcaoModel(),
-            dependencias: dependenciaPorcao()
-        }, {
-            classe: "PorcaoItens",
-            model: PorcaoItensModel()
-        }, {
-            classe: "Rentabilidade",
-            model: RentabilidadeModel(),
-            dependencias: dependenciaRentabilidade()
-        }, {
-            classe: "RentabilidadeItens",
-            model: RentabilidadeItensModel()
-        }, {
-            classe: "Categoria",
-            model: CategoriaModel()
-        }],
-        interfaces: "Produto",
-        local: "Produto"
-    })
-
+            classes: [{
+                classe: "ProdutoEmpresa",
+                model: ProdutoEmpresaModel(),
+                dependencias: dependenciaProdutoParent()
+            }, {
+                classe: "Produto",
+                model: ProdutoModel(),
+                dependencias: dependenciaProduto()
+            }, {
+                classe: "Cfop",
+                model: CfopModel()
+            }, {
+                classe: "Marca",
+                model: MarcaModel(),
+                dependencias: dependenciaMarca()
+            }, {
+                classe: "MarcaProduto",
+                model: MarcaProdutoModel()
+            }, {
+                classe: "Grupo",
+                model: GrupoModel()
+            }, {
+                classe: "SubGrupo",
+                model: SubGrupoModel()
+            }, {
+                classe: "UniMed",
+                model: UniMedModel()
+            }, {
+                classe: "Tributacao",
+                model: TributacaoModel()
+            }, {
+                classe: "Icms",
+                model: ICMSModel()
+            }, {
+                classe: "Pis",
+                model: PISModel()
+            }, {
+                classe: "Ipi",
+                model: IPIModel()
+            }, {
+                classe: "Cofins",
+                model: COFINSModel()
+            }, {
+                classe: "ICMSOpInter",
+                model: ICMSOpInterModel()
+            }, { // ICMSOpInter
+                classe: "Custo",
+                model: CustoModel(),
+                dependencias: dependenciaCusto()
+            }, {
+                classe: "CustoItens",
+                model: CustoItensModel()
+            }, {
+                classe: "Estoque",
+                model: EstoqueModel()
+            }, {
+                classe: "Porcao",
+                model: PorcaoModel(),
+                dependencias: dependenciaPorcao()
+            }, {
+                classe: "PorcaoItens",
+                model: PorcaoItensModel()
+            }, {
+                classe: "Rentabilidade",
+                model: RentabilidadeModel(),
+                dependencias: dependenciaRentabilidade()
+            }, {
+                classe: "RentabilidadeItens",
+                model: RentabilidadeItensModel()
+            }, {
+                classe: "Categoria",
+                model: CategoriaModel()
+            }],
+            interfaces: "Produto",
+            local: "Produto"
+        })
+        //ProdutoEmpresaModel
     oProjet.push({
         classes: [{
+            classe: "ProdutoEmpresa",
+            model: ProdutoEmpresaModel()
+        }, {
             classe: "Servico",
             model: ServicoModel(),
             dependencias: dependenciaServico()
