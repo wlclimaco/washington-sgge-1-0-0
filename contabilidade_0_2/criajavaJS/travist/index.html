@@ -1050,14 +1050,9 @@
                             }
                         }
 
-                        if ($('#montDicionario').prop('checked')) {
-
-                       
+                        if($('#montDicionario').prop('checked')) {
                             $("div#tabs").addTab("Teste",montDicionario(dataModel));
                         }
-                        
-
-                        
 
                         if ($('#Request').prop('checked')) {
                             $("div#tabs").addTab(oProjet[i].interfaces, requestInquery(oProjet[i].classes, oProjet[i].interfaces));
